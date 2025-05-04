@@ -27,7 +27,7 @@ Der Ball bewegt sich basierend auf der Schussweise durch die Charaktere entweder
      x-Richtung    Gleichförmige Bewegung
      y-Richtung:   Gleichmäßig beschleunigte Bewegung (Fallbewegung)
     
-
+Außerdem Ball kann an Geschwindigkeit dazugewinnen ( durch Tritt von Spieler) und verliert über Zeit die Geschwindigkeit. 
 
 
 ### weitere Features: ###
@@ -47,6 +47,7 @@ Weiterhinn wird nach jedem Anstoß eine Besondere Map ausgewählt die das Spiel 
     Superschnell
     Supergroß
     Barieren ...
+    VolleyBall ( Ball darf nicht auf Boden fallen)
 
 ## Design ##
 
