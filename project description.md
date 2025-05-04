@@ -1,11 +1,11 @@
 # Project description #
 
-## Game idea ## 
+## Game idea / Kurzbeschreibung## 
 
-2D sport-spiel, bei dem zwei Charactäre jeweils das Tor des Gegners treffen und das eigene verteidigen müssen.
-ähnlich zu "Kopfkicker"
+2D sport-spiel, bei dem zwei Charaktere jeweils das Tor des Gegners treffen und das eigene verteidigen müssen.
+ähnlich zu "Kopfkicker". Es wird Gespielt bis jemand eine Bestimmte Punktzahl z.B 4 erreicht
 
-Die Spieler können sich bewegen, springen und schießen und lassen sich über die Tastatur steuern
+Die Spieler können sich bewegen, springen, schießen und können Einzigartige Fertigkeiten einsetzen und lassen sich über die Tastatur steuern.
 
 
 Es gibt mehrere auswählbare Charactäre, wobei jeder Charactär eine individuelle Eigenschafft hat.
@@ -13,20 +13,25 @@ Es gibt mehrere auswählbare Charactäre, wobei jeder Charactär eine individuel
     Kämpfer   - kann den Gegner ausknockken für x Sekunden
     Spiderman - kann sehr hoch springen
 
-Weiterhinn ändert sich nach jedem Anstoß (neustart nach dem ein Tor gefallen ist) das Spielfeld und einige Funktionen etwas. Bsp. Spieler muss 2 Charaktere gleichzeitig steuern
+Weiterhinn ändert sich nach jedem Anstoß (neustart nach dem ein Tor gefallen ist) das Spielfeld und einige Funktionen etwas.
+    Bsp.
+    Spieler muss 2 Charaktere gleichzeitig steuern
+    Bevor ein Tor fallen kann muss einen Knopf treffen
 
-Dieses Spiel soll entweder gegen einen Bot oder einen anderen Menschlichen Spieler gespielt werden
+Dieses Spiel soll entweder gegen einen Bot oder einen anderen Menschlichen Spieler am gleichen Computer gespielt werden
 
 ### Physik im Spiel ###
-Die Spieler bewegen sich jeweils mit einer vorgegebeben Geschwindigkeit (Pixel je Sekunde) entlang der X Achse
-Der Ball bewegt sich basierend auf der Schussweise  entweder linear mit einer festen Geschwindigkeit oder Parabelförmig mit
+
+Die Spieler bewegen sich jeweils mit einer vorgegebeben Geschwindigkeit (Pixel je Sekunde) entlang der X Achse und können Springen entlang der y-Achse
+Der Ball bewegt sich basierend auf der Schussweise durch die Charaktere entweder linear mit einer festen Geschwindigkeit oder Parabelförmig mit
      x-Richtung    Gleichförmige Bewegung
-     y-Richtung:    Gleichmäßig beschleunigte Bewegung (Fallbewegung)
+     y-Richtung:   Gleichmäßig beschleunigte Bewegung (Fallbewegung)
     
 
 
 
 ### weitere Features: ###
+
 Feuerball - Ball wird sehr schnell
 Eisball   - Ball wird eingefrohren/ sehr langsam
 Goal Boost - nächste Tor zählt doppelt
@@ -36,18 +41,47 @@ großßes / kleines Tor
 Alle Features sind temporär begrenzt und nur in ausgewählten Spielsituationen einsetzbar.
 z.B. wer hinten liegt, kriegt mit einer höheren Wahrscheinlichkeit einen Boost
 
+Weiterhinn wird nach jedem Anstoß eine Besondere Map ausgewählt die das Spiel interessanter machen sollen.
+    Bsp.
+    Kontrolle 2 Spieler 
+    Superschnell
+    Supergroß
+    Barieren ...
+
+## Design ##
+
+Das Spiel soll unterschiedliche Level haben mit unterschiedlich starken Bot Gegner und eigenen Fähigkeiten und die Möglichkeit haben local auf einem 
+PC zu spielen.
+
+Nach dem man die Gegner besiegt hat kann man selbst ihre einzigartige Fähigkeit benutzen. Diese Fähigkeiten kann man einsetzen nach dem man sie aufgeladen hat.
+Dies Passiert durch Ball berührungen und Tore. 
+
+Auf der Map gibt es Loot Kisten welche PowerUps geben 
+    z.B 
+    Flammen Ball -> Ball ist beim nächsten Schuss sehr viel schneller. 
+    Ladung auf Fähigkeit +10
+
+## Controlls und Interface ##
+
+Interface Bild erstellen ( Fähigkeiten Ladebalken, Spielstand, Mapname (besonderheit)
+Steuerung Tabelle erstellen 
 
 
-## Visualisierung ##
+## Visualisierung / Grafikstil ##
 
 Fokus liegt auf der Entwicklung einer 2D Version
 Option das Spielerlebnis zu erweitern, durch die geziehlte Implementation von 3D Animationen (z.B. wenn ein Tor fällt)
+
+Pixelgrafik? 
+
+Charaktere Tragen Ländertrikos 
 
 
 ## Menus ##
   - Menu zur Spielerwahl
   - Menu zur Spielfeld (Hintergeund) wahl
   - Menu zum Modus auswählen (2 Spielermode, 1 Spielermode)
+  - Schwierigkeitsauswahl
 
 
 ## Struktur des Spiels ###
@@ -64,11 +98,22 @@ Implementation mit Monogame und C#
 
 
 ## Minimum Product ##
-todo 
+
+Das Spiel muss ohne Bugs / Fehler funktionieren
+ein Bot welcher angemessen gut Spielt 
+Features der Maps
+PowerUps
+Local Spielbar
+
 
 
 ## Zeitplan ##
-todo
+
+1. Meilenstein funktionierendes Spiel Local mit 2 Spielern spielbar
+2. Meilenstein angemessener Bot erstellen
+3. Meilenstein PowerUps und Map Features
+4. Grafik und Animationen
+5. unterschiedliche Stärke der Bots
   
 
 
