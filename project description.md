@@ -13,6 +13,9 @@ Es gibt mehrere auswählbare Charactäre, wobei jeder Charactär eine individuel
     Kämpfer   - kann den Gegner ausknockken für x Sekunden
     Spiderman - kann sehr hoch springen
 
+Weiterhinn ändert sich nach jedem Anstoß (neustart nach dem ein Tor gefallen ist) das Spielfeld und einige Funktionen etwas. Bsp. Spieler muss 2 Charaktere gleichzeitig steuern
+
+Dieses Spiel soll entweder gegen einen Bot oder einen anderen Menschlichen Spieler gespielt werden
 
 ### Physik im Spiel ###
 Die Spieler bewegen sich jeweils mit einer vorgegebeben Geschwindigkeit (Pixel je Sekunde) entlang der X Achse
