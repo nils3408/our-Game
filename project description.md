@@ -1,6 +1,6 @@
 # Project description #
 
-## Game idea / Kurzbeschreibung## 
+## Game idea / Kurzbeschreibung ## 
 
 2D sport-spiel, bei dem zwei Charaktere jeweils das Tor des Gegners treffen und das eigene verteidigen müssen.
 ähnlich zu "Kopfkicker". Es wird Gespielt bis jemand eine Bestimmte Punktzahl z.B 4 erreicht
