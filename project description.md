@@ -32,6 +32,9 @@ Außerdem Ball kann an Geschwindigkeit dazugewinnen ( durch Tritt von Spieler) u
 
 ### weitere Features: ###
 
+Todo: nach Wichtigkleit Sortieren!
+
+
 Feuerball - Ball wird sehr schnell
 Eisball   - Ball wird eingefrohren/ sehr langsam
 Goal Boost - nächste Tor zählt doppelt
