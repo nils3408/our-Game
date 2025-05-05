@@ -25,9 +25,9 @@ Dieses Spiel soll entweder gegen einen Bot oder einen anderen Menschlichen Spiel
 Die Spieler bewegen sich jeweils mit einer vorgegebeben Geschwindigkeit (Pixel je Sekunde) entlang der X Achse und können Springen entlang der y-Achse
 Der Ball bewegt sich basierend auf der Schussweise durch die Charaktere entweder linear mit einer festen Geschwindigkeit oder Parabelförmig mit
      x-Richtung    Gleichförmige Bewegung
-     y-Richtung:   Gleichmäßig beschleunigte Bewegung (Fallbewegung)
+     y-Richtung:   Gleichmäßig beschleunigte Bewegung 
     
-Außerdem Ball kann an Geschwindigkeit dazugewinnen ( durch Tritt von Spieler) und verliert über Zeit die Geschwindigkeit. 
+
 
 
 ### weitere Features: ###
@@ -44,7 +44,8 @@ großßes / kleines Tor
 Alle Features sind temporär begrenzt und nur in ausgewählten Spielsituationen einsetzbar.
 z.B. wer hinten liegt, kriegt mit einer höheren Wahrscheinlichkeit einen Boost
 
-Weiterhinn wird nach jedem Anstoß eine Besondere Map ausgewählt die das Spiel interessanter machen sollen.
+Weiteres mögliches Feature:
+Es wird nach jedem Anstoß eine besondere Map ausgewählt die das Spiel interessanter machen sollen.
     Bsp.
     Kontrolle 2 Spieler 
     Superschnell
@@ -70,6 +71,13 @@ Auf der Map gibt es Loot Kisten welche PowerUps geben
 Interface Bild erstellen ( Fähigkeiten Ladebalken, Spielstand, Mapname (besonderheit)
 Steuerung Tabelle erstellen 
 
+Bewegungen der Spieler:
+
+ Spieler    | nach links | nach rechs | springen | schießen 
+----------- |  --------  | ---------- | -------- | --------             
+Spieler 1   |      a     |  d         |    w     |  s
+----------  | ---------  | ---------- | -------- | ---------
+Spieler 2   |  k         |  ö         |   o      | l
 
 ## Visualisierung / Grafikstil ##
 
@@ -77,8 +85,6 @@ Fokus liegt auf der Entwicklung einer 2D Version
 Option das Spielerlebnis zu erweitern, durch die geziehlte Implementation von 3D Animationen (z.B. wenn ein Tor fällt)
 
 Pixelgrafik? 
-
-Charaktere Tragen Ländertrikos 
 
 
 ## Menus ##
@@ -101,13 +107,35 @@ Charaktere Tragen Ländertrikos
 Implementation mit Monogame und C#
 
 
+### Implemenation für die Menus ###
+
+Das Spiel ist läuft in zwei Schleifen:
+    - Wenn man das Spiel startet landed man im Startmenu (siehe oben) der ersten Schleife.
+    - Wenn man in eines der Menus geht, landed man in einer zweiten, inneren Loop
+    - Wenn man das Menu in dem man sich befinded, beended , determiniert die innere Schleife
+    - Dadurch stellt man sicher, dass wenn man ein Menu verlässt, wieder im Hauptmenu landed.
+
+
+### Implementationsideen für die Spiellogig:
+    
+    ![image](https://github.com/user-attachments/assets/f8d2b5db-fb9d-4a6f-b9b8-94121a39d1eb)
+
+
+    ![image](https://github.com/user-attachments/assets/a74c3a13-ab5f-43b5-a1a9-5325fe85c676)
+
+
+
 ## Minimum Product ##
 
-Das Spiel muss ohne Bugs / Fehler funktionieren
+Die Spiellogik funktioniert
+    - Man kann die Spieler steuern
+    - Die Kollisionen mit Ball und Gegner funktionieren
+    - basic Power Ups funktionieren
+    - Die Physik des Balls funktioniert wie gewünscht
+    
 ein Bot welcher angemessen gut Spielt 
 Features der Maps
-PowerUps
-Local Spielbar
+ein und zwei Spieler Modus
 
 
 
@@ -117,7 +145,7 @@ Local Spielbar
 2. Meilenstein angemessener Bot erstellen
 3. Meilenstein PowerUps und Map Features
 4. Grafik und Animationen
-5. unterschiedliche Stärke der Bots
+5. unterschiedliche Stärke der Bots 
   
 
 
