@@ -118,10 +118,11 @@ Das Spiel ist läuft in zwei Schleifen:
 
 ### Implementationsideen für die Spiellogig:
     
-    ![image](https://github.com/user-attachments/assets/f8d2b5db-fb9d-4a6f-b9b8-94121a39d1eb)
+![image](https://github.com/user-attachments/assets/f8d2b5db-fb9d-4a6f-b9b8-94121a39d1eb)
+    
 
 
-    ![image](https://github.com/user-attachments/assets/a74c3a13-ab5f-43b5-a1a9-5325fe85c676)
+![image](https://github.com/user-attachments/assets/a74c3a13-ab5f-43b5-a1a9-5325fe85c676)
 
 
 
