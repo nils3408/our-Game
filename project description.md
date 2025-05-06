@@ -54,7 +54,7 @@ Feuerball - Ball wird sehr schnell
 Eisball   - Ball wird eingefrohren/ sehr langsam
 Goal Boost - nächste Tor zählt doppelt
 Freezing Effect - Der Gegner kann nicht mehr springen / nur noch springen 
-großßes / kleines Tor
+großes / kleines Tor
 
 Alle Features sind temporär begrenzt und nur in ausgewählten Spielsituationen einsetzbar.
 z.B. wer hinten liegt, kriegt mit einer höheren Wahrscheinlichkeit einen Boost
@@ -68,12 +68,15 @@ Es wird nach jedem Anstoß eine besondere Map ausgewählt die das Spiel interess
     Barieren ...
     VolleyBall ( Ball darf nicht auf Boden fallen)
 
+Jeder einzelne Charakter besitzt eine Ultimative Fähigkeit die man erst aufladen muss 
+
 ## Design ##
 
-Das Spiel soll unterschiedliche Level haben mit unterschiedlich starken Bot Gegner und eigenen Fähigkeiten, wenn ein Bot geschlagen wurde kann man selbst mit dem Charakter spielenund die Möglichkeit haben local auf einem PC zu spielen.
+Das Spiel soll unterschiedliche Level haben mit unterschiedlich starken Bot Gegner und eigenen Fähigkeiten, wenn ein Bot geschlagen wurde kann man selbst mit dem Charakter spielen und ihre Eigenschaften ausnutzen kann. Somit schaltet man im laufe des Spieles mehrere Charaktere frei mit denen man spielen kann. 
 
-Nach dem man die Gegner besiegt hat kann man selbst ihre einzigartige Fähigkeit benutzen. Diese Fähigkeiten kann man einsetzen nach dem man sie aufgeladen hat.
-Dies Passiert durch Ball berührungen und Tore. 
+Die Ultimative Fähigkeit jedes Charakters muss erst Aufgeladen werden was durch Ballberührungen oder Tore aufgeladen wird. 
+
+Nachdem man ein Level besiegt hat bekommt jeder Spieler Münzen welche dazu vewendet werden kann um Skins und Toranimationen zu kaufen 
 
 Auf der Map gibt es Loot Kisten welche PowerUps geben 
     z.B 
