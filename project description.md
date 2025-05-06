@@ -70,8 +70,7 @@ Es wird nach jedem Anstoß eine besondere Map ausgewählt die das Spiel interess
 
 ## Design ##
 
-Das Spiel soll unterschiedliche Level haben mit unterschiedlich starken Bot Gegner und eigenen Fähigkeiten und die Möglichkeit haben local auf einem 
-PC zu spielen.
+Das Spiel soll unterschiedliche Level haben mit unterschiedlich starken Bot Gegner und eigenen Fähigkeiten, wenn ein Bot geschlagen wurde kann man selbst mit dem Charakter spielenund die Möglichkeit haben local auf einem PC zu spielen.
 
 Nach dem man die Gegner besiegt hat kann man selbst ihre einzigartige Fähigkeit benutzen. Diese Fähigkeiten kann man einsetzen nach dem man sie aufgeladen hat.
 Dies Passiert durch Ball berührungen und Tore. 
