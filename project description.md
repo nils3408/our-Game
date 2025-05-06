@@ -88,11 +88,11 @@ Steuerung Tabelle erstellen
 
 Bewegungen der Spieler:
 
- Spieler    | nach links | nach rechs | springen | schießen 
------------ |  --------  | ---------- | -------- | --------             
-Spieler 1   |      a     |  d         |    w     |  s
-----------  | ---------  | ---------- | -------- | ---------
-Spieler 2   |  k         |  ö         |   o      | l
+ Spieler    | nach links | nach rechs | springen | schießen  | Fähigkeit
+----------- |  --------  | ---------- | -------- | --------- | ---------            
+Spieler 1   |      a     |  d         |    w     |  s	     |	  f
+----------  | ---------- |----------  |----------|---------- |----------
+Spieler 2   |  k         |  ö         |   o      | l         |    ä
 
 ## Visualisierung / Grafikstil ##
 
@@ -131,7 +131,7 @@ Das Spiel ist läuft in zwei Schleifen:
     - Dadurch stellt man sicher, dass wenn man ein Menu verlässt, wieder im Hauptmenu landed.
 
 
-### Implementationsideen für die Spiellogig:
+### Implementationsideen für die Spiellogik:
     
 ![image](https://github.com/user-attachments/assets/f8d2b5db-fb9d-4a6f-b9b8-94121a39d1eb)
     
