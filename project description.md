@@ -49,14 +49,15 @@ Der Ball bewegt sich basierend auf der Schussweise durch die Charaktere entweder
 
 Todo: nach Wichtigkleit Sortieren!
 
-
+Auf der Map gibt es Loot Kisten welche PowerUps geben 
+    z.B 
 Feuerball - Ball wird sehr schnell
 Eisball   - Ball wird eingefrohren/ sehr langsam
 Goal Boost - nächste Tor zählt doppelt
 Freezing Effect - Der Gegner kann nicht mehr springen / nur noch springen 
 großes / kleines Tor
 
-Alle Features sind temporär begrenzt und nur in ausgewählten Spielsituationen einsetzbar.
+Alle Item PowerUpssind temporär begrenzt und nur in ausgewählten Spielsituationen einsetzbar.
 z.B. wer hinten liegt, kriegt mit einer höheren Wahrscheinlichkeit einen Boost
 
 Weiteres mögliches Feature:
@@ -69,19 +70,16 @@ Es wird nach jedem Anstoß eine besondere Map ausgewählt die das Spiel interess
     VolleyBall ( Ball darf nicht auf Boden fallen)
 
 Jeder einzelne Charakter besitzt eine Ultimative Fähigkeit die man erst aufladen muss 
+Die Ultimative Fähigkeit jedes Charakters wird durch Ballberührungen, Tore oder durch ein Item aufgeladen wird. 
+
+
 
 ## Design ##
 
 Das Spiel soll unterschiedliche Level haben mit unterschiedlich starken Bot Gegner und eigenen Fähigkeiten, wenn ein Bot geschlagen wurde kann man selbst mit dem Charakter spielen und ihre Eigenschaften ausnutzen kann. Somit schaltet man im laufe des Spieles mehrere Charaktere frei mit denen man spielen kann. 
 
-Die Ultimative Fähigkeit jedes Charakters muss erst Aufgeladen werden was durch Ballberührungen oder Tore aufgeladen wird. 
-
 Nachdem man ein Level besiegt hat bekommt jeder Spieler Münzen welche dazu vewendet werden kann um Skins und Toranimationen zu kaufen 
 
-Auf der Map gibt es Loot Kisten welche PowerUps geben 
-    z.B 
-    Flammen Ball -> Ball ist beim nächsten Schuss sehr viel schneller. 
-    Ladung auf Fähigkeit +10
 
 ## Controlls und Interface ##
 
