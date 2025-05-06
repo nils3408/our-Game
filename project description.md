@@ -89,11 +89,11 @@ Auf der Map gibt es Loot Kisten welche PowerUps geben
 
 Bewegungen der Spieler:
 
- Spieler    | nach links | nach rechs | springen | schießen  | Fähigkeit
------------ |  --------  | ---------- | -------- | --------- | ---------            
-Spieler 1   |      a     |  d         |    w     |  s	     |	  f
-----------  | ---------- |----------  |----------|---------- |----------
-Spieler 2   |  k         |  ö         |   o      | l         |    ä
+ Spieler    | nach links | nach rechs | springen | schießen  | Fähigkeit | Items
+----------- |  --------  | ---------- | -------- | --------- | --------- | ---------          
+Spieler 1   |      a     |  d         |    w     |  	s    |	  f	 | 	e
+----------  | ---------- |----------  |----------|---------- |---------- | ---------
+Spieler 2   |  k         |  ö         |   o      | l         |    ä	 |    p
 
 ## Visualisierung / Grafikstil ##
 
