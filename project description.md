@@ -20,6 +20,21 @@ Weiterhinn ändert sich nach jedem Anstoß (neustart nach dem ein Tor gefallen i
 
 Dieses Spiel soll entweder gegen einen Bot oder einen anderen Menschlichen Spieler am gleichen Computer gespielt werden
 
+## Genre ##
+
+Gelegenheitsspiel, Arcade, Indie, Sportspiel
+
+## Zielgruppen ##
+
+Kinder und Jugendliche da: 	 -Einfaches Gameplay, leicht verständlich
+                    	     -Kurze Spielrunden -> viel Action wenig Downtime
+						  	 -Gut möglich mit Freunden zu spielen 
+							 -möglichkeit Spiel im Internet/Handy anzubieten
+		
+Gelegenheitsspieler da: 	 -Kurze Runden also gut Spielbar wenn man Kurz Wartet/abschalten möchte 
+		  					 -möglichkeit Spiel im Internet/Handy anzubieten
+
+		
 ### Physik im Spiel ###
 
 Die Spieler bewegen sich jeweils mit einer vorgegebeben Geschwindigkeit (Pixel je Sekunde) entlang der X Achse und können Springen entlang der y-Achse
