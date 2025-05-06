@@ -83,8 +83,9 @@ Auf der Map gibt es Loot Kisten welche PowerUps geben
 
 ## Controlls und Interface ##
 
-Interface Bild erstellen ( Fähigkeiten Ladebalken, Spielstand, Mapname (besonderheit)
-Steuerung Tabelle erstellen 
+![Interface](https://github.com/user-attachments/assets/b76ff47c-d8aa-4eb1-a891-3f4a6d41b9b5)
+
+
 
 Bewegungen der Spieler:
 
