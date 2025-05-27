@@ -11,7 +11,8 @@ namespace Project8
         private SpriteBatch _spriteBatch;
 
         // Spieler
-        private Texture2D _rectangleTexture;
+        private Texture2D _player1Texture;
+        private Texture2D _player2Texture;
         private Vector2 _player1Position;
         private Vector2 _player2Position;
         private Vector2 _player1Velocity;
@@ -33,7 +34,7 @@ namespace Project8
         private const float BallFriction = 500f;
         private const float BallPushStrength = 200f;
         private const float BallLiftStrength = -150f;
-        private const int BallMargin = 100; // ← Abstand zum Fensterrand
+        private const int BallMargin = 100;
 
         public Game1()
         {
@@ -63,9 +64,8 @@ namespace Project8
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _rectangleTexture = new Texture2D(GraphicsDevice, 1, 1);
-            _rectangleTexture.SetData(new[] { Color.White });
-
+            _player1Texture = Content.Load<Texture2D>("KopfkickerChar1");
+            _player2Texture = Content.Load<Texture2D>("KopfkickerChar2");
             _ballTexture = Content.Load<Texture2D>("ball");
         }
 
@@ -160,7 +160,6 @@ namespace Project8
                 _ballVelocity.Y = 0;
             }
 
-            // Randbegrenzung mit Abstand
             float minX = BallMargin;
             float maxX = _graphics.PreferredBackBufferWidth - BallSize - BallMargin;
             _ballPosition.X = MathHelper.Clamp(_ballPosition.X, minX, maxX);
@@ -177,13 +176,23 @@ namespace Project8
 
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_rectangleTexture,
+            _spriteBatch.Draw(_player1Texture,
                 new Rectangle((int)_player1Position.X, (int)_player1Position.Y, RectangleWidth, RectangleHeight),
-                Color.Blue);
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0f);
 
-            _spriteBatch.Draw(_rectangleTexture,
+            _spriteBatch.Draw(_player2Texture,
                 new Rectangle((int)_player2Position.X, (int)_player2Position.Y, RectangleWidth, RectangleHeight),
-                Color.Red);
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.FlipHorizontally,
+                0f);
 
             _spriteBatch.Draw(_ballTexture,
                 new Rectangle((int)_ballPosition.X, (int)_ballPosition.Y, BallSize, BallSize),
@@ -200,3 +209,4 @@ namespace Project8
         }
     }
 }
+

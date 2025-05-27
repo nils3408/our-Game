@@ -36,3 +36,6 @@ C:\Users\lukas\source\repos\Project8\Project8\obj\Debug\net6.0-windows\Project8.
 C:\Users\lukas\source\repos\Project8\Project8\obj\Debug\net6.0-windows\Project8.genruntimeconfig.cache
 C:\Users\lukas\source\repos\Project8\Project8\obj\Debug\net6.0-windows\ref\Project8.dll
 C:\Users\lukas\source\repos\Project8\Project8\bin\Debug\net6.0-windows\Content\Ball.xnb
+C:\Users\lukas\source\repos\Project8\Project8\obj\Debug\net6.0-windows\Project8.sourcelink.json
+C:\Users\lukas\source\repos\Project8\Project8\bin\Debug\net6.0-windows\Content\KopfkickerChar1.xnb
+C:\Users\lukas\source\repos\Project8\Project8\bin\Debug\net6.0-windows\Content\KopfkickerChar2.xnb
