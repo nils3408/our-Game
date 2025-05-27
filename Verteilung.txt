@@ -1,0 +1,15 @@
+Augabenverteilung  bis 27.05
+
+
+Nils:  	Ball-Physik, Bounderies
+	
+
+Lukas:  Skins einbinden, Player Kollision 
+
+
+Thies:   Klassendiagramm
+   	 schöner Hintergrund, Tor
+
+
+          
+

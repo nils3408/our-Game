@@ -6,7 +6,7 @@ public class Player
     private Texture2D texture;
     public Rectangle Rectangle { get; private set; }
 
-    public Player(GraphicsDevice graphicsDevice, Vector2 position, int width = 50, int height = 50)
+    public Player(GraphicsDevice graphicsDevice, Vector2 position, int width = 50, int height = 100)
     {
         // Erstelle eine schwarze 1x1-Textur
         texture = new Texture2D(graphicsDevice, 1, 1);
@@ -61,3 +61,25 @@ public class Player
         );
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

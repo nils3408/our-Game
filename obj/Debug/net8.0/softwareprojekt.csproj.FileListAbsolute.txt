@@ -30,3 +30,4 @@ C:\Users\nilsw\Desktop\softwareprojekt\obj\Debug\net8.0\refint\softwareprojekt.d
 C:\Users\nilsw\Desktop\softwareprojekt\obj\Debug\net8.0\softwareprojekt.pdb
 C:\Users\nilsw\Desktop\softwareprojekt\obj\Debug\net8.0\softwareprojekt.genruntimeconfig.cache
 C:\Users\nilsw\Desktop\softwareprojekt\obj\Debug\net8.0\ref\softwareprojekt.dll
+C:\Users\nilsw\Desktop\softwareprojekt\bin\Debug\net8.0\Content\player1.xnb

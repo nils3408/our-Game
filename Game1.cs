@@ -1,6 +1,8 @@
 ﻿//code by Nils 
 
 
+using  System.Threading;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -35,7 +37,7 @@ public class Game1 : Game
         // Erzeuge Spieler als schwarzes Rechteck
         player1 = new Player(GraphicsDevice, new Vector2(100, 100));
         player2 = new Player(GraphicsDevice, new Vector2(700, 100));
-        football = new Ball(GraphicsDevice, new Vector2(250, 110));
+        football = new Ball(GraphicsDevice, new Vector2(200, 200));
     }
 
     protected override void Update(GameTime gameTime)
@@ -45,7 +47,7 @@ public class Game1 : Game
             Exit();
 
         HandleMovement();
-        football.move();
+        football.move_parabel();
 
         if (Ball_out_of_bounds(football)) football.change_direction();
         if ((football.colliderect_with_player(player1)) | (football.colliderect_with_player(player2)))
