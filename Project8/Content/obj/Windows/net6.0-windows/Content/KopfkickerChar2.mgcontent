@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/Source/Repos/our-Game/Project8/Content/KopfkickerChar2.png</SourceFile>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Project8/Content/KopfkickerChar2.png</SourceFile>
   <SourceTime>2025-05-28T13:18:49.4061397+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/Source/Repos/our-Game/Project8/Content/bin/Windows/Content/KopfkickerChar2.xnb</DestFile>
-  <DestTime>2025-05-30T15:15:28.0403099+02:00</DestTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Project8/Content/bin/Windows/Content/KopfkickerChar2.xnb</DestFile>
+  <DestTime>2025-05-30T20:49:39.4009882+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -102,27 +102,23 @@ namespace Project8
 
 
             //Player 1
-            if (state.IsKeyDown(Keys.A))
-                
-                player1.move_left(delta);
-
-            if (state.IsKeyDown(Keys.D))
-                player1.move_right(delta);
+            if (state.IsKeyDown(Keys.A))   player1.move_left(delta);
+            if (state.IsKeyDown(Keys.D))   player1.move_right(delta);
 
             if (state.IsKeyDown(Keys.W) && IsOnGround(_player1Position))
                 player1.jump(delta);
 
 
             // player 2
-            if (state.IsKeyDown(Keys.Left))
-                player2.move_left(delta);
-            if (state.IsKeyDown(Keys.Right))
-                player2.move_right(delta);
+            if (state.IsKeyDown(Keys.Left))     player2.move_left(delta);
+            if (state.IsKeyDown(Keys.Right))    player2.move_right(delta);
 
             if (state.IsKeyDown(Keys.Up) && IsOnGround(_player2Position))
                 player2.jump(delta);
 
         }
+
+
 
         private void handle_player_ball_collision()
         {

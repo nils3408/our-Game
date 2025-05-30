@@ -10,7 +10,7 @@ namespace Project8
     {
 
         private Texture2D texture;
-        public float move_speed;
+        public float move_speed = 100f;
         public Vector2 position;
         private float jump_velocity= -400f;
         public  Rectangle currentRect;
@@ -35,6 +35,15 @@ namespace Project8
         public void Set_other_Player(Player otherPlayer1)
         {
             otherPlayer= otherPlayer1;
+        }
+
+        public void draw(SpriteBatch spritebatch)
+        {
+            spritebatch.Draw(texture,
+                             currentRect, null, Color.White, 0f, Vector2.Zero,
+                             SpriteEffects.None, 0f
+                             );
+            // todo;
         }
 
 
@@ -85,18 +94,11 @@ namespace Project8
         public bool out_of_bounds()
         {
             // todo
-            return true;
+            return false;
         }
 
 
-        public void draw(SpriteBatch spritebatch)
-        {
-            spritebatch.Draw(texture, 
-                             currentRect, null, Color.White, 0f, Vector2.Zero, 
-                             SpriteEffects.None, 0f
-                             );
-            // todo;
-        }
+       
 
 
     }
