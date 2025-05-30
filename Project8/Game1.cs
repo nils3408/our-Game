@@ -1,40 +1,36 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct2D1;
+using SharpDX.XAudio2;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Project8
 {
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch;
 
         // Spieler
         private Texture2D _player1Texture;
         private Texture2D _player2Texture;
         private Vector2 _player1Position;
-        private Vector2 _player2Position;
         private Vector2 _player1Velocity;
+        private Vector2 _player2Position;
         private Vector2 _player2Velocity;
+        private Player player1;
+        private Player player2;
+        private Ball football;
 
-        private const int RectangleWidth = 50;
-        private const int RectangleHeight = 50;
         private const float MoveSpeed = 200f;
-        private const float JumpVelocity = -400f;
-        private const float Gravity = 1000f;
+        
+        
 
-        private float GroundY => _graphics.PreferredBackBufferHeight - RectangleHeight;
 
-        // Ball
-        private Texture2D _ballTexture;
-        private Vector2 _ballPosition;
-        private Vector2 _ballVelocity;
-        private const int BallSize = 32;
-        private const float BallFriction = 500f;
-        private const float BallPushStrength = 200f;
-        private const float BallLiftStrength = -150f;
-        private const int BallMargin = 100;
+        private float GroundY => _graphics.PreferredBackBufferHeight - 50;
+
 
         public Game1()
         {
@@ -48,164 +44,108 @@ namespace Project8
 
         protected override void Initialize()
         {
-            _player1Position = new Vector2(100, GroundY);
-            _player2Position = new Vector2(600, GroundY);
+            player1 = new Player(GraphicsDevice, new Vector2(100, GroundY), Content.Load<Texture2D>("KopfkickerChar1"));
+            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY), Content.Load<Texture2D>("KopfkickerChar2"));
+            football = new Ball(GraphicsDevice,    new Vector2(200, GroundY), Content.Load<Texture2D>("ball"));
 
-            _ballPosition = new Vector2(
-                (_player1Position.X + _player2Position.X) / 2f + RectangleWidth / 2f - BallSize / 2f,
-                GroundY + RectangleHeight / 2f - BallSize / 2f
-            );
-            _ballVelocity = Vector2.Zero;
-
+            player1.Set_other_Player(player2);
+            player2.Set_other_Player(player1);
+            
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            _player1Texture = Content.Load<Texture2D>("KopfkickerChar1");
-            _player2Texture = Content.Load<Texture2D>("KopfkickerChar2");
-            _ballTexture = Content.Load<Texture2D>("ball");
+            _spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(GraphicsDevice);
         }
+
 
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState state = Keyboard.GetState();
-            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            Vector2 newPlayer1Pos = _player1Position;
-            Vector2 newPlayer2Pos = _player2Position;
-
-            if (state.IsKeyDown(Keys.A))
-                newPlayer1Pos.X -= MoveSpeed * delta;
-            if (state.IsKeyDown(Keys.D))
-                newPlayer1Pos.X += MoveSpeed * delta;
-
-            if (state.IsKeyDown(Keys.Left))
-                newPlayer2Pos.X -= MoveSpeed * delta;
-            if (state.IsKeyDown(Keys.Right))
-                newPlayer2Pos.X += MoveSpeed * delta;
-
-            Rectangle futureRect1 = new Rectangle((int)newPlayer1Pos.X, (int)_player1Position.Y, RectangleWidth, RectangleHeight);
-            Rectangle futureRect2 = new Rectangle((int)newPlayer2Pos.X, (int)_player2Position.Y, RectangleWidth, RectangleHeight);
-
-            Rectangle currentRect1 = new Rectangle((int)_player1Position.X, (int)_player1Position.Y, RectangleWidth, RectangleHeight);
-            Rectangle currentRect2 = new Rectangle((int)_player2Position.X, (int)_player2Position.Y, RectangleWidth, RectangleHeight);
-
-            if (!futureRect1.Intersects(currentRect2))
-                _player1Position.X = newPlayer1Pos.X;
-
-            if (!futureRect2.Intersects(currentRect1))
-                _player2Position.X = newPlayer2Pos.X;
-
-            if (state.IsKeyDown(Keys.W) && IsOnGround(_player1Position))
-                _player1Velocity.Y = JumpVelocity;
-
-            if (state.IsKeyDown(Keys.Up) && IsOnGround(_player2Position))
-                _player2Velocity.Y = JumpVelocity;
-
-            _player1Velocity.Y += Gravity * delta;
-            _player2Velocity.Y += Gravity * delta;
-
-            _player1Position.Y += _player1Velocity.Y * delta;
-            _player2Position.Y += _player2Velocity.Y * delta;
-
-            if (_player1Position.Y >= GroundY)
-            {
-                _player1Position.Y = GroundY;
-                _player1Velocity.Y = 0;
-            }
-
-            if (_player2Position.Y >= GroundY)
-            {
-                _player2Position.Y = GroundY;
-                _player2Velocity.Y = 0;
-            }
-
-            _player1Position.X = MathHelper.Clamp(_player1Position.X, 0, _graphics.PreferredBackBufferWidth - RectangleWidth);
-            _player2Position.X = MathHelper.Clamp(_player2Position.X, 0, _graphics.PreferredBackBufferWidth - RectangleWidth);
-
-            Rectangle ballRect = new Rectangle((int)_ballPosition.X, (int)_ballPosition.Y, BallSize, BallSize);
-            Rectangle player1Rect = new Rectangle((int)_player1Position.X, (int)_player1Position.Y, RectangleWidth, RectangleHeight);
-            Rectangle player2Rect = new Rectangle((int)_player2Position.X, (int)_player2Position.Y, RectangleWidth, RectangleHeight);
-
-            if (ballRect.Intersects(player1Rect))
-            {
-                float dir = Math.Sign(_ballPosition.X - _player1Position.X);
-                _ballVelocity.X += dir * BallPushStrength;
-                _ballVelocity.Y = BallLiftStrength;
-            }
-
-            if (ballRect.Intersects(player2Rect))
-            {
-                float dir = Math.Sign(_ballPosition.X - _player2Position.X);
-                _ballVelocity.X += dir * BallPushStrength;
-                _ballVelocity.Y = BallLiftStrength;
-            }
-
-            _ballVelocity.Y += Gravity * delta;
-
-            if (_ballVelocity.X > 0)
-                _ballVelocity.X = Math.Max(0, _ballVelocity.X - BallFriction * delta);
-            else if (_ballVelocity.X < 0)
-                _ballVelocity.X = Math.Min(0, _ballVelocity.X + BallFriction * delta);
-
-            _ballPosition += _ballVelocity * delta;
-
-            float ballGroundY = GroundY + RectangleHeight / 2f - BallSize / 2f;
-            if (_ballPosition.Y >= ballGroundY)
-            {
-                _ballPosition.Y = ballGroundY;
-                _ballVelocity.Y = 0;
-            }
-
-            float minX = BallMargin;
-            float maxX = _graphics.PreferredBackBufferWidth - BallSize - BallMargin;
-            _ballPosition.X = MathHelper.Clamp(_ballPosition.X, minX, maxX);
-
-            if (state.IsKeyDown(Keys.Escape))
-                Exit();
-
+            handle_player_movement(gameTime);
+            handle_player_ball_collision();
+            
             base.Update(gameTime);
         }
+
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_player1Texture,
-                new Rectangle((int)_player1Position.X, (int)_player1Position.Y, RectangleWidth, RectangleHeight),
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                0f);
-
-            _spriteBatch.Draw(_player2Texture,
-                new Rectangle((int)_player2Position.X, (int)_player2Position.Y, RectangleWidth, RectangleHeight),
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.FlipHorizontally,
-                0f);
-
-            _spriteBatch.Draw(_ballTexture,
-                new Rectangle((int)_ballPosition.X, (int)_ballPosition.Y, BallSize, BallSize),
-                Color.White);
+            player1.draw(_spriteBatch);
+            player2.draw(_spriteBatch);
+            football.draw(_spriteBatch);
+            // To do draw Hintergrund();
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
+
         private bool IsOnGround(Vector2 position)
         {
             return position.Y >= GroundY;
+        }
+
+        
+        private void handle_player_movement(GameTime gameTime)
+        {
+            KeyboardState state = Keyboard.GetState();
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            //Game 
+            if (state.IsKeyDown(Keys.Escape))
+                Exit();
+
+
+            //Player 1
+            if (state.IsKeyDown(Keys.A))
+                
+                player1.move_left(delta);
+
+            if (state.IsKeyDown(Keys.D))
+                player1.move_right(delta);
+
+            if (state.IsKeyDown(Keys.W) && IsOnGround(_player1Position))
+                player1.jump(delta);
+
+
+            // player 2
+            if (state.IsKeyDown(Keys.Left))
+                player2.move_left(delta);
+            if (state.IsKeyDown(Keys.Right))
+                player2.move_right(delta);
+
+            if (state.IsKeyDown(Keys.Up) && IsOnGround(_player2Position))
+                player2.jump(delta);
+
+        }
+
+        private void handle_player_ball_collision()
+        {
+            if (football.getRect().Intersects(player1.currentRect))
+            {
+                float direction = Math.Sign(football.position.X - player1.position.X);
+                football.velocity.X += direction * football.starting_velocity.X;
+                football.velocity.Y += football.starting_velocity.Y;
+                //todo 
+            }
+
+
+            if (football.getRect().Intersects(player2.currentRect))
+            {
+                float direction = Math.Sign(football.position.X - player2.position.X);
+                football.velocity.X += direction * football.starting_velocity.X;
+                football.velocity.Y += football.starting_velocity.Y;
+                //to do 
+            }
+
+
+
+            
         }
     }
 }
