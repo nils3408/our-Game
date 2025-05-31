@@ -13,6 +13,8 @@ namespace Project8
         private GraphicsDeviceManager _graphics;
         private Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch;
 
+        //Spielfeld
+        private Texture2D _backgroundTexture;
         // Spieler
         private Texture2D _player1Texture;
         private Texture2D _player2Texture;
@@ -57,6 +59,7 @@ namespace Project8
         protected override void LoadContent()
         {
             _spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(GraphicsDevice);
+            _backgroundTexture = Content.Load<Texture2D>("Spielfeld");
         }
 
 
@@ -74,6 +77,11 @@ namespace Project8
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
 
+            _spriteBatch.Draw(
+            _backgroundTexture,
+            new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
+            Color.White
+            );
             player1.draw(_spriteBatch);
             player2.draw(_spriteBatch);
             football.draw(_spriteBatch);
