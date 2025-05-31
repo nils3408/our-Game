@@ -46,8 +46,8 @@ namespace Project8
 
         protected override void Initialize()
         {
-            player1 = new Player(GraphicsDevice, new Vector2(100, GroundY), Content.Load<Texture2D>("KopfkickerChar1"));
-            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY), Content.Load<Texture2D>("KopfkickerChar2"));
+            player1 = new Player(GraphicsDevice, new Vector2(100, GroundY), Content.Load<Texture2D>("KopfkickerChar1"), GroundY);
+            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY), Content.Load<Texture2D>("KopfkickerChar2"), GroundY);
             football = new Ball(GraphicsDevice,    new Vector2(200, GroundY), Content.Load<Texture2D>("ball"));
 
             player1.Set_other_Player(player2);
@@ -67,7 +67,8 @@ namespace Project8
         {
             handle_player_movement(gameTime);
             handle_player_ball_collision();
-            
+            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, GroundY);
+            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, GroundY);
             base.Update(gameTime);
         }
 
@@ -92,13 +93,6 @@ namespace Project8
             base.Draw(gameTime);
         }
 
-
-        private bool IsOnGround(Vector2 position)
-        {
-            return position.Y >= GroundY;
-        }
-
-        
         private void handle_player_movement(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
@@ -113,16 +107,16 @@ namespace Project8
             if (state.IsKeyDown(Keys.A))   player1.move_left(delta);
             if (state.IsKeyDown(Keys.D))   player1.move_right(delta);
 
-            if (state.IsKeyDown(Keys.W) && IsOnGround(_player1Position))
-                player1.jump(delta);
+            if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, GroundY))
+                player1.jump(delta, GroundY);
 
 
             // player 2
             if (state.IsKeyDown(Keys.Left))     player2.move_left(delta);
             if (state.IsKeyDown(Keys.Right))    player2.move_right(delta);
 
-            if (state.IsKeyDown(Keys.Up) && IsOnGround(_player2Position))
-                player2.jump(delta);
+            if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, GroundY))
+                player2.jump(delta,GroundY);
 
         }
 

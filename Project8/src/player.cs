@@ -12,19 +12,19 @@ namespace Project8
         private Texture2D texture;
         public float move_speed = 100f;
         public Vector2 position;
-        private float jump_velocity= -400f;
+        private float jump_velocity= -200f;
         public  Rectangle currentRect;
         public  Rectangle futureRect;
         private const int RectangleWidth = 50;
         private const int RectangleHeight = 50;
         public Player otherPlayer;
         public float newPositionX;
-        public float gravity = 9.81f;
-        public Vector2 newPositionY;  
+        public float gravity = 200f;
+        public Vector2 newPositionY;
+        public Vector2 velocity;
 
 
-
-        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1)
+        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, float groundY)
         {
             position = position1;
             texture = texture1;
@@ -75,10 +75,26 @@ namespace Project8
         }
 
 
-        public void jump(float delta)
+        public void jump(float delta, float groundY)
         {
-            // todo 
+            if (IsOnGround(position, groundY))
+            {
+                velocity.Y = jump_velocity;
+            }
+        }
 
+        public void update_vertical(float delta, float groundY)
+        {
+            velocity.Y += gravity * delta;
+            position.Y += velocity.Y * delta;
+
+            if (position.Y >= groundY)
+            {
+                position.Y = groundY;
+                velocity.Y = 0;
+            }
+
+            update_rectangles();
         }
 
 
@@ -97,13 +113,10 @@ namespace Project8
             return false;
         }
 
-
-       
-
-
+        public bool IsOnGround(Vector2 position, float groundY)
+        {
+            return position.Y >= groundY;
+        }
     }
-
-
-    
 }
 
