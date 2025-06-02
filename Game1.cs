@@ -7,7 +7,17 @@ namespace our_Game;
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
+    private  SpriteBatch _spriteBatch;
+
+    private static IGameState curState;
+
+    private static GameLogic game;
+    private static Menu menu;
+    private static Settings settings;
+
+    public Player[] PlayerList { get; set; }
+
+
 
     public Game1()
     {
