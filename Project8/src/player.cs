@@ -12,14 +12,14 @@ namespace Project8
         private Texture2D texture;
         public float move_speed = 100f;
         public Vector2 position;
-        private float jump_velocity= -200f;
-        public  Rectangle currentRect;
-        public  Rectangle futureRect;
+        private float jump_velocity = -200f;
+        public Rectangle currentRect;
+        public Rectangle futureRect;
         private const int RectangleWidth = 50;
         private const int RectangleHeight = 50;
         public Player otherPlayer;
         public float newPositionX;
-        public float gravity = 200f;
+        public float gravity = 400f;
         public Vector2 newPositionY;
         public Vector2 velocity;
 
@@ -28,13 +28,13 @@ namespace Project8
         {
             position = position1;
             texture = texture1;
-            currentRect = new Rectangle ((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
-            futureRect = new Rectangle  ((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+            currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+            futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
         }
 
         public void Set_other_Player(Player otherPlayer1)
         {
-            otherPlayer= otherPlayer1;
+            otherPlayer = otherPlayer1;
         }
 
         public void draw(SpriteBatch spritebatch)
@@ -51,26 +51,26 @@ namespace Project8
 
         public void move_left(float delta)
         {
-            newPositionX = position.X - delta *move_speed;
+            newPositionX = position.X - delta * move_speed;
             futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
-            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds()==false))
+            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds() == false))
             {
                 position.X -= move_speed * delta;
                 update_rectangles();
-            }     
+            }
         }
 
 
         public void move_right(float delta)
         {
             newPositionX = position.X + delta * move_speed;
-            futureRect = new Rectangle ((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+            futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
             if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds() == false))
             {
                 position.X += move_speed * delta;
-                update_rectangles();    
+                update_rectangles();
             }
         }
 
@@ -102,8 +102,8 @@ namespace Project8
         public void update_rectangles()
         {
             //update current_rectangle and future_rectangle
-            currentRect = new Rectangle( (int) position.X, (int) position.Y, RectangleWidth, RectangleHeight);
-            futureRect = new Rectangle ( (int)  position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+            currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+            futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
 
         }
 
@@ -119,4 +119,3 @@ namespace Project8
         }
     }
 }
-
