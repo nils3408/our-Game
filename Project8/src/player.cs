@@ -1,7 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿//nils, Lukas
+
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace Project8
@@ -54,7 +58,7 @@ namespace Project8
             newPositionX = position.X - delta * move_speed;
             futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
-            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds() == false))
+            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
             {
                 position.X -= move_speed * delta;
                 update_rectangles();
@@ -67,8 +71,9 @@ namespace Project8
             newPositionX = position.X + delta * move_speed;
             futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
-            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds() == false))
+            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
             {
+              
                 position.X += move_speed * delta;
                 update_rectangles();
             }
@@ -107,9 +112,10 @@ namespace Project8
 
         }
 
-        public bool out_of_bounds()
+        public bool out_of_bounds(float newPositioX)
         {
-            // todo
+            if (newPositionX >= 760) return true;
+            if (newPositionX < 0)    return true;
             return false;
         }
 

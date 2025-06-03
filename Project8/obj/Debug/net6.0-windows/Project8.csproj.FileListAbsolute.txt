@@ -122,3 +122,4 @@ C:\Users\lukas\Source\Repos\our-Game\Project8\obj\Debug\net6.0-windows\Project8.
 C:\Users\lukas\Source\Repos\our-Game\Project8\obj\Debug\net6.0-windows\Project8.genruntimeconfig.cache
 C:\Users\lukas\Source\Repos\our-Game\Project8\obj\Debug\net6.0-windows\ref\Project8.dll
 C:\Users\lukas\Source\Repos\our-Game\Project8\bin\Debug\net6.0-windows\Content\Spielfeld.xnb
+C:\Users\nilsw\source\repos\our-Game\Project8\bin\Debug\net6.0-windows\Content\Spielfeld.xnb
