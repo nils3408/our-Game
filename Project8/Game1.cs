@@ -33,7 +33,7 @@ namespace Project8
 
 
 
-        private float GroundY => _graphics.PreferredBackBufferHeight;
+        private float GroundY => _graphics.PreferredBackBufferHeight-150;
 
 
         public Game1()

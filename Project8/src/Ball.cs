@@ -16,9 +16,9 @@ namespace Project8
         private Texture2D texture;
         public Vector2 position;
         public Vector2 velocity = new Vector2(0, 0);
-        public Vector2 starting_velocity = new Vector2(100f, 40f);
+        public Vector2 starting_velocity = new Vector2(150f, 50f);
 
-        private const int BallSize = 32;
+        private const int BallSize = 50;
         private const float BallFriction = 100f;
         private const int BallMargin = 100;
         private const float Gravity = 50f;
@@ -30,7 +30,7 @@ namespace Project8
             position = position2;
             texture = texture1;
             Rect = new Rectangle((int)position.X, (int)position.Y, BallSize, BallSize);
-            this.groundY = groundY - BallSize;
+            this.groundY = groundY - BallSize + 80;
         }
 
         public Rectangle getRect()

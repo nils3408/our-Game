@@ -14,16 +14,16 @@ namespace Project8
     {
 
         private Texture2D texture;
-        public float move_speed = 100f;
+        public float move_speed = 300f;
         public Vector2 position;
-        private float jump_velocity = -200f;
+        private float jump_velocity = -400f;
         public Rectangle currentRect;
         public Rectangle futureRect;
-        private const int RectangleWidth = 50;
-        private const int RectangleHeight = 50;
+        private const int RectangleWidth = 150;
+        private const int RectangleHeight = 150;
         public Player otherPlayer;
         public float newPositionX;
-        public float gravity = 400f;
+        public float gravity = 500f;
         public Vector2 newPositionY;
         public Vector2 velocity;
 
