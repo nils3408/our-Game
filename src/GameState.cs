@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public interface IGameState
@@ -9,7 +10,7 @@ public interface IGameState
     void LoadContent();
 
     // Method with parameters and return type
-    void Update(float elapsedTime);
+    void Update(GameTime gameTime);
 
-    void Draw(SpriteBatch spriteBatch_);
+    void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 }

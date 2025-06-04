@@ -4,12 +4,15 @@
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Serialization;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 public class Player
 {
     public string name;
     //int id;
+
+    Texture2D texture2D;
 
     Vector2 position;
     Vector2 velocity = new Vector2(0, 0);
@@ -18,22 +21,13 @@ public class Player
     const float jump_impuls = 50;
     Vector2 footForce = new Vector2(5, 10);
 
+    PlayerControls controls = null;
+    
 
-    private enum Actions
-    {
-        Left = 0,
-        Right = 1,
-        Up = 2,
-        Down = 3,
-        Shot = 4,
-        Special = 5
-    }
-    //maps the Controlls to the Keys, standartwerte, müssen angepasst werden
-    private Keys[] controllKeys = { Keys.A, Keys.D, Keys.W, Keys.S, Keys.Space, Keys.E };
-
-    public Player(string name)
+    public Player(string name, PlayerControls controls)
     {
         this.name = name;
+        this.controls = controls;
     }
 
     public void setControlls(Keys[] keys) { }

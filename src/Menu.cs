@@ -1,24 +1,26 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class Menu : IGameState
 {
-    public void Draw(SpriteBatch spriteBatch_)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void Initialize()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void LoadContent()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void Update(float elapsedTime)
+    public void Update(GameTime gameTime)
     {
-        throw new System.NotImplementedException();
+        
+    }
+    
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        
     }
 }

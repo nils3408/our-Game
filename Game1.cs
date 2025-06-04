@@ -15,7 +15,7 @@ public class Game1 : Game
     private static Menu menu;
     private static Settings settings;
 
-    public Player[] PlayerList { get; set; }
+
 
 
 
@@ -24,11 +24,19 @@ public class Game1 : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        
+        _graphics.PreferredBackBufferWidth = 800;
+        _graphics.PreferredBackBufferHeight = 480;
     }
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
+        // Initializing each GameState
+        game.Initialize();
+        menu.Initialize();
+        settings.Initialize();
+
+        curState = game;
 
         base.Initialize();
     }
@@ -37,7 +45,10 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // TODO: use this.Content to load your game content here
+        // load Content for each GameState
+        menu.LoadContent();
+        game.LoadContent();
+        settings.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
@@ -45,7 +56,9 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
+        // update current Game State
+
+        curState.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -54,7 +67,13 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        // TODO: Add your drawing code here
+        // let the current State draw something
+
+        _spriteBatch.Begin();
+
+        curState.Draw(gameTime, _spriteBatch);
+
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }

@@ -1,24 +1,43 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using nkast.Aether.Physics2D.Dynamics;
+
 
 public class GameLogic : IGameState
 {
-    public void Draw(SpriteBatch spriteBatch_)
+
+    private GraphicsDevice graphicsDevice;
+    private float GroundY;
+    
+    public Player[] playerList { get; set; }
+
+    public Project8.Ball football;
+
+    public GameLogic(GraphicsDevice graphicsDevice, Player[] playerList)
     {
-        throw new System.NotImplementedException();
+
+        this.playerList = playerList;
+        football = new Project8.Ball(new Vector2(200, GroundY), Content.Load<Texture2D>("ball"), GroundY);
+
     }
 
     public void Initialize()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void LoadContent()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void Update(float elapsedTime)
+    public void Update(GameTime gameTime)
     {
-        throw new System.NotImplementedException();
+        
+    }
+
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch_)
+    {
+        
     }
 }
