@@ -112,6 +112,7 @@ namespace Project8
 
         }
 
+
         public bool out_of_bounds(float newPositioX)
         {
             if (newPositionX >= 760) return true;

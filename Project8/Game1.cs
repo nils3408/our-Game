@@ -48,9 +48,9 @@ namespace Project8
 
         protected override void Initialize()
         {
-            player1 = new Player(GraphicsDevice, new Vector2(100, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50);
+            player1 = new Player(GraphicsDevice, new Vector2(60, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50);
             player2 = new Player(GraphicsDevice, new Vector2(700, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar2"), GroundY - 50);
-            football = new Ball(GraphicsDevice, new Vector2(200, GroundY), Content.Load<Texture2D>("ball"), GroundY);
+            football = new Ball(GraphicsDevice, new Vector2(100, GroundY), Content.Load<Texture2D>("ball"), GroundY);
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
@@ -71,7 +71,7 @@ namespace Project8
             handle_player_ball_collision(gameTime);
             player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, GroundY - 50);
             player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, GroundY - 50);
-            football.move_parabel((float)gameTime.ElapsedGameTime.TotalSeconds);
+            football.move((float)gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 
@@ -117,7 +117,6 @@ namespace Project8
             // player 2
             if (state.IsKeyDown(Keys.Left)) player2.move_left(delta);
             if (state.IsKeyDown(Keys.Right)) player2.move_right(delta);
-
             if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, GroundY - 50))
                 player2.jump(delta, GroundY - 50);
 
@@ -134,6 +133,7 @@ namespace Project8
                 Vector2 direction = football.position - player1.position;
                 direction.Normalize();
                 football.velocity = direction * football.starting_velocity.Length();
+                football.reset_starting_position();
             }
 
             // Spieler 2
@@ -142,6 +142,7 @@ namespace Project8
                 Vector2 direction = football.position - player2.position;
                 direction.Normalize();
                 football.velocity = direction * football.starting_velocity.Length();
+                football.reset_starting_position();
             }
         }
     }
