@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/Das_Game/our-Game/Content/football.png</File>
+    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/Das_Game/our-Game/Content/KopfkickerChar1.png</File>
+    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/Das_Game/our-Game/Content/KopfkickerChar2.png</File>
+    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/Das_Game/our-Game/Content/Spielfeld.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

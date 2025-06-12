@@ -12,5 +12,5 @@ public interface IGameState
     // Method with parameters and return type
     void Update(GameTime gameTime);
 
-    void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+    void Draw(GameTime gameTime);
 }

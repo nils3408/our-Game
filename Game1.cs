@@ -24,6 +24,10 @@ public class Game1 : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+
+        game = new GameLogic(GraphicsDevice,Content,new Player[] { });
+        menu = new Menu(GraphicsDevice,Content);
+
         
         _graphics.PreferredBackBufferWidth = 800;
         _graphics.PreferredBackBufferHeight = 480;
@@ -36,7 +40,7 @@ public class Game1 : Game
         menu.Initialize();
         settings.Initialize();
 
-        curState = game;
+        curState = menu;
 
         base.Initialize();
     }
@@ -65,16 +69,9 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        //GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        // let the current State draw something
+        curState.Draw(gameTime);
 
-        _spriteBatch.Begin();
-
-        curState.Draw(gameTime, _spriteBatch);
-
-        _spriteBatch.End();
-
-        base.Draw(gameTime);
     }
 }

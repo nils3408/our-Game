@@ -18,7 +18,7 @@ public class Settings : IGameState
 
     }
 
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch_)
+    public void Draw(GameTime gameTime)
     {
         
     }
