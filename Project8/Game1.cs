@@ -48,8 +48,8 @@ namespace Project8
 
         protected override void Initialize()
         {
-            player1 = new Player(GraphicsDevice, new Vector2(60, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50);
-            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar2"), GroundY - 50);
+            player1 = new Player(GraphicsDevice, new Vector2(60, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50,1);
+            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar2"), GroundY - 50,2);
             football = new Ball(GraphicsDevice, new Vector2(100, GroundY), Content.Load<Texture2D>("ball"), GroundY);
 
             player1.Set_other_Player(player2);

@@ -26,11 +26,13 @@ namespace Project8
         public float gravity = 500f;
         public Vector2 newPositionY;
         public Vector2 velocity;
+        int playerGroup;
 
 
-        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, float groundY)
+        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, float groundY, int player)
         {
             position = position1;
+            playerGroup = player;
             texture = texture1;
             currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
             futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
@@ -42,11 +44,19 @@ namespace Project8
         }
 
         public void draw(SpriteBatch spritebatch)
-        {
+        {   if (playerGroup == 2)
+            {
+                spritebatch.Draw(texture,
+                                 currentRect, null, Color.White, 0f, Vector2.Zero,
+                                 SpriteEffects.FlipHorizontally, 0f
+                                 );
+            }
+            else
             spritebatch.Draw(texture,
                              currentRect, null, Color.White, 0f, Vector2.Zero,
                              SpriteEffects.None, 0f
                              );
+            
             // todo;
         }
 
