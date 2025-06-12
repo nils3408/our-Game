@@ -44,7 +44,8 @@ namespace Project8
         }
 
         public void draw(SpriteBatch spritebatch)
-        {   if (playerGroup == 2)
+        {
+            if (playerGroup == 2)
             {
                 spritebatch.Draw(texture,
                                  currentRect, null, Color.White, 0f, Vector2.Zero,
@@ -52,12 +53,13 @@ namespace Project8
                                  );
             }
             else
-            spritebatch.Draw(texture,
+            {
+                spritebatch.Draw(texture,
                              currentRect, null, Color.White, 0f, Vector2.Zero,
                              SpriteEffects.None, 0f
                              );
-            
-            // todo;
+
+            }
         }
 
 
@@ -83,7 +85,7 @@ namespace Project8
 
             if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
             {
-              
+
                 position.X += move_speed * delta;
                 update_rectangles();
             }
@@ -126,7 +128,7 @@ namespace Project8
         public bool out_of_bounds(float newPositioX)
         {
             if (newPositionX >= 760) return true;
-            if (newPositionX < 0)    return true;
+            if (newPositionX < 0) return true;
             return false;
         }
 

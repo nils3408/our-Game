@@ -1,6 +1,6 @@
 ﻿//alle 
 
-using Microsoft.Xna.Framework;                         
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct2D1;
@@ -17,6 +17,9 @@ namespace Project8
 
         //Spielfeld
         private Texture2D _backgroundTexture;
+        private Texture2D _goalTexture;
+        private Vector2 _leftGoalPosition;
+        private Vector2 _rightGoalPosition;
         // Spieler
         private Texture2D _player1Texture;
         private Texture2D _player2Texture;
@@ -29,13 +32,11 @@ namespace Project8
         private Ball football;
 
         private const float MoveSpeed = 200f;
+        private float GroundY => _graphics.PreferredBackBufferHeight - 150;
 
-
-
-
-        private float GroundY => _graphics.PreferredBackBufferHeight-150;
-
-
+        float goalScale;
+        int goalWidth;
+        int goalHeight;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -48,13 +49,13 @@ namespace Project8
 
         protected override void Initialize()
         {
-            player1 = new Player(GraphicsDevice, new Vector2(60, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50,1);
-            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar2"), GroundY - 50,2);
+            player1 = new Player(GraphicsDevice, new Vector2(60, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50, 1);
+            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar2"), GroundY - 50, 2);
             football = new Ball(GraphicsDevice, new Vector2(100, GroundY), Content.Load<Texture2D>("ball"), GroundY);
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
-
+            goalScale = 0.2f;
             base.Initialize();
         }
 
@@ -62,6 +63,12 @@ namespace Project8
         {
             _spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(GraphicsDevice);
             _backgroundTexture = Content.Load<Texture2D>("Spielfeld");
+            _goalTexture = Content.Load<Texture2D>("Tore2");
+            goalWidth = (int)(_goalTexture.Width * goalScale);
+            goalHeight = (int)(_goalTexture.Height * goalScale);
+            _leftGoalPosition = new Vector2(-50, GroundY + 100 - goalHeight);
+            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 50, GroundY + 100 - goalHeight);
+
         }
 
 
@@ -86,6 +93,8 @@ namespace Project8
             new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
             Color.White
             );
+            _spriteBatch.Draw(_goalTexture, new Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
+            _spriteBatch.Draw(_goalTexture, new Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Color.White);
             player1.draw(_spriteBatch);
             player2.draw(_spriteBatch);
             football.draw(_spriteBatch);
