@@ -25,8 +25,7 @@ public class Game1 : Game
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
-        game = new GameLogic(GraphicsDevice,Content,new Player[] { });
-        menu = new Menu(GraphicsDevice,Content);
+
 
         
         _graphics.PreferredBackBufferWidth = 800;
@@ -35,6 +34,9 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
+        game = new GameLogic(GraphicsDevice, Content, new Player[] { });
+        menu = new Menu(GraphicsDevice, Content);
+        settings = new Settings();
         // Initializing each GameState
         game.Initialize();
         menu.Initialize();

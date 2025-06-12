@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/Das_Game/our-Game/Content/football.png</SourceFile>
-  <SourceTime>2025-06-04T00:21:54.1089457+02:00</SourceTime>
-  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/Das_Game/our-Game/Content/bin/DesktopGL/Content/football.xnb</DestFile>
-  <DestTime>2025-06-12T23:45:02.7953075+02:00</DestTime>
+  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/football.png</SourceFile>
+  <SourceTime>2025-06-13T01:28:08.8853554+02:00</SourceTime>
+  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/football.xnb</DestFile>
+  <DestTime>2025-06-13T01:36:11.1428317+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
