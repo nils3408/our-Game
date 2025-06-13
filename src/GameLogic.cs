@@ -49,6 +49,9 @@ public class GameLogic : IGameState
 
     public void Draw(GameTime gameTime)
     {
-        
+        graphicsDevice.Clear(Color.Crimson);
+        _spriteBatch.Begin();
+
+        _spriteBatch.End();
     }
 }

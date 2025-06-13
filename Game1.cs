@@ -10,10 +10,11 @@ public class Game1 : Game
     private  SpriteBatch _spriteBatch;
 
     private static IGameState curState;
+    public static IGameState _nextState;
 
-    private static GameLogic game;
-    private static Menu menu;
-    private static Settings settings;
+    public static GameLogic game;
+    public static Menu menu;
+    public static Settings settings;
 
 
 
@@ -62,6 +63,8 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
+        if (_nextState != null && _nextState != curState) curState = _nextState;
+
         // update current Game State
 
         curState.Update(gameTime);
@@ -71,9 +74,9 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        //GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.CornflowerBlue);
 
         curState.Draw(gameTime);
-
+        base.Draw(gameTime);
     }
 }

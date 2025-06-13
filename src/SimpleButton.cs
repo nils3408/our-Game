@@ -1,37 +1,60 @@
 
 
-using System;
-using System.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-public enum ButtonAnchor
-{
-    Left = 0,
-    Right = 1,
-    Top = 2,
-    Bottom = 3,
-    Middle = 4
-}
+using Microsoft.Xna.Framework.Input;
+using System;
 
 public class SimpleButton
 {
 
     Vector2 position = new Vector2(0, 0);
     Microsoft.Xna.Framework.Rectangle rectangle;
-    
-    String text = "";
 
     public event Action OnClick;
 
-    public SimpleButton(Vector2 pos, Microsoft.Xna.Framework.Rectangle rectangle, String text)
+    private Texture2D pixelTexture;
+
+    private Microsoft.Xna.Framework.Color buttonColor = Color.Black;
+
+    public SimpleButton(Vector2 pos, Microsoft.Xna.Framework.Rectangle rectangle, GraphicsDevice graphicsDevice)
     {
         this.position = pos;
         this.rectangle = rectangle;
 
+        pixelTexture = new Texture2D(graphicsDevice, 1, 1);
+        pixelTexture.SetData(new[] { Color.Black });
+    }
+
+    public void Update(MouseState mouseState)
+    {
+
+        Point mousePos = new Point(mouseState.X, mouseState.Y);
+        bool isHovered = rectangle.Contains(mousePos);
+
+        // Check for click
+        if (isHovered)
+        {
+            System.Diagnostics.Debug.WriteLine("hello");
+            buttonColor = Color.Gray;
+            
+            if (mouseState.LeftButton == ButtonState.Pressed) {
+                OnClick?.Invoke();
+            }
+        } else {
+            buttonColor = Color.Black;
+        }
+        pixelTexture.SetData(new[] { buttonColor });
     }
 
     public void Draw(SpriteBatch spriteBatch)
-    { 
+    {
+
+
+
+        // In Draw()
+         // x, y, width, height
+        spriteBatch.Draw(pixelTexture, rectangle, buttonColor);
+        
     }
 }
