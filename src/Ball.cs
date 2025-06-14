@@ -111,7 +111,6 @@ namespace Project8
         {
             spritebatch.Draw(texture, Rect, Color.White);
         }
-
     }
 }
 

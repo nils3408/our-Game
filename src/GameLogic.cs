@@ -19,6 +19,8 @@ public class GameLogic : IGameState
     private ContentManager content;
     private Player[] players;
 
+    SimpleButton _button;
+
     public GameLogic(GraphicsDevice graphicsDevice, ContentManager contentManager, Player[] playerList)
     {
         this.graphicsDevice = graphicsDevice;
@@ -28,6 +30,10 @@ public class GameLogic : IGameState
         
         Texture2D ballTexture = (Texture2D) contentManager.Load<Texture2D>("football");
         football = new Project8.Ball(new Vector2(200, GroundY), ballTexture, GroundY);
+
+        _button = new SimpleButton(new Vector2(200, 200), new Rectangle(200, 200, 200, 100), graphicsDevice);
+        _button.OnClick += () => Game1._nextState = Game1.menu;
+
 
     }
 
@@ -51,7 +57,7 @@ public class GameLogic : IGameState
     {
         graphicsDevice.Clear(Color.Crimson);
         _spriteBatch.Begin();
-
+        _button.Draw(graphicsDevice);
         _spriteBatch.End();
     }
 }
