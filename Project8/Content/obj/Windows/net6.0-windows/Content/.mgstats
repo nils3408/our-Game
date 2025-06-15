@@ -1,6 +1,1 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/Ball.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/bin/Windows/Content/Ball.xnb","TextureProcessor","Texture2DContent",2811782,11115641,0,4539333
-"C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/KopfkickerChar1.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/bin/Windows/Content/KopfkickerChar1.xnb","TextureProcessor","Texture2DContent",1455712,4194389,0,1360527
-"C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/KopfkickerChar2.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/bin/Windows/Content/KopfkickerChar2.xnb","TextureProcessor","Texture2DContent",1409503,4194389,0,1513899
-"C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/Spielfeld.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/bin/Windows/Content/Spielfeld.xnb","TextureProcessor","Texture2DContent",1397693,5760085,0,1982182
-"C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/Tore2.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/bin/Windows/Content/Tore2.xnb","TextureProcessor","Texture2DContent",1448931,4194389,0,102293

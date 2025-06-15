@@ -1,5 +1,20 @@
 ﻿//alle 
 
+
+/*------------------------------------------------------------------------------------------------------------------
+ * Hinweise
+ * 
+ * Ball Collsion Issue
+ *      For a decent time there was an issue with the collisions. 
+ *      When a player collisionates with the ball, the ball changes its direction                  -> wished
+ *      however one frame later: collision gets detected again: ball changes its direction again  -> not wished
+ *      solution: a minimum time intervall that must pass before a collision with the same player can be detected again
+ *                therefore we have the two variables CollisionCoolDown1, CollisionCoolDown2 
+ * 
+ * 
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,7 +35,7 @@ namespace Project8
         private Texture2D _goalTexture;
         private Vector2 _leftGoalPosition;
         private Vector2 _rightGoalPosition;
-        // Spieler
+        // Spieler, Ball
         private Texture2D _player1Texture;
         private Texture2D _player2Texture;
         private Vector2 _player1Position;
@@ -31,7 +46,11 @@ namespace Project8
         private Player player2;
         private Ball football;
 
-        private const float MoveSpeed = 200f;
+        //genrell
+        private float collisionCooldown1 = 0f; 
+        private float collisionCooldown2 = 0f;
+        private const float CollisionCooldownTime = 0.5f; 
+
         private float GroundY => _graphics.PreferredBackBufferHeight - 150;
 
         float goalScale;
@@ -51,7 +70,7 @@ namespace Project8
         {
             player1 = new Player(GraphicsDevice, new Vector2(60, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50, 1);
             player2 = new Player(GraphicsDevice, new Vector2(700, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar2"), GroundY - 50, 2);
-            football = new Ball(GraphicsDevice, new Vector2(100, GroundY), Content.Load<Texture2D>("ball"), GroundY);
+            football = new Ball(GraphicsDevice, new Vector2(300, GroundY), Content.Load<Texture2D>("ball"), GroundY);
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
@@ -136,23 +155,33 @@ namespace Project8
         private void handle_player_ball_collision(GameTime gameTime)
         {
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            collisionCooldown1 -= delta;
+            collisionCooldown2 -= delta;
+
+
+
             // Spieler 1
-            if (football.getRect().Intersects(player1.currentRect))
+            if (football.getRect().Intersects(player1.currentRect) && collisionCooldown1 <=0)
             {
-                Vector2 direction = football.position - player1.position;
-                direction.Normalize();
-                football.velocity = direction * football.starting_velocity.Length();
-                football.reset_starting_position();
+                 Vector2 direction = football.position - player1.position;
+                 direction.Normalize();
+
+                 football.reset_velocity();
+                 football.change_direction();
+                 collisionCooldown1 = CollisionCooldownTime;
             }
 
             // Spieler 2
-            if (football.getRect().Intersects(player2.currentRect))
+            if (football.getRect().Intersects(player2.currentRect) && collisionCooldown2 <=0)
             {
-                Vector2 direction = football.position - player2.position;
-                direction.Normalize();
-                football.velocity = direction * football.starting_velocity.Length();
-                football.reset_starting_position();
+                 Vector2 direction2 = football.position - player2.position;
+                 direction2.Normalize();
+
+                 football.reset_velocity();
+                 football.change_direction();
+                 collisionCooldown2 = CollisionCooldownTime;
+                
             }
-        }
+        } 
     }
 }
