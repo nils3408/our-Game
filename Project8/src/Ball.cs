@@ -47,7 +47,7 @@ namespace Project8
             position = position2;
             texture = texture1;
             Rect = new Rectangle((int)position.X, (int)position.Y, BallSize, BallSize);
-            this.groundY = groundY - BallSize + 80;
+            this.groundY = groundY;
         }
 
         public Rectangle getRect()

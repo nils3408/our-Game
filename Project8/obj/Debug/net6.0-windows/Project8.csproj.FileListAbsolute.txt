@@ -167,3 +167,5 @@ C:\Users\Lukas\source\repos\nils3408\our-Game\Project8\obj\Debug\net6.0-windows\
 C:\Users\Lukas\source\repos\nils3408\our-Game\Project8\obj\Debug\net6.0-windows\ref\Project8.dll
 C:\Users\Lukas\source\repos\nils3408\our-Game\Project8\bin\Debug\net6.0-windows\Content\Tore2.xnb
 C:\Users\nilsw\source\repos\our-Game\Project8\bin\Debug\net6.0-windows\Content\Tore2.xnb
+C:\Users\Lukas\Source\Repos\our-Game\Project8\bin\Debug\net6.0-windows\Content\Tore2.xnb
+C:\Users\Lukas\Source\Repos\our-Game\Project8\bin\Debug\net6.0-windows\Content\Spielfeld2.xnb
