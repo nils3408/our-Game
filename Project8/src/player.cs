@@ -27,9 +27,10 @@ namespace Project8
         public Vector2 newPositionY;
         public Vector2 velocity;
         int playerGroup;
+       
 
 
-        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, float groundY, int player)
+        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
         {
             position = position1;
             playerGroup = player;
@@ -94,6 +95,7 @@ namespace Project8
 
         public void jump(float delta, float groundY)
         {
+            System.Diagnostics.Debug.WriteLine("player ground: " + groundY);
             if (IsOnGround(position, groundY))
             {
                 velocity.Y = jump_velocity;

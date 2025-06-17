@@ -37,17 +37,14 @@ namespace Project8
 
         private const float g = (float)9.81 * (float)3.5; //gravity
         private Rectangle Rect;
-        private float groundY;
 
 
 
-
-        public Ball(GraphicsDevice graphicsDevice, Vector2 position2, Texture2D texture1, float groundY)
+        public Ball(GraphicsDevice graphicsDevice, Vector2 position2, Texture2D texture1)
         {
             position = position2;
             texture = texture1;
             Rect = new Rectangle((int)position.X, (int)position.Y, BallSize, BallSize);
-            this.groundY = groundY;
         }
 
         public Rectangle getRect()
@@ -62,7 +59,7 @@ namespace Project8
 
 
 
-        public void move(float deltaTime)
+        public void move(float deltaTime, float groundY)
         {
             if (velocity == Vector2.Zero) return;
 
@@ -87,10 +84,10 @@ namespace Project8
                 position.Y = 0 + 5;
             }
 
-            if (out_of_bounds_on_down_side(position))
+            if (out_of_bounds_on_down_side(position, groundY))
             {
                 change_direction_y_scale();
-                position.Y = groundY - BallSize - 5;
+                position.Y = groundY;
             }
 
 
@@ -150,17 +147,18 @@ namespace Project8
             return (newPosition.Y <= 0);
         }
 
-        public bool out_of_bounds_on_down_side(Vector2 newPosition)
+        public bool out_of_bounds_on_down_side(Vector2 newPosition, float groundY)
         {
-            return ((newPosition.Y + BallSize) >= groundY);
+            System.Diagnostics.Debug.WriteLine("ball on ground : " + groundY);
+            return ((newPosition.Y) >= groundY);
         }
 
 
 
-        public bool out_of_bounds_in_generell(Vector2 newPosition)
+        public bool out_of_bounds_in_generell(Vector2 newPosition, float groundY)
         {
-            return (out_of_bounds_on_down_side(newPosition)   || out_of_bounds_on_upper_side(newPosition) ||
-                     out_of_bounds_on_right_side(newPosition) || out_of_bounds_on_down_side(newPosition)
+            return (out_of_bounds_on_down_side(newPosition, groundY)   || out_of_bounds_on_upper_side(newPosition) ||
+                     out_of_bounds_on_right_side(newPosition) || out_of_bounds_on_left_side(newPosition)
                    );
         }
 

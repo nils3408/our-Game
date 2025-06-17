@@ -52,7 +52,7 @@ namespace Project8
         private float collisionCooldown2 = 0f;
         private const float CollisionCooldownTime = 0.5f; 
 
-        private float GroundY => _graphics.PreferredBackBufferHeight - 300;
+        private float groundY => _graphics.PreferredBackBufferHeight - 300;
 
         float goalScale;
         int goalWidth;
@@ -74,10 +74,11 @@ namespace Project8
             _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             _graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();           */
-            player1 = new Player(GraphicsDevice, new Vector2(60, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), GroundY - 50, 1);
-            player2 = new Player(GraphicsDevice, new Vector2(700, GroundY - 50), Content.Load<Texture2D>("KopfkickerChar2"), GroundY - 50, 2);
-            football = new Ball(GraphicsDevice, new Vector2(300, GroundY), Content.Load<Texture2D>("ball"), GroundY);
+            _graphics.ApplyChanges();          
+*/
+            player1 = new Player(GraphicsDevice, new Vector2(60, groundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), 1);
+            player2 = new Player(GraphicsDevice, new Vector2(700,groundY- 50), Content.Load<Texture2D>("KopfkickerChar2"),2);
+            football = new Ball(GraphicsDevice, new Vector2(300, groundY- 50 ), Content.Load<Texture2D>("ball"));
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
@@ -90,10 +91,12 @@ namespace Project8
             _spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(GraphicsDevice);
             _backgroundTexture = Content.Load<Texture2D>("Spielfeld2");
             _goalTexture = Content.Load<Texture2D>("Tore2");
+            
             goalWidth = (int)(_goalTexture.Width * goalScale);
             goalHeight = (int)(_goalTexture.Height * goalScale);
-            _leftGoalPosition = new Vector2(-50, GroundY + 100 - goalHeight);
-            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 50, GroundY + 100 - goalHeight);
+            
+            _leftGoalPosition = new Vector2(-50, groundY + 100 - goalHeight);
+            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 50, groundY + 100 - goalHeight);
 
         }
 
@@ -102,9 +105,9 @@ namespace Project8
         {
             handle_player_movement(gameTime);
             handle_player_ball_collision(gameTime);
-            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, GroundY - 50);
-            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, GroundY - 50);
-            football.move((float)gameTime.ElapsedGameTime.TotalSeconds);
+            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
+            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
+            football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY+50);
             base.Update(gameTime);
         }
 
@@ -145,15 +148,15 @@ namespace Project8
             if (state.IsKeyDown(Keys.A)) player1.move_left(delta);
             if (state.IsKeyDown(Keys.D)) player1.move_right(delta);
 
-            if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, GroundY - 50))
-                player1.jump(delta, GroundY - 50);
+            if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY - 50))
+                player1.jump(delta, groundY - 50);
 
 
             // player 2
             if (state.IsKeyDown(Keys.Left)) player2.move_left(delta);
             if (state.IsKeyDown(Keys.Right)) player2.move_right(delta);
-            if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, GroundY - 50))
-                player2.jump(delta, GroundY - 50);
+            if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY - 50))
+                player2.jump(delta, groundY - 50);
 
         }
 
