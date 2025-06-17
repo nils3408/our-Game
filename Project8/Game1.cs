@@ -69,20 +69,20 @@ namespace Project8
 
         protected override void Initialize()
         {
-/*          FullScreen Mode: 
- *          ToDo Spielfeld anpassen!!
+ /*          FullScreen Mode: 
+           ToDo Spielfeld anpassen!!
             _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();          
 */
-            player1 = new Player(GraphicsDevice, new Vector2(60, groundY - 50), Content.Load<Texture2D>("KopfkickerChar1"), 1);
-            player2 = new Player(GraphicsDevice, new Vector2(700,groundY- 50), Content.Load<Texture2D>("KopfkickerChar2"),2);
-            football = new Ball(GraphicsDevice, new Vector2(300, groundY- 50 ), Content.Load<Texture2D>("ball"));
+            player1 = new Player(GraphicsDevice, new Vector2(60, groundY +50), Content.Load<Texture2D>("KopfkickerChar1"), 1);
+            player2 = new Player(GraphicsDevice, new Vector2(700,groundY +50), Content.Load<Texture2D>("KopfkickerChar2"),2);
+            football = new Ball(GraphicsDevice, new Vector2(300, groundY ), Content.Load<Texture2D>("ball"));
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
-            goalScale = 0.2f;
+            goalScale = 0.15f;
             base.Initialize();
         }
 
@@ -108,6 +108,7 @@ namespace Project8
             player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
             player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
             football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY+50);
+            check_for_goal();
             base.Update(gameTime);
         }
 
@@ -161,7 +162,27 @@ namespace Project8
         }
 
 
+        private void check_for_goal()
+        {
+            Microsoft.Xna.Framework.Rectangle leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth - 50, goalHeight-50);
+            Microsoft.Xna.Framework.Rectangle rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth - 50 , goalHeight - 50);
 
+            Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
+
+          
+            if (leftGoal.Contains(ballRect))
+            {
+                
+                football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+            }
+
+            
+            if (rightGoal.Contains(ballRect))
+            {
+                
+                football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+            }
+        }
         private void handle_player_ball_collision(GameTime gameTime)
         {
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;

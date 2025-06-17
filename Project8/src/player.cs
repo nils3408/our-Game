@@ -19,8 +19,8 @@ namespace Project8
         private float jump_velocity = -400f;
         public Rectangle currentRect;
         public Rectangle futureRect;
-        private const int RectangleWidth = 150;
-        private const int RectangleHeight = 150;
+        private const int RectangleWidth = 100;
+        private const int RectangleHeight = 100;
         public Player otherPlayer;
         public float newPositionX;
         public float gravity = 500f;

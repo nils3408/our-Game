@@ -4,12 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Lukas/source/repos/our-Game/Project8/Content/Ball.png</File>
-    <File>C:/Users/Lukas/source/repos/our-Game/Project8/Content/KopfkickerChar1.png</File>
-    <File>C:/Users/Lukas/source/repos/our-Game/Project8/Content/KopfkickerChar2.png</File>
-    <File>C:/Users/Lukas/source/repos/our-Game/Project8/Content/Spielfeld.png</File>
-    <File>C:/Users/Lukas/source/repos/our-Game/Project8/Content/Spielfeld2.png</File>
-    <File>C:/Users/Lukas/source/repos/our-Game/Project8/Content/Tore2.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/Ball.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/KopfkickerChar1.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/KopfkickerChar2.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/Spielfeld.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/Spielfeld2.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Project8/Content/Tore2.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

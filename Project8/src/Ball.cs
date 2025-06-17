@@ -35,7 +35,7 @@ namespace Project8
         private const int BallSize = 50;
         private const float BallFriction = (float)1;
 
-        private const float g = (float)9.81 * (float)3.5; //gravity
+        private const float g = 100f;                        // (float)9.81 * (float)3.5; //gravity
         private Rectangle Rect;
 
 
@@ -161,7 +161,13 @@ namespace Project8
                      out_of_bounds_on_right_side(newPosition) || out_of_bounds_on_left_side(newPosition)
                    );
         }
-
+        public void Reset_Position(Vector2 newPosition)
+        {
+            position = newPosition;
+            velocity = Vector2.Zero;
+            Rect.X = (int)position.X;
+            Rect.Y = (int)position.Y;
+        }
         public void draw(SpriteBatch spritebatch)
         {
             spritebatch.Draw(texture, Rect, Color.White);
