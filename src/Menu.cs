@@ -18,8 +18,10 @@ public class Menu : IGameState
         this._spriteBatch = new SpriteBatch(graphicsDevice);
         this.contentManager = contentManager;
 
-        _button = new SimpleButton(new Vector2(200,200),new Rectangle(200,200, 200,100), graphicsDevice);
+        SpriteFont font = contentManager.Load<SpriteFont>("Arial");
+        _button = new SimpleButton(new Rectangle(200,200, 200,100), "Button", font);
         _button.OnClick += () => Game1._nextState = Game1.game;
+        
 
     }
 
@@ -36,9 +38,10 @@ public class Menu : IGameState
 
     public void Draw(GameTime gameTime)
     {
-        graphicsDevice.Clear(Color.Aquamarine);
+        Color background = new Color(190, 244, 150);
+        graphicsDevice.Clear(background);
         _spriteBatch.Begin();
-        _button.Draw(_spriteBatch);
+        _button.Draw(_spriteBatch, graphicsDevice);
         _spriteBatch.End();
     }
 }

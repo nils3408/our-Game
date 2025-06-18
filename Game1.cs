@@ -18,24 +18,22 @@ public class Game1 : Game
 
 
 
-
-
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
-
-
+        //_graphics.ToggleFullScreen();
         
-        _graphics.PreferredBackBufferWidth = 800;
-        _graphics.PreferredBackBufferHeight = 480;
+        
+        _graphics.PreferredBackBufferWidth = 1920;
+        _graphics.PreferredBackBufferHeight = 1080;
     }
 
     protected override void Initialize()
     {
-        game = new GameLogic(GraphicsDevice, Content, new Player[] { });
+        game = new GameLogic(_graphics ,GraphicsDevice, Content);
         menu = new Menu(GraphicsDevice, Content);
         settings = new Settings();
         // Initializing each GameState
@@ -60,9 +58,11 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
-
+        if (curState == menu)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+        }
         if (_nextState != null && _nextState != curState) curState = _nextState;
 
         // update current Game State

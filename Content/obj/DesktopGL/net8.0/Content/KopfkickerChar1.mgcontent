@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/KopfkickerChar1.png</SourceFile>
-  <SourceTime>2025-06-13T01:49:36.1243117+02:00</SourceTime>
+  <SourceTime>2025-06-14T22:07:57.1185711+02:00</SourceTime>
   <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/KopfkickerChar1.xnb</DestFile>
-  <DestTime>2025-06-13T01:50:16.4645434+02:00</DestTime>
+  <DestTime>2025-06-17T22:38:38.1278611+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

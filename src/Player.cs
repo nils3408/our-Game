@@ -1,62 +1,140 @@
-using System.Collections.Generic;
+﻿//nils, Lukas
+
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-public class Player
-{
-    public string name;
-    //int id;
-
-    Texture2D texture2D;
-
-    Vector2 position;
-    Vector2 velocity = new Vector2(0, 0);
-
-    const float gravity = 10;
-    const float jump_impuls = 50;
-    Vector2 footForce = new Vector2(5, 10);
-
-    PlayerControls controls = null;
+using System;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 
-    public Player(string name, PlayerControls controls)
-    {
-        this.name = name;
-        this.controls = controls;
-    }
-
-    public void setControlls(PlayerControls controlls)
-    {
-        this.controls = controlls;
-    }
-
-    public Vector2 GetMoveDir(KeyboardState input)
+    public class Player
     {
 
-        Dictionary<int, Vector2> actionMovement = new Dictionary<int, Vector2>
+        private Texture2D texture;
+        public float move_speed = 300f;
+        public Vector2 position;
+        private float jump_velocity = -400f;
+        public Rectangle currentRect;
+        public Rectangle futureRect;
+        private const int RectangleWidth = 100;
+        private const int RectangleHeight = 100;
+        public Player otherPlayer;
+        public float newPositionX;
+        public float gravity = 500f;
+        public Vector2 newPositionY;
+        public Vector2 velocity;
+        int playerGroup;
+       
+
+
+        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
         {
-            [(int)PlayerAction.Left] = new Vector2(-1, 0),    //Left
-            [(int)PlayerAction.Right] = new Vector2(1, 0),     //Right
-            [(int)PlayerAction.Up] = new Vector2(0, 1),     //Up
-            [(int)PlayerAction.Down] = new Vector2(0, -1)     //Down
-        };
-
-        Vector2 result = new Vector2(0, 0);
-        Keys[] pushedKeys = input.GetPressedKeys();
-        for (int i = 0; i < pushedKeys.Length; i++)
-        {
-            int action = (int)controls.GetAction(pushedKeys[i]);
-            result += actionMovement[action];
+            position = position1;
+            playerGroup = player;
+            texture = texture1;
+            currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+            futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
         }
-        return result;
+
+        public void Set_other_Player(Player otherPlayer1)
+        {
+            otherPlayer = otherPlayer1;
+        }
+
+        public void draw(SpriteBatch spritebatch)
+        {
+            if (playerGroup == 2)
+            {
+                spritebatch.Draw(texture,
+                                 currentRect, null, Color.White, 0f, Vector2.Zero,
+                                 SpriteEffects.FlipHorizontally, 0f
+                                 );
+            }
+            else
+            {
+                spritebatch.Draw(texture,
+                             currentRect, null, Color.White, 0f, Vector2.Zero,
+                             SpriteEffects.None, 0f
+                             );
+
+            }
+        }
+
+
+
+
+        public void move_left(float delta)
+        {
+            newPositionX = position.X - delta * move_speed;
+            futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+
+            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
+            {
+                position.X -= move_speed * delta;
+                update_rectangles();
+            }
+        }
+
+
+        public void move_right(float delta)
+        {
+            newPositionX = position.X + delta * move_speed;
+            futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+
+            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
+            {
+
+                position.X += move_speed * delta;
+                update_rectangles();
+            }
+        }
+
+
+        public void jump(float delta, float groundY)
+        {
+            System.Diagnostics.Debug.WriteLine("player ground: " + groundY);
+            if (IsOnGround(position, groundY))
+            {
+                velocity.Y = jump_velocity;
+            }
+        }
+
+        public void update_vertical(float delta, float groundY)
+        {
+            velocity.Y += gravity * delta;
+            position.Y += velocity.Y * delta;
+
+            if (position.Y >= groundY)
+            {
+                position.Y = groundY;
+                velocity.Y = 0;
+            }
+
+            update_rectangles();
+        }
+
+
+
+        public void update_rectangles()
+        {
+            //update current_rectangle and future_rectangle
+            currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+            futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+
+        }
+
+
+        public bool out_of_bounds(float newPositioX)
+        {
+            if (newPositionX >= 760) return true;
+            if (newPositionX < 0) return true;
+            return false;
+        }
+
+        public bool IsOnGround(Vector2 position, float groundY)
+        {
+            return position.Y >= groundY;
+        }
     }
-
-    public void handle_player_movement(GameTime gameTime)
-    {
-        KeyboardState input = Keyboard.GetState();
-
-    }
-
-
-}
