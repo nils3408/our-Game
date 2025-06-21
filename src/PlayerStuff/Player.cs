@@ -13,7 +13,7 @@ using System.Runtime.CompilerServices;
     {
 
         private Texture2D texture;
-        public float move_speed = 300f;
+        public float move_speed = 380f;
         public Vector2 position;
         private float jump_velocity = -500f;
         public Rectangle currentRect;

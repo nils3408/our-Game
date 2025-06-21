@@ -155,7 +155,6 @@ using our_Game;
             //Player 1
             if (state.IsKeyDown(Keys.A)) player1.move_left(delta);
             if (state.IsKeyDown(Keys.D)) player1.move_right(delta);
-
             if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY-250))
                 player1.jump(delta, groundY-250);
 
@@ -198,19 +197,25 @@ using our_Game;
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             collisionCooldown1 -= delta;
             collisionCooldown2 -= delta;
+            
 
 
 
             // Spieler 1
             if (football.getRect().Intersects(player1.currentRect) && collisionCooldown1 <=0)
             {
-                 Vector2 direction = football.position - player1.position;
-                 direction.Normalize();
 
-                 football.reset_velocity();
-                 football.change_direction();
-                 collisionCooldown1 = CollisionCooldownTime;
-            }
+                Vector2 direction = football.position - player1.position;
+                direction.Normalize();
+
+                football.reset_velocity();
+                football.change_direction();
+                collisionCooldown1 = CollisionCooldownTime;
+
+                // shooting    
+                KeyboardState state = Keyboard.GetState();
+                if (state.IsKeyDown(Keys.S)) { football.getShooted();}
+            }   
 
             // Spieler 2
             if (football.getRect().Intersects(player2.currentRect) && collisionCooldown2 <=0)
@@ -218,10 +223,14 @@ using our_Game;
                  Vector2 direction2 = football.position - player2.position;
                  direction2.Normalize();
 
-                 football.reset_velocity();
-                 football.change_direction();
+                football.reset_velocity(); 
+                football.change_direction();
                  collisionCooldown2 = CollisionCooldownTime;
-                
+
+                // shooting    
+                KeyboardState state = Keyboard.GetState();
+                if (state.IsKeyDown(Keys.Down)) { football.getShooted(); }
+
             }
         } 
     }
