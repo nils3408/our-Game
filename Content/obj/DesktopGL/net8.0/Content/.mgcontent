@@ -4,14 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Arial.spritefont</File>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Ball.png</File>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/football.png</File>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/KopfkickerChar1.png</File>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/KopfkickerChar2.png</File>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Spielfeld.png</File>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Spielfeld2.png</File>
-    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Tore2.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/Arial.spritefont</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/Ball.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/football.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/KopfkickerChar1.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/KopfkickerChar2.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/Spielfeld.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/Spielfeld2.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/Tore2.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

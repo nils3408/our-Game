@@ -4,7 +4,10 @@
 /*-------------------------------------------------------------------------------------------------------------
  * - Ball movement 
  *      the ball movement is based on its velocity. velocity is a 2D Vector
- *      with the gravity parameter we can simulate a realistic parabel (=ballmovement)
+ *      with the gravity parameter we can simulate a realistic parabel for ballmovement
+ *      
+ *      whenver the ball collides Ball, its velocity gets reset due to Reibung
+ *      When the player is activly shooting, the velocity gets reset. 
  * 
  * ------------------------------------------------------------------------------------------------------------
  */
@@ -27,10 +30,10 @@ public class Ball
     public Vector2 position;
 
     public Vector2 velocity = new Vector2(0, 0);
-    public Vector2 starting_velocity = new Vector2(180f, -100f);
+    public Vector2 starting_velocity = new Vector2(360f, -200f);
     public Vector2 v_sim;
 
-    private const int BallSize = 50;
+    private const int BallSize = 100;
     private const float BallFriction = (float)1;
 
     private const float g = 100f;                        // (float)9.81 * (float)3.5; //gravity
@@ -68,25 +71,29 @@ public class Ball
         if (out_of_bounds_on_right_side(position))
         {
             change_direction_x_scale();
-            position.X = 800 - BallSize - 5;
+            position.X = 1960 - BallSize - 5;
+            reduce_velocity_due_to_friction();
         }
 
         if (out_of_bounds_on_left_side(position))
         {
             change_direction_x_scale();
             position.X = 0 + 5;
+            reduce_velocity_due_to_friction();
         }
 
         if (out_of_bounds_on_upper_side(position))
         {
             change_direction_y_scale();
             position.Y = 0 + 5;
+            reduce_velocity_due_to_friction();
         }
 
         if (out_of_bounds_on_down_side(position, groundY))
         {
             change_direction_y_scale();
             position.Y = groundY;
+            reduce_velocity_due_to_friction();
         }
 
 
@@ -133,7 +140,7 @@ public class Ball
 
     public bool out_of_bounds_on_right_side(Vector2 newPosition)
     {
-        return ((newPosition.X + BallSize) >= 800);
+        return ((newPosition.X + BallSize) >= 1960);
     }
 
     public bool out_of_bounds_on_left_side(Vector2 newPosition)
@@ -148,7 +155,6 @@ public class Ball
 
     public bool out_of_bounds_on_down_side(Vector2 newPosition, float groundY)
     {
-        System.Diagnostics.Debug.WriteLine("ball on ground : " + groundY);
         return ((newPosition.Y) >= groundY);
     }
 
@@ -160,6 +166,8 @@ public class Ball
                  out_of_bounds_on_right_side(newPosition) || out_of_bounds_on_left_side(newPosition)
                );
     }
+
+
     public void Reset_Position(Vector2 newPosition)
     {
         position = newPosition;
@@ -173,4 +181,8 @@ public class Ball
     }
 
 
+    public void reduce_velocity_due_to_friction()
+    {
+        velocity *= 0.9f;
+    }
 }

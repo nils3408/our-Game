@@ -50,12 +50,12 @@ using our_Game;
         private Player player2;
         private Ball football;
 
-        //genrell
+        //generell
         private float collisionCooldown1 = 0f; 
         private float collisionCooldown2 = 0f;
         private const float CollisionCooldownTime = 0.5f; 
 
-        private float groundY => _graphics.PreferredBackBufferHeight - 300;
+        private float groundY => _graphics.PreferredBackBufferHeight - 400;
 
         float goalScale;
         int goalWidth;
@@ -80,9 +80,9 @@ using our_Game;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();          
 */
-            player1 = new Player(graphicsDevice, new Vector2(60, groundY +50), Content.Load<Texture2D>("KopfkickerChar1"), 1);
-            player2 = new Player(graphicsDevice, new Vector2(700,groundY +50), Content.Load<Texture2D>("KopfkickerChar2"),2);
-            football = new Ball(graphicsDevice, new Vector2(300, groundY ), Content.Load<Texture2D>("ball"));
+            player1 = new Player(graphicsDevice, new Vector2(60, groundY +200), Content.Load<Texture2D>("KopfkickerChar1"), 1);
+            player2 = new Player(graphicsDevice, new Vector2(700,groundY +200), Content.Load<Texture2D>("KopfkickerChar2"),2);
+            football = new Ball(graphicsDevice, new Vector2(300, groundY -100), Content.Load<Texture2D>("ball"));
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
@@ -109,9 +109,9 @@ using our_Game;
         {
             handle_player_movement(gameTime);
             handle_player_ball_collision(gameTime);
-            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
-            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
-            football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY+50);
+            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 250);
+            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 250);
+            football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY-100);
             check_for_goal();
             
         }
@@ -156,15 +156,15 @@ using our_Game;
             if (state.IsKeyDown(Keys.A)) player1.move_left(delta);
             if (state.IsKeyDown(Keys.D)) player1.move_right(delta);
 
-            if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY - 50))
-                player1.jump(delta, groundY - 50);
+            if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY-250))
+                player1.jump(delta, groundY-250);
 
 
             // player 2
             if (state.IsKeyDown(Keys.Left)) player2.move_left(delta);
             if (state.IsKeyDown(Keys.Right)) player2.move_right(delta);
-            if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY - 50))
-                player2.jump(delta, groundY - 50);
+            if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY -250))
+                player2.jump(delta, groundY - 250);
 
         }
 
@@ -190,6 +190,9 @@ using our_Game;
                 football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
             }
         }
+
+
+
         private void handle_player_ball_collision(GameTime gameTime)
         {
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;

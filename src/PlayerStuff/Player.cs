@@ -15,11 +15,11 @@ using System.Runtime.CompilerServices;
         private Texture2D texture;
         public float move_speed = 300f;
         public Vector2 position;
-        private float jump_velocity = -400f;
+        private float jump_velocity = -500f;
         public Rectangle currentRect;
         public Rectangle futureRect;
-        private const int RectangleWidth = 100;
-        private const int RectangleHeight = 100;
+        private const int RectangleWidth = 250;
+        private const int RectangleHeight = 250;
         public Player otherPlayer;
         public float newPositionX;
         public float gravity = 500f;
@@ -78,28 +78,32 @@ using System.Runtime.CompilerServices;
         }
 
 
-        public void move_right(float delta)
+    public void move_right(float delta)
+    {
+        newPositionX = position.X + delta * move_speed;
+        futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+
+        System.Diagnostics.Debug.WriteLine("I am hier");
+        if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
         {
-            newPositionX = position.X + delta * move_speed;
-            futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
-
-            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
-            {
-
-                position.X += move_speed * delta;
-                update_rectangles();
-            }
+            position.X += move_speed * delta;
+            update_rectangles();
         }
 
+        System.Diagnostics.Debug.WriteLine(futureRect.Intersects(otherPlayer.currentRect));
+        System.Diagnostics.Debug.WriteLine(out_of_bounds(newPositionX));
+    }
 
-        public void jump(float delta, float groundY)
+
+
+    public void jump(float delta, float groundY)
         {
-            System.Diagnostics.Debug.WriteLine("player ground: " + groundY);
             if (IsOnGround(position, groundY))
             {
                 velocity.Y = jump_velocity;
             }
-        }
+
+    }
 
         public void update_vertical(float delta, float groundY)
         {
@@ -126,10 +130,10 @@ using System.Runtime.CompilerServices;
         }
 
 
-        public bool out_of_bounds(float newPositioX)
+        public bool out_of_bounds(float newPosition1X)
         {
-            if (newPositionX >= 760) return true;
-            if (newPositionX < 0) return true;
+            if (newPosition1X >= 1700) return true;
+            if (newPosition1X < 0) return true;
             return false;
         }
 
