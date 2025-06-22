@@ -55,7 +55,7 @@ using our_Game;
         private float collisionCooldown2 = 0f;
         private const float CollisionCooldownTime = 0.5f; 
 
-        private float groundY => _graphics.PreferredBackBufferHeight - 400;
+        private float groundY =550;
 
         float goalScale;
         int goalWidth;
@@ -80,13 +80,13 @@ using our_Game;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();          
 */
-            player1 = new Player(graphicsDevice, new Vector2(60, groundY +200), Content.Load<Texture2D>("KopfkickerChar1"), 1);
-            player2 = new Player(graphicsDevice, new Vector2(700,groundY +200), Content.Load<Texture2D>("KopfkickerChar2"),2);
+            player1 = new Player(graphicsDevice, new Vector2(60, groundY +200), Content.Load<Texture2D>("KopfkickerChar1_neu"),1);
+            player2 = new Player(graphicsDevice, new Vector2(700,groundY +200), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
             football = new Ball(graphicsDevice, new Vector2(300, groundY -100), Content.Load<Texture2D>("ball"));
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
-            goalScale = 0.15f;
+            goalScale = 0.3f;
             
         }
 
@@ -132,7 +132,7 @@ using our_Game;
             player1.draw(_spriteBatch);
             player2.draw(_spriteBatch);
             football.draw(_spriteBatch);
-            // To do draw Hintergrund();
+           
 
             _spriteBatch.End();
 

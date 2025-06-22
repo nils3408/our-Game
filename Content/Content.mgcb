@@ -44,7 +44,7 @@
 /processorParam:TextureFormat=Color
 /build:football.png
 
-#begin KopfkickerChar1.png
+#begin KopfkickerChar1_neu.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -54,9 +54,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:KopfkickerChar1.png
+/build:KopfkickerChar1_neu.png
 
-#begin KopfkickerChar2.png
+#begin KopfkickerChar2_neu.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -66,9 +66,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:KopfkickerChar2.png
+/build:KopfkickerChar2_neu.png
 
-#begin Spielfeld.png
+#begin Spielcharakter1_neu.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -78,7 +78,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Spielfeld.png
+/build:Spielcharakter1_neu.png
 
 #begin Spielfeld2.png
 /importer:TextureImporter
