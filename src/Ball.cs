@@ -44,7 +44,7 @@ public class Ball
     private const int BallSize = 100;
     private const float BallFriction = (float)1;
 
-    private const float g = 120f;                        // (float)9.81 * (float)3.5; //gravity
+    private const float g = 300f;                        // (float)9.81 * (float)3.5; //gravity
     private Rectangle Rect;
 
 
@@ -54,6 +54,7 @@ public class Ball
         position = position2;
         texture = texture1;
         Rect = new Rectangle((int)position.X, (int)position.Y, BallSize, BallSize);
+        //new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY)
     }
 
     public Rectangle getRect()

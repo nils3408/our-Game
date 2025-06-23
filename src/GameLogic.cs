@@ -80,9 +80,9 @@ using our_Game;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();          
 */
-            player1 = new Player(graphicsDevice, new Vector2(60, groundY +200), Content.Load<Texture2D>("KopfkickerChar1_neu"),1);
-            player2 = new Player(graphicsDevice, new Vector2(700,groundY +200), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
-            football = new Ball(graphicsDevice, new Vector2(300, groundY -100), Content.Load<Texture2D>("ball"));
+            player1 = new Player(graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("KopfkickerChar1_neu"),1);
+            player2 = new Player(graphicsDevice, new Vector2(700,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
+            football = new Ball(graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("ball"));
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
@@ -109,9 +109,9 @@ using our_Game;
         {
             handle_player_movement(gameTime);
             handle_player_ball_collision(gameTime);
-            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 250);
-            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 250);
-            football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY-100);
+            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY -50);
+            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY -50);
+            football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
             check_for_goal();
             
         }
