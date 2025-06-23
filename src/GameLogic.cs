@@ -80,8 +80,8 @@ using our_Game;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();          
 */
-            player1 = new Player(graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("KopfkickerChar1_neu"),1);
-            player2 = new Player(graphicsDevice, new Vector2(700,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
+            player1 = new Spiderman (graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
+            player2 = new Player    (graphicsDevice, new Vector2(700,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
             football = new Ball(graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("ball"));
 
             player1.Set_other_Player(player2);
@@ -157,6 +157,7 @@ using our_Game;
             if (state.IsKeyDown(Keys.D)) player1.move_right(delta);
             if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY-250))
                 player1.jump(delta, groundY-250);
+            if (state.IsKeyDown(Keys.E)) player1.do_special_effect();
 
 
             // player 2

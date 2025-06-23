@@ -12,24 +12,32 @@ using System.Runtime.CompilerServices;
     public class Player
     {
 
-        private Texture2D texture;
+        public Texture2D texture;
         public float move_speed = 380f;
         public Vector2 position;
-        private float jump_velocity = -500f;
+        public float jump_velocity = -500f;
         public Rectangle currentRect;
         public Rectangle futureRect;
-        private const int RectangleWidth = 150;
-        private const int RectangleHeight = 150;
+        public const int RectangleWidth = 150;
+        public const int RectangleHeight = 150;
         public Player otherPlayer;
         public float newPositionX;
         public float gravity = 500f;
         public Vector2 newPositionY;
         public Vector2 velocity;
-        int playerGroup;
-       
+        public int playerGroup;
+
+    /*
+     * -------------------------------------------------
+     * heredity
+     *      each player has a special effect that gets executed through function do_special_effect()
+     *      this function gets overwritten in each child-class inherting from this one
+     *      
+     * --------------------------------------------------
+     */
 
 
-        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
+    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
         {
             position = position1;
             playerGroup = player;
@@ -41,6 +49,13 @@ using System.Runtime.CompilerServices;
         public void Set_other_Player(Player otherPlayer1)
         {
             otherPlayer = otherPlayer1;
+        }
+
+        
+        public virtual void do_special_effect()
+        {
+            // this player does nothing special;
+            return;
         }
 
         public void draw(SpriteBatch spritebatch)
@@ -62,46 +77,44 @@ using System.Runtime.CompilerServices;
             }
         }
 
-
-
-
+  
         public void move_left(float delta)
         {
-            newPositionX = position.X - delta * move_speed;
+                newPositionX = position.X - delta * move_speed;
+                futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+
+                if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
+                {
+                    position.X -= move_speed * delta;
+                    update_rectangles();
+                }
+        }
+
+
+        public void move_right(float delta)
+        {
+            newPositionX = position.X + delta * move_speed;
             futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
+            System.Diagnostics.Debug.WriteLine("I am hier");
             if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
             {
-                position.X -= move_speed * delta;
+                position.X += move_speed * delta;
                 update_rectangles();
             }
-        }
 
-
-    public void move_right(float delta)
-    {
-        newPositionX = position.X + delta * move_speed;
-        futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
-
-        System.Diagnostics.Debug.WriteLine("I am hier");
-        if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
-        {
-            position.X += move_speed * delta;
-            update_rectangles();
-        }
-
-        System.Diagnostics.Debug.WriteLine(futureRect.Intersects(otherPlayer.currentRect));
-        System.Diagnostics.Debug.WriteLine(out_of_bounds(newPositionX));
+            System.Diagnostics.Debug.WriteLine(futureRect.Intersects(otherPlayer.currentRect));
+            System.Diagnostics.Debug.WriteLine(out_of_bounds(newPositionX));
     }
 
 
 
-    public void jump(float delta, float groundY)
-        {
-            if (IsOnGround(position, groundY))
+        public void jump(float delta, float groundY)
             {
-                velocity.Y = jump_velocity;
-            }
+                if (IsOnGround(position, groundY))
+                {
+                    velocity.Y = jump_velocity;
+                }
 
     }
 

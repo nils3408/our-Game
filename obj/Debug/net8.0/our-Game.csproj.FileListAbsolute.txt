@@ -81,9 +81,6 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Ball.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\BasicFont.ttf
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\football.xnb
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\KopfkickerChar1.xnb
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\KopfkickerChar2.xnb
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielfeld.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielfeld2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tore2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.exe
@@ -161,3 +158,7 @@ C:\Users\Lukas\source\repos\nils3408\our-Game\obj\Debug\net8.0\ref\our-Game.dll
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\KopfkickerChar2_neu.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\KopfkickerChar1_neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\KopfkickerChar1_neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\KopfkickerChar2_neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spiderman.xnb

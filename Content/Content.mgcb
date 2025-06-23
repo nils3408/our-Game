@@ -68,7 +68,7 @@
 /processorParam:TextureFormat=Color
 /build:KopfkickerChar2_neu.png
 
-#begin Spielcharakter1_neu.png
+#begin Spiderman.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -78,7 +78,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Spielcharakter1_neu.png
+/build:Spiderman.png
 
 #begin Spielfeld2.png
 /importer:TextureImporter
