@@ -13,19 +13,23 @@ using System.Runtime.CompilerServices;
     {
 
         public Texture2D texture;
+        public Player otherPlayer;
+        public int playerGroup;
+        
         public float move_speed = 380f;
-        public Vector2 position;
         public float jump_velocity = -500f;
+        public float gravity = 500f;
+        public Vector2 velocity;
+
         public Rectangle currentRect;
         public Rectangle futureRect;
         public const int RectangleWidth = 150;
         public const int RectangleHeight = 150;
-        public Player otherPlayer;
-        public float newPositionX;
-        public float gravity = 500f;
-        public Vector2 newPositionY;
-        public Vector2 velocity;
-        public int playerGroup;
+
+        public Vector2 position;
+        public float maxPosY = 5;
+        
+        
 
     /*
      * -------------------------------------------------
@@ -37,7 +41,7 @@ using System.Runtime.CompilerServices;
      */
 
 
-    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
+        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
         {
             position = position1;
             playerGroup = player;
@@ -46,17 +50,19 @@ using System.Runtime.CompilerServices;
             futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
         }
 
+        
         public void Set_other_Player(Player otherPlayer1)
         {
             otherPlayer = otherPlayer1;
         }
 
         
-        public virtual void do_special_effect()
+        public virtual void do_special_effect(float delta)
         {
             // this player does nothing special;
             return;
         }
+
 
         public void draw(SpriteBatch spritebatch)
         {
@@ -80,43 +86,52 @@ using System.Runtime.CompilerServices;
   
         public void move_left(float delta)
         {
-                newPositionX = position.X - delta * move_speed;
+                float newPositionX = position.X - delta * move_speed;
+                Vector2 newPosition = new Vector2(newPositionX, position.Y);
+                
                 futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
-                if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
+                if (!(futureRect.Intersects(otherPlayer.currentRect)))
                 {
-                    position.X -= move_speed * delta;
-                    update_rectangles();
+                    if (out_of_bounds_both_scales (newPosition) == false)
+                    { 
+                        position.X -= move_speed * delta;
+                        update_rectangles();
+                    }
                 }
         }
 
 
         public void move_right(float delta)
         {
-            newPositionX = position.X + delta * move_speed;
+            float newPositionX = position.X + delta * move_speed;
+            Vector2 newPosition = new Vector2(newPositionX, position.Y);
+
             futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
-            System.Diagnostics.Debug.WriteLine("I am hier");
-            if (!(futureRect.Intersects(otherPlayer.currentRect)) && (out_of_bounds(newPositionX) == false))
+            if (!(futureRect.Intersects(otherPlayer.currentRect)))
             {
-                position.X += move_speed * delta;
-                update_rectangles();
-            }
-
-            System.Diagnostics.Debug.WriteLine(futureRect.Intersects(otherPlayer.currentRect));
-            System.Diagnostics.Debug.WriteLine(out_of_bounds(newPositionX));
-    }
-
+                if (out_of_bounds_both_scales(newPosition) == false)
+                {
+                    position.X += move_speed * delta;
+                    update_rectangles();
+                }
+            }   
+        }
 
 
         public void jump(float delta, float groundY)
-            {
-                if (IsOnGround(position, groundY))
-                {
-                    velocity.Y = jump_velocity;
-                }
+        {
+                float newPositionY = position.Y - jump_velocity * delta;
+                Vector2 newPosition = new Vector2 (position.X, newPositionY);
 
-    }
+                if (!(IsOnGround(position, groundY))) return;
+                if (out_of_bounds_Y_Scale(newPosition)) newPosition.Y = maxPosY;   
+                velocity.Y = jump_velocity;
+                
+
+        }
+
 
         public void update_vertical(float delta, float groundY)
         {
@@ -142,13 +157,27 @@ using System.Runtime.CompilerServices;
 
         }
 
-
-        public bool out_of_bounds(float newPosition1X)
+        
+        
+        public bool out_of_bounds_both_scales(Vector2 newPosition1)
         {
-            if (newPosition1X >= 1700) return true;
-            if (newPosition1X < 0) return true;
+            return (out_of_bounds_X_Scale(newPosition1) || out_of_bounds_Y_Scale(newPosition1));
+        }
+        
+        
+        public bool out_of_bounds_X_Scale(Vector2 newPosition1)
+        {
+            if (newPosition1.X >= 1700) return true;
+            if (newPosition1.X < 0) return true;
             return false;
         }
+        
+        public bool out_of_bounds_Y_Scale(Vector2 newPosition1)
+        {
+            if (newPosition1.Y < 0) return true;
+            return false;
+        }
+
 
         public bool IsOnGround(Vector2 position, float groundY)
         {

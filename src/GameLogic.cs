@@ -157,7 +157,7 @@ using our_Game;
             if (state.IsKeyDown(Keys.D)) player1.move_right(delta);
             if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY-250))
                 player1.jump(delta, groundY-250);
-            if (state.IsKeyDown(Keys.E)) player1.do_special_effect();
+            if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
 
 
             // player 2
