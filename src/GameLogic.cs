@@ -105,14 +105,20 @@ using our_Game;
         }
 
 
-        public void Update(GameTime gameTime)
-        {
-            handle_player_movement(gameTime);
-            handle_player_ball_collision(gameTime);
-            player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY -50);
-            player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY -50);
-            football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
-            check_for_goal();
+    public void Update(GameTime gameTime)
+    {
+        handle_player_movement(gameTime);
+        handle_player_ball_collision(gameTime);
+        player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
+        player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
+        football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
+        check_for_goal();
+            
+            //Zurück ins Menu wenn ESC losgelassen wird 
+            if (InputHandler.IsReleased(Keys.Escape)) {
+                System.Diagnostics.Debug.WriteLine("escape!");
+                Game1._nextState = Game1.menu;
+            }
             
         }
 
@@ -143,13 +149,6 @@ using our_Game;
         {
             KeyboardState state = Keyboard.GetState();
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            //Game 
-            if (state.IsKeyDown(Keys.Escape)) {
-                System.Diagnostics.Debug.WriteLine("escape!");
-                Game1._nextState = Game1.menu;
-            }
-                
 
 
             //Player 1

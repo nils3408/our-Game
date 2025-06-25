@@ -58,9 +58,10 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
+        InputHandler.Update();
         if (curState == menu)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || InputHandler.IsReleased(Keys.Escape))
                 Exit();
         }
         if (_nextState != null && _nextState != curState) curState = _nextState;

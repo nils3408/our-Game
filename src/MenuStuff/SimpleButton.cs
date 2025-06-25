@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-public class SimpleButton
+public class SimpleButton : UIElement
 {
 
 
-    Microsoft.Xna.Framework.Rectangle rect;
+  
     int outline = 5;
 
     Color color = Color.White;
@@ -27,24 +27,24 @@ public class SimpleButton
     public event Action OnClick;
 
 
-    public SimpleButton(Rectangle rectangle)
+    public SimpleButton(Rectangle rectangle):base(rectangle)
     {
-        this.rect = rectangle;
+        this.bounds = rectangle;
 
     }
 
-    public SimpleButton(Rectangle rectangle, String text, SpriteFont font)
+    public SimpleButton(UIElement parent, Rectangle rectangle, String text, SpriteFont font):base(rectangle)
     {
-        this.rect = rectangle;
+        this.bounds = rectangle;
         this.text = text;
         this.font = font;
     }
 
-    public void Update(MouseState mouseState)
+    public override void Update()
     {
-
+        MouseState mouseState = Mouse.GetState();
         Point mousePos = new Point(mouseState.X, mouseState.Y);
-        isHovered = rect.Contains(mousePos);
+        isHovered = bounds.Contains(mousePos);
 
         // Check for click
         if (isHovered && mouseState.LeftButton == ButtonState.Pressed)
@@ -61,16 +61,16 @@ public class SimpleButton
         }
     }
 
-    public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
+    public override void Draw(SpriteBatch spriteBatch)
     {
-        Texture2D pixelTexture = new Texture2D(graphicsDevice, 1, 1);
+        Texture2D pixelTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
         pixelTexture.SetData(new[] { Color.White });
 
         // In Draw()
         // x, y, width, height
-        spriteBatch.Draw(pixelTexture, rect, colorOutline);
+        spriteBatch.Draw(pixelTexture, bounds, colorOutline);
 
-        Rectangle innerRect = new Rectangle(rect.X + outline, rect.Y + outline, rect.Width - 2 * outline, rect.Height - 2 * outline);
+        Rectangle innerRect = new Rectangle(bounds.X + outline, bounds.Y + outline, bounds.Width - 2 * outline, bounds.Height - 2 * outline);
         if (!isHovered)
         {
             spriteBatch.Draw(pixelTexture, innerRect, color);
@@ -84,12 +84,12 @@ public class SimpleButton
             Vector2 textSize = font.MeasureString(text);
         
             Vector2 textPosition = new Vector2(
-                rect.X + (rect.Width - textSize.X) / 2,
-                rect.Y + (rect.Height - textSize.Y) / 2
+                bounds.X + (bounds.Width - textSize.X) / 2,
+                bounds.Y + (bounds.Height - textSize.Y) / 2
             );
 
         
-            spriteBatch.DrawString(font, text, textPosition, Color.Black, 0 , Vector2.Zero,2,SpriteEffects.None,0); 
+            spriteBatch.DrawString(font, text, textPosition, Color.Black); 
         }
     }
 }
