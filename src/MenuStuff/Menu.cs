@@ -10,7 +10,7 @@ public class Menu : IGameState
     private  SpriteBatch _spriteBatch;
     private ContentManager contentManager;
 
-    SimpleButton _button;
+    SimpleButton _button1;
 
     public Menu(GraphicsDevice graphicsDevice, ContentManager contentManager)
     {
@@ -19,9 +19,11 @@ public class Menu : IGameState
         this.contentManager = contentManager;
 
         SpriteFont font = contentManager.Load<SpriteFont>("Arial");
-        _button = new SimpleButton(null, new Rectangle(200,200, 200,100), "Button", font);
-        _button.OnClick += () => Game1._nextState = Game1.game;
-        
+
+        ElementContainer stackCobtainer = new StackContainer(null, new Rectangle(200,200, 200,100), 20);
+        _button1 = new SimpleButton(null, new Rectangle(0,0, 200,100), "Button", font);
+        _button1.OnClick += () => Game1._nextState = Game1.game;
+        stackCobtainer.Add(_button1);
 
     }
 
@@ -32,7 +34,7 @@ public class Menu : IGameState
 
     public void Update(GameTime gameTime)
     {
-        _button.Update();
+        _button1.Update();
 
     }
 
@@ -42,7 +44,7 @@ public class Menu : IGameState
         graphicsDevice.Clear(background);
         _spriteBatch.Begin();
         Geometry.DrawLine(_spriteBatch, new Vector2(0, 0), new Vector2(500, 500), Color.Red, 20);
-        _button.Draw(_spriteBatch);
+        _button1.Draw(_spriteBatch);
         _spriteBatch.End();
     }
 }

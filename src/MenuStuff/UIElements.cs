@@ -40,8 +40,23 @@ public abstract class UIElement
     {
         return bounds;
     }
-    
-    
+
+    public void MoveBounds(Vector2 translation)
+    {
+        this.bounds.Offset(translation);
+    }
+
+    public Vector2 GetParentsOffset()
+    {
+        if (this.parent == null)
+        {
+            return new Vector2(this.bounds.X, this.bounds.Y);
+        }
+        else
+        {
+            return new Vector2(this.bounds.X, this.bounds.Y) + parent.GetParentsOffset();
+        }
+    }
 
 }
 
@@ -62,7 +77,7 @@ public abstract class ElementContainer : UIElement
 
 
 
-    public void Add(UIElement element)
+    public virtual void Add(UIElement element)
     {
         element.parent = this;
         elements.Add(element);
@@ -92,9 +107,18 @@ public class StackContainer : ElementContainer
 
     int spacing = 0;
 
+    private Vector2 Offset = Vector2.Zero;
+
     public StackContainer(UIElement parent, Rectangle bounds, int spacing) : base(parent, bounds)
     {
         this.spacing = spacing;
+    }
+
+    public override void Add(UIElement element)
+    {
+        element.MoveBounds(Offset);
+        Offset += new Vector2(0, spacing + element.GetBounds().Height);
+        base.Add(element);
     }
 
     public override void Draw(SpriteBatch spriteBatch)

@@ -21,21 +21,13 @@ public class SimpleButton : UIElement
 
     bool isHovered = false;
 
-    int timeout = 0;
-    const int FramesPerTimeout = 5;
-
     public event Action OnClick;
 
 
-    public SimpleButton(Rectangle rectangle):base(rectangle)
-    {
-        this.bounds = rectangle;
-
-    }
+    public SimpleButton(Rectangle rectangle):base(rectangle){}
 
     public SimpleButton(UIElement parent, Rectangle rectangle, String text, SpriteFont font):base(rectangle)
     {
-        this.bounds = rectangle;
         this.text = text;
         this.font = font;
     }
@@ -47,23 +39,16 @@ public class SimpleButton : UIElement
         isHovered = bounds.Contains(mousePos);
 
         // Check for click
-        if (isHovered && mouseState.LeftButton == ButtonState.Pressed)
+        if (isHovered && InputHandler.IsMouseLeftReleased())
         {
-            if (timeout == 0)
-            {
-                System.Diagnostics.Debug.WriteLine("click!");
-                timeout += FramesPerTimeout;
-                OnClick?.Invoke();
-            }
-            else {
-                timeout--;
-            }
+            OnClick?.Invoke();
         }
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        //Rectangle innerRect = new Rectangle(bounds.X + outline, bounds.Y + outline, bounds.Width - 2 * outline, bounds.Height - 2 * outline);
+        //Rectangle offsetBounds = new Rectangle(bounds.X + );
+
         if (!isHovered)
         {
             Geometry.DrawRectangleWithOutline(spriteBatch, bounds, color, colorOutline, outline);

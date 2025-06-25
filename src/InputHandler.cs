@@ -13,30 +13,45 @@ using System.Linq;
 	geschrieben Thies
  */
 
-public static class InputHandler {
+public static class InputHandler
+{
 
 	private static Keys[] prevKeys = Keyboard.GetState().GetPressedKeys();
 	private static Keys[] curKeys = Keyboard.GetState().GetPressedKeys();
 
-	public static void Update() { 
+	private static MouseState prevMouse = Mouse.GetState();
+	private static MouseState curMouse = Mouse.GetState();
+
+	public static void Update()
+	{
 		prevKeys = curKeys;
 		curKeys = Keyboard.GetState().GetPressedKeys();
-		if(IsDown(Keys.Escape)) System.Diagnostics.Debug.WriteLine("escape!");
-    }
 
-	public static bool IsDown(Keys key) {
+		prevMouse = curMouse;
+		curMouse = Mouse.GetState();
+	}
+
+	public static bool IsDown(Keys key)
+	{
 		return curKeys.Contains(key);
 	}
 
-	public static bool IsUp(Keys key) {
+	public static bool IsUp(Keys key)
+	{
 		return !curKeys.Contains(key);
 	}
 
-	public static bool IsReleased(Keys key) {
+	public static bool IsReleased(Keys key)
+	{
 		return !curKeys.Contains(key) && prevKeys.Contains(key);
 	}
 
-	public static bool IsPressed(Keys key) {
+	public static bool IsPressed(Keys key)
+	{
 		return curKeys.Contains(key) && !prevKeys.Contains(key);
+	}
+
+	public static bool IsMouseLeftReleased() { 
+		return prevMouse.LeftButton == ButtonState.Pressed && curMouse.LeftButton != ButtonState.Pressed;
 	}
 }
