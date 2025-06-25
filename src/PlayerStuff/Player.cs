@@ -27,7 +27,7 @@ using System.Runtime.CompilerServices;
         public const int RectangleHeight = 150;
 
         public Vector2 position;
-        public float maxPosY = 5;
+        public float maxHeightY =3 ;
         
         
 
@@ -125,8 +125,7 @@ using System.Runtime.CompilerServices;
                 float newPositionY = position.Y - jump_velocity * delta;
                 Vector2 newPosition = new Vector2 (position.X, newPositionY);
 
-                if (!(IsOnGround(position, groundY))) return;
-                if (out_of_bounds_Y_Scale(newPosition)) newPosition.Y = maxPosY;   
+                if (!(IsOnGround(position, groundY))) return; 
                 velocity.Y = jump_velocity;
                 
 
@@ -136,7 +135,7 @@ using System.Runtime.CompilerServices;
         public void update_vertical(float delta, float groundY)
         {
             velocity.Y += gravity * delta;
-            position.Y += velocity.Y * delta;
+            position.Y = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
 
             if (position.Y >= groundY)
             {

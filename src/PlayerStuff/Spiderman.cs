@@ -19,12 +19,6 @@ public class Spiderman: Player
         float newPositionY = position.Y - jump_velocity * delta;
         Vector2 newPosition = new Vector2(position.X, newPositionY);
 
-        if (out_of_bounds_Y_Scale(newPosition))
-        {
-            newPosition.Y = maxPosY;
-            return;
-        }
-
         velocity.Y = jump_velocity;
     }
 
