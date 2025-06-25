@@ -114,6 +114,11 @@ using our_Game;
             football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY+50);
             check_for_goal();
             
+
+            //Zurück ins Menu wenn ESC losgelassen wird
+            if (InputHandler.IsReleased(Keys.Escape)) {
+                Game1._nextState = Game1.menu;
+            } 
         }
 
 
@@ -143,12 +148,6 @@ using our_Game;
         {
             KeyboardState state = Keyboard.GetState();
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            //Game 
-            if (state.IsKeyDown(Keys.Escape)) {
-                System.Diagnostics.Debug.WriteLine("escape!");
-                Game1._nextState = Game1.menu;
-            }
                 
 
 

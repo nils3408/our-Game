@@ -21,6 +21,6 @@ public class Settings : IGameState
 
     public void Draw(GameTime gameTime)
     {
-        
+
     }
 }

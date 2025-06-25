@@ -19,7 +19,7 @@ public class Menu : IGameState
         this.contentManager = contentManager;
 
         SpriteFont font = contentManager.Load<SpriteFont>("Arial");
-        _button = new SimpleButton(new Rectangle(200,200, 200,100), "Button", font);
+        _button = new SimpleButton(null,new Rectangle(200,200, 200,100), "Button", font);
         _button.OnClick += () => Game1._nextState = Game1.game;
         
 
@@ -32,7 +32,7 @@ public class Menu : IGameState
 
     public void Update(GameTime gameTime)
     {
-        _button.Update(Mouse.GetState());
+        _button.Update();
 
     }
 
@@ -41,7 +41,7 @@ public class Menu : IGameState
         Color background = new Color(190, 244, 150);
         graphicsDevice.Clear(background);
         _spriteBatch.Begin();
-        _button.Draw(_spriteBatch, graphicsDevice);
+        _button.Draw(_spriteBatch);
         _spriteBatch.End();
     }
 }

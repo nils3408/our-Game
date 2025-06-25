@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<<<<<<< Updated upstream:Content/obj/DesktopGL/net8.0/Content/Spielfeld.mgcontent
   <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Spielfeld.png</SourceFile>
   <SourceTime>2025-06-14T22:07:57.1407271+02:00</SourceTime>
   <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/Spielfeld.xnb</DestFile>
   <DestTime>2025-06-17T22:38:38.5254707+02:00</DestTime>
+=======
+  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/KopfkickerChar2_neu.png</SourceFile>
+  <SourceTime>2025-06-24T20:13:28.6093851+02:00</SourceTime>
+  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/KopfkickerChar2_neu.xnb</DestFile>
+  <DestTime>2025-06-24T20:15:03.0674285+02:00</DestTime>
+>>>>>>> Stashed changes:Content/obj/DesktopGL/net8.0/Content/KopfkickerChar2_neu.mgcontent
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

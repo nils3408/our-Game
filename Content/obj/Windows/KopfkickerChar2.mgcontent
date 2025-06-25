@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<<<<<<< Updated upstream:Content/obj/Windows/KopfkickerChar2.mgcontent
   <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/KopfkickerChar2.png</SourceFile>
   <SourceTime>2025-06-14T22:07:57.1301371+02:00</SourceTime>
   <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/Windows/KopfkickerChar2.xnb</DestFile>
   <DestTime>2025-06-18T01:56:47.0309847+02:00</DestTime>
+=======
+  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/KopfkickerChar1_neu.png</SourceFile>
+  <SourceTime>2025-06-24T20:13:28.604986+02:00</SourceTime>
+  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/Windows/KopfkickerChar1_neu.xnb</DestFile>
+  <DestTime>2025-06-24T21:59:44.6594989+02:00</DestTime>
+>>>>>>> Stashed changes:Content/obj/Windows/KopfkickerChar1_neu.mgcontent
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
