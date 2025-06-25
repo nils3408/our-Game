@@ -94,7 +94,7 @@ public class Ball
 
     public void reduce_velocity_due_to_friction()
     {
-        velocity *= 0.9f;
+        velocity *= 0.5f;
     }
 
 

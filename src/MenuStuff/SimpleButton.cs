@@ -63,21 +63,14 @@ public class SimpleButton : UIElement
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        Texture2D pixelTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-        pixelTexture.SetData(new[] { Color.White });
-
-        // In Draw()
-        // x, y, width, height
-        spriteBatch.Draw(pixelTexture, bounds, colorOutline);
-
-        Rectangle innerRect = new Rectangle(bounds.X + outline, bounds.Y + outline, bounds.Width - 2 * outline, bounds.Height - 2 * outline);
+        //Rectangle innerRect = new Rectangle(bounds.X + outline, bounds.Y + outline, bounds.Width - 2 * outline, bounds.Height - 2 * outline);
         if (!isHovered)
         {
-            spriteBatch.Draw(pixelTexture, innerRect, color);
+            Geometry.DrawRectangleWithOutline(spriteBatch, bounds, color, colorOutline, outline);
         }
         else
         {
-            spriteBatch.Draw(pixelTexture, innerRect, colorOnHover);
+            Geometry.DrawRectangleWithOutline(spriteBatch, bounds, colorOnHover, colorOutline, outline);
         }
 
         if (text != "") {

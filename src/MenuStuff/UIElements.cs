@@ -37,9 +37,11 @@ public abstract class UIElement
     public abstract void Draw(SpriteBatch spriteBatch);
 
     public Rectangle GetBounds()
-    { 
+    {
         return bounds;
     }
+    
+    
 
 }
 

@@ -41,6 +41,7 @@ public class Menu : IGameState
         Color background = new Color(190, 244, 150);
         graphicsDevice.Clear(background);
         _spriteBatch.Begin();
+        Geometry.DrawLine(_spriteBatch, new Vector2(0, 0), new Vector2(500, 500), Color.Red, 20);
         _button.Draw(_spriteBatch);
         _spriteBatch.End();
     }

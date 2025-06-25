@@ -57,7 +57,7 @@ using our_Game;
 
         private float groundY =550;
 
-        float goalScale;
+        float goalScale = 0.3f;
         int goalWidth;
         int goalHeight;
         public GameLogic(GraphicsDeviceManager _graphics ,GraphicsDevice graphicsDevice, ContentManager contentManager)
@@ -82,11 +82,10 @@ using our_Game;
 */
             player1 = new Spiderman (graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
             player2 = new Player    (graphicsDevice, new Vector2(700,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
-            football = new Ball(graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("ball"));
+            football = new Ball(graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
-            goalScale = 0.3f;
             
         }
 

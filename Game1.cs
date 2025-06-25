@@ -33,6 +33,7 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
+        Geometry.Initialize(GraphicsDevice);
         game = new GameLogic(_graphics ,GraphicsDevice, Content);
         menu = new Menu(GraphicsDevice, Content);
         settings = new Settings();
