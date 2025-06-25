@@ -205,10 +205,9 @@ using our_Game;
             {
 
                 Vector2 direction = football.position - player1.position;
-                direction.Normalize();
 
                 football.reset_velocity();
-                football.change_direction();
+                football.change_direction(direction);
                 collisionCooldown1 = CollisionCooldownTime;
 
                 // shooting    
@@ -220,11 +219,10 @@ using our_Game;
             if (football.getRect().Intersects(player2.currentRect) && collisionCooldown2 <=0)
             {
                  Vector2 direction2 = football.position - player2.position;
-                 direction2.Normalize();
 
                 football.reset_velocity(); 
-                football.change_direction();
-                 collisionCooldown2 = CollisionCooldownTime;
+                football.change_direction(direction2);
+                collisionCooldown2 = CollisionCooldownTime;
 
                 // shooting    
                 KeyboardState state = Keyboard.GetState();

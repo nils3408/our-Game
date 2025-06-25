@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -182,4 +183,6 @@ using System.Runtime.CompilerServices;
         {
             return position.Y >= groundY;
         }
+
+
     }

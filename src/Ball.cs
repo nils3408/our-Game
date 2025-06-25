@@ -17,6 +17,7 @@
  * ------------------------------------------------------------------------------------------------------------
  */
 
+using System;
 using System.ComponentModel.Design;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,13 +39,13 @@ public class Ball
     public Vector2 velocity = new Vector2(0, 0);
     public Vector2 starting_velocity = new Vector2(500f, -230f);
     public Vector2 v_sim;
-    public Vector2 shooting_velocity = new Vector2(550, -50);
+    public Vector2 shooting_velocity = new Vector2(700, -80);
     
 
     private const int BallSize = 100;
     private const float BallFriction = (float)1;
 
-    private const float g = 300f;                        // (float)9.81 * (float)3.5; //gravity
+    private const float g = 250f;               
     private Rectangle Rect;
 
 
@@ -76,7 +77,7 @@ public class Ball
         }
 
 
-        Vector2 direction = getDirection(velocity);
+        Vector2 direction = transform_direction(velocity);
         velocity = direction * starting_velocity;
     }
 
@@ -88,32 +89,41 @@ public class Ball
             return;
         }
 
-        velocity.X = shooting_velocity.X * getDirection(velocity).X;
+        velocity.X = shooting_velocity.X * transform_direction(velocity).X;
         velocity.Y = shooting_velocity.Y;
     }
 
     public void reduce_velocity_due_to_friction()
     {
-        velocity *= 0.5f;
+        velocity *= 0.8f;
     }
 
 
 
 
-    public void change_direction()
+    public void change_direction(Vector2 dir)
     {
-        change_direction_x_scale();
+        // dir is defined as ball.position - player.position in GameLogic
+        change_direction_x_scale(dir);
         change_direction_y_scale();
     }
 
-    public void change_direction_x_scale()
+    public void change_direction_x_scale(Vector2 dir)
     {
-        velocity.X *= -1;
+
+        System.Diagnostics.Debug.WriteLine(dir);
+        velocity.X = Math.Abs(velocity.X);
+        velocity.X = velocity.X * transform_direction(dir).X;
     }
 
     public void change_direction_y_scale()
     {
         velocity.Y *= -1;
+    }
+
+    public void change_direction_x_scale()
+    {
+        velocity.X *= -1;
     }
 
 
@@ -165,10 +175,12 @@ public class Ball
 
 
 
-    public Vector2 getDirection(Vector2 velocity1)
+    public Vector2 transform_direction(Vector2 velocity1)
     {
-        float xDir = velocity.X >= 0 ? 1 : -1;
-        float yDir = velocity.Y >= 0 ? -1 : 1;
+        //only return -1 or 1
+        float xDir = velocity1.X >= 0 ? 1 : -1;
+        float yDir = velocity1.Y >= 0 ? -1 : 1;
+
         return new Vector2(xDir, yDir);
     }
 
