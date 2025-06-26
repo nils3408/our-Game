@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/Spielfeld2.png</SourceFile>
-  <SourceTime>2025-06-21T13:36:25.6898162+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/Spielfeld2.xnb</DestFile>
-  <DestTime>2025-06-25T15:11:18.3114696+02:00</DestTime>
+  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spielfeld2.png</SourceFile>
+  <SourceTime>2025-06-26T23:38:39.6385673+02:00</SourceTime>
+  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/Spielfeld2.xnb</DestFile>
+  <DestTime>2025-06-26T23:39:25.3392599+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

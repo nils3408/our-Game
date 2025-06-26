@@ -49,7 +49,7 @@ using our_Game;
         private Player player1;
         private Player player2;
         private Ball football;
-
+        private float jumpheight = 250f;
         //generell
         private float collisionCooldown1 = 0f; 
         private float collisionCooldown2 = 0f;
@@ -60,7 +60,12 @@ using our_Game;
         float goalScale = 0.3f;
         int goalWidth;
         int goalHeight;
-        public GameLogic(GraphicsDeviceManager _graphics ,GraphicsDevice graphicsDevice, ContentManager contentManager)
+
+        //Tore Counter
+        private int scorePlayer1 = 0;
+        private int scorePlayer2 = 0;
+        private SpriteFont scoreFont;
+    public GameLogic(GraphicsDeviceManager _graphics ,GraphicsDevice graphicsDevice, ContentManager contentManager)
 
         {
             this._graphics = _graphics;
@@ -81,7 +86,7 @@ using our_Game;
             _graphics.ApplyChanges();          
 */
             player1 = new Spiderman (graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
-            player2 = new Player    (graphicsDevice, new Vector2(700,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
+            player2 = new Player    (graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
             football = new Ball(graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
 
             player1.Set_other_Player(player2);
@@ -93,14 +98,14 @@ using our_Game;
         {
             _spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(graphicsDevice);
             _backgroundTexture = Content.Load<Texture2D>("Spielfeld2");
-            _goalTexture = Content.Load<Texture2D>("Tore2");
+            _goalTexture = Content.Load<Texture2D>("Tore");
             
             goalWidth = (int)(_goalTexture.Width * goalScale);
             goalHeight = (int)(_goalTexture.Height * goalScale);
             
-            _leftGoalPosition = new Vector2(-50, groundY + 100 - goalHeight);
-            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 50, groundY + 100 - goalHeight);
-
+            _leftGoalPosition = new Vector2(-50, groundY  - 165);
+            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 50, groundY - 165);
+            scoreFont = Content.Load<SpriteFont>("Arial");
         }
 
 
@@ -137,8 +142,9 @@ using our_Game;
             player1.draw(_spriteBatch);
             player2.draw(_spriteBatch);
             football.draw(_spriteBatch);
-           
 
+            _spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
+            
             _spriteBatch.End();
 
             
@@ -154,7 +160,7 @@ using our_Game;
             if (state.IsKeyDown(Keys.A)) player1.move_left(delta);
             if (state.IsKeyDown(Keys.D)) player1.move_right(delta);
             if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY-250))
-                player1.jump(delta, groundY-250);
+                player1.jump(delta, groundY-jumpheight);
             if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
 
 
@@ -162,29 +168,30 @@ using our_Game;
             if (state.IsKeyDown(Keys.Left)) player2.move_left(delta);
             if (state.IsKeyDown(Keys.Right)) player2.move_right(delta);
             if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY -250))
-                player2.jump(delta, groundY - 250);
+                player2.jump(delta, groundY - jumpheight );
 
         }
 
-
+         //Check Ball im Tor
         private void check_for_goal()
         {
-            Microsoft.Xna.Framework.Rectangle leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth - 50, goalHeight-50);
-            Microsoft.Xna.Framework.Rectangle rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth - 50 , goalHeight - 50);
+        //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
+            Microsoft.Xna.Framework.Rectangle leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth , goalHeight);
+            Microsoft.Xna.Framework.Rectangle rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
 
             Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
 
           
             if (leftGoal.Contains(ballRect))
             {
-                
+                scorePlayer2++;
                 football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
             }
 
             
             if (rightGoal.Contains(ballRect))
             {
-                
+                scorePlayer1++;
                 football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
             }
         }

@@ -1,1 +1,10 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Arial.spritefont","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2068,136217,0,2390888
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Ball.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Ball.xnb","TextureProcessor","Texture2DContent",2811782,11115641,0,3978499
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/football.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/football.xnb","TextureProcessor","Texture2DContent",310365,98883221,2,5030887
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/KopfkickerChar1_neu.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/KopfkickerChar1_neu.xnb","TextureProcessor","Texture2DContent",619974,1813705,0,1272419
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/KopfkickerChar2_neu.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/KopfkickerChar2_neu.xnb","TextureProcessor","Texture2DContent",709927,2598509,0,0806851
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spiderman.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Spiderman.xnb","TextureProcessor","Texture2DContent",2435,241573,0,0093546
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spielfeld2.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Spielfeld2.xnb","TextureProcessor","Texture2DContent",1614800,6291541,0,197214
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tore.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Tore.xnb","TextureProcessor","Texture2DContent",676094,2551205,0,0650137
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tore2.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Tore2.xnb","TextureProcessor","Texture2DContent",1448931,4194389,0,1436928
