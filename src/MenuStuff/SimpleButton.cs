@@ -25,18 +25,29 @@ public class SimpleButton : UIElement
 
 
     public SimpleButton(Rectangle rectangle):base(rectangle){}
-
-    public SimpleButton(UIElement parent, Rectangle rectangle, String text, SpriteFont font):base(rectangle)
+    public SimpleButton(Point Size) : base( Size) { }
+    public SimpleButton(Point RelativePosition, Point Size) : base(RelativePosition, Size) { }
+    public SimpleButton(Rectangle rectangle, String text, SpriteFont font) : base(rectangle)
     {
         this.text = text;
         this.font = font;
     }
+    public SimpleButton(Point size, String text, SpriteFont font):base( size)
+    {
+        this.text = text;
+        this.font = font;
+     }
+    public SimpleButton(Point RelativePosition, Point Size, String text, SpriteFont font) : base(RelativePosition, Size)
+    {
+        this.text = text;
+        this.font = font;
+     }
 
     public override void Update()
     {
         MouseState mouseState = Mouse.GetState();
         Point mousePos = new Point(mouseState.X, mouseState.Y);
-        isHovered = bounds.Contains(mousePos);
+        isHovered = GetBounds().Contains(mousePos);
 
         // Check for click
         if (isHovered && InputHandler.IsMouseLeftReleased())
@@ -51,19 +62,19 @@ public class SimpleButton : UIElement
 
         if (!isHovered)
         {
-            Geometry.DrawRectangleWithOutline(spriteBatch, bounds, color, colorOutline, outline);
+            PrimitiveDrawer.DrawRectangleWithOutline(spriteBatch, GetBounds(), color, colorOutline, outline);
         }
         else
         {
-            Geometry.DrawRectangleWithOutline(spriteBatch, bounds, colorOnHover, colorOutline, outline);
+            PrimitiveDrawer.DrawRectangleWithOutline(spriteBatch, GetBounds(), colorOnHover, colorOutline, outline);
         }
 
         if (text != "") {
             Vector2 textSize = font.MeasureString(text);
-        
+            
             Vector2 textPosition = new Vector2(
-                bounds.X + (bounds.Width - textSize.X) / 2,
-                bounds.Y + (bounds.Height - textSize.Y) / 2
+                GetPosition().X + (Size.X - textSize.X) / 2,
+                GetPosition().Y + (Size.Y - textSize.Y) / 2
             );
 
         

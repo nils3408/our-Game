@@ -6,11 +6,11 @@ namespace our_Game;
 
 public class Game1 : Game
 {
-    private GraphicsDeviceManager _graphics;
-    private  SpriteBatch _spriteBatch;
+    public static GraphicsDeviceManager graphics;
+    private SpriteBatch _spriteBatch;
 
     private static IGameState curState;
-    public static IGameState _nextState;
+    public static IGameState nextState;
 
     public static GameLogic game;
     public static Menu menu;
@@ -20,29 +20,32 @@ public class Game1 : Game
 
     public Game1()
     {
-        _graphics = new GraphicsDeviceManager(this);
+        graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
         //_graphics.ToggleFullScreen();
-        
-        
-        _graphics.PreferredBackBufferWidth = 1920;
-        _graphics.PreferredBackBufferHeight = 1080;
+
+
+        graphics.PreferredBackBufferWidth = 1920;
+        graphics.PreferredBackBufferHeight = 1080;
     }
 
     protected override void Initialize()
     {
-        Geometry.Initialize(GraphicsDevice);
-        game = new GameLogic(_graphics ,GraphicsDevice, Content);
-        menu = new Menu(GraphicsDevice, Content);
-        settings = new Settings();
+        PrimitiveDrawer.Initialize(GraphicsDevice);
+
+        game = new GameLogic(this);
+        menu = new Menu(this);
+        settings = new Settings(this);
+
         // Initializing each GameState
         game.Initialize();
         menu.Initialize();
         settings.Initialize();
 
         curState = menu;
+        nextState = menu;
 
         base.Initialize();
     }
@@ -62,10 +65,10 @@ public class Game1 : Game
         InputHandler.Update();
         if (curState == menu)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || InputHandler.IsReleased(Keys.Escape))
-                Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || InputHandler.IsReleased(Keys.Escape))Exit();
         }
-        if (_nextState != null && _nextState != curState) curState = _nextState;
+        if (nextState == null) Exit();
+        if (nextState != null && nextState != curState) curState = nextState;
 
         // update current Game State
 
@@ -81,4 +84,10 @@ public class Game1 : Game
         curState.Draw(gameTime);
         base.Draw(gameTime);
     }
+
+    public void ExitGame()
+    { 
+        base.Exit();
+    }
+
 }

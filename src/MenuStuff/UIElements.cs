@@ -4,58 +4,69 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
 
 //Einfaches Interface ds alle UIElemente erf�llen
 
 public abstract class UIElement
 {
-    public UIElement parent
+    public UIElement parent = null;
+
+    protected Point relPos = Point.Zero;
+    public Point Size = Point.Zero;
+
+    public UIElement(Point Size)
     {
-        get;
-        set;
+        this.Size = Size;
     }
 
-    public Rectangle bounds
+    public UIElement(Point relativePosition, Point Size)
     {
-        get;
-        set;
+        this.relPos = relativePosition;
+        this.Size = Size;
     }
 
     public UIElement(Rectangle bounds)
     {
-        this.bounds = bounds;
-    }
-
-    public UIElement(UIElement parent, Rectangle bounds)
-    {
-        this.bounds = bounds;
-        this.parent = parent;
+        this.relPos = bounds.Location;
+        this.Size = bounds.Size;
     }
 
     public abstract void Update();
 
     public abstract void Draw(SpriteBatch spriteBatch);
 
-    public Rectangle GetBounds()
+    public virtual Rectangle GetBounds()
     {
-        return bounds;
+        Point position = this.GetPosition();
+        return new Rectangle(position, Size);
     }
 
-    public void MoveBounds(Vector2 translation)
+    public Point GetOffset()
     {
-        this.bounds.Offset(translation);
+        return this.relPos;
     }
 
-    public Vector2 GetParentsOffset()
+    public void Offset(Point translation)
+    {
+        this.relPos += translation;
+    }
+
+    public Point GetPosition()
     {
         if (this.parent == null)
         {
-            return new Vector2(this.bounds.X, this.bounds.Y);
+            return relPos;
         }
         else
         {
-            return new Vector2(this.bounds.X, this.bounds.Y) + parent.GetParentsOffset();
+            return relPos + parent.GetPosition();
         }
+    }
+
+    public void MoveCenter(Point newCenterPos)
+    {
+        relPos = newCenterPos- new Point(GetBounds().Width/2, GetBounds().Height/2);
     }
 
 }
@@ -68,7 +79,8 @@ public abstract class ElementContainer : UIElement
     protected List<UIElement> elements = new List<UIElement>();
 
     public ElementContainer(Rectangle bounds) : base(bounds) { }
-    public ElementContainer(UIElement parent, Rectangle bounds) : base(bounds) { }
+    public ElementContainer(Point RelativePosition) : base(RelativePosition) { }
+    public ElementContainer(Point RelativePosition, Point Size) : base(RelativePosition, Size) { }
 
     public List<UIElement> GetChildren()
     {
@@ -99,6 +111,27 @@ public abstract class ElementContainer : UIElement
         }
     }
 
+    public override Rectangle GetBounds()
+    {
+        int maxX = GetPosition().X;
+        int maxY = GetPosition().Y;
+        int minX = GetPosition().X;
+        int minY = GetPosition().Y;
+        for (int i = 0; i < elements.Count; i++)
+        {
+            int left = elements[i].GetBounds().Left;
+            if (left > minX) minX = left;
+            int bottom = elements[i].GetBounds().Bottom;
+            if (bottom > maxX) maxX = bottom;
+            int right = elements[i].GetBounds().Right;
+            if (right > maxX) maxX = right;
+            int top = elements[i].GetBounds().Top;
+            if (top > minX) minX = top;
+
+        }
+        return new Rectangle(minX, minY, maxX, maxY);
+    }
+
 
 }
 
@@ -107,28 +140,28 @@ public class StackContainer : ElementContainer
 
     int spacing = 0;
 
-    private Vector2 Offset = Vector2.Zero;
+    private Point Offset = Point.Zero;
 
-    public StackContainer(UIElement parent, Rectangle bounds, int spacing) : base(parent, bounds)
+    public StackContainer(Point position, int spacing) : base(position, Point.Zero)
     {
         this.spacing = spacing;
     }
 
     public override void Add(UIElement element)
     {
-        element.MoveBounds(Offset);
-        Offset += new Vector2(0, spacing + element.GetBounds().Height);
+        element.Offset(Offset);
+        Offset += new Point(0, spacing + element.Size.Y);
         base.Add(element);
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        int y = bounds.Top;
-        int x = bounds.Left;
+        PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), Color.Red, 5);
+        PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), Color.Red, 5);
+
         foreach (UIElement e in elements)
         {
             e.Draw(spriteBatch);
-            y += e.bounds.Height + spacing;
         }
     }
 }

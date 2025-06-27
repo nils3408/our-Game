@@ -27,12 +27,9 @@ using System;
 using our_Game;
 
 
-    public class GameLogic : IGameState
+    public class GameLogic : GameState
     {
-        GraphicsDeviceManager _graphics;
-        private GraphicsDevice graphicsDevice;
-        private SpriteBatch _spriteBatch;
-        private ContentManager Content;
+     
 
         //Spielfeld
         private Texture2D _backgroundTexture;
@@ -65,18 +62,13 @@ using our_Game;
         private int scorePlayer1 = 0;
         private int scorePlayer2 = 0;
         private SpriteFont scoreFont;
-    public GameLogic(GraphicsDeviceManager _graphics ,GraphicsDevice graphicsDevice, ContentManager contentManager)
+    public GameLogic(Game baseGame):base(baseGame)
 
         {
-            this._graphics = _graphics;
-            this.graphicsDevice = graphicsDevice;
-            this._spriteBatch = new SpriteBatch(graphicsDevice);
-            this.Content = contentManager;
             //this.playerList = playerList;
-
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
  /*          FullScreen Mode: 
            ToDo Spielfeld anpassen!!
@@ -85,18 +77,18 @@ using our_Game;
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();          
 */
-            player1 = new Spiderman (graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
-            player2 = new Player    (graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
-            football = new Ball(graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
+            player1 = new Spiderman (_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
+            player2 = new Player    (_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
+            football = new Ball(_graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
             
         }
 
-        public void LoadContent()
+        public override void LoadContent()
         {
-            _spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(graphicsDevice);
+            spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
             _backgroundTexture = Content.Load<Texture2D>("Spielfeld2");
             _goalTexture = Content.Load<Texture2D>("Tore");
             
@@ -109,7 +101,7 @@ using our_Game;
         }
 
 
-    public void Update(GameTime gameTime)
+    public override void Update(GameTime gameTime)
     {
         handle_player_movement(gameTime);
         handle_player_ball_collision(gameTime);
@@ -121,31 +113,31 @@ using our_Game;
             //Zurück ins Menu wenn ESC losgelassen wird 
             if (InputHandler.IsReleased(Keys.Escape)) {
                 System.Diagnostics.Debug.WriteLine("escape!");
-                Game1._nextState = Game1.menu;
+                Game1.nextState = Game1.menu;
             }
             
         }
 
 
-        public void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            graphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
-            _spriteBatch.Begin();
+            _graphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
+            spriteBatch.Begin();
 
-            _spriteBatch.Draw(
+            spriteBatch.Draw(
             _backgroundTexture,
             new Microsoft.Xna.Framework.Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
             Microsoft.Xna.Framework.Color.White
             );
-            _spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
-            _spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
-            player1.draw(_spriteBatch);
-            player2.draw(_spriteBatch);
-            football.draw(_spriteBatch);
+            spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
+            player1.draw(spriteBatch);
+            player2.draw(spriteBatch);
+            football.draw(spriteBatch);
 
-            _spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
+            spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
             
-            _spriteBatch.End();
+            spriteBatch.End();
 
             
         }

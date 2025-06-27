@@ -5,7 +5,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public static class Geometry
+public static class PrimitiveDrawer
 {
     private static Texture2D pixelTexture;
 
