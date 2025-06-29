@@ -62,8 +62,11 @@ using our_Game;
         private int scorePlayer1 = 0;
         private int scorePlayer2 = 0;
         private SpriteFont scoreFont;
-    public GameLogic(Game baseGame):base(baseGame)
 
+        private float gameTimer = 0f;
+        private bool gameRunning = true;
+
+    public GameLogic(Game baseGame):base(baseGame)
 
         {
             //this.playerList = playerList;
@@ -116,8 +119,11 @@ using our_Game;
                 System.Diagnostics.Debug.WriteLine("escape!");
                 Game1.nextState = Game1.menu;
             }
-            
+        if (gameRunning)
+        {
+            gameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
+    }
 
 
         public override void Draw(GameTime gameTime)
@@ -137,8 +143,9 @@ using our_Game;
             football.draw(spriteBatch);
 
             spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
-            
-            spriteBatch.End();
+            string timerText = $" {Math.Floor(gameTimer)}s";
+            spriteBatch.DrawString(scoreFont, timerText, new Vector2(20, 20), Color.White);
+        spriteBatch.End();
 
             
         }
