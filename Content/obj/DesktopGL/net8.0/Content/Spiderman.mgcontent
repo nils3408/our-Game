@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Spiderman.png</SourceFile>
-  <SourceTime>2025-06-25T02:08:18.8471154+02:00</SourceTime>
-  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/Spiderman.xnb</DestFile>
-  <DestTime>2025-06-27T12:56:12.7408436+02:00</DestTime>
+  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spiderman.png</SourceFile>
+  <SourceTime>2025-06-27T19:49:56.3623711+02:00</SourceTime>
+  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/Spiderman.xnb</DestFile>
+  <DestTime>2025-06-27T19:50:33.7410972+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
