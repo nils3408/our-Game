@@ -167,7 +167,7 @@ using System.Runtime.CompilerServices;
         
         public bool out_of_bounds_X_Scale(Vector2 newPosition1)
         {
-            if (newPosition1.X >= 1700) return true;
+            if (newPosition1.X >= 1800) return true;
             if (newPosition1.X < 0) return true;
             return false;
         }

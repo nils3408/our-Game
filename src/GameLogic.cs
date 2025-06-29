@@ -141,13 +141,11 @@ using our_Game;
             player1.draw(spriteBatch);
             player2.draw(spriteBatch);
             football.draw(spriteBatch);
-
+            // Score und Timer anzeigen
             spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
             string timerText = $" {Math.Floor(gameTimer)}s";
             spriteBatch.DrawString(scoreFont, timerText, new Vector2(20, 20), Color.White);
-        spriteBatch.End();
-
-            
+            spriteBatch.End();            
         }
 
         private void handle_player_movement(GameTime gameTime)
