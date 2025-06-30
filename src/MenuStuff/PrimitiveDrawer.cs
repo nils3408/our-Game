@@ -63,4 +63,24 @@ public static class PrimitiveDrawer
         DrawRectangleOutline(spriteBatch, rect, colorOutline, thickness);
     }
 
+    public static void DrawTriangle(SpriteBatch spriteBatch, Vector2 a, Vector2 b, Vector2 c, Color color)
+    {
+
+        Vector2 AtoB = new Vector2(b.X - a.X, b.Y - a.Y);
+        float stepAmount = 1 / (AtoB.Length() * 3f);
+
+        for (float p = 0; p <= 1; p += stepAmount)
+        {
+            float curX = (a.X + p * AtoB.X);
+            float curY = (a.Y + p * AtoB.Y);
+            Vector2 start = new Vector2(curX, curY);
+            Vector2 end = c;
+
+            DrawLine(spriteBatch, start, c, color, 0.5f);
+        }
+
+    }
+    
+    
+
 }

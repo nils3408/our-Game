@@ -11,7 +11,6 @@ public class Menu : GameState
 
     public Menu(Game game): base(game)
     {
-        spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
         SpriteFont font = Content.Load<SpriteFont>("Arial");
 
@@ -19,9 +18,18 @@ public class Menu : GameState
 
         Point ButtonSize = new Point(300, 100);
 
-        SimpleButton gameButton = new SimpleButton(ButtonSize, "Game", font);
-        gameButton.OnClick += () => Game1.nextState = Game1.game;
-        buttonContainer.Add(gameButton);
+        //if (Game1.GameIsInitialized)
+        
+            SimpleButton gameButton = new SimpleButton(ButtonSize, "New Game", font);
+            gameButton.OnClick += () => Game1.nextState = Game1.setup;
+            buttonContainer.Add(gameButton);
+        
+        
+        
+            SimpleButton setupButton = new SimpleButton(ButtonSize, "Resume", font);
+            setupButton.OnClick += () => Game1.nextState = Game1.game;
+            buttonContainer.Add(setupButton);
+        
 
         SimpleButton settingsButton = new SimpleButton(ButtonSize, "Settings", font);
         settingsButton.OnClick += () => Game1.nextState = Game1.settings;
@@ -30,6 +38,10 @@ public class Menu : GameState
         SimpleButton exitButton = new SimpleButton(ButtonSize, "Exit", font);
         exitButton.OnClick += () => game.Exit();
         buttonContainer.Add(exitButton);
+
+        TriangleButton triangleButton = new TriangleButton(ButtonSize);
+        triangleButton.OnClick += () => { };
+        buttonContainer.Add(triangleButton);
         
         buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight/2));
         buttonContainer.SetDrawOutline(new Color(96, 96, 96), 3);
@@ -47,6 +59,7 @@ public class Menu : GameState
         Color background = new Color(190, 244, 150);
         _graphicsDevice.Clear(background);
         spriteBatch.Begin();
+        PrimitiveDrawer.DrawTriangle(spriteBatch, new Vector2(100, 100), new Vector2(300, 300), new Vector2(100, 300), Color.Red);
         buttonContainer.Draw(spriteBatch);
         spriteBatch.End();
     }

@@ -17,7 +17,7 @@ public class Settings : GameState
         Color background = Color.Crimson;
         _graphicsDevice.Clear(background);
         spriteBatch.Begin();
-        PrimitiveDrawer.DrawLine(spriteBatch, new Vector2(0, 0), new Vector2(500, 500), Color.Red, 20);
+        
         spriteBatch.End();
     }
 }

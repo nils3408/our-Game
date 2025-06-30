@@ -15,6 +15,8 @@ public class Game1 : Game
     public static GameLogic game;
     public static Menu menu;
     public static Settings settings;
+    public static GameSetup setup;
+    public static bool GameIsInitialized = false;
 
 
 
@@ -36,6 +38,8 @@ public class Game1 : Game
         PrimitiveDrawer.Initialize(GraphicsDevice);
 
         game = new GameLogic(this);
+        setup = new GameSetup(this);
+ 
         menu = new Menu(this);
         settings = new Settings(this);
 
@@ -43,6 +47,7 @@ public class Game1 : Game
         game.Initialize();
         menu.Initialize();
         settings.Initialize();
+        setup.Initialize();
 
         curState = menu;
         nextState = menu;

@@ -16,6 +16,7 @@ public abstract class UIElement
     protected Point relPos = Point.Zero;
     public Point Size = Point.Zero;
 
+    public UIElement(){}
     public UIElement(Point Size)
     {
         this.Size = Size;
@@ -79,6 +80,7 @@ public abstract class ElementContainer : UIElement
 
     protected List<UIElement> elements = new List<UIElement>();
 
+    public ElementContainer() : base() { }
     public ElementContainer(Rectangle bounds) : base(bounds) { }
     public ElementContainer(Point RelativePosition) : base(RelativePosition) { }
     public ElementContainer(Point RelativePosition, Point Size) : base(RelativePosition, Size) { }
@@ -145,14 +147,15 @@ public abstract class ElementContainer : UIElement
 public class StackContainer : ElementContainer
 {
 
-    int spacing = 0;
+    protected int spacing = 0;
 
-    private Point Offset = Point.Zero;
+    protected Point Offset = Point.Zero;
 
-    bool IsSetToDrawOutline = false;
-    Color outlineColor = Color.White;
-    int thickness = 1;
+    protected bool IsSetToDrawOutline = false;
+    protected Color outlineColor = Color.White;
+    protected int thickness = 1;
 
+    public StackContainer() : base() { }
     public StackContainer(Point position, int spacing) : base(position, Point.Zero)
     {
         this.spacing = spacing;
@@ -167,8 +170,8 @@ public class StackContainer : ElementContainer
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        if(IsSetToDrawOutline)
-        PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), outlineColor, thickness);
+        if (IsSetToDrawOutline)
+            PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), outlineColor, thickness);
 
         foreach (UIElement e in elements)
         {
@@ -191,9 +194,26 @@ public class StackContainer : ElementContainer
         outlineColor = color;
         this.thickness = thickness;
     }
-    
+
+    public void SetSpacing(int spacing)
+    { 
+        this.spacing = spacing;
+    }
 }
 
+public class HorizontalContainer : StackContainer
+{
+    public HorizontalContainer() : base(){}
+    public HorizontalContainer(Point position, int spacing) : base(position, spacing){}
+
+    public override void Add(UIElement element)
+    {
+        element.Offset(Offset);
+        Offset += new Point(spacing + element.Size.Y, 0);
+        base.Add(element);
+    }
+    
+}
 
 
 
