@@ -7,7 +7,7 @@ using System;
 
 public class Menu : GameState
 {
-    ElementContainer buttonContainer;
+    StackContainer buttonContainer;
 
     public Menu(Game game): base(game)
     {
@@ -24,15 +24,15 @@ public class Menu : GameState
         buttonContainer.Add(gameButton);
 
         SimpleButton settingsButton = new SimpleButton(ButtonSize, "Settings", font);
-        settingsButton.OnClick += () => Game1.nextState = Game1.game;
+        settingsButton.OnClick += () => Game1.nextState = Game1.settings;
         buttonContainer.Add(settingsButton);
 
         SimpleButton exitButton = new SimpleButton(ButtonSize, "Exit", font);
         exitButton.OnClick += () => game.Exit();
         buttonContainer.Add(exitButton);
         
-        buttonContainer.MoveCenter(new Point(1920/2, 400));
-
+        buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight/2));
+        buttonContainer.SetDrawOutline(new Color(96, 96, 96), 3);
     }
 
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
+using System.Diagnostics;
 
 //Einfaches Interface ds alle UIElemente erf�llen
 
@@ -87,8 +88,6 @@ public abstract class ElementContainer : UIElement
         return elements;
     }
 
-
-
     public virtual void Add(UIElement element)
     {
         element.parent = this;
@@ -111,8 +110,15 @@ public abstract class ElementContainer : UIElement
         }
     }
 
+    /**
+    gibt die Bounds, also den Umriss zurück als Recteck,
+    mit also der richtigen absoluten Position aufm Bildschirm und der Größe
+    berechnet die größe und da buttons auch nach links vom origin gesetzt werden könnten relPos=new Point(-10,0) also auch die relPos neu
+    */
+
     public override Rectangle GetBounds()
     {
+        
         int maxX = GetPosition().X;
         int maxY = GetPosition().Y;
         int minX = GetPosition().X;
@@ -120,16 +126,17 @@ public abstract class ElementContainer : UIElement
         for (int i = 0; i < elements.Count; i++)
         {
             int left = elements[i].GetBounds().Left;
-            if (left > minX) minX = left;
+            if (left < minX) minX = left;
             int bottom = elements[i].GetBounds().Bottom;
-            if (bottom > maxX) maxX = bottom;
+            if (bottom > maxY) maxY = bottom;
             int right = elements[i].GetBounds().Right;
             if (right > maxX) maxX = right;
             int top = elements[i].GetBounds().Top;
-            if (top > minX) minX = top;
+            if (top < minY) minY = top;
 
         }
-        return new Rectangle(minX, minY, maxX, maxY);
+        return new Rectangle(minX, minY, maxX - minX, maxY - minY);
+        //return new Rectangle(GetPosition(), Size);
     }
 
 
@@ -141,6 +148,10 @@ public class StackContainer : ElementContainer
     int spacing = 0;
 
     private Point Offset = Point.Zero;
+
+    bool IsSetToDrawOutline = false;
+    Color outlineColor = Color.White;
+    int thickness = 1;
 
     public StackContainer(Point position, int spacing) : base(position, Point.Zero)
     {
@@ -156,14 +167,31 @@ public class StackContainer : ElementContainer
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), Color.Red, 5);
-        PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), Color.Red, 5);
+        if(IsSetToDrawOutline)
+        PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), outlineColor, thickness);
 
         foreach (UIElement e in elements)
         {
             e.Draw(spriteBatch);
         }
+
     }
+
+    public override Rectangle GetBounds()
+    {
+        Rectangle nB = base.GetBounds();
+        Rectangle boundsWSpacing = new Rectangle(nB.X - spacing, nB.Y - spacing, nB.Width + 2 * spacing, nB.Height + 2 * spacing);
+        Debug.WriteLine($"Elements Count: {boundsWSpacing}");
+        return boundsWSpacing;
+    }
+
+    public void SetDrawOutline(Color color, int thickness)
+    {
+        IsSetToDrawOutline = true;
+        outlineColor = color;
+        this.thickness = thickness;
+    }
+    
 }
 
 
