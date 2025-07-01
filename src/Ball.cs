@@ -39,11 +39,11 @@ public class Ball
     public Vector2 velocity = new Vector2(0, 0);
     public Vector2 starting_velocity = new Vector2(500f, -230f);
     public Vector2 v_sim;
-    public Vector2 shooting_velocity = new Vector2(700, -80);
+    public Vector2 shooting_velocity = new Vector2(700, -300);
     
 
     private const int BallSize = 100;
-    private const float BallFriction = (float)1;
+    private const float BallFriction = (float)10;
 
     private const float g = 250f;               
     private Rectangle Rect;
