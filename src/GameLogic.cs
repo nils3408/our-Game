@@ -54,7 +54,7 @@ using our_Game;
 
         private float groundY =550;
 
-        float goalScale = 0.3f;
+        float goalScale = 0.4f;
         int goalWidth;
         int goalHeight;
 
@@ -99,8 +99,8 @@ using our_Game;
             goalWidth = (int)(_goalTexture.Width * goalScale);
             goalHeight = (int)(_goalTexture.Height * goalScale);
             
-            _leftGoalPosition = new Vector2(-50, groundY  - 165);
-            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 50, groundY - 165);
+            _leftGoalPosition = new Vector2(-100, groundY  - 255);
+            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 100, groundY - 255);
             scoreFont = Content.Load<SpriteFont>("Arial");
         }
 
