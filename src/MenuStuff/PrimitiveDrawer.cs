@@ -98,20 +98,18 @@ public static class PrimitiveDrawer
         }
     }
 
-    public static void DrawText(SpriteBatch spriteBatch, Rectangle bounds, string text, int height, Color color)
+    public static void DrawText(SpriteBatch spriteBatch, Rectangle bounds, string text, Color color)
     {
         if (text != "")
         {
             Vector2 textSize = font.MeasureString(text);
-
-            float scaling = height / (float)textSize.X;
 
             Vector2 textPosition = new Vector2(
                 bounds.Left + (bounds.Width - textSize.X) / 2,
                 bounds.Top + (bounds.Height - textSize.Y) / 2
             );
 
-            spriteBatch.DrawString(font, text, textPosition, Color.Black, 0f, Vector2.Zero, scaling, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, text, textPosition, Color.Black);
         }
     }
 
