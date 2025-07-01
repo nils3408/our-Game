@@ -16,7 +16,11 @@ public abstract class UIElement
     protected Point relPos = Point.Zero;
     public Point Size = Point.Zero;
 
-    public UIElement(){}
+    protected bool IsSetToDrawOutline = false;
+    protected Color outlineColor = Color.White;
+    protected int thickness = 1;
+
+    public UIElement() { }
     public UIElement(Point Size)
     {
         this.Size = Size;
@@ -66,17 +70,37 @@ public abstract class UIElement
         }
     }
 
-    public void MoveCenter(Point newCenterPos)
+    public Point GetCenter()
+    { 
+        return new Point((int)GetBounds().Width / 2, (int)GetBounds().Height / 2);
+    }
+
+    public virtual void MoveCenter(Point newCenterPos)
     {
-        relPos = newCenterPos- new Point(GetBounds().Width/2, GetBounds().Height/2);
+        relPos = newCenterPos - GetCenter();
+    }
+
+    public void SetDrawOutline(Color color, int thickness)
+    {
+        IsSetToDrawOutline = true;
+        outlineColor = color;
+        this.thickness = thickness;
+    }
+
+    protected void Outline(SpriteBatch spriteBatch)
+    { 
+        if (IsSetToDrawOutline)
+            PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), outlineColor, thickness);
+
     }
 
 }
 
 // abstrakte Grundlage f�r alle Container in welchen UIElemente aufgereiht werden
 
-public abstract class ElementContainer : UIElement
+public class ElementContainer : UIElement
 {
+    private bool centralize = false;
 
     protected List<UIElement> elements = new List<UIElement>();
 
@@ -93,6 +117,7 @@ public abstract class ElementContainer : UIElement
     public virtual void Add(UIElement element)
     {
         element.parent = this;
+        if (centralize) element.MoveCenter(new Point(0, 0));
         elements.Add(element);
     }
 
@@ -110,6 +135,7 @@ public abstract class ElementContainer : UIElement
         {
             e.Draw(spriteBatch);
         }
+        Outline(spriteBatch);
     }
 
     /**
@@ -120,7 +146,7 @@ public abstract class ElementContainer : UIElement
 
     public override Rectangle GetBounds()
     {
-        
+
         int maxX = GetPosition().X;
         int maxY = GetPosition().Y;
         int minX = GetPosition().X;
@@ -141,6 +167,24 @@ public abstract class ElementContainer : UIElement
         //return new Rectangle(GetPosition(), Size);
     }
 
+    public void ToggleCentralization()
+    {
+        centralize = true;
+    }
+
+    public override void MoveCenter(Point newCenterPos)
+    {
+        if (centralize)
+        {
+            relPos = newCenterPos - new Point(0,GetBounds().Height/2);
+        }
+        else
+        {
+            base.MoveCenter(newCenterPos);
+        }
+        
+    }
+
 
 }
 
@@ -149,11 +193,7 @@ public class StackContainer : ElementContainer
 
     protected int spacing = 0;
 
-    protected Point Offset = Point.Zero;
-
-    protected bool IsSetToDrawOutline = false;
-    protected Color outlineColor = Color.White;
-    protected int thickness = 1;
+    protected Point _Offset = Point.Zero;
 
     public StackContainer() : base() { }
     public StackContainer(Point position, int spacing) : base(position, Point.Zero)
@@ -163,21 +203,20 @@ public class StackContainer : ElementContainer
 
     public override void Add(UIElement element)
     {
-        element.Offset(Offset);
-        Offset += new Point(0, spacing + element.Size.Y);
         base.Add(element);
+        element.Offset(_Offset);
+        _Offset += new Point(0, spacing + element.Size.Y);
+        
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        if (IsSetToDrawOutline)
-            PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), outlineColor, thickness);
 
         foreach (UIElement e in elements)
         {
             e.Draw(spriteBatch);
         }
-
+        Outline(spriteBatch);
     }
 
     public override Rectangle GetBounds()
@@ -188,12 +227,6 @@ public class StackContainer : ElementContainer
         return boundsWSpacing;
     }
 
-    public void SetDrawOutline(Color color, int thickness)
-    {
-        IsSetToDrawOutline = true;
-        outlineColor = color;
-        this.thickness = thickness;
-    }
 
     public void SetSpacing(int spacing)
     { 
@@ -201,22 +234,67 @@ public class StackContainer : ElementContainer
     }
 }
 
-public class HorizontalContainer : StackContainer
+public class HorizontalContainer : ElementContainer
 {
-    public HorizontalContainer() : base(){}
-    public HorizontalContainer(Point position, int spacing) : base(position, spacing){}
+    protected int spacing = 0;
+
+    protected Point _Offset = Point.Zero;
+
+    public HorizontalContainer() : base() { }
+    public HorizontalContainer(int spacing) : base() {
+        this.spacing = spacing;
+    }
+    public HorizontalContainer(Point position, int spacing) : base(position)
+    {
+        this.spacing = spacing;
+
+    }
 
     public override void Add(UIElement element)
     {
-        element.Offset(Offset);
-        Offset += new Point(spacing + element.Size.Y, 0);
         base.Add(element);
+        element.Offset(_Offset);
+        _Offset += new Point(spacing + element.Size.X, 0);
+        
+    }
+    
+    public override Rectangle GetBounds()
+    {
+        int outlineSpacing = 2;
+        Rectangle nB = base.GetBounds();
+        Rectangle boundsWSpacing = new Rectangle(nB.X - outlineSpacing, nB.Y - outlineSpacing, nB.Width + 2 * outlineSpacing, nB.Height + 2 * outlineSpacing);
+        Debug.WriteLine($"Elements Count: {boundsWSpacing}");
+        return boundsWSpacing;
+    }
+
+    public void SetSpacing(int spacing)
+    {
+        this.spacing = spacing;
     }
     
 }
 
 
+public class Textfield : UIElement
+{
+    private String text = "";
 
+    public Textfield(string text, Point size) : base(size)
+    {
+        this.text = text;
+    }
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        PrimitiveDrawer.DrawText(spriteBatch, new Rectangle(relPos, Size), text, Size.Y, Color.Black);
+        Outline(spriteBatch);
+    }
+
+    public override void Update()
+    {
+
+    }
+    
+}
 
 
 

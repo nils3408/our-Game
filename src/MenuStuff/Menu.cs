@@ -38,10 +38,6 @@ public class Menu : GameState
         SimpleButton exitButton = new SimpleButton(ButtonSize, "Exit", font);
         exitButton.OnClick += () => game.Exit();
         buttonContainer.Add(exitButton);
-
-        TriangleButton triangleButton = new TriangleButton(ButtonSize);
-        triangleButton.OnClick += () => { };
-        buttonContainer.Add(triangleButton);
         
         buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight/2));
         buttonContainer.SetDrawOutline(new Color(96, 96, 96), 3);
@@ -59,7 +55,7 @@ public class Menu : GameState
         Color background = new Color(190, 244, 150);
         _graphicsDevice.Clear(background);
         spriteBatch.Begin();
-        PrimitiveDrawer.DrawTriangle(spriteBatch, new Vector2(100, 100), new Vector2(300, 300), new Vector2(100, 300), Color.Red);
+        
         buttonContainer.Draw(spriteBatch);
         spriteBatch.End();
     }

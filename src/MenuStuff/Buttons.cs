@@ -90,22 +90,44 @@ public class TriangleButton : UIElement
     Color colorOnHover = new Color(234, 234, 234);
     Color colorOutline = new Color(96, 96, 96);
 
+    private bool flip = false;
+
     bool isHovered = false;
 
     int spacing = 12;
 
     public event Action OnClick;
-    
+
     public TriangleButton(Point rectangle) : base(rectangle) { }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        PrimitiveDrawer.DrawRectangleWithOutline(spriteBatch, GetBounds(), color, Color.Red, 5);
+        PrimitiveDrawer.DrawRectangleWithOutline(spriteBatch, GetBounds(), colorOutline, colorOutline, 5);
         Rectangle _B = GetBounds();
-        Vector2 a = new Vector2(_B.Left + spacing, _B.Top + spacing);
-        Vector2 b = new Vector2(_B.Left + spacing, _B.Bottom - spacing);
-        Vector2 c = new Vector2(_B.Right - spacing, _B.Top + (_B.Height / 2));
-        PrimitiveDrawer.DrawTriangle(spriteBatch, c, a, b, Color.Red);
+        Vector2 a;
+        Vector2 b;
+        Vector2 c;
+        if (!flip)
+        {
+
+            a = new Vector2(_B.Left + spacing, _B.Top + spacing);
+            b = new Vector2(_B.Left + spacing, _B.Bottom - spacing);
+            c = new Vector2(_B.Right - spacing, _B.Top + (_B.Height / 2));
+        }
+        else
+        {
+            a = new Vector2(_B.Left + spacing, _B.Top + (_B.Height / 2));
+            b = new Vector2(_B.Right - spacing, _B.Bottom - spacing);
+            c = new Vector2(_B.Right - spacing, _B.Top + spacing);
+        }
+        if (isHovered)
+        {
+            PrimitiveDrawer.DrawTriangle(spriteBatch, c, a, b, color);
+        }
+        else
+        {
+            PrimitiveDrawer.DrawTriangle(spriteBatch, c, a, b, colorOnHover);
+        }
     }
 
     public override void Update()
@@ -119,5 +141,10 @@ public class TriangleButton : UIElement
         {
             OnClick?.Invoke();
         }
+    }
+
+    public void ToggleFlip()
+    {
+        flip = true;
     }
 }

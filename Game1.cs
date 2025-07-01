@@ -35,7 +35,7 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        PrimitiveDrawer.Initialize(GraphicsDevice);
+        PrimitiveDrawer.Initialize(GraphicsDevice, Content);
 
         game = new GameLogic(this);
         setup = new GameSetup(this);

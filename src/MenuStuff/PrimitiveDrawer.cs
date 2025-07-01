@@ -3,16 +3,20 @@
 
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 public static class PrimitiveDrawer
 {
     private static Texture2D pixelTexture;
+    private static SpriteFont font;
 
-    public static void Initialize(GraphicsDevice graphicsDevice)
+    public static void Initialize(GraphicsDevice graphicsDevice, ContentManager Content)
     {
         pixelTexture = new Texture2D(graphicsDevice, 1, 1);
         pixelTexture.SetData(new[] { Color.White });
+
+        font = Content.Load<SpriteFont>("Arial");
     }
 
     public static void DrawPixel(SpriteBatch spriteBatch, Vector2 position, Color color)
@@ -80,7 +84,40 @@ public static class PrimitiveDrawer
         }
 
     }
-    
-    
+
+    public static void DrawText(SpriteBatch spriteBatch, Point position, string text, int height, Color color)
+    {
+        if (text != "")
+        {
+            Vector2 textSize = font.MeasureString(text);
+
+            float scaling = height / (float)textSize.X;
+
+
+            spriteBatch.DrawString(font, text, PointToVector2(position), Color.Black, 0f, Vector2.Zero, scaling, SpriteEffects.None, 0);
+        }
+    }
+
+    public static void DrawText(SpriteBatch spriteBatch, Rectangle bounds, string text, int height, Color color)
+    {
+        if (text != "")
+        {
+            Vector2 textSize = font.MeasureString(text);
+
+            float scaling = height / (float)textSize.X;
+
+            Vector2 textPosition = new Vector2(
+                bounds.Left + (bounds.Width - textSize.X) / 2,
+                bounds.Top + (bounds.Height - textSize.Y) / 2
+            );
+
+            spriteBatch.DrawString(font, text, textPosition, Color.Black, 0f, Vector2.Zero, scaling, SpriteEffects.None, 0);
+        }
+    }
+
+    public static Vector2 PointToVector2(Point point)
+    {
+        return new Vector2(point.X, point.Y);
+    }
 
 }
