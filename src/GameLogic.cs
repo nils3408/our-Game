@@ -82,7 +82,7 @@ using our_Game;
             _graphics.ApplyChanges();          
 */
             player1 = new Spiderman (_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
-            player2 = new Knight    (_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("Knight"),2);
+            player2 = new Sonic (_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("sonic"),2);
             football = new Ball(_graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
 
             player1.Set_other_Player(player2);

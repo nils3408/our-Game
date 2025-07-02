@@ -10,12 +10,14 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Knight.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/KopfkickerChar1_neu.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/KopfkickerChar2_neu.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/sonic.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Spiderman.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Spielfeld2.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Tore.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Tore2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
