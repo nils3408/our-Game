@@ -175,8 +175,21 @@ using System.Runtime.CompilerServices;
             return position.Y >= groundY;
         }
 
-        public bool is_stronger_than_oponent(Player otherPlayer)
+        public bool is_stronger_than_oponent(Player otherPlayer1)
         {
-            return (strength > otherPlayer.strength);
+            return (strength > otherPlayer1.strength);
+        }
+
+        public bool oponent_is_in_the_way(Player otherPlayer1, float direction)
+        {
+            // check if other Player is in the given direction compared to the position of the own player
+            // otherPlayer would be_in_the_way 
+
+            if (direction != -1 && direction != 1) { throw new Exception("error in in_the_way() function. Dir is not -1 or 1");}
+
+            
+            if (direction == 1)   {return otherPlayer.position.X >= position.X; } // right
+            return otherPlayer.position.X <= position.X; //to the left
+
         }
     }

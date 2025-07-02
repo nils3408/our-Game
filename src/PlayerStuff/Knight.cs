@@ -38,6 +38,7 @@ public class Knight: Player
                 position.X += (move_speed * delta) * dir;
                 update_rectangles();
             }
+            return;
         }
 
 
@@ -45,7 +46,7 @@ public class Knight: Player
         //new code of the overwritten function
         if (is_stronger_than_oponent(otherPlayer))
         {
-            otherPlayer.move(delta, dir);
+            if (oponent_is_in_the_way(otherPlayer, dir)) otherPlayer.move(delta, dir);
 
             // Recalculate future position
             newPosition = new Vector2(newPositionX, position.Y);
