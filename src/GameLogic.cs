@@ -82,7 +82,7 @@ using our_Game;
             _graphics.ApplyChanges();          
 */
             player1 = new Spiderman (_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
-            player2 = new Player    (_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("KopfkickerChar2_neu"),2);
+            player2 = new Knight    (_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("Knight"),2);
             football = new Ball(_graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
 
             player1.Set_other_Player(player2);
@@ -167,8 +167,9 @@ using our_Game;
             if (state.IsKeyDown(Keys.Right)) player2.move_right(delta);
             if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY -250))
                 player2.jump(delta, groundY-50);
+            if (state.IsKeyDown(Keys.P)) player2.do_special_effect(delta);
 
-        }
+    }
 
          //Check Ball im Tor
         private void check_for_goal()

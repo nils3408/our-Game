@@ -31,6 +31,7 @@ using System.Runtime.CompilerServices;
         public float maxHeightY =3 ;
         
         public bool can_do_specialeffect;
+        public int strength;
         
         
 
@@ -52,6 +53,7 @@ using System.Runtime.CompilerServices;
             currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
             futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
             can_do_specialeffect = true;
+            strength = 1;
         }
 
         
@@ -88,7 +90,7 @@ using System.Runtime.CompilerServices;
         }
 
   
-        public void move_left(float delta)
+        public virtual void move_left(float delta)
         {
                 float newPositionX = position.X - delta * move_speed;
                 Vector2 newPosition = new Vector2(newPositionX, position.Y);
@@ -106,7 +108,7 @@ using System.Runtime.CompilerServices;
         }
 
 
-        public void move_right(float delta)
+        public virtual void move_right(float delta)
         {
             float newPositionX = position.X + delta * move_speed;
             Vector2 newPosition = new Vector2(newPositionX, position.Y);
@@ -120,7 +122,8 @@ using System.Runtime.CompilerServices;
                     position.X += move_speed * delta;
                     update_rectangles();
                 }
-            }   
+            }
+
         }
 
 
@@ -187,5 +190,8 @@ using System.Runtime.CompilerServices;
             return position.Y >= groundY;
         }
 
-
+        public bool is_stronger_than_oponent(Player otherPlayer)
+        {
+            return (strength > otherPlayer.strength);
+        }
     }
