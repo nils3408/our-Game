@@ -155,19 +155,19 @@ using our_Game;
 
 
             //Player 1
-            if (state.IsKeyDown(Keys.A)) player1.move_left(delta);
-            if (state.IsKeyDown(Keys.D)) player1.move_right(delta);
+            if (state.IsKeyDown(Keys.A)) player1.move(delta, -1);
+            if (state.IsKeyDown(Keys.D)) player1.move(delta, 1);
             if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY-250))
                 player1.jump(delta, groundY-50);
             if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
 
 
             // player 2
-            if (state.IsKeyDown(Keys.Left)) player2.move_left(delta);
-            if (state.IsKeyDown(Keys.Right)) player2.move_right(delta);
+            if (state.IsKeyDown(Keys.Left)) player2.move(delta, -1);
+            if (state.IsKeyDown(Keys.Right)) player2.move(delta, 1);
             if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY -250))
                 player2.jump(delta, groundY-50);
-            if (state.IsKeyDown(Keys.P)) player2.do_special_effect(delta);
+            if (state.IsKeyDown(Keys.RightShift)) player2.do_special_effect(delta); 
 
     }
 

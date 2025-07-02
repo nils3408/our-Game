@@ -17,32 +17,35 @@ public class Knight: Player
     public override void do_special_effect(float delta)
     {
         strength = 2;   //current normal value = 1
-        System.Diagnostics.Debug.WriteLine(strength);
-
-
     }
 
-    public override void move_right(float delta)
+
+
+    public override void move(float delta, float dir)
     {
-        float newPositionX = position.X + delta * move_speed;
+        //dir must be -1 or 1
+        if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
+
+        float newPositionX = position.X + (delta * move_speed) * dir;
         Vector2 newPosition = new Vector2(newPositionX, position.Y);
+
         futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
-        
-        if (!futureRect.Intersects(otherPlayer.currentRect))
+        if (!(futureRect.Intersects(otherPlayer.currentRect)))
         {
-            if (!out_of_bounds_both_scales(newPosition))
+            if (out_of_bounds_both_scales(newPosition) == false)
             {
-                position.X += move_speed * delta;
+                position.X += (move_speed * delta) * dir;
                 update_rectangles();
             }
-            return;
         }
 
+
         // future rect overlaps with oponent
+        //new code of the overwritten function
         if (is_stronger_than_oponent(otherPlayer))
         {
-            otherPlayer.move_right(delta);
+            otherPlayer.move(delta, dir);
 
             // Recalculate future position
             newPosition = new Vector2(newPositionX, position.Y);
@@ -50,46 +53,9 @@ public class Knight: Player
 
             if (!futureRect.Intersects(otherPlayer.currentRect) && !out_of_bounds_both_scales(newPosition))
             {
-                position.X += move_speed * delta;
-                update_rectangles();
-            }
-        }
-
-
-
-    public override void move_left(float delta)
-    {
-        float newPositionX = position.X - delta * move_speed;
-        Vector2 newPosition = new Vector2(newPositionX, position.Y);
-        futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
-
-        if (!futureRect.Intersects(otherPlayer.currentRect))
-        {
-            if (!out_of_bounds_both_scales(newPosition))
-            {
-                position.X -= move_speed * delta;
-                update_rectangles();
-            }
-            return;
-        }
-
-        if (is_stronger_than_oponent(otherPlayer))
-        {
-            otherPlayer.move_left(delta);
-
-            // WICHTIG: NEU berechnen nach Gegner bewegen!
-            newPositionX = position.X - delta * move_speed;
-            newPosition = new Vector2(newPositionX, position.Y);
-            futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
-
-            if (!futureRect.Intersects(otherPlayer.currentRect) && !out_of_bounds_both_scales(newPosition))
-            {
-                position.X -= move_speed * delta;
+                position.X += move_speed * delta * dir;
                 update_rectangles();
             }
         }
     }
-
-
-
 }

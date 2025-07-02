@@ -90,28 +90,13 @@ using System.Runtime.CompilerServices;
         }
 
   
-        public virtual void move_left(float delta)
-        {
-                float newPositionX = position.X - delta * move_speed;
+       public virtual void move(float delta, float dir)
+       {
+            //dir must be -1 or 1
+            if ( dir != -1 && dir != 1 ) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
+
+                float newPositionX = position.X + (delta * move_speed)*dir;
                 Vector2 newPosition = new Vector2(newPositionX, position.Y);
-                
-                futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
-
-                if (!(futureRect.Intersects(otherPlayer.currentRect)))
-                {
-                    if (out_of_bounds_both_scales (newPosition) == false)
-                    { 
-                        position.X -= move_speed * delta;
-                        update_rectangles();
-                    }
-                }
-        }
-
-
-        public virtual void move_right(float delta)
-        {
-            float newPositionX = position.X + delta * move_speed;
-            Vector2 newPosition = new Vector2(newPositionX, position.Y);
 
             futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
@@ -119,12 +104,12 @@ using System.Runtime.CompilerServices;
             {
                 if (out_of_bounds_both_scales(newPosition) == false)
                 {
-                    position.X += move_speed * delta;
+                    position.X += (move_speed * delta)*dir;
                     update_rectangles();
                 }
-            }
-
+            } 
         }
+
 
 
         public void jump(float delta, float groundY)
