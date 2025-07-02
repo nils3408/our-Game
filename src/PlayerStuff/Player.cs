@@ -30,6 +30,8 @@ using System.Runtime.CompilerServices;
         public Vector2 position;
         public float maxHeightY =3 ;
         
+        public bool can_do_specialeffect;
+        
         
 
     /*
@@ -49,6 +51,7 @@ using System.Runtime.CompilerServices;
             texture = texture1;
             currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
             futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+            can_do_specialeffect = true;
         }
 
         
@@ -133,7 +136,7 @@ using System.Runtime.CompilerServices;
         }
 
 
-        public void update_vertical(float delta, float groundY)
+        public virtual void update_vertical(float delta, float groundY)
         {
             velocity.Y += gravity * delta;
             position.Y = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
