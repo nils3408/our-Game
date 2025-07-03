@@ -6,7 +6,16 @@ using System;
 
 public class Sonic: Player
 {
-    private int counter;
+
+    public int cooldown = 13; //can activate its special effect all x seconds
+    public int speciaL_effect_timer = 3;  //can do its special effect for x seconds
+    
+    public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
+    public bool special_effect_in_use = false;
+
+    public float fast_move_speed = 900;
+
+
 
     //Konstruktor for Sonic
     public Sonic(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
@@ -14,31 +23,48 @@ public class Sonic: Player
     {}
 
 
-    public override void do_special_effect(float delta)
+   
+    public override void move(float delta, float dir)
     {
-        if (can_do_specialeffect == false) { return; }
-
-        // sonics: special effect:  super fast 
-        move_speed = 600f;
-    }
-
-    public override void update_vertical(float delta, float groundY)
-    {
-        //a bit different to the "normal player" ones 
-        // when he is on ground, he can do its special_effect again
-
-        velocity.Y += gravity * delta;
-        position.Y = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
-
-        if (position.Y >= groundY)
+        if (special_effect_in_use)
         {
-            position.Y = groundY;
-            velocity.Y = 0;
-            can_do_specialeffect= true; 
+            if (execution_time_is_over())
+            {
+                move_speed = move_speed2;
+                special_effect_in_use = false;
+            }
         }
 
-        update_rectangles();
+        base.move(delta, dir);
+    }
+    
+    
+    public override void do_special_effect(float delta)
+    {
+        if (can_do_special_effect() == false) { return; }
+
+        // sonics: special effect:  super fast 
+        move_speed = fast_move_speed;
+        
+        last_time_used = DateTime.Now;
+        special_effect_in_use=true; 
+
+    }
+    
+    
+    public override bool can_do_special_effect()
+    {
+        DateTime current_time = DateTime.Now;
+        double vergangene_zeit= (current_time- last_time_used).TotalSeconds;
+        return (vergangene_zeit > cooldown);
     }
 
+    public bool execution_time_is_over()
+    {
+        // check whether the duration the special effect is used is over
+        DateTime current_time = DateTime.Now;
+        double vergangene_zeit = (current_time - last_time_used).TotalSeconds;
+        return (vergangene_zeit > speciaL_effect_timer);
+    }
 
 }

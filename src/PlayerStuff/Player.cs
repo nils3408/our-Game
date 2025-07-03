@@ -18,7 +18,9 @@ using System.Runtime.CompilerServices;
         public int playerGroup;
         
         public float move_speed = 380f;
+        public float move_speed2;  //copy if move_speed gets changed (for example in sonic character)
         public float jump_velocity = -500f;
+        public float jump_velocity2;  //copy if jump_velocity gets changed(for example in sonic character)
         public float gravity = 500f;
         public Vector2 velocity;
 
@@ -54,6 +56,7 @@ using System.Runtime.CompilerServices;
             futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
             can_do_specialeffect = true;
             strength = 1;
+            move_speed2= move_speed;
         }
 
         
@@ -191,5 +194,10 @@ using System.Runtime.CompilerServices;
             if (direction == 1)   {return otherPlayer.position.X >= position.X; } // right
             return otherPlayer.position.X <= position.X; //to the left
 
+        }
+
+        public virtual bool can_do_special_effect()
+        {
+            return can_do_specialeffect;
         }
     }
