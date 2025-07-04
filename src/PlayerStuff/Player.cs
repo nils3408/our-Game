@@ -110,8 +110,25 @@ using System.Runtime.CompilerServices;
                     position.X += (move_speed * delta)*dir;
                     update_rectangles();
                 }
-            } 
-        }
+            }
+
+
+            // future rect overlaps with oponent
+            if (is_stronger_than_oponent(otherPlayer))
+            {
+                if (oponent_is_in_the_way(otherPlayer, dir)) otherPlayer.move(delta, dir);
+
+            
+                newPosition = new Vector2(newPositionX, position.Y);
+                futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+
+                if (!futureRect.Intersects(otherPlayer.currentRect) && !out_of_bounds_both_scales(newPosition))
+                {
+                    position.X += move_speed * delta * dir;
+                    update_rectangles();
+                }
+            }
+       }
 
 
 

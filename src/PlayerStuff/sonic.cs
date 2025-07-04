@@ -1,3 +1,6 @@
+//Nils
+
+
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,13 +10,13 @@ using System;
 public class Sonic: Player
 {
 
-    public int cooldown = 13; //can activate its special effect all x seconds
-    public int speciaL_effect_timer = 3;  //can do its special effect for x seconds
+    public int cooldown = 12; //can activate its special effect all x seconds
+    public int speciaL_effect_timer = 2;  //can do its special effect for x seconds
     
     public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
     public bool special_effect_in_use = false;
 
-    public float fast_move_speed = 900;
+    public float fast_move_speed = 1000;
 
 
 
