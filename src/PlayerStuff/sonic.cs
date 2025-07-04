@@ -30,7 +30,7 @@ public class Sonic: Player
         {
             if (execution_time_is_over())
             {
-                move_speed = move_speed2;
+                move_speed = move_speed2;  //back to old value , copy of move_speed, inialiezed in parent
                 special_effect_in_use = false;
             }
         }
