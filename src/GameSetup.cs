@@ -26,9 +26,6 @@ public class GameSetup : GameState
 
         SpriteFont font = Content.Load<SpriteFont>("Arial");
 
-        StackContainer buttonContainer = new StackContainer(ScreenCenter, spacing);
-        container.Add(buttonContainer);
-
         Textfield textfield = new Textfield("Choose a Player", new Point(500, 100));
         textfield.SetDrawOutline(outlineColor, 1);
         container.Add(textfield);
@@ -38,38 +35,22 @@ public class GameSetup : GameState
         homeButton.OnClick += () => Game1.nextState = Game1.menu;
         container.Add(homeButton);
 
+        SimpleButton startButton = new SimpleButton(new Point(spacing, spacing), new Point(200, 100), "Start New Game", font);
+        homeButton.OnClick += () => Game1.nextState = Game1.menu;
 
-        buttonContainer.SetSpacing(7);
-        //buttonContainer.ToggleCentralization();
 
-        Point ButtonSize = new Point(300, 100);
+        
+        HorizontalContainer H1 = new HorizontalContainer();
+        H1.SetSpacing(30);
+        PlayerSelection leftSelection = new PlayerSelection(Content);
+        PlayerSelection rightSelection = new PlayerSelection(Content);
+        H1.Add(leftSelection);
+        H1.Add(rightSelection);
+        H1.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
+        container.Add(H1);
 
-        ShowePlayerTyper playerDisplay = new ShowePlayerTyper(new Point(300, 500), Content);
-        buttonContainer.Add(playerDisplay);
 
-        SimpleButton exitButton = new SimpleButton(ButtonSize, "Choose", font);
-        exitButton.OnClick += () => game.Exit();
-        buttonContainer.Add(exitButton);
 
-        HorizontalContainer HContainer = new HorizontalContainer(100);
-
-        Point TSize = new Point(100, 100);
-
-        TriangleButton leftButton = new TriangleButton(TSize);
-        leftButton.OnClick += () => { playerDisplay.SwipeRight(); };
-        leftButton.ToggleFlip();
-        HContainer.Add(leftButton);
-
-        TriangleButton rightButton = new TriangleButton(TSize);
-        rightButton.OnClick += () => { playerDisplay.SwipeRight(); };
-
-        HContainer.Add(rightButton);
-        HContainer.SetDrawOutline(outlineColor, 1);
-
-        buttonContainer.Add(HContainer);
-
-        buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
-        buttonContainer.SetDrawOutline(outlineColor, 3);
     }
 
     public override void Update(GameTime gameTime)
@@ -98,7 +79,7 @@ public class GameSetup : GameState
 
 
 
-public class ShowePlayerTyper : UIElement
+public class ShowPlayerType : UIElement
 {
     ContentManager Content;
 
@@ -106,7 +87,7 @@ public class ShowePlayerTyper : UIElement
 
     public Texture2D[] players = new Texture2D[2];
 
-    public ShowePlayerTyper(Point Size, ContentManager Content) : base(Size)
+    public ShowPlayerType(Point Size, ContentManager Content) : base(Size)
     {
         this.Content = Content;
         players[0] = Content.Load<Texture2D>("KopfkickerChar2_neu");
@@ -137,5 +118,59 @@ public class ShowePlayerTyper : UIElement
     public override void Update()
     {
 
+    }
+}
+
+public class PlayerSelection : StackContainer
+{
+    Color outlineColor = new Color(96, 96, 96);
+    int spacing = 7;
+    public PlayerSelection(ContentManager Content)
+    {
+        SpriteFont font = Content.Load<SpriteFont>("Arial");
+
+
+   
+        base.SetSpacing(spacing);
+
+        Point ButtonSize = new Point(300, 100);
+
+        ShowPlayerType playerDisplay = new ShowPlayerType(new Point(300, 500), Content);
+        base.Add(playerDisplay);
+
+        SimpleButton exitButton = new SimpleButton(ButtonSize, "Choose", font);
+
+        exitButton.OnClick += () => { };
+        base.Add(exitButton);
+
+        HorizontalContainer HContainer = new HorizontalContainer(100);
+
+        Point TSize = new Point(100, 100);
+
+        TriangleButton leftButton = new TriangleButton(TSize);
+        leftButton.OnClick += () => { playerDisplay.SwipeRight(); };
+        leftButton.ToggleFlip();
+        HContainer.Add(leftButton);
+
+        TriangleButton rightButton = new TriangleButton(TSize);
+        rightButton.OnClick += () => { playerDisplay.SwipeRight(); };
+
+        HContainer.Add(rightButton);
+        HContainer.SetDrawOutline(outlineColor, 1);
+
+        base.Add(HContainer);
+
+        //buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
+        base.SetDrawOutline(outlineColor, 3);
+    }
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        base.Draw(spriteBatch);
+    }
+
+    public override void Update()
+    {
+        base.Update();
     }
 }

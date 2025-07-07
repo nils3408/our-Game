@@ -205,7 +205,7 @@ public class StackContainer : ElementContainer
     {
         base.Add(element);
         element.Offset(_Offset);
-        _Offset += new Point(0, spacing + element.Size.Y);
+        _Offset += new Point(0, spacing + element.GetBounds().Height);
         
     }
 
@@ -254,7 +254,7 @@ public class HorizontalContainer : ElementContainer
     {
         base.Add(element);
         element.Offset(_Offset);
-        _Offset += new Point(spacing + element.Size.X, 0);
+        _Offset += new Point(spacing + element.GetBounds().Width, 0);
         
     }
     

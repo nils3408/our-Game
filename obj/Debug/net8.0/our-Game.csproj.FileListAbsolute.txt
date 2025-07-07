@@ -169,3 +169,5 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sonic.xnb
+C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Knight.xnb
+C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\sonic.xnb
