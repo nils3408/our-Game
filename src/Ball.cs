@@ -21,6 +21,9 @@ using System;
 using System.ComponentModel.Design;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+
+
 //using SharpDX.XAudio2;
 //using System;
 //using System.Security.Cryptography.X509Certificates;

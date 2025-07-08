@@ -66,6 +66,10 @@ using our_Game;
         private float gameTimer = 0f;
         private bool gameRunning = true;
 
+        public Item item1;
+
+
+
     public GameLogic(Game baseGame):base(baseGame)
 
         {
@@ -87,6 +91,8 @@ using our_Game;
 
             player1.Set_other_Player(player2);
             player2.Set_other_Player(player1);
+
+            item1 = new Item(_graphicsDevice, Content);
             
         }
 
@@ -138,13 +144,17 @@ using our_Game;
             );
             spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
             spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
+            
             player1.draw(spriteBatch);
             player2.draw(spriteBatch);
             football.draw(spriteBatch);
+            item1.draw(spriteBatch, gameTime);
+
             // Score und Timer anzeigen
             spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
             string timerText = $" {Math.Floor(gameTimer)}s";
             spriteBatch.DrawString(scoreFont, timerText, new Vector2(20, 20), Color.White);
+            
             spriteBatch.End();            
         }
 
@@ -219,7 +229,7 @@ using our_Game;
                 // shooting    
                 KeyboardState state = Keyboard.GetState();
                 if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal();}
-                if (state.IsKeyDown(Keys.X)) { football.get_shooted_horizontal();}
+                if (state.IsKeyDown(Keys.Y)) { football.get_shooted_horizontal();}
             }   
 
             // Spieler 2
