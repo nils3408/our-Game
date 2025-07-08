@@ -218,7 +218,8 @@ using our_Game;
 
                 // shooting    
                 KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.S)) { football.getShooted();}
+                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal();}
+                if (state.IsKeyDown(Keys.X)) { football.get_shooted_horizontal();}
             }   
 
             // Spieler 2
@@ -232,7 +233,8 @@ using our_Game;
 
                 // shooting    
                 KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.Down)) { football.getShooted(); }
+                if (state.IsKeyDown(Keys.Down))      { football.get_shooted_diagonal();}
+                if (state.IsKeyDown(Keys.OemMinus))  {football.get_shooted_horizontal();}
 
             }
         } 

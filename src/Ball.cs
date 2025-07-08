@@ -32,14 +32,14 @@ public class Ball
 {
 
 
-
     private Texture2D texture;
     public Vector2 position;
 
     public Vector2 velocity = new Vector2(0, 0);
     public Vector2 starting_velocity = new Vector2(500f, -230f);
     public Vector2 v_sim;
-    public Vector2 shooting_velocity = new Vector2(700, -300);
+    public Vector2 shooting_horizontal_velocity = new Vector2(900, -20);
+    public Vector2 shooting_diagonally_velocity = new Vector2(900, -250);
     
 
     private const int BallSize = 100;
@@ -81,17 +81,32 @@ public class Ball
         velocity = direction * starting_velocity;
     }
 
-    public void getShooted()
+    
+    public void get_shooted_horizontal()
     {
         if (velocity == Vector2.Zero)
         {
-            velocity = shooting_velocity;
+            velocity = shooting_horizontal_velocity;
             return;
         }
 
-        velocity.X = shooting_velocity.X * transform_direction(velocity).X;
-        velocity.Y = shooting_velocity.Y;
+        velocity.X = shooting_horizontal_velocity.X * transform_direction(velocity).X;
+        velocity.Y = shooting_horizontal_velocity.Y;
     }
+
+    
+    public void get_shooted_diagonal()
+    {
+        if (velocity == Vector2.Zero)
+        {
+            velocity = shooting_diagonally_velocity;
+            return;
+        }
+
+        velocity.X = shooting_diagonally_velocity.X * transform_direction(velocity).X;
+        velocity.Y = shooting_diagonally_velocity.Y;
+    }
+
 
     public void reduce_velocity_due_to_friction()
     {
