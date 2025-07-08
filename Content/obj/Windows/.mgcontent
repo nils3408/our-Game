@@ -45,8 +45,10 @@
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spielfeld2.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tore.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tore2.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tribüne.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
