@@ -21,7 +21,13 @@ public class SimpleButton : UIElement
 
     bool isHovered = false;
 
+    bool isSetToStayPressed = false;
+
+    bool isPressed = false;
+
     public event Action OnClick;
+
+
 
 
     public SimpleButton(Rectangle rectangle) : base(rectangle) { }
@@ -52,7 +58,7 @@ public class SimpleButton : UIElement
         // Check for click
         if (isHovered && InputHandler.IsMouseLeftReleased())
         {
-            OnClick?.Invoke();
+            Click();
         }
     }
 
@@ -60,7 +66,7 @@ public class SimpleButton : UIElement
     {
         //Rectangle offsetBounds = new Rectangle(bounds.X + );
 
-        if (!isHovered)
+        if (!(isHovered || isPressed))
         {
             PrimitiveDrawer.DrawRectangleWithOutline(spriteBatch, GetBounds(), color, colorOutline, outline);
         }
@@ -81,6 +87,37 @@ public class SimpleButton : UIElement
 
             spriteBatch.DrawString(font, text, textPosition, Color.Black);
         }
+    }
+
+    public void Click()
+    {
+        if (!isSetToStayPressed)
+        {
+            isPressed = !isPressed;
+            OnClick.Invoke();
+        }
+        else
+        {
+            isPressed = !isPressed;
+            if (isPressed) OnClick.Invoke();
+        }
+    }
+
+    public void SetToStayPressed()
+    {
+        isSetToStayPressed = true;
+    }
+
+    public bool GetState()
+    {
+        return isPressed;
+    }
+
+    public void SetColor(Color color, Color colorOnHover, Color colorOutline)
+    {
+        if (color != null) this.color = color;
+        if (colorOnHover != null) this.colorOnHover = colorOnHover;
+        if(colorOutline != null) this.outlineColor = colorOutline;
     }
 }
 

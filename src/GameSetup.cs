@@ -35,11 +35,12 @@ public class GameSetup : GameState
         homeButton.OnClick += () => Game1.nextState = Game1.menu;
         container.Add(homeButton);
 
-        SimpleButton startButton = new SimpleButton(new Point(spacing, spacing), new Point(200, 100), "Start New Game", font);
-        homeButton.OnClick += () => Game1.nextState = Game1.menu;
 
 
-        
+
+
+
+
         HorizontalContainer H1 = new HorizontalContainer();
         H1.SetSpacing(30);
         PlayerSelection leftSelection = new PlayerSelection(Content);
@@ -50,7 +51,24 @@ public class GameSetup : GameState
         container.Add(H1);
 
 
-
+        SimpleButton startButton = new SimpleButton(new Point(500, 100), "Start New Game", font);
+        startButton.OnClick += () =>
+        {
+            if (leftSelection.isChoosen && rightSelection.isChoosen)
+            {
+                Game1.nextState = Game1.game;
+                //Game1.game.SetPlayer();
+                Game1.GameIsInitialized = true;
+            }
+            else
+            { 
+                
+            }
+        }
+            ;
+        startButton.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - spacing - startButton.GetBounds().Height / 2));
+        container.Add(startButton);
+        
     }
 
     public override void Update(GameTime gameTime)
@@ -125,12 +143,14 @@ public class PlayerSelection : StackContainer
 {
     Color outlineColor = new Color(96, 96, 96);
     int spacing = 7;
+
+    public bool isChoosen = false;
     public PlayerSelection(ContentManager Content)
     {
         SpriteFont font = Content.Load<SpriteFont>("Arial");
 
 
-   
+
         base.SetSpacing(spacing);
 
         Point ButtonSize = new Point(300, 100);
@@ -138,22 +158,23 @@ public class PlayerSelection : StackContainer
         ShowPlayerType playerDisplay = new ShowPlayerType(new Point(300, 500), Content);
         base.Add(playerDisplay);
 
-        SimpleButton exitButton = new SimpleButton(ButtonSize, "Choose", font);
-
-        exitButton.OnClick += () => { };
-        base.Add(exitButton);
+        SimpleButton chooseButton = new SimpleButton(ButtonSize, "Choose", font);
+        chooseButton.OnClick += () => { isChoosen = !isChoosen; };
+        chooseButton.SetToStayPressed();
+        chooseButton.SetColor(Color.White, Color.Green, outlineColor);
+        base.Add(chooseButton);
 
         HorizontalContainer HContainer = new HorizontalContainer(100);
 
         Point TSize = new Point(100, 100);
 
         TriangleButton leftButton = new TriangleButton(TSize);
-        leftButton.OnClick += () => { playerDisplay.SwipeRight(); };
+        leftButton.OnClick += () => { if (!chooseButton.GetState()) playerDisplay.SwipeRight(); };
         leftButton.ToggleFlip();
         HContainer.Add(leftButton);
 
         TriangleButton rightButton = new TriangleButton(TSize);
-        rightButton.OnClick += () => { playerDisplay.SwipeRight(); };
+        rightButton.OnClick += () => { if (!chooseButton.GetState()) playerDisplay.SwipeRight(); };
 
         HContainer.Add(rightButton);
         HContainer.SetDrawOutline(outlineColor, 1);
@@ -173,4 +194,6 @@ public class PlayerSelection : StackContainer
     {
         base.Update();
     }
+
+
 }

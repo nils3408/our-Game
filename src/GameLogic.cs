@@ -27,88 +27,88 @@ using System;
 using our_Game;
 
 
-    public class GameLogic : GameState
+public class GameLogic : GameState
+{
+
+
+    //Spielfeld
+    private Texture2D _backgroundTexture;
+    private Texture2D _goalTexture;
+    private Vector2 _leftGoalPosition;
+    private Vector2 _rightGoalPosition;
+    // Spieler, Ball
+    private Texture2D _player1Texture;
+    private Texture2D _player2Texture;
+    private Vector2 _player1Position;
+    private Vector2 _player1Velocity;
+    private Vector2 _player2Position;
+    private Vector2 _player2Velocity;
+    private Player player1;
+    private Player player2;
+    private Ball football;
+    private float jumpheight = 250f;
+    //generell
+    private float collisionCooldown1 = 0f;
+    private float collisionCooldown2 = 0f;
+    private const float CollisionCooldownTime = 0.5f;
+
+    private float groundY = 550;
+
+    float goalScale = 0.4f;
+    int goalWidth;
+    int goalHeight;
+
+    //Tore Counter
+    private int scorePlayer1 = 0;
+    private int scorePlayer2 = 0;
+    private SpriteFont scoreFont;
+
+    private float gameTimer = 0f;
+    private bool gameRunning = true;
+
+    public Item item1;
+
+
+
+    public GameLogic(Game baseGame) : base(baseGame)
+
     {
-     
+        //this.playerList = playerList;
+    }
 
-        //Spielfeld
-        private Texture2D _backgroundTexture;
-        private Texture2D _goalTexture;
-        private Vector2 _leftGoalPosition;
-        private Vector2 _rightGoalPosition;
-        // Spieler, Ball
-        private Texture2D _player1Texture;
-        private Texture2D _player2Texture;
-        private Vector2 _player1Position;
-        private Vector2 _player1Velocity;
-        private Vector2 _player2Position;
-        private Vector2 _player2Velocity;
-        private Player player1;
-        private Player player2;
-        private Ball football;
-        private float jumpheight = 250f;
-        //generell
-        private float collisionCooldown1 = 0f; 
-        private float collisionCooldown2 = 0f;
-        private const float CollisionCooldownTime = 0.5f; 
+    public override void Initialize()
+    {
+        /*          FullScreen Mode: 
+                  ToDo Spielfeld anpassen!!
+                   _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                   _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                   _graphics.IsFullScreen = true;
+                   _graphics.ApplyChanges();          
+       */
+        player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
+        player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
+        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
 
-        private float groundY =550;
+        player1.Set_other_Player(player2);
+        player2.Set_other_Player(player1);
 
-        float goalScale = 0.4f;
-        int goalWidth;
-        int goalHeight;
+        item1 = new Item(_graphicsDevice, Content);
 
-        //Tore Counter
-        private int scorePlayer1 = 0;
-        private int scorePlayer2 = 0;
-        private SpriteFont scoreFont;
+    }
 
-        private float gameTimer = 0f;
-        private bool gameRunning = true;
+    public override void LoadContent()
+    {
+        spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
+        _backgroundTexture = Content.Load<Texture2D>("Spielfeld2");
+        _goalTexture = Content.Load<Texture2D>("Tore");
 
-        public Item item1;
+        goalWidth = (int)(_goalTexture.Width * goalScale);
+        goalHeight = (int)(_goalTexture.Height * goalScale);
 
-
-
-    public GameLogic(Game baseGame):base(baseGame)
-
-        {
-            //this.playerList = playerList;
-        }
-
-        public override void Initialize()
-        {
- /*          FullScreen Mode: 
-           ToDo Spielfeld anpassen!!
-            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            _graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();          
-*/
-            player1 = new Spiderman (_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"),1);
-            player2 = new Sonic (_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth -300,groundY ), Content.Load<Texture2D>("sonic"),2);
-            football = new Ball(_graphicsDevice,new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
-
-            player1.Set_other_Player(player2);
-            player2.Set_other_Player(player1);
-
-            item1 = new Item(_graphicsDevice, Content);
-            
-        }
-
-        public override void LoadContent()
-        {
-            spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
-            _backgroundTexture = Content.Load<Texture2D>("Spielfeld2");
-            _goalTexture = Content.Load<Texture2D>("Tore");
-            
-            goalWidth = (int)(_goalTexture.Width * goalScale);
-            goalHeight = (int)(_goalTexture.Height * goalScale);
-            
-            _leftGoalPosition = new Vector2(-100, groundY  - 255);
-            _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 100, groundY - 255);
-            scoreFont = Content.Load<SpriteFont>("Arial");
-        }
+        _leftGoalPosition = new Vector2(-100, groundY - 255);
+        _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 100, groundY - 255);
+        scoreFont = Content.Load<SpriteFont>("Arial");
+    }
 
 
     public override void Update(GameTime gameTime)
@@ -119,12 +119,13 @@ using our_Game;
         player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
         football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
         check_for_goal();
-            
-            //Zurück ins Menu wenn ESC losgelassen wird 
-            if (InputHandler.IsReleased(Keys.Escape)) {
-                System.Diagnostics.Debug.WriteLine("escape!");
-                Game1.nextState = Game1.menu;
-            }
+
+        //Zurück ins Menu wenn ESC losgelassen wird 
+        if (InputHandler.IsReleased(Keys.Escape))
+        {
+            System.Diagnostics.Debug.WriteLine("escape!");
+            Game1.nextState = Game1.menu;
+        }
         if (gameRunning)
         {
             gameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -132,121 +133,129 @@ using our_Game;
     }
 
 
-        public override void Draw(GameTime gameTime)
-        {
-            _graphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
-            spriteBatch.Begin();
+    public override void Draw(GameTime gameTime)
+    {
+        _graphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
+        spriteBatch.Begin();
 
-            spriteBatch.Draw(
-            _backgroundTexture,
-            new Microsoft.Xna.Framework.Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
-            Microsoft.Xna.Framework.Color.White
-            );
-            spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
-            spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
-            
-            player1.draw(spriteBatch);
-            player2.draw(spriteBatch);
-            football.draw(spriteBatch);
-            item1.draw(spriteBatch, gameTime);
+        spriteBatch.Draw(
+        _backgroundTexture,
+        new Microsoft.Xna.Framework.Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
+        Microsoft.Xna.Framework.Color.White
+        );
+        spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
+        spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
 
-            // Score und Timer anzeigen
-            spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
-            string timerText = $" {Math.Floor(gameTimer)}s";
-            spriteBatch.DrawString(scoreFont, timerText, new Vector2(20, 20), Color.White);
-            
-            spriteBatch.End();            
-        }
+        player1.draw(spriteBatch);
+        player2.draw(spriteBatch);
+        football.draw(spriteBatch);
+        item1.draw(spriteBatch, gameTime);
 
-        private void handle_player_movement(GameTime gameTime)
-        {
-            KeyboardState state = Keyboard.GetState();
-            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        // Score und Timer anzeigen
+        spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
+        string timerText = $" {Math.Floor(gameTimer)}s";
+        spriteBatch.DrawString(scoreFont, timerText, new Vector2(20, 20), Color.White);
 
+        spriteBatch.End();
+    }
 
-            //Player 1
-            if (state.IsKeyDown(Keys.A)) player1.move(delta, -1);
-            if (state.IsKeyDown(Keys.D)) player1.move(delta, 1);
-            if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY-250))
-                player1.jump(delta, groundY-50);
-            if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
+    private void handle_player_movement(GameTime gameTime)
+    {
+        KeyboardState state = Keyboard.GetState();
+        float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
-            // player 2
-            if (state.IsKeyDown(Keys.Left)) player2.move(delta, -1);
-            if (state.IsKeyDown(Keys.Right)) player2.move(delta, 1);
-            if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY -250))
-                player2.jump(delta, groundY-50);
-            if (state.IsKeyDown(Keys.RightShift)) player2.do_special_effect(delta); 
+        //Player 1
+        if (state.IsKeyDown(Keys.A)) player1.move(delta, -1);
+        if (state.IsKeyDown(Keys.D)) player1.move(delta, 1);
+        if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY - 250))
+            player1.jump(delta, groundY - 50);
+        if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
+
+
+        // player 2
+        if (state.IsKeyDown(Keys.Left)) player2.move(delta, -1);
+        if (state.IsKeyDown(Keys.Right)) player2.move(delta, 1);
+        if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY - 250))
+            player2.jump(delta, groundY - 50);
+        if (state.IsKeyDown(Keys.RightShift)) player2.do_special_effect(delta);
 
     }
 
-         //Check Ball im Tor
-        private void check_for_goal()
-        {
+    //Check Ball im Tor
+    private void check_for_goal()
+    {
         //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
-            Microsoft.Xna.Framework.Rectangle leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth , goalHeight);
-            Microsoft.Xna.Framework.Rectangle rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
+        Microsoft.Xna.Framework.Rectangle leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth, goalHeight);
+        Microsoft.Xna.Framework.Rectangle rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
 
-            Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
+        Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
 
-          
-            if (leftGoal.Contains(ballRect))
-            {
-                scorePlayer2++;
-                football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
-            }
 
-            
-            if (rightGoal.Contains(ballRect))
-            {
-                scorePlayer1++;
-                football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
-            }
+        if (leftGoal.Contains(ballRect))
+        {
+            scorePlayer2++;
+            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
         }
 
 
-
-        private void handle_player_ball_collision(GameTime gameTime)
+        if (rightGoal.Contains(ballRect))
         {
-            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            collisionCooldown1 -= delta;
-            collisionCooldown2 -= delta;
-            
-
-
-
-            // Spieler 1
-            if (football.getRect().Intersects(player1.currentRect) && collisionCooldown1 <=0)
-            {
-
-                Vector2 direction = football.position - player1.position;
-
-                football.reset_velocity();
-                football.change_direction(direction);
-                collisionCooldown1 = CollisionCooldownTime;
-
-                // shooting    
-                KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal();}
-                if (state.IsKeyDown(Keys.Y)) { football.get_shooted_horizontal();}
-            }   
-
-            // Spieler 2
-            if (football.getRect().Intersects(player2.currentRect) && collisionCooldown2 <=0)
-            {
-                 Vector2 direction2 = football.position - player2.position;
-
-                football.reset_velocity(); 
-                football.change_direction(direction2);
-                collisionCooldown2 = CollisionCooldownTime;
-
-                // shooting    
-                KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.Down))      { football.get_shooted_diagonal();}
-                if (state.IsKeyDown(Keys.OemMinus))  {football.get_shooted_horizontal();}
-
-            }
-        } 
+            scorePlayer1++;
+            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+        }
     }
+
+
+
+    private void handle_player_ball_collision(GameTime gameTime)
+    {
+        float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        collisionCooldown1 -= delta;
+        collisionCooldown2 -= delta;
+
+
+
+
+        // Spieler 1
+        if (football.getRect().Intersects(player1.currentRect) && collisionCooldown1 <= 0)
+        {
+
+            Vector2 direction = football.position - player1.position;
+
+            football.reset_velocity();
+            football.change_direction(direction);
+            collisionCooldown1 = CollisionCooldownTime;
+
+            // shooting    
+            KeyboardState state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal(); }
+            if (state.IsKeyDown(Keys.Y)) { football.get_shooted_horizontal(); }
+        }
+
+        // Spieler 2
+        if (football.getRect().Intersects(player2.currentRect) && collisionCooldown2 <= 0)
+        {
+            Vector2 direction2 = football.position - player2.position;
+
+            football.reset_velocity();
+            football.change_direction(direction2);
+            collisionCooldown2 = CollisionCooldownTime;
+
+            // shooting    
+            KeyboardState state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.Down)) { football.get_shooted_diagonal(); }
+            if (state.IsKeyDown(Keys.OemMinus)) { football.get_shooted_horizontal(); }
+
+        }
+    }
+
+    public void SetPlayer(Player left, Player right)
+    {
+        player1 = left;
+        player2 = right;
+    }
+
+
+}
 
