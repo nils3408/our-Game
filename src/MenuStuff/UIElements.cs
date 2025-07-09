@@ -100,7 +100,6 @@ public abstract class UIElement
 
 public class ElementContainer : UIElement
 {
-    private bool centralize = false;
 
     protected List<UIElement> elements = new List<UIElement>();
 
@@ -117,7 +116,6 @@ public class ElementContainer : UIElement
     public virtual void Add(UIElement element)
     {
         element.parent = this;
-        if (centralize) element.MoveCenter(new Point(0, 0));
         elements.Add(element);
     }
 
@@ -167,26 +165,15 @@ public class ElementContainer : UIElement
         //return new Rectangle(GetPosition(), Size);
     }
 
-    public void ToggleCentralization()
-    {
-        centralize = true;
-    }
 
     public override void MoveCenter(Point newCenterPos)
     {
-        if (centralize)
-        {
-            relPos = newCenterPos - new Point(0,GetBounds().Height/2);
-        }
-        else
-        {
-            base.MoveCenter(newCenterPos);
-        }
-        
+        relPos = newCenterPos - new Point(GetBounds().Width/2,GetBounds().Height/2);
     }
 
 
 }
+
 
 public class StackContainer : ElementContainer
 {
@@ -206,7 +193,7 @@ public class StackContainer : ElementContainer
         base.Add(element);
         element.Offset(_Offset);
         _Offset += new Point(0, spacing + element.GetBounds().Height);
-        
+
     }
 
     public override void Draw(SpriteBatch spriteBatch)
@@ -229,7 +216,7 @@ public class StackContainer : ElementContainer
 
 
     public void SetSpacing(int spacing)
-    { 
+    {
         this.spacing = spacing;
     }
 }

@@ -180,6 +180,7 @@ public class TriangleButton : UIElement
         }
     }
 
+    //lässt das Dreieck zukünftig andersherum zeichnen
     public void ToggleFlip()
     {
         flip = true;

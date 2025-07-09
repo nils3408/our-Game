@@ -30,7 +30,7 @@ das Interface ist an der Stelle dann eher unnötig, aber hatte ich ja schon.
 
 public abstract class GameState : IGameState
 {
-    private Game baseGame;
+    protected Game baseGame;
     protected GraphicsDeviceManager _graphics;
     protected GraphicsDevice _graphicsDevice;
     protected SpriteBatch spriteBatch;

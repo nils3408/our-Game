@@ -36,6 +36,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         PrimitiveDrawer.Initialize(GraphicsDevice, Content);
+        PlayerFactory.Initialize(GraphicsDevice, Content);
 
         game = new GameLogic(this);
         setup = new GameSetup(this);
@@ -68,10 +69,7 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         InputHandler.Update();
-        if (curState == menu)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || InputHandler.IsReleased(Keys.Escape))Exit();
-        }
+        
         if (nextState == null) Exit();
         if (nextState != null && nextState != curState) curState = nextState;
 
@@ -88,11 +86,6 @@ public class Game1 : Game
 
         curState.Draw(gameTime);
         base.Draw(gameTime);
-    }
-
-    public void ExitGame()
-    { 
-        base.Exit();
     }
 
 }

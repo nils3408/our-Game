@@ -36,11 +36,6 @@ public class GameSetup : GameState
         container.Add(homeButton);
 
 
-
-
-
-
-
         HorizontalContainer H1 = new HorizontalContainer();
         H1.SetSpacing(30);
         PlayerSelection leftSelection = new PlayerSelection(Content);
@@ -56,16 +51,22 @@ public class GameSetup : GameState
         {
             if (leftSelection.isChoosen && rightSelection.isChoosen)
             {
-                Game1.nextState = Game1.game;
-                //Game1.game.SetPlayer();
+                Console.WriteLine($"start Game");
+                Player leftPlayer = PlayerFactory.CreatePlayer(leftSelection.playerType, true);
+                Player rightPlayer = PlayerFactory.CreatePlayer(rightSelection.playerType, false);
+                GameLogic newGame = new GameLogic(game, leftPlayer, rightPlayer);
+                newGame.Initialize();
+                newGame.LoadContent();
+                
+                Game1.game = newGame;
+                Game1.nextState = newGame;
                 Game1.GameIsInitialized = true;
             }
             else
             { 
-                
+                //Text anzeigen : beide Charaktere müssen ausgewählt sein
             }
-        }
-            ;
+        };
         startButton.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - spacing - startButton.GetBounds().Height / 2));
         container.Add(startButton);
         
@@ -103,34 +104,34 @@ public class ShowPlayerType : UIElement
 
     int curIndex = 0;
 
-    public Texture2D[] players = new Texture2D[2];
+    int maxTypes = 0;
 
     public ShowPlayerType(Point Size, ContentManager Content) : base(Size)
     {
+        maxTypes = PlayerFactory.TypesCount;
         this.Content = Content;
-        players[0] = Content.Load<Texture2D>("KopfkickerChar2_neu");
-        players[1] = Content.Load<Texture2D>("Spiderman");
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
         //PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), Color.Red, 1);
-        spriteBatch.Draw(players[curIndex], GetBounds(), null, Color.White);
+        Texture2D texture = PlayerFactory.GetPlayerTexture((PlayerFactory.Types)curIndex);
+        spriteBatch.Draw(texture, GetBounds(), null, Color.White);
     }
 
     public void SwipeRight()
     {
-        curIndex = (curIndex + 1) % players.Length;
+        curIndex = (curIndex + 1) % maxTypes;
     }
 
     public void SwipeLeft()
     {
-        curIndex = (curIndex + 1) % players.Length;
+        curIndex = (curIndex + 1) % maxTypes;
     }
 
-    public Texture2D GetCurPlayer()
+    public PlayerFactory.Types GetCurPlayer()
     {
-        return players[curIndex];
+        return (PlayerFactory.Types) curIndex;
     }
 
     public override void Update()
@@ -139,12 +140,16 @@ public class ShowPlayerType : UIElement
     }
 }
 
+//Die Box wo man den Player auswählen kann
 public class PlayerSelection : StackContainer
 {
     Color outlineColor = new Color(96, 96, 96);
     int spacing = 7;
 
     public bool isChoosen = false;
+
+    public PlayerFactory.Types playerType = PlayerFactory.Types.Standart;
+
     public PlayerSelection(ContentManager Content)
     {
         SpriteFont font = Content.Load<SpriteFont>("Arial");
@@ -159,7 +164,11 @@ public class PlayerSelection : StackContainer
         base.Add(playerDisplay);
 
         SimpleButton chooseButton = new SimpleButton(ButtonSize, "Choose", font);
-        chooseButton.OnClick += () => { isChoosen = !isChoosen; };
+        chooseButton.OnClick += () =>
+        {
+            isChoosen = !isChoosen;
+            playerType = playerDisplay.GetCurPlayer();
+        };
         chooseButton.SetToStayPressed();
         chooseButton.SetColor(Color.White, Color.Green, outlineColor);
         base.Add(chooseButton);
@@ -194,6 +203,5 @@ public class PlayerSelection : StackContainer
     {
         base.Update();
     }
-
 
 }

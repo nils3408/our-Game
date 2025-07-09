@@ -9,7 +9,7 @@ public class Menu : GameState
 {
     StackContainer buttonContainer;
 
-    public Menu(Game game): base(game)
+    public Menu(Game game) : base(game)
     {
 
         SpriteFont font = Content.Load<SpriteFont>("Arial");
@@ -18,18 +18,19 @@ public class Menu : GameState
 
         Point ButtonSize = new Point(300, 100);
 
-        //if (Game1.GameIsInitialized)
-        
+        if (!Game1.GameIsInitialized)
+        {
+
             SimpleButton gameButton = new SimpleButton(ButtonSize, "New Game", font);
             gameButton.OnClick += () => Game1.nextState = Game1.setup;
             buttonContainer.Add(gameButton);
-        
-        
-        
-            SimpleButton setupButton = new SimpleButton(ButtonSize, "Resume", font);
-            setupButton.OnClick += () => Game1.nextState = Game1.game;
-            buttonContainer.Add(setupButton);
-        
+
+        } else { 
+
+        SimpleButton setupButton = new SimpleButton(ButtonSize, "Resume", font);
+        setupButton.OnClick += () => Game1.nextState = Game1.game;
+        buttonContainer.Add(setupButton);
+        }
 
         SimpleButton settingsButton = new SimpleButton(ButtonSize, "Settings", font);
         settingsButton.OnClick += () => Game1.nextState = Game1.settings;
@@ -47,7 +48,7 @@ public class Menu : GameState
     public override void Update(GameTime gameTime)
     {
         buttonContainer.Update();
-
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || InputHandler.IsReleased(Keys.Escape))Exit();
     }
 
     public override void Draw(GameTime gameTime)

@@ -70,10 +70,11 @@ public class GameLogic : GameState
 
 
 
-    public GameLogic(Game baseGame) : base(baseGame)
+    public GameLogic(Game baseGame) : base(baseGame){}
+    public GameLogic(Game baseGame, Player leftPlayer, Player rightPlayer) : base(baseGame)
 
     {
-        //this.playerList = playerList;
+        SetPlayer(leftPlayer, rightPlayer);
     }
 
     public override void Initialize()
@@ -85,8 +86,11 @@ public class GameLogic : GameState
                    _graphics.IsFullScreen = true;
                    _graphics.ApplyChanges();          
        */
-        player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
-        player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
+
+        //Initiert nur Player wenn es durch den neuen Konstruktor nicht vorher gelöscht wird, Zeilen könnten auch gelöscht werden eigentlich, später!
+        if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
+        if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
+
         football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
 
         player1.Set_other_Player(player2);
@@ -115,8 +119,10 @@ public class GameLogic : GameState
     {
         handle_player_movement(gameTime);
         handle_player_ball_collision(gameTime);
+        
         player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
         player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
+
         football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
         check_for_goal();
 
@@ -124,7 +130,8 @@ public class GameLogic : GameState
         if (InputHandler.IsReleased(Keys.Escape))
         {
             System.Diagnostics.Debug.WriteLine("escape!");
-            Game1.nextState = Game1.menu;
+            Game1.nextState = new Menu(baseGame);
+            Game1.GameIsInitialized = false;
         }
         if (gameRunning)
         {
@@ -253,7 +260,9 @@ public class GameLogic : GameState
     public void SetPlayer(Player left, Player right)
     {
         player1 = left;
+        player1.position = new Vector2(60, groundY);
         player2 = right;
+        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY);
     }
 
 

@@ -2,40 +2,43 @@
 
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 
 
-    public class Player
-    {
+public class Player
+{
 
-        public Texture2D texture;
-        public Player otherPlayer;
-        public int playerGroup;
-        
-        public float move_speed = 380f;
-        public float move_speed2;  //copy if move_speed gets changed (for example in sonic character)
-        public float jump_velocity = -500f;
-        public float jump_velocity2;  //copy if jump_velocity gets changed(for example in sonic character)
-        public float gravity = 500f;
-        public Vector2 velocity;
+    public Texture2D texture;
+    public Player otherPlayer;
+    public int playerGroup;
 
-        public Rectangle currentRect;
-        public Rectangle futureRect;
-        public const int RectangleWidth = 150;
-        public const int RectangleHeight = 150;
+    public float move_speed = 380f;
+    public float move_speed2;  //copy if move_speed gets changed (for example in sonic character)
+    public float jump_velocity = -500f;
+    public float jump_velocity2;  //copy if jump_velocity gets changed(for example in sonic character)
+    public float gravity = 500f;
+    public Vector2 velocity;
 
-        public Vector2 position;
-        public float maxHeightY =3 ;
-        
-        public bool can_do_specialeffect;
-        public int strength;
-        
-        
+    public Rectangle currentRect;
+    public Rectangle futureRect;
+    public const int RectangleWidth = 150;
+    public const int RectangleHeight = 150;
+
+    public Vector2 position;
+    public float maxHeightY = 3;
+
+    public bool can_do_specialeffect;
+    public int strength;
+
+
 
     /*
      * -------------------------------------------------
@@ -47,102 +50,102 @@ using System.Runtime.CompilerServices;
      */
 
 
-        public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
-        {
-            position = position1;
-            playerGroup = player;
-            texture = texture1;
-            currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
-            futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
-            can_do_specialeffect = true;
-            strength = 1;
-            move_speed2= move_speed;
-        }
-
-        
-        public void Set_other_Player(Player otherPlayer1)
-        {
-            otherPlayer = otherPlayer1;
-        }
-
-        
-        public virtual void do_special_effect(float delta)
-        {
-            // this player does nothing special;
-            return;
-        }
+    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
+    {
+        position = position1;
+        playerGroup = player;
+        texture = texture1;
+        currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+        futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+        can_do_specialeffect = true;
+        strength = 1;
+        move_speed2 = move_speed;
+    }
 
 
-        public void draw(SpriteBatch spritebatch)
+    public void Set_other_Player(Player otherPlayer1)
+    {
+        otherPlayer = otherPlayer1;
+    }
+
+
+    public virtual void do_special_effect(float delta)
+    {
+        // this player does nothing special;
+        return;
+    }
+
+
+    public void draw(SpriteBatch spritebatch)
+    {
+        if (playerGroup == 2)
         {
-            if (playerGroup == 2)
-            {
-                spritebatch.Draw(texture,
-                                 currentRect, null, Color.White, 0f, Vector2.Zero,
-                                 SpriteEffects.FlipHorizontally, 0f
-                                 );
-            }
-            else
-            {
-                spritebatch.Draw(texture,
+            spritebatch.Draw(texture,
                              currentRect, null, Color.White, 0f, Vector2.Zero,
-                             SpriteEffects.None, 0f
+                             SpriteEffects.FlipHorizontally, 0f
                              );
+        }
+        else
+        {
+            spritebatch.Draw(texture,
+                         currentRect, null, Color.White, 0f, Vector2.Zero,
+                         SpriteEffects.None, 0f
+                         );
 
+        }
+    }
+
+
+    public virtual void move(float delta, float dir)
+    {
+        //dir must be -1 or 1
+        if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
+
+        float newPositionX = position.X + (delta * move_speed) * dir;
+        Vector2 newPosition = new Vector2(newPositionX, position.Y);
+
+        futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+
+        if (!(futureRect.Intersects(otherPlayer.currentRect)))
+        {
+            if (out_of_bounds_both_scales(newPosition) == false)
+            {
+                position.X += (move_speed * delta) * dir;
+                update_rectangles();
             }
         }
 
-  
-       public virtual void move(float delta, float dir)
-       {
-            //dir must be -1 or 1
-            if ( dir != -1 && dir != 1 ) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
 
-                float newPositionX = position.X + (delta * move_speed)*dir;
-                Vector2 newPosition = new Vector2(newPositionX, position.Y);
 
+        // future rect overlaps with oponent
+        if (is_stronger_than_oponent(otherPlayer))
+        {
+            if (oponent_is_in_the_way(otherPlayer, dir)) otherPlayer.move(delta, dir);
+
+
+            newPosition = new Vector2(newPositionX, position.Y);
             futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
 
-            if (!(futureRect.Intersects(otherPlayer.currentRect)))
+            if (!futureRect.Intersects(otherPlayer.currentRect) && !out_of_bounds_both_scales(newPosition))
             {
-                if (out_of_bounds_both_scales(newPosition) == false)
-                {
-                    position.X += (move_speed * delta)*dir;
-                    update_rectangles();
-                }
+                position.X += move_speed * delta * dir;
+                update_rectangles();
             }
-
-              
-                 
-            // future rect overlaps with oponent
-            if (is_stronger_than_oponent(otherPlayer))
-            {
-                if (oponent_is_in_the_way(otherPlayer, dir)) otherPlayer.move(delta, dir);
-
-            
-                newPosition = new Vector2(newPositionX, position.Y);
-                futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
-
-                if (!futureRect.Intersects(otherPlayer.currentRect) && !out_of_bounds_both_scales(newPosition))
-                {
-                    position.X += move_speed * delta * dir;
-                    update_rectangles();
-                }
-            }
-       }
-
-
-
-        public void jump(float delta, float groundY)
-        {
-                float newPositionY = position.Y - jump_velocity * delta;
-                Vector2 newPosition = new Vector2 (position.X, newPositionY);
-
-                if (!(IsOnGround(position, groundY))) return; 
-                velocity.Y = jump_velocity;
-                
-
         }
+    }
+
+
+
+    public void jump(float delta, float groundY)
+    {
+        float newPositionY = position.Y - jump_velocity * delta;
+        Vector2 newPosition = new Vector2(position.X, newPositionY);
+
+        if (!(IsOnGround(position, groundY))) return;
+        velocity.Y = jump_velocity;
+
+
+    }
 
     // TODO P1 schiebt P2 in den Boden eventuell weil stärker ?
     public virtual void update_vertical(float delta, float groundY)
@@ -150,31 +153,31 @@ using System.Runtime.CompilerServices;
         velocity.Y += gravity * delta;
         float newY = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
 
-       
+
         Vector2 newPos = new Vector2(position.X, newY);
         Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
 
         // Prüfe Kollision mit anderem Spieler
         if (testRect.Intersects(otherPlayer.currentRect))
         {
-            
+
             bool horizontalOverlap = (testRect.X < otherPlayer.currentRect.X + RectangleWidth &&
                                       testRect.X + RectangleWidth > otherPlayer.currentRect.X);
 
             if (horizontalOverlap)
             {
-                
+
                 float previousY = position.Y;
                 float otherPlayerTop = otherPlayer.position.Y;
                 float otherPlayerBottom = otherPlayer.position.Y + RectangleHeight;
 
-                
+
                 if (velocity.Y > 0)
                 {
                     // Prüfe ob Spieler von oben kommt
-                    if (previousY + RectangleHeight <= otherPlayerTop + 5) 
+                    if (previousY + RectangleHeight <= otherPlayerTop + 5)
                     {
-                        
+
                         position.Y = otherPlayerTop - RectangleHeight;
                         velocity.Y = 0;
                     }
@@ -188,7 +191,7 @@ using System.Runtime.CompilerServices;
                 else if (velocity.Y < 0)
                 {
                     // Prüfe ob Spieler von unten kommt
-                    if (previousY >= otherPlayerBottom - 5) 
+                    if (previousY >= otherPlayerBottom - 5)
                     {
                         // Spieler stößt von unten gegen den anderen Spieler
                         position.Y = otherPlayerBottom;
@@ -247,61 +250,140 @@ using System.Runtime.CompilerServices;
     }
 
     public void update_rectangles()
+    {
+        //update current_rectangle and future_rectangle
+        currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+        futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
+
+    }
+
+
+
+    public bool out_of_bounds_both_scales(Vector2 newPosition1)
+    {
+        return (out_of_bounds_X_Scale(newPosition1) || out_of_bounds_Y_Scale(newPosition1));
+    }
+
+
+    public bool out_of_bounds_X_Scale(Vector2 newPosition1)
+    {
+        if (newPosition1.X >= 1800) return true;
+        if (newPosition1.X < 0) return true;
+        return false;
+    }
+
+    public bool out_of_bounds_Y_Scale(Vector2 newPosition1)
+    {
+        if (newPosition1.Y < 0) return true;
+        return false;
+    }
+
+
+    public bool IsOnGround(Vector2 position, float groundY)
+    {
+        return position.Y >= groundY;
+    }
+
+    public bool is_stronger_than_oponent(Player otherPlayer1)
+    {
+        return (strength > otherPlayer1.strength);
+    }
+
+    public bool oponent_is_in_the_way(Player otherPlayer1, float direction)
+    {
+        // check if other Player is in the given direction compared to the position of the own player
+        // otherPlayer would be_in_the_way 
+
+        if (direction != -1 && direction != 1) { throw new Exception("error in in_the_way() function. Dir is not -1 or 1"); }
+
+
+        if (direction == 1) { return otherPlayer.position.X >= position.X; } // right
+        return otherPlayer.position.X <= position.X; //to the left
+
+    }
+
+    public virtual bool can_do_special_effect()
+    {
+        return can_do_specialeffect;
+    }
+}
+
+
+/**
+    Zum erzeugen von PlayerTypes mit CreatePlayer(), muss stetig angepasst werden! 
+    Erspart mir aber doppelt gemoppelt das selbe zu tun weil ich die Texturen im SetupGame brauche, Texturen können mit GetPlayerTexture nachgefragt werden.
+    Man könnte sagen das es dem Factory Pattern entspricht, aber sicher bin ich mir da nicht.
+*/
+
+public static class PlayerFactory
+{
+    public const int TypesCount = 5;
+    //beim hinzufügen von PlayerTypen den enum sowie TypesCount anpassen, wenn euch n besserer Name einfällt für TypesCount bitte komentieren lol
+    //Das und dann nicht vergessen, die Texture zu laden in der Initialize Methode
+    public enum Types
+    {
+        Standart = 0,
+        Spiderman = 1,
+        Sonic = 2,
+        Knight = 3,
+        Ninja = 4
+    }
+
+    private static GraphicsDevice _graphicsDevice;
+
+    private static Texture2D[] playerTextures = new Texture2D[TypesCount];
+
+    public static void Initialize(GraphicsDevice graphicsDevice, ContentManager Content)
+    {
+        _graphicsDevice = graphicsDevice;
+
+        playerTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("Spiderman");
+        playerTextures[(int)Types.Knight] = Content.Load<Texture2D>("Knight");
+        playerTextures[(int)Types.Sonic] = Content.Load<Texture2D>("sonic");
+        playerTextures[(int)Types.Standart] = Content.Load<Texture2D>("KopfkickerChar1_neu");
+        playerTextures[(int)Types.Ninja] = Content.Load<Texture2D>("KopfkickerChar2_neu");
+    }
+
+    public static Player CreatePlayer(Types playerType, Vector2 position, int id)
+    {
+        switch (playerType)
         {
-            //update current_rectangle and future_rectangle
-            currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
-            futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
-
-        }
-
-        
-        
-        public bool out_of_bounds_both_scales(Vector2 newPosition1)
-        {
-            return (out_of_bounds_X_Scale(newPosition1) || out_of_bounds_Y_Scale(newPosition1));
-        }
-        
-        
-        public bool out_of_bounds_X_Scale(Vector2 newPosition1)
-        {
-            if (newPosition1.X >= 1800) return true;
-            if (newPosition1.X < 0) return true;
-            return false;
-        }
-        
-        public bool out_of_bounds_Y_Scale(Vector2 newPosition1)
-        {
-            if (newPosition1.Y < 0) return true;
-            return false;
-        }
-
-
-        public bool IsOnGround(Vector2 position, float groundY)
-        {
-            return position.Y >= groundY;
-        }
-
-        public bool is_stronger_than_oponent(Player otherPlayer1)
-        {
-            return (strength > otherPlayer1.strength);
-        }
-
-        public bool oponent_is_in_the_way(Player otherPlayer1, float direction)
-        {
-            // check if other Player is in the given direction compared to the position of the own player
-            // otherPlayer would be_in_the_way 
-
-            if (direction != -1 && direction != 1) { throw new Exception("error in in_the_way() function. Dir is not -1 or 1");}
-
-            
-            if (direction == 1)   {return otherPlayer.position.X >= position.X; } // right
-            return otherPlayer.position.X <= position.X; //to the left
-
-        }
-
-        public virtual bool can_do_special_effect()
-        {
-            return can_do_specialeffect;
+            case Types.Standart:
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                break;
+            case Types.Sonic:
+                return new Sonic(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                break;
+            case Types.Spiderman:
+                return new Spiderman(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                break;
+            case Types.Knight:
+                return new Knight(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                break;
+            case Types.Ninja:
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                break;
+            default:
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);
         }
     }
+
+    //erstellt Player, Position ist da erstmal egal, weil das in GameLogic abhängig ist von GroundY, korrigiere ich die Positionen dann auch dort
+    public static Player CreatePlayer(Types playerType, bool left)
+    {
+        if (left)
+        {
+            return CreatePlayer(playerType, Vector2.Zero, 1);
+        }
+        else
+        {
+            return CreatePlayer(playerType, Vector2.Zero, 2);
+        }
+    }
+
+    public static Texture2D GetPlayerTexture(Types playerType)
+    {
+        return playerTextures[(int)playerType];
+    }
+}
 
