@@ -21,12 +21,13 @@ using Microsoft.Xna.Framework.Content;
 
 public class Item
 {
-    public Vector2 position = new Vector2(400, 300);
+    public Vector2 position = new Vector2(100, 100);
 
     private Texture2D current_texture;
     private Texture2D[] textures;
 
-    public Rectangle Rect;
+    public Rectangle current_Rect;
+    public int rect_size = 60;
 
     private ContentManager content;
 
@@ -34,6 +35,17 @@ public class Item
     private float framerate = 0.08f;
     private int  current_frame = 0;
     private float animation_time_counter = 0f;
+
+    // position boundaries for the item in the map -> values got hardcoded 
+    private float min_Y = 30;
+    private float max_Y = 550;
+    private float min_X = 190;
+    private float max_X = 1800;
+
+    //random value for ranom position asociating 
+    Random rand = new Random();
+
+    public Item[] all_items;  //beeinhaltet alle Items -> auch sich selber 
 
 
     public Item(GraphicsDevice graphicsDevice, ContentManager content)
@@ -43,13 +55,15 @@ public class Item
         textures = LoadTextures();
         current_texture = textures[0];
 
-        Rect = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        current_Rect = new Rectangle((int)position.X, (int)position.Y, rect_size, rect_size);
+
     }
 
 
     public void draw(SpriteBatch spritebatch, GameTime gameTime)
     {
-        // get the right texture for the animation
+        // get the right texturefor the animation
+        // get newPosition if choosen
         // and draw the texture 
 
         update_texture(gameTime);
@@ -69,10 +83,12 @@ public class Item
         }
     }
 
+
+
     
     public void draw_current_texture(SpriteBatch spritebatch)
     {
-        spritebatch.Draw(current_texture, Rect, Color.White);
+        spritebatch.Draw(current_texture, current_Rect, Color.White);
     }
 
 
@@ -88,4 +104,43 @@ public class Item
 
         return textures;
     }
+
+
+    public void set_random_position()
+    {
+        position.X = rand.Next((int)min_X, (int)max_X);
+        position.Y = rand.Next((int)min_Y, (int)max_Y);
+        current_Rect = new Rectangle((int)position.X, (int)position.Y, rect_size, rect_size);
+
+        if (Rect_intersect_with_one_of_the_other_items(current_Rect))
+        {
+            // set a new random position -> can end in endless loop in worst case but statistically very unlikely
+            set_random_position();
+        }
+    }
+
+    public bool Rect_intersect_with_one_of_the_other_items(Rectangle Rect)
+    {
+        //carefull all_items_ include this object as well !!
+        foreach(Item other in all_items)
+    {
+            if (other != this && other.current_Rect.Intersects(Rect))
+            {
+                return true;
+            }
+        }
+
+        return false;
+
+        return false;
+    }
+
+
+
+    public void set_all_items(Item[] items)
+    {
+        all_items = items;
+    }
+
+    
 }

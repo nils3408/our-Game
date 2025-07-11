@@ -11,6 +11,16 @@
  *      solution: a minimum time intervall that must pass before a collision with the same player can be detected again
  *                therefore we have the two variables CollisionCoolDown1, CollisionCoolDown2 
  * 
+ * Item position
+ *      item position can not be deklared within the construkctor when initalising the first time
+ *      The reason for this is:
+ *      when assigning the item a new position compare it with the postions of the other items to avoid overlapping
+ *      however items get deklared before the they get array of references to the other items assigned
+ *          Comparing positions with the other items (null) would lead to null- error 
+ *      solution:
+ *          declare all items -> give each item array of references of all items -> give each item a new position and 
+ *          check on collission
+ *      
  * 
  * ---------------------------------------------------------------------------------------------------------------------
  */
@@ -22,6 +32,7 @@ using Microsoft.Xna.Framework.Content;
 //using SharpDX.Direct2D1;
 //using SharpDX.XAudio2;
 using System;
+using System.Diagnostics;
 //using System.Drawing;
 //using System.Runtime.CompilerServices;
 using our_Game;
@@ -67,6 +78,9 @@ public class GameLogic : GameState
     private bool gameRunning = true;
 
     public Item item1;
+    public Item item2;
+    public Item item3;
+    public Item[] items;
 
 
 
@@ -97,6 +111,13 @@ public class GameLogic : GameState
         player2.Set_other_Player(player1);
 
         item1 = new Item(_graphicsDevice, Content);
+        item2 = new Item(_graphicsDevice, Content);
+        item3 = new Item(_graphicsDevice, Content);
+        items = new Item[] { item1, item2, item3 };
+        distribute_items();
+        update_all_item_positions();
+
+
 
     }
 
@@ -124,7 +145,10 @@ public class GameLogic : GameState
         player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
 
         football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
+
+        handle_player_coin_colission();
         check_for_goal();
+
 
         //Zurück ins Menu wenn ESC losgelassen wird 
         if (InputHandler.IsReleased(Keys.Escape))
@@ -156,7 +180,12 @@ public class GameLogic : GameState
         player1.draw(spriteBatch);
         player2.draw(spriteBatch);
         football.draw(spriteBatch);
-        item1.draw(spriteBatch, gameTime);
+
+        //draw items
+        foreach(Item item in items)
+        {
+            item.draw(spriteBatch, gameTime);
+        }
 
         // Score und Timer anzeigen
         spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
@@ -181,12 +210,28 @@ public class GameLogic : GameState
 
 
         // player 2
-        if (state.IsKeyDown(Keys.Left)) player2.move(delta, -1);
-        if (state.IsKeyDown(Keys.Right)) player2.move(delta, 1);
-        if (state.IsKeyDown(Keys.Up) && player2.IsOnGround(player2.position, groundY - 250))
+        // {J K L I} statt {W S A D}
+        if (state.IsKeyDown(Keys.J)) player2.move(delta, -1);
+        if (state.IsKeyDown(Keys.L)) player2.move(delta, 1);
+        if (state.IsKeyDown(Keys.I) && player2.IsOnGround(player2.position, groundY - 250))
             player2.jump(delta, groundY - 50);
-        if (state.IsKeyDown(Keys.RightShift)) player2.do_special_effect(delta);
+        if (state.IsKeyDown(Keys.O)) player2.do_special_effect(delta);
 
+
+        KeyboardState state2 = Keyboard.GetState();
+        foreach (var key in state2.GetPressedKeys())
+        {
+            Console.WriteLine($"Gedrückte Taste: {key}");
+            Debug.WriteLine($"Gedrückte Taste: {key}");
+        }
+
+    }
+
+
+
+    private void handle_player_coin_colission()
+    {
+        // todo 
     }
 
     //Check Ball im Tor
@@ -251,8 +296,8 @@ public class GameLogic : GameState
 
             // shooting    
             KeyboardState state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.Down)) { football.get_shooted_diagonal(); }
-            if (state.IsKeyDown(Keys.OemMinus)) { football.get_shooted_horizontal(); }
+            if (state.IsKeyDown(Keys.K)) { football.get_shooted_diagonal(); }
+            if (state.IsKeyDown(Keys.M)) { football.get_shooted_horizontal(); }
 
         }
     }
@@ -264,6 +309,27 @@ public class GameLogic : GameState
         player2 = right;
         player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY);
     }
+
+
+    public void distribute_items()
+    {
+        // alle items jedem item-object zuordnen
+        for (int i = 0; i< items.Length; i++)
+        {
+            items[i].set_all_items(items);
+        }
+    }
+
+    public void update_all_item_positions()
+    {
+        //update position of all items
+       for(int i = 0; i< items.Length; i++)
+       {
+            items[i].set_random_position();
+       }
+    }
+    
+
 
 
 }

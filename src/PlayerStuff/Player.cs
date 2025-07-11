@@ -119,6 +119,8 @@ public class Player
 
 
         // future rect overlaps with oponent
+        // if stronger
+        // push oponent away and move anýway
         if (is_stronger_than_oponent(otherPlayer))
         {
             if (oponent_is_in_the_way(otherPlayer, dir)) otherPlayer.move(delta, dir);
@@ -148,24 +150,20 @@ public class Player
 
     }
 
-    // TODO P1 schiebt P2 in den Boden eventuell weil stärker ?
+    
     public virtual void update_vertical(float delta, float groundY)
     {
         velocity.Y += gravity * delta;
+        
         float newY = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
-
-
         Vector2 newPos = new Vector2(position.X, newY);
+
         Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
 
         // Prüfe Kollision mit anderem Spieler
         if (testRect.Intersects(otherPlayer.currentRect))
         {
-
-            bool horizontalOverlap = (testRect.X < otherPlayer.currentRect.X + RectangleWidth &&
-                                      testRect.X + RectangleWidth > otherPlayer.currentRect.X);
-
-            if (horizontalOverlap)
+            if (is_horizontal_overlapping_with_a_Player (testRect))
             {
 
                 float previousY = position.Y;
@@ -257,7 +255,6 @@ public class Player
         //update current_rectangle and future_rectangle
         currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
         futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
-
     }
 
 
@@ -308,6 +305,14 @@ public class Player
     public virtual bool can_do_special_effect()
     {
         return can_do_specialeffect;
+    }
+
+    public bool is_horizontal_overlapping_with_a_Player(Rectangle testRect)
+    {
+        //check if a rectangle is overlapping with the currentRect of a Player
+        return (testRect.X < otherPlayer.currentRect.X + RectangleWidth &&
+                testRect.X + RectangleWidth > otherPlayer.currentRect.X);
+
     }
 }
 

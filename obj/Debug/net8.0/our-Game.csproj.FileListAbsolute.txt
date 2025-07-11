@@ -264,3 +264,5 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Coin\coin-9.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Knightord.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Knightord.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
