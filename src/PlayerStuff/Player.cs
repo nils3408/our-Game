@@ -47,6 +47,8 @@ public class Player
      *      each player has a special effect that gets executed through function do_special_effect()
      *      this function gets overwritten in each child-class inherting from this one
      *      
+     * please comment your code guys!!!
+     *      
      * --------------------------------------------------
      */
 

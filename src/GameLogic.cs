@@ -302,6 +302,7 @@ public class GameLogic : GameState
         }
     }
 
+
     public void SetPlayer(Player left, Player right)
     {
         player1 = left;
