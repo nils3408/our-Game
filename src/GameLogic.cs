@@ -54,14 +54,18 @@ public class GameLogic : GameState
     private Vector2 _player1Velocity;
     private Vector2 _player2Position;
     private Vector2 _player2Velocity;
+    //player
     private Player player1;
     private Player player2;
+    private Player last_player_touching_the_ball = null;
+
+
     private Ball football;
     private float jumpheight = 250f;
     //generell
     private float collisionCooldown1 = 0f;
     private float collisionCooldown2 = 0f;
-    private const float CollisionCooldownTime = 0.5f;
+    private const float CollisionCooldownTime = 0.4f;
 
     private float groundY = 550;
 
@@ -147,6 +151,7 @@ public class GameLogic : GameState
         football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
 
         handle_player_coin_colission();
+        handle_ball_coin_collision();
         check_for_goal();
 
 
@@ -218,21 +223,53 @@ public class GameLogic : GameState
         if (state.IsKeyDown(Keys.O)) player2.do_special_effect(delta);
 
 
-        KeyboardState state2 = Keyboard.GetState();
-        foreach (var key in state2.GetPressedKeys())
-        {
-            Console.WriteLine($"Gedrückte Taste: {key}");
-            Debug.WriteLine($"Gedrückte Taste: {key}");
-        }
-
     }
 
 
 
     private void handle_player_coin_colission()
     {
-        // todo 
+        // when a player colliderects with a item , he gets the PoweUP, linked to the PowerUP
+        handle_player_coin_collision_helper(player1);
+        handle_player_coin_collision_helper(player2);
+        
     }
+
+    private void handle_player_coin_collision_helper(Player playerABC)
+    {
+        foreach (Item itemA in items)
+        {
+            if (playerABC.currentRect.Intersects(itemA.current_Rect))
+            {
+                playerABC.set_PowerUp(itemA.linked_powerup);
+
+                itemA.set_new_powerUP();
+                itemA.set_random_position();
+
+                Debug.WriteLine(player1.powerup1.getText());
+            }
+        }
+    }
+
+
+    private void handle_ball_coin_collision()
+    {
+        //when ball collides with the ball. The last player touching the ball gets the PowerUp linked to the Item
+        if (last_player_touching_the_ball == null) { return; }
+
+        foreach (Item itemA in items)
+        {
+            if (football.getRect().Intersects(itemA.current_Rect))
+            {
+                last_player_touching_the_ball.set_PowerUp(itemA.linked_powerup);
+
+                itemA.set_new_powerUP();
+                itemA.set_random_position();
+
+            }
+        }
+    }
+
 
     //Check Ball im Tor
     private void check_for_goal()
@@ -267,12 +304,10 @@ public class GameLogic : GameState
         collisionCooldown2 -= delta;
 
 
-
-
         // Spieler 1
         if (football.getRect().Intersects(player1.currentRect) && collisionCooldown1 <= 0)
         {
-
+            last_player_touching_the_ball = player1;
             Vector2 direction = football.position - player1.position;
 
             football.reset_velocity();
@@ -288,6 +323,7 @@ public class GameLogic : GameState
         // Spieler 2
         if (football.getRect().Intersects(player2.currentRect) && collisionCooldown2 <= 0)
         {
+            last_player_touching_the_ball= player2;
             Vector2 direction2 = football.position - player2.position;
 
             football.reset_velocity();
@@ -330,7 +366,6 @@ public class GameLogic : GameState
        }
     }
     
-
 
 
 }

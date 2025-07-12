@@ -21,5 +21,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class PowerUp
 {
-   
+    String text;
+
+    public PowerUp(String abc)
+    {
+        text = abc;
+    }
+
+    public String getText()
+    {
+        return (String)text;
+    }
 }

@@ -40,6 +40,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Knightord.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/KopfkickerChar1_neu.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/KopfkickerChar2_neu.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/ronaldo.jpg</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/sonic.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Spiderman.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Spielfeld2.png</File>
@@ -48,6 +49,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Tribüne.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

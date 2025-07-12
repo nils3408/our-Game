@@ -47,6 +47,8 @@ public class Item
 
     public Item[] all_items;  //beeinhaltet alle Items -> auch sich selber 
 
+    public PowerUp linked_powerup = new PowerUp ("123");
+
 
     public Item(GraphicsDevice graphicsDevice, ContentManager content)
     {
@@ -123,14 +125,12 @@ public class Item
     {
         //carefull all_items_ include this object as well !!
         foreach(Item other in all_items)
-    {
+        {
             if (other != this && other.current_Rect.Intersects(Rect))
             {
                 return true;
             }
         }
-
-        return false;
 
         return false;
     }
@@ -140,6 +140,12 @@ public class Item
     public void set_all_items(Item[] items)
     {
         all_items = items;
+    }
+
+    public void set_new_powerUP()
+    {
+        // todo
+        linked_powerup = new PowerUp("hello there");
     }
 
     

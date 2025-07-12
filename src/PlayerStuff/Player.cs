@@ -39,6 +39,8 @@ public class Player
     public bool can_do_specialeffect;
     public int strength;
 
+    public PowerUp powerup1 = null;
+    public PowerUp powerup2 = null;
 
 
     /*
@@ -152,7 +154,28 @@ public class Player
 
     }
 
-    
+
+
+    public void set_PowerUp(PowerUp a)
+    {
+        if (powerup1 == null)
+        {
+            powerup1 = a;
+            return;
+        }
+        if (powerup1 == null)
+        {
+            powerup2 = a;
+            return;
+        }
+
+        powerup1= a;
+    }
+
+
+
+
+
     public virtual void update_vertical(float delta, float groundY)
     {
         velocity.Y += gravity * delta;
