@@ -246,7 +246,6 @@ public class GameLogic : GameState
                 itemA.set_new_powerUP();
                 itemA.set_random_position();
 
-                Debug.WriteLine(player1.powerup1.getText());
             }
         }
     }
