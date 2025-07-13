@@ -179,64 +179,32 @@ public class Player
     public virtual void update_vertical(float delta, float groundY)
     {
         velocity.Y += gravity * delta;
-        
         float newY = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
-        Vector2 newPos = new Vector2(position.X, newY);
 
+        // Neue Position vorbereiten
+        Vector2 newPos = new Vector2(position.X, newY);
         Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
 
         // Prüfe Kollision mit anderem Spieler
         if (testRect.Intersects(otherPlayer.currentRect))
         {
-            if (is_horizontal_overlapping_with_a_Player (testRect))
+            // Prüfe ob der Spieler von oben auf den anderen Spieler fällt
+            if (velocity.Y > 0 && position.Y + RectangleHeight <= otherPlayer.position.Y + 10) // 10 ist Toleranz
             {
-
-                float previousY = position.Y;
-                float otherPlayerTop = otherPlayer.position.Y;
-                float otherPlayerBottom = otherPlayer.position.Y + RectangleHeight;
-
-
-                if (velocity.Y > 0)
-                {
-                    // Prüfe ob Spieler von oben kommt
-                    if (previousY + RectangleHeight <= otherPlayerTop + 5)
-                    {
-
-                        position.Y = otherPlayerTop - RectangleHeight;
-                        velocity.Y = 0;
-                    }
-                    else
-                    {
-                        // Spieler kommt von der Seite - stoppe Bewegung
-                        velocity.Y = 0;
-                    }
-                }
-                // Spieler springt nach oben (negative velocity.Y)
-                else if (velocity.Y < 0)
-                {
-                    // Prüfe ob Spieler von unten kommt
-                    if (previousY >= otherPlayerBottom - 5)
-                    {
-                        // Spieler stößt von unten gegen den anderen Spieler
-                        position.Y = otherPlayerBottom;
-                        velocity.Y = 0;
-                    }
-                    else
-                    {
-                        // Spieler kommt von der Seite - stoppe Bewegung
-                        velocity.Y = 0;
-                    }
-                }
-                else
-                {
-                    // Keine vertikale Geschwindigkeit - stoppe Bewegung
-                    velocity.Y = 0;
-                }
+                // Spieler landet auf dem anderen Spieler
+                position.Y = otherPlayer.position.Y - RectangleHeight;
+                velocity.Y = 0;
+            }
+            else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + Player.RectangleHeight - 10)
+            {
+                // Spieler stößt von unten gegen den anderen Spieler
+                position.Y = otherPlayer.position.Y + Player.RectangleHeight;
+                velocity.Y = 0;
             }
             else
             {
-                // Keine horizontale Überlappung - normale Bewegung
-                position.Y = newY;
+                // Seitliche Kollision - stoppe die Bewegung
+                velocity.Y = 0;
             }
         }
         else
@@ -251,28 +219,9 @@ public class Player
             position.Y = groundY;
             velocity.Y = 0;
         }
-        
+
         update_rectangles();
-
-        // Sicherheitsprüfung: Verhindere dass Spieler sich überlappen
-        if (currentRect.Intersects(otherPlayer.currentRect))
-        {
-            // Notfall-Trennung basierend auf der vorherigen Position
-            if (position.Y < otherPlayer.position.Y)
-            {
-                // Dieser Spieler ist höher - setze ihn auf den anderen
-                position.Y = otherPlayer.position.Y - RectangleHeight;
-            }
-            else
-            {
-                // Dieser Spieler ist tiefer - setze ihn unter den anderen
-                position.Y = otherPlayer.position.Y + RectangleHeight;
-            }
-            velocity.Y = 0;
-            update_rectangles();
-        }
     }
-
 
 
     public void update_rectangles()

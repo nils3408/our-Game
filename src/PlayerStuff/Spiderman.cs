@@ -31,15 +31,48 @@ public class Spiderman: Player
     {
         //a bit different to the "normal player" ones 
         // when he is on ground, he can do its special_effect again
-
         velocity.Y += gravity * delta;
-        position.Y = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
+        float newY = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
 
+        // Neue Position vorbereiten
+        Vector2 newPos = new Vector2(position.X, newY);
+        Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
+
+        // Prüfe Kollision mit anderem Spieler
+        if (testRect.Intersects(otherPlayer.currentRect))
+        {
+            // Prüfe ob der Spieler von oben auf den anderen Spieler fällt
+            if (velocity.Y > 0 && position.Y + RectangleHeight <= otherPlayer.position.Y + 10) // 10 ist Toleranz
+            {
+                // Spieler landet auf dem anderen Spieler
+                position.Y = otherPlayer.position.Y - RectangleHeight;
+                velocity.Y = 0;
+                can_do_specialeffect = true; // Spiderman kann wieder springen wenn er auf anderem Spieler steht
+            }
+            else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + Player.RectangleHeight - 10)
+            {
+                // Spieler stößt von unten gegen den anderen Spieler
+                position.Y = otherPlayer.position.Y + Player.RectangleHeight;
+                velocity.Y = 0;
+            }
+            else
+            {
+                // Seitliche Kollision - stoppe die Bewegung
+                velocity.Y = 0;
+            }
+        }
+        else
+        {
+            // Keine Kollision mit anderem Spieler
+            position.Y = newY;
+        }
+
+        // Prüfe Kollision mit Boden
         if (position.Y >= groundY)
         {
             position.Y = groundY;
             velocity.Y = 0;
-            can_do_specialeffect= true; 
+            can_do_specialeffect = true; // Spiderman kann wieder springen wenn er auf dem Boden ist
         }
 
         update_rectangles();
