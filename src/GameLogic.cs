@@ -86,7 +86,16 @@ public class GameLogic : GameState
     public Item item3;
     public Item[] items;
 
+    private Texture2D _tribuneTexture; 
+    private Vector2 _leftTribunePosition;  
+    private Vector2 _rightTribunePosition;
 
+    float tribuneScale = 1f; 
+    int tribuneWidth;
+    int tribuneHeight;
+    float greenAreaY;
+    float centerX;
+    float tribuneSpacing;
 
     public GameLogic(Game baseGame) : base(baseGame){}
     public GameLogic(Game baseGame, Player leftPlayer, Player rightPlayer) : base(baseGame)
@@ -137,6 +146,17 @@ public class GameLogic : GameState
         _leftGoalPosition = new Vector2(-100, groundY - 255);
         _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 100, groundY - 255);
         scoreFont = Content.Load<SpriteFont>("Arial");
+
+        _tribuneTexture = Content.Load<Texture2D>("Tribüne");
+        tribuneWidth = (int)(_tribuneTexture.Width * tribuneScale);
+        tribuneHeight = (int)(_tribuneTexture.Height * tribuneScale);
+
+        greenAreaY = groundY+50;
+        centerX = _graphics.PreferredBackBufferWidth / 2f;
+        tribuneSpacing = 200f;
+
+        _leftTribunePosition = new Vector2(centerX - tribuneSpacing - tribuneWidth, greenAreaY - tribuneHeight);
+        _rightTribunePosition = new Vector2(centerX + tribuneSpacing, greenAreaY - tribuneHeight);
     }
 
 
@@ -181,6 +201,14 @@ public class GameLogic : GameState
         );
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
+        //Tribünen
+        spriteBatch.Draw(_tribuneTexture,
+        new Microsoft.Xna.Framework.Rectangle((int)_leftTribunePosition.X, (int)_leftTribunePosition.Y, tribuneWidth, tribuneHeight),
+        Microsoft.Xna.Framework.Color.White);
+        spriteBatch.Draw(_tribuneTexture,
+            new Microsoft.Xna.Framework.Rectangle((int)_rightTribunePosition.X, (int)_rightTribunePosition.Y, tribuneWidth, tribuneHeight),
+            Microsoft.Xna.Framework.Color.White);
+
 
         player1.draw(spriteBatch);
         player2.draw(spriteBatch);
