@@ -21,15 +21,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class PowerUp
 {
-    String text;
-
-    public PowerUp(String abc)
+    Ball ball;
+    
+    public PowerUp(Ball ball1)
     {
-        text = abc;
+        ball = ball1;
     }
+    
 
-    public String getText()
+    public virtual void activate()
     {
-        return (String)text;
+        //hello there 
     }
 }

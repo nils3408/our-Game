@@ -123,9 +123,9 @@ public class GameLogic : GameState
         player1.Set_other_Player(player2);
         player2.Set_other_Player(player1);
 
-        item1 = new Item(_graphicsDevice, Content);
-        item2 = new Item(_graphicsDevice, Content);
-        item3 = new Item(_graphicsDevice, Content);
+        item1 = new Item(_graphicsDevice, Content, football);
+        item2 = new Item(_graphicsDevice, Content, football);
+        item3 = new Item(_graphicsDevice, Content, football);
         items = new Item[] { item1, item2, item3 };
         distribute_items();
         update_all_item_positions();
@@ -230,6 +230,7 @@ public class GameLogic : GameState
 
     private void handle_player_movement(GameTime gameTime)
     {
+        // movement and other input
         KeyboardState state = Keyboard.GetState();
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -239,7 +240,10 @@ public class GameLogic : GameState
         if (state.IsKeyDown(Keys.D)) player1.move(delta, 1);
         if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY - 250))
             player1.jump(delta, groundY - 50);
+        
         if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
+        if (state.IsKeyDown(Keys.R)) player1.activate_powerUP1();
+        if (state.IsKeyDown(Keys.F)) player1.activate_powerUP2();
 
 
         // player 2
@@ -248,7 +252,10 @@ public class GameLogic : GameState
         if (state.IsKeyDown(Keys.L)) player2.move(delta, 1);
         if (state.IsKeyDown(Keys.I) && player2.IsOnGround(player2.position, groundY - 250))
             player2.jump(delta, groundY - 50);
+        
         if (state.IsKeyDown(Keys.O)) player2.do_special_effect(delta);
+        if (state.IsKeyDown(Keys.P))  player2.activate_powerUP1();
+        if (state.IsKeyDown(Keys.OemPeriod)) player2.activate_powerUP2();
 
 
     }

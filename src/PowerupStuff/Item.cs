@@ -1,3 +1,5 @@
+//Nils 
+
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -47,10 +49,13 @@ public class Item
 
     public Item[] all_items;  //beeinhaltet alle Items -> auch sich selber 
 
-    public PowerUp linked_powerup = new PowerUp ("123");
+    public PowerUp linked_powerup;
+    public PowerUpFactory pf;
+
+    public Ball ball; //reference on ball is important so PowerUp can be used on it
 
 
-    public Item(GraphicsDevice graphicsDevice, ContentManager content)
+    public Item(GraphicsDevice graphicsDevice, ContentManager content, Ball ball1)
     {
         this.content = content;
 
@@ -58,6 +63,10 @@ public class Item
         current_texture = textures[0];
 
         current_Rect = new Rectangle((int)position.X, (int)position.Y, rect_size, rect_size);
+        
+        ball = ball1;
+        pf = new PowerUpFactory(ball);
+        set_new_powerUP();
 
     }
 
@@ -145,7 +154,7 @@ public class Item
     public void set_new_powerUP()
     {
         // todo
-        linked_powerup = new PowerUp("hello there");
+        linked_powerup = pf.random_powerUP();
     }
 
     

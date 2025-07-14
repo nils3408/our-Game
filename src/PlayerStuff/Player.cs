@@ -80,6 +80,24 @@ public class Player
         return;
     }
 
+    public void activate_powerUP1()
+    {
+        if (powerup1 != null)
+        {
+            powerup1.activate();
+            powerup1 = null; //delete after activation so it can not be used again
+        }
+    }
+
+    public void activate_powerUP2()
+    {
+        if (powerup2 != null)
+        {
+            powerup2.activate();
+            powerup2 = null; //delete after activation so it can not be used again
+        }
+    }
+
 
     public void draw(SpriteBatch spritebatch)
     {
@@ -163,13 +181,12 @@ public class Player
             powerup1 = a;
             return;
         }
-        if (powerup1 == null)
+        if (powerup2 == null)
         {
             powerup2 = a;
             return;
         }
 
-        powerup1= a;
     }
 
 
