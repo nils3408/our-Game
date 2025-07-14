@@ -19,14 +19,15 @@ public static class PlayerFactory
     */
 
 
-    public const int TypesCount = 5;
+    public const int TypesCount = 6;
     public enum Types
     {
         Standart = 0,
         Spiderman = 1,
         Sonic = 2,
         Knight = 3,
-        Ninja = 4
+        Ninja = 4,
+        Mario = 5,
     }
 
     private static GraphicsDevice _graphicsDevice;
@@ -42,6 +43,7 @@ public static class PlayerFactory
         playerTextures[(int)Types.Sonic] = Content.Load<Texture2D>("sonic");
         playerTextures[(int)Types.Standart] = Content.Load<Texture2D>("KopfkickerChar1_neu");
         playerTextures[(int)Types.Ninja] = Content.Load<Texture2D>("KopfkickerChar2_neu");
+        playerTextures[(int)Types.Mario] = Content.Load<Texture2D>("ronaldo");
     }
 
     public static Player CreatePlayer(Types playerType, Vector2 position, int id)
@@ -62,6 +64,9 @@ public static class PlayerFactory
                 break;
             case Types.Ninja:
                 return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                break;
+            case Types.Mario:
+                return new Mario(_graphicsDevice, position, GetPlayerTexture(playerType), id);
                 break;
             default:
                 return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);

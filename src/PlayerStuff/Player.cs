@@ -34,6 +34,8 @@ public class Player
     public const int RectangleHeight = 150;  
 
     public Vector2 position;
+    public Vector2 starting_position;
+
     public float maxHeightY = 3;
 
     public bool can_do_specialeffect;
@@ -50,6 +52,9 @@ public class Player
      *      this function gets overwritten in each child-class inherting from this one
      *      
      * please comment your code guys!!!
+     * 
+     * starting position
+     *  starting position gets defined in GameLocig.cs -> function: Set_Player
      *      
      * --------------------------------------------------
      */
@@ -58,6 +63,7 @@ public class Player
     public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
     {
         position = position1;
+ 
         playerGroup = player;
         texture = texture1;
         currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
@@ -65,6 +71,7 @@ public class Player
         can_do_specialeffect = true;
         strength = 1;
         move_speed2 = move_speed;
+       
     }
 
 
@@ -202,6 +209,10 @@ public class Player
         Vector2 newPos = new Vector2(position.X, newY);
         Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
 
+        
+
+
+
         // Prüfe Kollision mit anderem Spieler
         if (testRect.Intersects(otherPlayer.currentRect))
         {
@@ -304,6 +315,12 @@ public class Player
         return (testRect.X < otherPlayer.currentRect.X + RectangleWidth &&
                 testRect.X + RectangleWidth > otherPlayer.currentRect.X);
 
+    }
+
+    public void set_back_to_starting_position()
+    {
+        position = starting_position;
+        update_rectangles();
     }
 }
 
