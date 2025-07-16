@@ -174,6 +174,12 @@ public class GameLogic : GameState
         handle_ball_coin_collision();
         check_for_goal();
 
+        player1.reset_powerUp1_if_time_is_over();
+        player1.reset_powerUp2_if_time_is_over();
+        player2.reset_powerUp1_if_time_is_over();
+        player2.reset_powerUp2_if_time_is_over();
+
+
 
         //Zurück ins Menu wenn ESC losgelassen wird 
         if (InputHandler.IsReleased(Keys.Escape))

@@ -18,7 +18,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class BigPlayerPowerUp : PowerUp
 {
     public BigPlayerPowerUp(Ball ball) : base(ball) {
-        cooldown = 5f;
+        cooldown = 3.5f;
     }
 
     

@@ -131,6 +131,7 @@ public class Player
            
             activation_time_powerUp1 = DateTime.Now;
             powerUp1_in_use = true;
+            powerUp_cooldown1 = powerup1.get_cooldown();
 
             powerup1 = null; //delete after activation so it can not be used again
         }
@@ -144,6 +145,7 @@ public class Player
 
             activation_time_powerUp2 = DateTime.Now;
             powerUp2_in_use = false;
+            powerUp_cooldown2 = powerup2.get_cooldown();
 
             powerup2 = null; //delete after activation so it can not be used again
         }
@@ -220,7 +222,6 @@ public class Player
         if (!(IsOnGround(position))) return;
         velocity.Y = jump_velocity;
 
-
     }
 
 
@@ -251,11 +252,36 @@ public class Player
     public void reset_powerUp1_if_time_is_over()
     {
         if (powerUp1_in_use == false) return;
+
+        DateTime current_time = DateTime.Now;
+        double vergangene_zeit = (current_time - activation_time_powerUp1).TotalSeconds;
+
+        if (vergangene_zeit > powerUp_cooldown1)
+        {
+            reset_values();
+        }
     }
+
 
     public void reset_powerUp2_if_time_is_over()
     {
         if (powerUp2_in_use  == false) return;
+
+        DateTime current_time = DateTime.Now;
+        double vergangene_zeit = (current_time - activation_time_powerUp2).TotalSeconds;
+
+        if (vergangene_zeit > powerUp_cooldown2)
+        {
+            reset_values();
+        }
+    }
+
+
+    public void reset_values()
+    {
+        groundY = groundY_copy;
+        RectangleHeight = RectangleHeight_copy;
+        RectangleWidth = RectangleWidth_copy;
     }
 
 
