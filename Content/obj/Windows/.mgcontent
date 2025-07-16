@@ -35,11 +35,14 @@
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-7.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-8.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-9.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/firefootball.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/football.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/icefootball.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Knight.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Knightord.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/KopfkickerChar1_neu.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/KopfkickerChar2_neu.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/ronaldo.jpg</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sonic.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spiderman.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spielfeld2.png</File>
@@ -48,6 +51,9 @@
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tribüne.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
