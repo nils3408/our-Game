@@ -30,8 +30,11 @@ public class Player
 
     public Rectangle currentRect;
     public Rectangle futureRect;
-    public const int RectangleWidth = 150;
-    public const int RectangleHeight = 150;  
+    
+    public  int RectangleWidth = 150;
+    public  int RectangleHeight = 150;
+    public const int RectangleWidth_copy = 150;   //backup when RectangleWith gets tempory overwritten
+    public const int RectangleHeight_copy = 150;  // backups when RectangleHeight gets temporary ovberwritten 
 
     public Vector2 position;
     public Vector2 starting_position;
@@ -41,8 +44,18 @@ public class Player
     public bool can_do_specialeffect;
     public int strength;
 
+    public float groundY = float.NaN;     //nicht initialisert am anfang um möliche bugs abzufangen welche bei zb. 0.0f entstehen könnten
+    public float groundY_copy = float.NaN;
+
+
     public PowerUp powerup1 = null;
     public PowerUp powerup2 = null;
+    public bool powerUp1_in_use = false;
+    public bool powerUp2_in_use = false;
+    public float powerUp_cooldown1 = 0;   //how long PowerUp on a player should be active
+    public float powerUp_cooldown2 = 0;
+    public DateTime activation_time_powerUp1 = DateTime.MinValue;
+    public DateTime activation_time_powerUp2 = DateTime.MinValue;
 
 
     /*
@@ -55,6 +68,19 @@ public class Player
      * 
      * starting position
      *  starting position gets defined in GameLocig.cs -> function: Set_Player
+     *  
+     *  
+     *  
+     *  Rectangle Width/height:
+     *      these values get temporary overwritten in the BigPlayerPowerUp
+     *      to reset them to their original values, we use copys of these values 
+     *      
+     *      same for groundY
+     *      
+     *   PowerUp
+     *      when a PowerUp is used on a player (like biggerPlayerPowerUP) its values (as cooldown) are stored in the Player
+     *      before the PowrUp gets deleted
+     *      Moreover , with this aproach we can check on values of PowerUp from GameLogic (by calling connected player.value)
      *      
      * --------------------------------------------------
      */
@@ -71,7 +97,7 @@ public class Player
         can_do_specialeffect = true;
         strength = 1;
         move_speed2 = move_speed;
-       
+
     }
 
 
@@ -80,6 +106,16 @@ public class Player
         otherPlayer = otherPlayer1;
     }
 
+    public void set_groundYs(float abc)
+    {
+        groundY = abc;
+        groundY_copy = abc;
+    }
+
+    public void set_groundY_to_original_value()
+    {
+        groundY = groundY_copy;
+    }
 
     public virtual void do_special_effect(float delta)
     {
@@ -91,7 +127,11 @@ public class Player
     {
         if (powerup1 != null)
         {
-            powerup1.activate();
+            powerup1.activate(this);
+           
+            activation_time_powerUp1 = DateTime.Now;
+            powerUp1_in_use = true;
+
             powerup1 = null; //delete after activation so it can not be used again
         }
     }
@@ -100,7 +140,11 @@ public class Player
     {
         if (powerup2 != null)
         {
-            powerup2.activate();
+            powerup2.activate(this);
+
+            activation_time_powerUp2 = DateTime.Now;
+            powerUp2_in_use = false;
+
             powerup2 = null; //delete after activation so it can not be used again
         }
     }
@@ -168,12 +212,12 @@ public class Player
 
 
 
-    public void jump(float delta, float groundY)
+    public void jump(float delta)
     {
         float newPositionY = position.Y - jump_velocity * delta;
         Vector2 newPosition = new Vector2(position.X, newPositionY);
 
-        if (!(IsOnGround(position, groundY))) return;
+        if (!(IsOnGround(position))) return;
         velocity.Y = jump_velocity;
 
 
@@ -197,10 +241,26 @@ public class Player
     }
 
 
+    public void reset_powerUps_if_time_is_over()
+    {
+        reset_powerUp1_if_time_is_over();
+        reset_powerUp2_if_time_is_over();
+    }
+
+
+    public void reset_powerUp1_if_time_is_over()
+    {
+        if (powerUp1_in_use == false) return;
+    }
+
+    public void reset_powerUp2_if_time_is_over()
+    {
+        if (powerUp2_in_use  == false) return;
+    }
 
 
 
-    public virtual void update_vertical(float delta, float groundY)
+    public virtual void update_vertical(float delta)
     {
         velocity.Y += gravity * delta;
         float newY = Math.Max(position.Y + velocity.Y * delta, maxHeightY);
@@ -223,10 +283,10 @@ public class Player
                 position.Y = otherPlayer.position.Y - RectangleHeight;
                 velocity.Y = 0;
             }
-            else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + Player.RectangleHeight - 10)
+            else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + otherPlayer.RectangleHeight - 10)
             {
                 // Spieler stößt von unten gegen den anderen Spieler
-                position.Y = otherPlayer.position.Y + Player.RectangleHeight;
+                position.Y = otherPlayer.position.Y + otherPlayer.RectangleHeight;
                 velocity.Y = 0;
             }
             else
@@ -281,7 +341,7 @@ public class Player
     }
 
 
-    public bool IsOnGround(Vector2 position, float groundY)
+    public bool IsOnGround(Vector2 position)
     {
         return position.Y >= groundY;
     }

@@ -3,7 +3,7 @@
 
 /*-------------------------------------------------------------------------------------------------------------
  * PowerUp that are integrated in the Map
- *     
+ * central managing point where we have access to all PowerUps    
  * 
  * ------------------------------------------------------------------------------------------------------------
  */
@@ -25,7 +25,8 @@ public class PowerUpFactory
     private static Random random = new Random();
     enum PowerUps
     {
-        Fireball
+        //FireballPowerUp
+        BigPlayerPowerUp
     }
 
 
@@ -37,14 +38,18 @@ public class PowerUpFactory
 
     public PowerUp random_powerUP()
     {
+        //return a random PowerUp
+
         Array values = Enum.GetValues(typeof(PowerUps));
         PowerUps randomType = (PowerUps)values.GetValue(random.Next(values.Length));
 
         switch (randomType)
         {
-            case PowerUps.Fireball:
-                return new Fireball(ball);
-            // Weitere PowerUps hier behandeln
+            //case PowerUps.FireballPowerUp:
+                //return new FireballPowerUp(ball);
+            
+            case PowerUps.BigPlayerPowerUp:
+                return new BigPlayerPowerUp(ball);
             default:
                 throw new NotImplementedException($"PowerUp '{randomType}' ist nicht implementiert.");
         }

@@ -165,8 +165,8 @@ public class GameLogic : GameState
         handle_player_movement(gameTime);
         handle_player_ball_collision(gameTime);
         
-        player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
-        player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds, groundY - 50);
+        player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds);
+        player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds);
 
         football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
 
@@ -238,8 +238,8 @@ public class GameLogic : GameState
         //Player 1
         if (state.IsKeyDown(Keys.A)) player1.move(delta, -1);
         if (state.IsKeyDown(Keys.D)) player1.move(delta, 1);
-        if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position, groundY - 250))
-            player1.jump(delta, groundY - 50);
+        if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position))
+            player1.jump(delta);
         
         if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
         if (state.IsKeyDown(Keys.R)) player1.activate_powerUP1();
@@ -250,8 +250,8 @@ public class GameLogic : GameState
         // {J K L I} statt {W S A D}
         if (state.IsKeyDown(Keys.J)) player2.move(delta, -1);
         if (state.IsKeyDown(Keys.L)) player2.move(delta, 1);
-        if (state.IsKeyDown(Keys.I) && player2.IsOnGround(player2.position, groundY - 250))
-            player2.jump(delta, groundY - 50);
+        if (state.IsKeyDown(Keys.I) && player2.IsOnGround(player2.position))
+            player2.jump(delta);
         
         if (state.IsKeyDown(Keys.O)) player2.do_special_effect(delta);
         if (state.IsKeyDown(Keys.P))  player2.activate_powerUP1();
@@ -379,12 +379,17 @@ public class GameLogic : GameState
 
     public void SetPlayer(Player left, Player right)
     {
+        float exakter_ground_y = groundY - 40;
+
         player1 = left;
-        player1.position = new Vector2(60, groundY);
-        player1.starting_position= new Vector2(60, groundY);
+        player1.position = new Vector2(60, exakter_ground_y);
+        player1.starting_position= new Vector2(60, exakter_ground_y);
+        player1.set_groundYs(exakter_ground_y);
+
         player2 = right;
-        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY);
-        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY);
+        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
+        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
+        player2.set_groundYs(exakter_ground_y);
 
     }
 

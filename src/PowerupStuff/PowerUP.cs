@@ -22,6 +22,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class PowerUp
 {
     Ball ball;
+    protected float cooldown; //time how long the PowerUp should be active
     
     public PowerUp(Ball ball1)
     {
@@ -29,8 +30,13 @@ public class PowerUp
     }
     
 
-    public virtual void activate()
+    public virtual void activate(Player player)
     {
-        //hello there 
+       //player is the one the PowerUp will be used on
     }
+
+   public float get_cooldown()
+   {
+        return cooldown;
+   }
 }

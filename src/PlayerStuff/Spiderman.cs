@@ -27,7 +27,7 @@ public class Spiderman: Player
         can_do_specialeffect = false;
     }
 
-    public override void update_vertical(float delta, float groundY)
+    public override void update_vertical(float delta)
     {
         //a bit different to the "normal player" ones 
         // when he is on ground, he can do its special_effect again
@@ -49,10 +49,10 @@ public class Spiderman: Player
                 velocity.Y = 0;
                 can_do_specialeffect = true; // Spiderman kann wieder springen wenn er auf anderem Spieler steht
             }
-            else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + Player.RectangleHeight - 10)
+            else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + otherPlayer.RectangleHeight - 10)
             {
                 // Spieler stößt von unten gegen den anderen Spieler
-                position.Y = otherPlayer.position.Y + Player.RectangleHeight;
+                position.Y = otherPlayer.position.Y + otherPlayer.RectangleHeight;
                 velocity.Y = 0;
             }
             else

@@ -15,12 +15,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 
 
-public class Fireball : PowerUp
+public class FireballPowerUp : PowerUp
 {
-    public Fireball(Ball ball) : base(ball) { }
+    public FireballPowerUp(Ball ball) : base(ball) { }
 
-    public override void activate()
+    public override void activate(Player player)
     {
-        Debug.WriteLine("abcdefghijkl");
+        Debug.WriteLine("Fireball-PowerUp activated");
     }
 }
