@@ -192,6 +192,7 @@ public class GameLogic : GameState
         player1.reset_powerUp2_if_time_is_over();
         player2.reset_powerUp1_if_time_is_over();
         player2.reset_powerUp2_if_time_is_over();
+        football.reset_powerUps_if_time_is_over();
 
 
 

@@ -18,13 +18,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class FireballPowerUp : PowerUp
 {
+    Vector2 fireball_velocity = new Vector2(1600, 10);
+
     public FireballPowerUp(Ball ball) : base(ball) 
     {
-        cooldown = 2.5f;
+        cooldown = 3f;
+
     }
 
     public override void activate(Player player)
     {
+        ball.activation_time_powerUp = DateTime.Now;
+        ball.powerUp_cooldown = cooldown;
+
         ball.texture = ball.powerUp_textures["firefootball"];
+        ball.fire_powerUp_in_use = true;
+        ball.set_velocity(fireball_velocity * ball.transform_direction(ball.velocity));
+        
     }
 }

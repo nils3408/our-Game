@@ -62,6 +62,9 @@ public class Ball
     private const float g = 250f;               
     private Rectangle Rect;
 
+    public bool fire_powerUp_in_use = false;
+    public DateTime activation_time_powerUp = DateTime.MinValue;
+    public float powerUp_cooldown = 0;
 
 
     public Ball(GraphicsDevice graphicsDevice, Vector2 position2, Texture2D texture1, Dictionary<string, Texture2D> powerUp_textures1)
@@ -84,7 +87,7 @@ public class Ball
         texture = texture_copy; 
     }
 
-    public void Set_velocity(Vector2 velocity1)
+    public void set_velocity(Vector2 velocity1)
     {
         velocity = velocity1;
     }
@@ -93,7 +96,7 @@ public class Ball
     {
         if (velocity == Vector2.Zero)
         {
-            velocity = starting_velocity;
+            velocity = starting_velocity * transform_direction(velocity);
             return;
         }
 
@@ -102,9 +105,34 @@ public class Ball
         velocity = direction * starting_velocity;
     }
 
-    
+    public void reset_values()
+    {
+        set_texture_back_to_original();
+        reset_velocity();
+        fire_powerUp_in_use = false;
+
+    }
+
+
+    public void reset_powerUps_if_time_is_over()
+    {
+        if (fire_powerUp_in_use == false) return;
+
+        DateTime current_time = DateTime.Now;
+        double vergangene_zeit = (current_time - activation_time_powerUp).TotalSeconds;
+
+        if (vergangene_zeit > powerUp_cooldown)
+        {
+            reset_values();
+        }
+    }
+
+
+
     public void get_shooted_horizontal()
     {
+        if (fire_powerUp_in_use) { return; }
+        
         if (velocity == Vector2.Zero)
         {
             velocity = shooting_horizontal_velocity;
@@ -118,6 +146,8 @@ public class Ball
     
     public void get_shooted_diagonal()
     {
+        if (fire_powerUp_in_use) { return; }
+
         if (velocity == Vector2.Zero)
         {
             velocity = shooting_diagonally_velocity;
