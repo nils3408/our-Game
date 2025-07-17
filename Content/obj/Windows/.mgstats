@@ -1,1 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/../../../../../Downloads/TribueneLang.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/TribueneLang.xnb","TextureProcessor","Texture2DContent",1381178,4194389,0,3279734
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Mario.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Mario.xnb","TextureProcessor","Texture2DContent",21454,50549,0,0052956
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/mariopixel.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/mariopixel.xnb","TextureProcessor","Texture2DContent",6468,3686485,0,1170933
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spielfeld3.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Spielfeld3.xnb","TextureProcessor","Texture2DContent",703955,2797653,0,094137
