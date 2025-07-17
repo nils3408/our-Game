@@ -12,13 +12,21 @@
  *      
  *  - Ball Position
  *      whem a goal is made the Ball gets reseted to its starting position
- *     
+ *      
+ *  - ball_powerup_textures
+ *      textures as fireball/ iceball can not be loaded in the corresponsing PowerUp if we do not
+ *      give them a reference on the Contentmanager -- something we want to avoid cause we want to load 
+ *      all textures in gamelogic 
+ *      solution: 
+            create Dictionary in gamelogic.s with the powerUp_textures and give it to ball during its initialization
+            -> Powerup can access it then as it has a reference on the ball 
  * 
  * ------------------------------------------------------------------------------------------------------------
  */
 
 using System;
 using System.ComponentModel.Design;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
@@ -35,7 +43,10 @@ public class Ball
 {
 
 
-    private Texture2D texture;
+    public  Texture2D texture;
+    private Texture2D texture_copy;
+    public Dictionary<string, Texture2D> powerUp_textures;
+
     public Vector2 position;
 
     public Vector2 velocity = new Vector2(0, 0);
@@ -53,10 +64,13 @@ public class Ball
 
 
 
-    public Ball(GraphicsDevice graphicsDevice, Vector2 position2, Texture2D texture1)
+    public Ball(GraphicsDevice graphicsDevice, Vector2 position2, Texture2D texture1, Dictionary<string, Texture2D> powerUp_textures1)
     {
-        position = position2;
         texture = texture1;
+        texture_copy = texture1;
+        powerUp_textures = powerUp_textures1;
+
+        position = position2;
         Rect = new Rectangle((int)position.X, (int)position.Y, BallSize, BallSize);
         //new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY)
     }
@@ -64,6 +78,10 @@ public class Ball
     public Rectangle getRect()
     {
         return Rect;
+    }
+
+    public void set_texture_back_to_original() {
+        texture = texture_copy; 
     }
 
     public void Set_velocity(Vector2 velocity1)

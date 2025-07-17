@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,10 +18,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class FireballPowerUp : PowerUp
 {
-    public FireballPowerUp(Ball ball) : base(ball) { }
+    public FireballPowerUp(Ball ball) : base(ball) 
+    {
+        cooldown = 2.5f;
+    }
 
     public override void activate(Player player)
     {
-        Debug.WriteLine("Fireball-PowerUp activated");
+        ball.texture = ball.powerUp_textures["firefootball"];
     }
 }

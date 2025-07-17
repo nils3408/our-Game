@@ -21,7 +21,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class PowerUp
 {
-    Ball ball;
+    public Ball ball;
     protected float cooldown; //time how long the PowerUp should be active
     
     public PowerUp(Ball ball1)

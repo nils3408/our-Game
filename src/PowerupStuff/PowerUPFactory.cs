@@ -25,7 +25,7 @@ public class PowerUpFactory
     private static Random random = new Random();
     enum PowerUps
     {
-        //FireballPowerUp
+        FireballPowerUp,
         BigPlayerPowerUp
     }
 
@@ -45,8 +45,8 @@ public class PowerUpFactory
 
         switch (randomType)
         {
-            //case PowerUps.FireballPowerUp:
-                //return new FireballPowerUp(ball);
+            case PowerUps.FireballPowerUp:
+                return new FireballPowerUp(ball);
             
             case PowerUps.BigPlayerPowerUp:
                 return new BigPlayerPowerUp(ball);

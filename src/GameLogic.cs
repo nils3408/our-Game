@@ -20,6 +20,9 @@
  *      solution:
  *          declare all items -> give each item array of references of all items -> give each item a new position and 
  *          check on collission
+ *          
+ *          
+ *  
  *      
  * 
  * ---------------------------------------------------------------------------------------------------------------------
@@ -33,6 +36,8 @@ using Microsoft.Xna.Framework.Content;
 //using SharpDX.XAudio2;
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
+
 //using System.Drawing;
 //using System.Runtime.CompilerServices;
 using our_Game;
@@ -66,6 +71,8 @@ public class GameLogic : GameState
     private float collisionCooldown1 = 0f;
     private float collisionCooldown2 = 0f;
     private const float CollisionCooldownTime = 0.4f;
+    
+    public Dictionary<string, Texture2D> powerUpTextures;
 
     private float groundY = 550;
 
@@ -97,6 +104,8 @@ public class GameLogic : GameState
     float centerX;
     float tribuneSpacing;
 
+    
+    
     public GameLogic(Game baseGame) : base(baseGame){}
     public GameLogic(Game baseGame, Player leftPlayer, Player rightPlayer) : base(baseGame)
 
@@ -118,7 +127,12 @@ public class GameLogic : GameState
         if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
         if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
 
-        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"));
+        powerUpTextures = new()
+        {
+            { "firefootball", Content.Load<Texture2D>("firefootball") },
+            { "icefootball",  Content.Load<Texture2D>("icefootball")  }
+        };
+        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"), powerUpTextures);
 
         player1.Set_other_Player(player2);
         player2.Set_other_Player(player1);
@@ -129,7 +143,6 @@ public class GameLogic : GameState
         items = new Item[] { item1, item2, item3 };
         distribute_items();
         update_all_item_positions();
-
 
 
     }
@@ -157,6 +170,7 @@ public class GameLogic : GameState
 
         _leftTribunePosition = new Vector2(centerX - tribuneSpacing - tribuneWidth, greenAreaY - tribuneHeight);
         _rightTribunePosition = new Vector2(centerX + tribuneSpacing, greenAreaY - tribuneHeight);
+
     }
 
 
