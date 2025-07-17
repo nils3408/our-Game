@@ -150,7 +150,7 @@ public class GameLogic : GameState
     public override void LoadContent()
     {
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
-        _backgroundTexture = Content.Load<Texture2D>("Spielfeld2");
+        _backgroundTexture = Content.Load<Texture2D>("Spielfeld3");
         _goalTexture = Content.Load<Texture2D>("Tore");
 
         goalWidth = (int)(_goalTexture.Width * goalScale);
@@ -160,16 +160,15 @@ public class GameLogic : GameState
         _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 100, groundY - 255);
         scoreFont = Content.Load<SpriteFont>("Arial");
 
-        _tribuneTexture = Content.Load<Texture2D>("Tribüne");
+        _tribuneTexture = Content.Load<Texture2D>("TribueneLang");
         tribuneWidth = (int)(_tribuneTexture.Width * tribuneScale);
         tribuneHeight = (int)(_tribuneTexture.Height * tribuneScale);
 
         greenAreaY = groundY+50;
-        centerX = _graphics.PreferredBackBufferWidth / 2f;
-        tribuneSpacing = 200f;
+        
 
-        _leftTribunePosition = new Vector2(centerX - tribuneSpacing - tribuneWidth, greenAreaY - tribuneHeight);
-        _rightTribunePosition = new Vector2(centerX + tribuneSpacing, greenAreaY - tribuneHeight);
+        _leftTribunePosition = new Vector2(450, -100);
+        
 
     }
 
@@ -225,9 +224,7 @@ public class GameLogic : GameState
         spriteBatch.Draw(_tribuneTexture,
         new Microsoft.Xna.Framework.Rectangle((int)_leftTribunePosition.X, (int)_leftTribunePosition.Y, tribuneWidth, tribuneHeight),
         Microsoft.Xna.Framework.Color.White);
-        spriteBatch.Draw(_tribuneTexture,
-            new Microsoft.Xna.Framework.Rectangle((int)_rightTribunePosition.X, (int)_rightTribunePosition.Y, tribuneWidth, tribuneHeight),
-            Microsoft.Xna.Framework.Color.White);
+        
 
 
         player1.draw(spriteBatch);
