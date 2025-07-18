@@ -63,6 +63,7 @@ public class Ball
     private Rectangle Rect;
 
     public bool fire_powerUp_in_use = false;
+    public bool ice_powerUp_in_use = false;
     public DateTime activation_time_powerUp = DateTime.MinValue;
     public float powerUp_cooldown = 0;
 
@@ -109,13 +110,15 @@ public class Ball
     {
         set_texture_back_to_original();
         fire_powerUp_in_use = false;
+        ice_powerUp_in_use = false;
+        powerUp_cooldown = 0;
+        activation_time_powerUp = DateTime.MinValue;
 
     }
 
 
     public void reset_powerUps_if_time_is_over()
     {
-        if (fire_powerUp_in_use == false) return;
 
         DateTime current_time = DateTime.Now;
         double vergangene_zeit = (current_time - activation_time_powerUp).TotalSeconds;
@@ -131,6 +134,7 @@ public class Ball
     public void get_shooted_horizontal()
     {
         if (fire_powerUp_in_use) { return; }
+        if (ice_powerUp_in_use) { return; }
         
         if (velocity == Vector2.Zero)
         {
@@ -146,6 +150,8 @@ public class Ball
     public void get_shooted_diagonal()
     {
         if (fire_powerUp_in_use) { return; }
+        if (ice_powerUp_in_use) { return; }
+
 
         if (velocity == Vector2.Zero)
         {
@@ -255,6 +261,7 @@ public class Ball
 
     public void move(float deltaTime, float groundY)
     {
+        if (ice_powerUp_in_use) return;
         if (velocity == Vector2.Zero) return;
 
 

@@ -360,6 +360,8 @@ public class GameLogic : GameState
 
     private void handle_player_ball_collision(GameTime gameTime)
     {
+        if (football.ice_powerUp_in_use) return;
+
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
         collisionCooldown1 -= delta;
         collisionCooldown2 -= delta;
@@ -387,7 +389,7 @@ public class GameLogic : GameState
             last_player_touching_the_ball= player2;
             Vector2 direction2 = football.position - player2.position;
 
-            football.reset_velocity();
+            if (football.fire_powerUp_in_use == false)  football.reset_velocity();
             football.change_direction(direction2);
             collisionCooldown2 = CollisionCooldownTime;
 

@@ -26,6 +26,7 @@ public class PowerUpFactory
     enum PowerUps
     {
         FireballPowerUp,
+        IceballPowerUp,
         BigPlayerPowerUp
     }
 
@@ -50,6 +51,8 @@ public class PowerUpFactory
             
             case PowerUps.BigPlayerPowerUp:
                 return new BigPlayerPowerUp(ball);
+            case PowerUps.IceballPowerUp:
+                return new IceballPowerUp(ball);
             default:
                 throw new NotImplementedException($"PowerUp '{randomType}' ist nicht implementiert.");
         }

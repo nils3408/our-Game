@@ -16,14 +16,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 
 
-public class FireballPowerUp : PowerUp
+public class IceballPowerUp : PowerUp
 {
-    float fireball_velocityX = 1600;
-
-    public FireballPowerUp(Ball ball) : base(ball) 
+    public IceballPowerUp(Ball ball) : base(ball)
     {
-        cooldown = 3f;
-
+        cooldown = 2.5f;
     }
 
     public override void activate(Player player)
@@ -32,10 +29,7 @@ public class FireballPowerUp : PowerUp
         ball.activation_time_powerUp = DateTime.Now;
         ball.powerUp_cooldown = cooldown;
 
-        ball.texture = ball.powerUp_textures["firefootball"];
-        ball.fire_powerUp_in_use = true;
-        Vector2 newVelocity = new Vector2 (fireball_velocityX, ball.velocity.Y*2);
-        ball.set_velocity(newVelocity * ball.transform_direction(ball.velocity));
-        
+        ball.texture = ball.powerUp_textures["icefootball"];
+        ball.ice_powerUp_in_use = true;
     }
 }
