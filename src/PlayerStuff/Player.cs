@@ -196,7 +196,7 @@ public class Player
         // future rect overlaps with oponent
         // if stronger
         // push oponent away and move anýway
-        if (is_stronger_than_oponent(otherPlayer))
+        else if (is_stronger_than_oponent(otherPlayer))
         {
             if (oponent_is_in_the_way(otherPlayer, dir)) otherPlayer.move(delta, dir);
 
