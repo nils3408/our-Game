@@ -337,8 +337,11 @@ public class GameLogic : GameState
         {
             scorePlayer2++;
             football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+            football.reset_values();
             player1.set_back_to_starting_position();
             player2.set_back_to_starting_position();
+            update_all_item_positions();
+            
         }
 
 
@@ -346,8 +349,10 @@ public class GameLogic : GameState
         {
             scorePlayer1++;
             football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+            football.reset_values();
             player1.set_back_to_starting_position();
             player2.set_back_to_starting_position();
+            update_all_item_positions();
         }
     }
 

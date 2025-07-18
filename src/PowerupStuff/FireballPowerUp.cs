@@ -18,7 +18,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class FireballPowerUp : PowerUp
 {
-    Vector2 fireball_velocity = new Vector2(1600, 10);
+    Vector2 fireball_velocity = new Vector2(1600, -10);
 
     public FireballPowerUp(Ball ball) : base(ball) 
     {

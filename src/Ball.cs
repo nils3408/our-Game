@@ -108,7 +108,6 @@ public class Ball
     public void reset_values()
     {
         set_texture_back_to_original();
-        reset_velocity();
         fire_powerUp_in_use = false;
 
     }
