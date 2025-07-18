@@ -476,7 +476,7 @@
 /processorParam:TextureFormat=Color
 /build:Mario.png
 
-#begin mariopixel.png
+#begin Mario2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -486,7 +486,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:mariopixel.png
+/build:Mario2.png
 
 #begin ronaldo.jpg
 /importer:TextureImporter

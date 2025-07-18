@@ -43,7 +43,7 @@ public static class PlayerFactory
         playerTextures[(int)Types.Sonic] = Content.Load<Texture2D>("sonic");
         playerTextures[(int)Types.Standart] = Content.Load<Texture2D>("KopfkickerChar1_neu");
         playerTextures[(int)Types.Ninja] = Content.Load<Texture2D>("KopfkickerChar2_neu");
-        playerTextures[(int)Types.Mario] = Content.Load<Texture2D>("Mario");
+        playerTextures[(int)Types.Mario] = Content.Load<Texture2D>("Mario2");
     }
 
     public static Player CreatePlayer(Types playerType, Vector2 position, int id)

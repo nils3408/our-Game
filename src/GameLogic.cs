@@ -89,8 +89,6 @@ public class GameLogic : GameState
     private bool gameRunning = true;
 
     public Item item1;
-    public Item item2;
-    public Item item3;
     public Item[] items;
 
     private Texture2D _tribuneTexture; 
@@ -138,9 +136,7 @@ public class GameLogic : GameState
         player2.Set_other_Player(player1);
 
         item1 = new Item(_graphicsDevice, Content, football);
-        item2 = new Item(_graphicsDevice, Content, football);
-        item3 = new Item(_graphicsDevice, Content, football);
-        items = new Item[] { item1, item2, item3 };
+        items = new Item[] { item1};
         distribute_items();
         update_all_item_positions();
 
@@ -438,8 +434,5 @@ public class GameLogic : GameState
             items[i].set_random_position();
        }
     }
-    
-
-
 }
 
