@@ -190,6 +190,12 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Knightord.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\ronaldo.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\firefootball.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\icefootball.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\mariopixel.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Ball.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\BasicFont.ttf
@@ -230,13 +236,16 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Knightord.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\KopfkickerChar1_neu.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\KopfkickerChar2_neu.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\mariopixel.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\ronaldo.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sonic.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spiderman.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielfeld2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tore.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tore2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.exe
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.deps.json
@@ -271,12 +280,3 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\firefootball.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\icefootball.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\mariopixel.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\mariopixel.xnb
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb

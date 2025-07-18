@@ -18,7 +18,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class FireballPowerUp : PowerUp
 {
-    Vector2 fireball_velocity = new Vector2(1600, -10);
+    float fireball_velocityX = 1600;
 
     public FireballPowerUp(Ball ball) : base(ball) 
     {
@@ -33,7 +33,8 @@ public class FireballPowerUp : PowerUp
 
         ball.texture = ball.powerUp_textures["firefootball"];
         ball.fire_powerUp_in_use = true;
-        ball.set_velocity(fireball_velocity * ball.transform_direction(ball.velocity));
+        Vector2 newVelocity = new Vector2 (fireball_velocityX, ball.velocity.Y*2);
+        ball.set_velocity(newVelocity * ball.transform_direction(ball.velocity));
         
     }
 }

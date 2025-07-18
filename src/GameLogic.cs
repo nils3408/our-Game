@@ -340,6 +340,8 @@ public class GameLogic : GameState
             football.reset_values();
             player1.set_back_to_starting_position();
             player2.set_back_to_starting_position();
+            player1.reset_rect_size();
+            player2.reset_rect_size();
             update_all_item_positions();
             
         }
@@ -352,6 +354,8 @@ public class GameLogic : GameState
             football.reset_values();
             player1.set_back_to_starting_position();
             player2.set_back_to_starting_position();
+            player1.reset_rect_size();
+            player2.reset_rect_size();
             update_all_item_positions();
         }
     }
@@ -371,7 +375,7 @@ public class GameLogic : GameState
             last_player_touching_the_ball = player1;
             Vector2 direction = football.position - player1.position;
 
-            football.reset_velocity();
+            if (football.fire_powerUp_in_use == false)    football.reset_velocity();
             football.change_direction(direction);
             collisionCooldown1 = CollisionCooldownTime;
 

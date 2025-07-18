@@ -280,6 +280,11 @@ public class Player
     public void reset_values()
     {
         groundY = groundY_copy;
+        reset_rect_size();
+    }
+
+    public void reset_rect_size()
+    {
         RectangleHeight = RectangleHeight_copy;
         RectangleWidth = RectangleWidth_copy;
     }
