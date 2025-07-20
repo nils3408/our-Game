@@ -96,13 +96,6 @@ public class GameSetup : GameState
         spriteBatch.End();
     }
 
-
-    public void Reset()
-    {
-        GameSetup refreshedSetup = new GameSetup(base.baseGame);
-        refreshedSetup.Initialize();
-        Game1.setup = refreshedSetup;
-    }
 }
 
 

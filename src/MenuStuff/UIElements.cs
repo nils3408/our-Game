@@ -280,7 +280,7 @@ public class Textfield : UIElement
     {
 
     }
-    
+
 }
 
 
@@ -292,13 +292,3 @@ public class Textfield : UIElement
 
 
 
-
-
-
-/*bleibt erstmal nur ne Idee
-// Container zum Anordnen in relativen Verh�ltnissen von 0 bis 1, abgekoppelt von den absoluten Pixel Gr��en.
-public class RelativeContainer : ElementContainer {
-    public ElementContainer(Rectangle bounds) : base(bounds) {
-        
-    }
-}*/
