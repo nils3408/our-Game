@@ -22,7 +22,7 @@ public class Menu : GameState
         {
 
             SimpleButton gameButton = new SimpleButton(ButtonSize, "New Game", font);
-            gameButton.OnClick += () => Game1.nextState = Game1.setup;
+            gameButton.OnClick += () => Game1.nextState = new GameSetup(baseGame);
             buttonContainer.Add(gameButton);
 
         } else { 

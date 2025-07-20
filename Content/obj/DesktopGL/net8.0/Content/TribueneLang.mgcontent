@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/TribueneLang.png</SourceFile>
-  <SourceTime>2025-07-17T20:14:06.8183152+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/TribueneLang.xnb</DestFile>
-  <DestTime>2025-07-18T11:16:35.2054066+02:00</DestTime>
+  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/TribueneLang.png</SourceFile>
+  <SourceTime>2025-07-18T14:23:07.323976+02:00</SourceTime>
+  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/TribueneLang.xnb</DestFile>
+  <DestTime>2025-07-20T20:22:02.1928957+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

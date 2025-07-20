@@ -33,6 +33,7 @@ public class GameSetup : GameState
 
         SimpleButton homeButton = new SimpleButton(new Point(spacing, spacing), new Point(200, 100), "Home", font);
         homeButton.OnClick += () => Game1.nextState = Game1.menu;
+        
         container.Add(homeButton);
 
 
@@ -57,19 +58,19 @@ public class GameSetup : GameState
                 GameLogic newGame = new GameLogic(game, leftPlayer, rightPlayer);
                 newGame.Initialize();
                 newGame.LoadContent();
-                
+
                 Game1.game = newGame;
                 Game1.nextState = newGame;
                 Game1.GameIsInitialized = true;
             }
             else
-            { 
+            {
                 //Text anzeigen : beide Charaktere müssen ausgewählt sein
             }
         };
         startButton.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - spacing - startButton.GetBounds().Height / 2));
         container.Add(startButton);
-        
+
     }
 
     public override void Update(GameTime gameTime)
@@ -93,6 +94,14 @@ public class GameSetup : GameState
         //HContainer.Draw(spriteBatch);
         container.Draw(spriteBatch);
         spriteBatch.End();
+    }
+
+
+    public void Reset()
+    {
+        GameSetup refreshedSetup = new GameSetup(base.baseGame);
+        refreshedSetup.Initialize();
+        Game1.setup = refreshedSetup;
     }
 }
 
@@ -150,6 +159,8 @@ public class PlayerSelection : StackContainer
 
     public PlayerFactory.Types playerType = PlayerFactory.Types.Standart;
 
+    SimpleButton chooseButton;
+
     public PlayerSelection(ContentManager Content)
     {
         SpriteFont font = Content.Load<SpriteFont>("Arial");
@@ -163,10 +174,10 @@ public class PlayerSelection : StackContainer
         ShowPlayerType playerDisplay = new ShowPlayerType(new Point(300, 500), Content);
         base.Add(playerDisplay);
 
-        SimpleButton chooseButton = new SimpleButton(ButtonSize, "Choose", font);
+        chooseButton = new SimpleButton(ButtonSize, "Choose", font);
         chooseButton.OnClick += () =>
         {
-            isChoosen = !isChoosen;
+            //isChoosen = !isChoosen;
             playerType = playerDisplay.GetCurPlayer();
         };
         chooseButton.SetToStayPressed();
@@ -202,6 +213,9 @@ public class PlayerSelection : StackContainer
     public override void Update()
     {
         base.Update();
+        isChoosen = chooseButton.GetState();
     }
+
+ 
 
 }

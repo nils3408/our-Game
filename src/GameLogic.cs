@@ -71,7 +71,7 @@ public class GameLogic : GameState
     private float collisionCooldown1 = 0f;
     private float collisionCooldown2 = 0f;
     private const float CollisionCooldownTime = 0.4f;
-    
+
     public Dictionary<string, Texture2D> powerUpTextures;
 
     private float groundY = 550;
@@ -91,20 +91,20 @@ public class GameLogic : GameState
     public Item item1;
     public Item[] items;
 
-    private Texture2D _tribuneTexture; 
-    private Vector2 _leftTribunePosition;  
+    private Texture2D _tribuneTexture;
+    private Vector2 _leftTribunePosition;
     private Vector2 _rightTribunePosition;
 
-    float tribuneScale = 1f; 
+    float tribuneScale = 1f;
     int tribuneWidth;
     int tribuneHeight;
     float greenAreaY;
     float centerX;
     float tribuneSpacing;
 
-    
-    
-    public GameLogic(Game baseGame) : base(baseGame){}
+
+
+    public GameLogic(Game baseGame) : base(baseGame) { }
     public GameLogic(Game baseGame, Player leftPlayer, Player rightPlayer) : base(baseGame)
 
     {
@@ -136,7 +136,7 @@ public class GameLogic : GameState
         player2.Set_other_Player(player1);
 
         item1 = new Item(_graphicsDevice, Content, football);
-        items = new Item[] { item1};
+        items = new Item[] { item1 };
         distribute_items();
         update_all_item_positions();
 
@@ -160,11 +160,11 @@ public class GameLogic : GameState
         tribuneWidth = (int)(_tribuneTexture.Width * tribuneScale);
         tribuneHeight = (int)(_tribuneTexture.Height * tribuneScale);
 
-        greenAreaY = groundY+50;
-        
+        greenAreaY = groundY + 50;
+
 
         _leftTribunePosition = new Vector2(450, -100);
-        
+
 
     }
 
@@ -173,7 +173,7 @@ public class GameLogic : GameState
     {
         handle_player_movement(gameTime);
         handle_player_ball_collision(gameTime);
-        
+
         player1.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds);
         player2.update_vertical((float)gameTime.ElapsedGameTime.TotalSeconds);
 
@@ -195,8 +195,9 @@ public class GameLogic : GameState
         if (InputHandler.IsReleased(Keys.Escape))
         {
             System.Diagnostics.Debug.WriteLine("escape!");
-            Game1.nextState = new Menu(baseGame);
             Game1.GameIsInitialized = false;
+            Game1.nextState = new Menu(baseGame);
+
         }
         if (gameRunning)
         {
@@ -221,7 +222,7 @@ public class GameLogic : GameState
         spriteBatch.Draw(_tribuneTexture,
         new Microsoft.Xna.Framework.Rectangle((int)_leftTribunePosition.X, (int)_leftTribunePosition.Y, tribuneWidth, tribuneHeight),
         Microsoft.Xna.Framework.Color.White);
-        
+
 
 
         player1.draw(spriteBatch);
@@ -229,7 +230,7 @@ public class GameLogic : GameState
         football.draw(spriteBatch);
 
         //draw items
-        foreach(Item item in items)
+        foreach (Item item in items)
         {
             item.draw(spriteBatch, gameTime);
         }
@@ -254,7 +255,7 @@ public class GameLogic : GameState
         if (state.IsKeyDown(Keys.D)) player1.move(delta, 1);
         if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position))
             player1.jump(delta);
-        
+
         if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
         if (state.IsKeyDown(Keys.R)) player1.activate_powerUP1();
         if (state.IsKeyDown(Keys.F)) player1.activate_powerUP2();
@@ -266,9 +267,9 @@ public class GameLogic : GameState
         if (state.IsKeyDown(Keys.L)) player2.move(delta, 1);
         if (state.IsKeyDown(Keys.I) && player2.IsOnGround(player2.position))
             player2.jump(delta);
-        
+
         if (state.IsKeyDown(Keys.O)) player2.do_special_effect(delta);
-        if (state.IsKeyDown(Keys.P))  player2.activate_powerUP1();
+        if (state.IsKeyDown(Keys.P)) player2.activate_powerUP1();
         if (state.IsKeyDown(Keys.OemPeriod)) player2.activate_powerUP2();
 
 
@@ -281,7 +282,7 @@ public class GameLogic : GameState
         // when a player colliderects with a item , he gets the PoweUP, linked to the PowerUP
         handle_player_coin_collision_helper(player1);
         handle_player_coin_collision_helper(player2);
-        
+
     }
 
     private void handle_player_coin_collision_helper(Player playerABC)
@@ -339,7 +340,7 @@ public class GameLogic : GameState
             player1.reset_rect_size();
             player2.reset_rect_size();
             update_all_item_positions();
-            
+
         }
 
 
@@ -373,7 +374,7 @@ public class GameLogic : GameState
             last_player_touching_the_ball = player1;
             Vector2 direction = football.position - player1.position;
 
-            if (football.fire_powerUp_in_use == false)    football.reset_velocity();
+            if (football.fire_powerUp_in_use == false) football.reset_velocity();
             football.change_direction(direction);
             collisionCooldown1 = CollisionCooldownTime;
 
@@ -386,10 +387,10 @@ public class GameLogic : GameState
         // Spieler 2
         if (football.getRect().Intersects(player2.currentRect) && collisionCooldown2 <= 0)
         {
-            last_player_touching_the_ball= player2;
+            last_player_touching_the_ball = player2;
             Vector2 direction2 = football.position - player2.position;
 
-            if (football.fire_powerUp_in_use == false)  football.reset_velocity();
+            if (football.fire_powerUp_in_use == false) football.reset_velocity();
             football.change_direction(direction2);
             collisionCooldown2 = CollisionCooldownTime;
 
@@ -408,7 +409,7 @@ public class GameLogic : GameState
 
         player1 = left;
         player1.position = new Vector2(60, exakter_ground_y);
-        player1.starting_position= new Vector2(60, exakter_ground_y);
+        player1.starting_position = new Vector2(60, exakter_ground_y);
         player1.set_groundYs(exakter_ground_y);
 
         player2 = right;
@@ -422,7 +423,7 @@ public class GameLogic : GameState
     public void distribute_items()
     {
         // alle items jedem item-object zuordnen
-        for (int i = 0; i< items.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
             items[i].set_all_items(items);
         }
@@ -431,10 +432,18 @@ public class GameLogic : GameState
     public void update_all_item_positions()
     {
         //update position of all items
-       for(int i = 0; i< items.Length; i++)
-       {
+        for (int i = 0; i < items.Length; i++)
+        {
             items[i].set_random_position();
-       }
+        }
+    }
+
+    // checkt ob einer gewonnen hat, kann von Kindklassen geändert werden da es virtual ist.
+    //standartmäßig einfachhalber bei 12 
+    public virtual Boolean isOver()
+    {
+        if (scorePlayer1 > 12 || scorePlayer2 > 12) return true;
+        return false;
     }
 }
 

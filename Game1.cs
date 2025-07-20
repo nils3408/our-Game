@@ -40,7 +40,7 @@ public class Game1 : Game
 
         game = new GameLogic(this);
         setup = new GameSetup(this);
- 
+
         menu = new Menu(this);
         settings = new Settings(this);
 
@@ -51,7 +51,7 @@ public class Game1 : Game
         setup.Initialize();
 
         curState = menu;
-        nextState = menu;
+        nextState = curState;
 
         base.Initialize();
     }
@@ -69,7 +69,7 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         InputHandler.Update();
-        
+
         if (nextState == null) Exit();
         if (nextState != null && nextState != curState) curState = nextState;
 
@@ -87,5 +87,6 @@ public class Game1 : Game
         curState.Draw(gameTime);
         base.Draw(gameTime);
     }
+
 
 }
