@@ -156,8 +156,23 @@ public class GameLogic : GameState
         goalWidth = (int)(_goalTexture.Width * goalScale);
         goalHeight = (int)(_goalTexture.Height * goalScale);
 
-        _leftGoalPosition = new Vector2(-100, groundY - 255);
-        _rightGoalPosition = new Vector2(_graphics.PreferredBackBufferWidth - goalWidth + 100, groundY - 255);
+
+
+        // Feste Punkte definieren
+        float fixedBottomY = groundY - 780 + _goalTexture.Height; // Unterer Punkt bleibt fest
+        float leftGoalInnerX = 200;  // Innerer Punkt des linken Tors (rechte Kante)
+        float rightGoalInnerX = _graphics.PreferredBackBufferWidth - 200; // Innerer Punkt des rechten Tors (linke Kante)
+
+        // Linkes Tor: Wächst nach links und oben
+        // X-Position: innerer Punkt minus Breite = linke Kante
+        // Y-Position: unterer Punkt minus Höhe = obere Kante  
+        _leftGoalPosition = new Vector2(leftGoalInnerX - goalWidth, fixedBottomY - goalHeight);
+
+        // Rechtes Tor: Wächst nach rechts und oben
+        // X-Position: innerer Punkt = linke Kante (Tor wächst nach rechts)
+        // Y-Position: unterer Punkt minus Höhe = obere Kante
+        _rightGoalPosition = new Vector2(rightGoalInnerX, fixedBottomY - goalHeight);
+
         scoreFont = Content.Load<SpriteFont>("Arial");
 
         _tribuneTexture = Content.Load<Texture2D>("TribueneLang");

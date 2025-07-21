@@ -193,7 +193,6 @@ C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\ronaldo.x
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\firefootball.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\icefootball.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\mariopixel.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
@@ -287,3 +286,4 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\ronaldo.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario2.xnb
