@@ -79,6 +79,8 @@ public class GameLogic : GameState
     float goalScale = 0.4f;
     int goalWidth;
     int goalHeight;
+    Microsoft.Xna.Framework.Rectangle leftGoal;
+    Microsoft.Xna.Framework.Rectangle rightGoal;
 
     //Tore Counter
     private int scorePlayer1 = 0;
@@ -101,6 +103,8 @@ public class GameLogic : GameState
     float greenAreaY;
     float centerX;
     float tribuneSpacing;
+
+
 
 
 
@@ -324,8 +328,8 @@ public class GameLogic : GameState
     private void check_for_goal()
     {
         //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
-        Microsoft.Xna.Framework.Rectangle leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth, goalHeight);
-        Microsoft.Xna.Framework.Rectangle rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
+        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth, goalHeight);
+        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
 
         Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
 
