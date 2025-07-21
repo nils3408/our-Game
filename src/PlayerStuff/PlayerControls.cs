@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -60,23 +61,66 @@ public class PlayerControls
     public Keys getKey(PlayerAction action)
     {
         return controlKeys[(int)action];
-    }
+    } 
 
-
+    
 }
 
-public class ContraolsEditor: UIElement
+public class ContraolsEditor : UIElement
 {
     public PlayerControls controls;
-    public ContraolsEditor() : base() { }
+
+    ElementContainer container = new ElementContainer();
+
+    public ContraolsEditor(PlayerControls controls) : base()
+    {
+        this.controls = controls;
+
+        
+    }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        throw new System.NotImplementedException();
+        container.Draw(spriteBatch);
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        container.Update();
+    }
+}
+
+public class KeyEditor : UIElement
+{
+    Keys key;
+    String description;
+
+    HorizontalContainer HContainer;
+
+
+    public KeyEditor(Keys key, String description) : base()
+    {
+        this.key = key;
+        this.description = description;
+
+        HContainer = new HorizontalContainer();
+
+        Point TextfielSize = new Point(250, 100);
+        Textfield text = new Textfield(description, TextfielSize);
+        HContainer.Add(text);
+
+        Textfield selKey = new Textfield(key.ToString(), TextfielSize);
+        HContainer.Add(text);
+
+    }
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        HContainer.Draw(spriteBatch);
+    }
+
+    public override void Update()
+    {
+        HContainer.Update();
     }
 }
