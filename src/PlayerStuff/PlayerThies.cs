@@ -38,8 +38,8 @@ public class PlayerThies
         {
             [(int)PlayerAction.Left] = new Vector2(-1, 0),    //Left
             [(int)PlayerAction.Right] = new Vector2(1, 0),     //Right
-            [(int)PlayerAction.Up] = new Vector2(0, 1),     //Up
-            [(int)PlayerAction.Down] = new Vector2(0, -1)     //Down
+            [(int)PlayerAction.Jump] = new Vector2(0, 1),     //Up
+            //[(int)PlayerAction.Down] = new Vector2(0, -1)     //Down
         };
 
         Vector2 result = new Vector2(0, 0);

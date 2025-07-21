@@ -12,9 +12,9 @@ public static class PlayerFactory
 
     /**
     Zum erzeugen von PlayerTypes mit CreatePlayer(), muss stetig angepasst werden! 
-    Erspart mir aber doppelt gemoppelt das selbe zu tun weil ich die Texturen im SetupGame brauche, Texturen können mit GetPlayerTexture nachgefragt werden.
-    Man könnte sagen das es dem Factory Pattern entspricht, aber sicher bin ich mir da nicht.
-    //beim hinzufügen von PlayerTypen den enum sowie TypesCount anpassen, wenn euch n besserer Name einfällt für TypesCount bitte komentieren lol
+    Erspart mir aber doppelt gemoppelt das selbe zu tun weil ich die Texturen im SetupGame brauche, Texturen kï¿½nnen mit GetPlayerTexture nachgefragt werden.
+    Man kï¿½nnte sagen das es dem Factory Pattern entspricht, aber sicher bin ich mir da nicht.
+    //beim hinzufï¿½gen von PlayerTypen den enum sowie TypesCount anpassen, wenn euch n besserer Name einfï¿½llt fï¿½r TypesCount bitte komentieren lol
     //Das und dann nicht vergessen, die Texture zu laden in der Initialize Methode
     */
 
@@ -46,43 +46,43 @@ public static class PlayerFactory
         playerTextures[(int)Types.Mario] = Content.Load<Texture2D>("Mario2");
     }
 
-    public static Player CreatePlayer(Types playerType, Vector2 position, int id)
+    public static Player CreatePlayer(Types playerType, Vector2 position, int id, PlayerControls controls)
     {
         switch (playerType)
         {
             case Types.Standart:
-                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             case Types.Sonic:
-                return new Sonic(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                return new Sonic(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             case Types.Spiderman:
-                return new Spiderman(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                return new Spiderman(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             case Types.Knight:
-                return new Knight(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                return new Knight(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             case Types.Ninja:
-                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             case Types.Mario:
-                return new Mario(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                return new Mario(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             default:
-                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id);
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
         }
     }
 
-    //erstellt Player, Position ist da erstmal egal, weil das in GameLogic abhängig ist von GroundY, korrigiere ich die Positionen dann auch dort
+    //erstellt Player, Position ist da erstmal egal, weil das in GameLogic abhï¿½ngig ist von GroundY, korrigiere ich die Positionen dann auch dort
     public static Player CreatePlayer(Types playerType, bool left)
     {
         if (left)
         {
-            return CreatePlayer(playerType, Vector2.Zero, 1);
+            return CreatePlayer(playerType, Vector2.Zero, 1, PlayerControls.getStandartLeft());
         }
         else
         {
-            return CreatePlayer(playerType, Vector2.Zero, 2);
+            return CreatePlayer(playerType, Vector2.Zero, 2, PlayerControls.getStandartRight());
         }
     }
 

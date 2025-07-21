@@ -9,8 +9,8 @@ public class Spiderman: Player
     private int counter;
 
     //Konstruktor for Spiderman
-    public Spiderman(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
-              : base(graphicsDevice, position1, texture1, player)
+    public Spiderman(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)
+              : base(graphicsDevice, position1, texture1, player, controls)
     {}
 
 
@@ -38,10 +38,10 @@ public class Spiderman: Player
         Vector2 newPos = new Vector2(position.X, newY);
         Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
 
-        // Prüfe Kollision mit anderem Spieler
+        // Prï¿½fe Kollision mit anderem Spieler
         if (testRect.Intersects(otherPlayer.currentRect))
         {
-            // Prüfe ob der Spieler von oben auf den anderen Spieler fällt
+            // Prï¿½fe ob der Spieler von oben auf den anderen Spieler fï¿½llt
             if (velocity.Y > 0 && position.Y + RectangleHeight <= otherPlayer.position.Y + 10) // 10 ist Toleranz
             {
                 // Spieler landet auf dem anderen Spieler
@@ -51,7 +51,7 @@ public class Spiderman: Player
             }
             else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + otherPlayer.RectangleHeight - 10)
             {
-                // Spieler stößt von unten gegen den anderen Spieler
+                // Spieler stï¿½ï¿½t von unten gegen den anderen Spieler
                 position.Y = otherPlayer.position.Y + otherPlayer.RectangleHeight;
                 velocity.Y = 0;
             }
@@ -67,7 +67,7 @@ public class Spiderman: Player
             position.Y = newY;
         }
 
-        // Prüfe Kollision mit Boden
+        // Prï¿½fe Kollision mit Boden
         if (position.Y >= groundY)
         {
             position.Y = groundY;

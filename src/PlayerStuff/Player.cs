@@ -57,6 +57,8 @@ public class Player
     public DateTime activation_time_powerUp1 = DateTime.MinValue;
     public DateTime activation_time_powerUp2 = DateTime.MinValue;
 
+    public PlayerControls controls;
+
 
     /*
      * -------------------------------------------------
@@ -86,10 +88,10 @@ public class Player
      */
 
 
-    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
+    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)
     {
         position = position1;
- 
+
         playerGroup = player;
         texture = texture1;
         currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
@@ -98,6 +100,7 @@ public class Player
         strength = 1;
         move_speed2 = move_speed;
 
+        this.controls = controls;
     }
 
 
@@ -115,6 +118,17 @@ public class Player
     public void set_groundY_to_original_value()
     {
         groundY = groundY_copy;
+    }
+
+    public void handle_input(float delta)
+    { 
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Left))) move(delta, -1);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Right))) move(delta, 1);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position)) jump(delta);
+
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Special))) do_special_effect(delta);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP1();
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP2();
     }
 
     public virtual void do_special_effect(float delta)

@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,7 +14,7 @@ public class Game1 : Game
     private static IGameState curState;
     public static IGameState nextState;
 
-    public static GameLogic game;
+    public static List<GameLogic> openGames;
     public static Menu menu;
     public static Settings settings;
     public static GameSetup setup;
@@ -31,6 +33,8 @@ public class Game1 : Game
 
         graphics.PreferredBackBufferWidth = 1920;
         graphics.PreferredBackBufferHeight = 1080;
+
+        openGames = new List<GameLogic>();
     }
 
     protected override void Initialize()
@@ -38,14 +42,13 @@ public class Game1 : Game
         PrimitiveDrawer.Initialize(GraphicsDevice, Content);
         PlayerFactory.Initialize(GraphicsDevice, Content);
 
-        game = new GameLogic(this);
+
         setup = new GameSetup(this);
 
         menu = new Menu(this);
         settings = new Settings(this);
 
         // Initializing each GameState
-        game.Initialize();
         menu.Initialize();
         settings.Initialize();
         setup.Initialize();
@@ -62,7 +65,6 @@ public class Game1 : Game
 
         // load Content for each GameState
         menu.LoadContent();
-        game.LoadContent();
         settings.LoadContent();
     }
 
@@ -86,6 +88,16 @@ public class Game1 : Game
 
         curState.Draw(gameTime);
         base.Draw(gameTime);
+    }
+
+// kann ich nicht nutzen in den GameStates, da Game1 als einfaches Game übergeben wird
+    public void OpenNewGame(Player leftPlayer, Player rightPlayer)
+    {
+        GameLogic newGame = new GameLogic(this, leftPlayer, rightPlayer);
+        newGame.Initialize();
+        newGame.LoadContent();
+        openGames.Add(newGame);
+        nextState = newGame;
     }
 
 

@@ -55,13 +55,13 @@ public class GameSetup : GameState
                 Console.WriteLine($"start Game");
                 Player leftPlayer = PlayerFactory.CreatePlayer(leftSelection.playerType, true);
                 Player rightPlayer = PlayerFactory.CreatePlayer(rightSelection.playerType, false);
+
                 GameLogic newGame = new GameLogic(game, leftPlayer, rightPlayer);
                 newGame.Initialize();
                 newGame.LoadContent();
-
-                Game1.game = newGame;
+                Game1.openGames.Add(newGame);
+                
                 Game1.nextState = newGame;
-                Game1.GameIsInitialized = true;
             }
             else
             {

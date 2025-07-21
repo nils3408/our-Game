@@ -21,8 +21,8 @@ public class Sonic: Player
 
 
     //Konstruktor for Sonic
-    public Sonic(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
-              : base(graphicsDevice, position1, texture1, player)
+    public Sonic(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)
+              : base(graphicsDevice, position1, texture1, player, controls)
     {}
 
 

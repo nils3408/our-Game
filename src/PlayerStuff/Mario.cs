@@ -9,14 +9,14 @@ public class Mario : Player
 {
    
 
-    public Mario(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player)
-              : base(graphicsDevice, position1, texture1, player)
+    public Mario(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)
+              : base(graphicsDevice, position1, texture1, player, controls)
     { }
 
     public override void do_special_effect(float delta)
     {
 
-        velocity.Y = 500f; // erhöhte Gravitation für schnelleren Fall
+        velocity.Y = 500f; // erhï¿½hte Gravitation fï¿½r schnelleren Fall
      
     }
 }

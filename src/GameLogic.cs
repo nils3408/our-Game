@@ -126,8 +126,8 @@ public class GameLogic : GameState
        */
 
         //Initiert nur Player wenn es durch den neuen Konstruktor nicht vorher gelöscht wird, Zeilen könnten auch gelöscht werden eigentlich, später!
-        if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
-        if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
+        //if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
+        //if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
 
         powerUpTextures = new()
         {
@@ -255,26 +255,12 @@ public class GameLogic : GameState
 
 
         //Player 1
-        if (state.IsKeyDown(Keys.A)) player1.move(delta, -1);
-        if (state.IsKeyDown(Keys.D)) player1.move(delta, 1);
-        if (state.IsKeyDown(Keys.W) && player1.IsOnGround(player1.position))
-            player1.jump(delta);
-
-        if (state.IsKeyDown(Keys.E)) player1.do_special_effect(delta);
-        if (state.IsKeyDown(Keys.R)) player1.activate_powerUP1();
-        if (state.IsKeyDown(Keys.F)) player1.activate_powerUP2();
+        player1.handle_input(delta);
 
 
         // player 2
         // {J K L I} statt {W S A D}
-        if (state.IsKeyDown(Keys.J)) player2.move(delta, -1);
-        if (state.IsKeyDown(Keys.L)) player2.move(delta, 1);
-        if (state.IsKeyDown(Keys.I) && player2.IsOnGround(player2.position))
-            player2.jump(delta);
-
-        if (state.IsKeyDown(Keys.O)) player2.do_special_effect(delta);
-        if (state.IsKeyDown(Keys.P)) player2.activate_powerUP1();
-        if (state.IsKeyDown(Keys.OemPeriod)) player2.activate_powerUP2();
+        player2.handle_input(delta);
 
 
     }

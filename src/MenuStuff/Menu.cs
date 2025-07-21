@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using our_Game;
 using System;
+using System.Linq;
 
 public class Menu : GameState
 {
@@ -18,7 +19,7 @@ public class Menu : GameState
 
         Point ButtonSize = new Point(300, 100);
 
-        if (!Game1.GameIsInitialized)
+        if (Game1.openGames.Count() == 0)
         {
 
             SimpleButton gameButton = new SimpleButton(ButtonSize, "New Game", font);
@@ -28,7 +29,7 @@ public class Menu : GameState
         } else { 
 
         SimpleButton setupButton = new SimpleButton(ButtonSize, "Resume", font);
-        setupButton.OnClick += () => Game1.nextState = Game1.game;
+        setupButton.OnClick += () => Game1.nextState = Game1.openGames.First();
         buttonContainer.Add(setupButton);
         }
 
