@@ -214,7 +214,7 @@ public class GameLogic : GameState
         if (InputHandler.IsReleased(Keys.Escape))
         {
             System.Diagnostics.Debug.WriteLine("escape!");
-            Game1.GameIsInitialized = false;
+            //Game1.GameIsInitialized = false;
             Game1.nextState = new Menu(baseGame);
 
         }

@@ -14,7 +14,10 @@ public class Settings : GameState
 
         SpriteFont font = Content.Load<SpriteFont>("Arial");
         SimpleButton homeButton = new SimpleButton(new Point(20, 20), new Point(200, 100), "Home", font);
-        homeButton.OnClick += () => Game1.nextState = Game1.menu;
+        homeButton.OnClick += () =>
+        {
+            Game1.nextState = new Menu(baseGame);
+        };
         container.Add(homeButton);
 
         HorizontalContainer H1 = new HorizontalContainer();
@@ -49,7 +52,7 @@ public class Settings : GameState
         if (InputHandler.IsReleased(Keys.Escape))
         {
             System.Diagnostics.Debug.WriteLine("escape!");
-            Game1.nextState = Game1.menu;
+            Game1.nextState = new Menu(baseGame);
         }
         
     }

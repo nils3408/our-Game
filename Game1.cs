@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Xml.Serialization;
+using System.IO;
+using System;
 
 namespace our_Game;
 
@@ -15,7 +18,7 @@ public class Game1 : Game
     public static IGameState nextState;
 
     public static List<GameLogic> openGames;
-    public static Menu menu;
+    //public static Menu menu;
     public static Settings settings;
     public static GameSetup setup;
     public static bool GameIsInitialized = false;
@@ -47,18 +50,21 @@ public class Game1 : Game
         PrimitiveDrawer.Initialize(GraphicsDevice, Content);
         PlayerFactory.Initialize(GraphicsDevice, Content);
 
-        settings = new Settings(this);
-        setup = new GameSetup(this);
+        LoadSavedData();
+        this.Exiting += OnExiting;
 
-        menu = new Menu(this);
         
+        setup = new GameSetup(this);
+settings = new Settings(this);
+        //menu = new Menu(this);
+
 
         // Initializing each GameState
-        menu.Initialize();
+
         settings.Initialize();
         setup.Initialize();
 
-        curState = menu;
+        curState = new Menu(this);
         nextState = curState;
 
         base.Initialize();
@@ -69,7 +75,7 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // load Content for each GameState
-        menu.LoadContent();
+
         settings.LoadContent();
     }
 
@@ -77,7 +83,11 @@ public class Game1 : Game
     {
         InputHandler.Update();
 
-        if (nextState == null) Exit();
+        if (nextState == null)
+        {
+            SaveData();
+            Exit();
+        }
         if (nextState != null && nextState != curState) curState = nextState;
 
         // update current Game State
@@ -95,7 +105,7 @@ public class Game1 : Game
         base.Draw(gameTime);
     }
 
-// kann ich nicht nutzen in den GameStates, da Game1 als einfaches Game übergeben wird
+    // kann ich nicht nutzen in den GameStates, da Game1 als einfaches Game übergeben wird
     public void OpenNewGame(Player leftPlayer, Player rightPlayer)
     {
         GameLogic newGame = new GameLogic(this, leftPlayer, rightPlayer);
@@ -105,5 +115,72 @@ public class Game1 : Game
         nextState = newGame;
     }
 
+    public void GoToMenu()
+    { 
+        Game1.nextState = new Menu(this);
+    }
 
+
+    private static void LoadSavedData()
+    {
+        try
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(GameData));
+            using (FileStream fs = new FileStream("GameData.xml", FileMode.Open))
+            {
+                GameData gameData = (GameData)serializer.Deserialize(fs);
+
+                // Hier musst du die geladenen Daten verwenden:
+                leftPlayerControls = gameData.leftPlayerControls;
+                rightPlayerControls = gameData.rightPlayerControls;
+            }
+        }
+        catch (FileNotFoundException)
+        {
+            // Datei existiert noch nicht - verwende Standardwerte
+            Console.WriteLine("Keine gespeicherten Daten gefunden.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fehler beim Laden: {ex.Message}");
+        }
+    }
+
+    public static void SaveData()
+    {
+        try
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(GameData));
+            GameData gameData = new GameData(leftPlayerControls, rightPlayerControls);
+            using (FileStream fs = new FileStream("GameData.xml", FileMode.Create))
+            {
+                serializer.Serialize(fs, gameData);
+            }
+            Console.WriteLine("Daten erfolgreich gespeichert!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fehler beim Speichern: {ex.Message}");
+        }
+    }
+
+    private void OnExiting(object sender, EventArgs e)
+    {
+        SaveData();
+    }
+}
+
+public class GameData
+{
+    public PlayerControls leftPlayerControls;
+    public PlayerControls rightPlayerControls;
+    
+    // Parameterloser Konstruktor für XML-Serialisierung erforderlich!
+    public GameData() { }
+    
+    public GameData(PlayerControls leftPlayerControls, PlayerControls rightPlayerControls)
+    {
+        this.leftPlayerControls = leftPlayerControls;
+        this.rightPlayerControls = rightPlayerControls;
+    }
 }

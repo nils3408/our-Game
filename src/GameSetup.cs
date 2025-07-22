@@ -32,7 +32,7 @@ public class GameSetup : GameState
         textfield.MoveCenter(new Point(ScreenCenter.X, spacing + textfield.GetBounds().Height / 2));
 
         SimpleButton homeButton = new SimpleButton(new Point(spacing, spacing), new Point(200, 100), "Home", font);
-        homeButton.OnClick += () => Game1.nextState = Game1.menu;
+        homeButton.OnClick += () => Game1.nextState = new Menu(baseGame);
         
         container.Add(homeButton);
 
@@ -92,7 +92,7 @@ public class GameSetup : GameState
         if (InputHandler.IsReleased(Keys.Escape))
         {
             System.Diagnostics.Debug.WriteLine("escape!");
-            Game1.nextState = Game1.menu;
+            Game1.nextState = new Menu(baseGame);
         }
 
         container.Update();

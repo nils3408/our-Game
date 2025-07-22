@@ -26,11 +26,11 @@ public class Menu : GameState
             gameButton.OnClick += () => Game1.nextState = new GameSetup(baseGame);
             buttonContainer.Add(gameButton);
 
-        } else { 
+        } else {
 
-        SimpleButton setupButton = new SimpleButton(ButtonSize, "Resume", font);
-        setupButton.OnClick += () => Game1.nextState = Game1.openGames.First();
-        buttonContainer.Add(setupButton);
+            SimpleButton setupButton = new SimpleButton(ButtonSize, "Resume", font);
+            setupButton.OnClick += () => Game1.nextState = Game1.openGames.First();
+            buttonContainer.Add(setupButton);
         }
 
         SimpleButton settingsButton = new SimpleButton(ButtonSize, "Settings", font);
@@ -38,7 +38,7 @@ public class Menu : GameState
         buttonContainer.Add(settingsButton);
 
         SimpleButton exitButton = new SimpleButton(ButtonSize, "Exit", font);
-        exitButton.OnClick += () => game.Exit();
+        exitButton.OnClick += () => { Game1.SaveData(); game.Exit(); };
         buttonContainer.Add(exitButton);
         
         buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight/2));
