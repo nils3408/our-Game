@@ -109,13 +109,18 @@ public static class PrimitiveDrawer
                 bounds.Top + (bounds.Height - textSize.Y) / 2
             );
 
-            spriteBatch.DrawString(font, text, textPosition, Color.Black);
+            spriteBatch.DrawString(font, text, textPosition, color);
         }
     }
 
     public static Vector2 PointToVector2(Point point)
     {
         return new Vector2(point.X, point.Y);
+    }
+
+    public static SpriteFont getFont()
+    { 
+        return font;
     }
 
     

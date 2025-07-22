@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -21,6 +22,13 @@ public class PlayerControls
     private Keys[] controlKeys = { Keys.A, Keys.D, Keys.W, Keys.S, Keys.Space, Keys.E };
     private Dictionary<Keys, PlayerAction> keyToAction = new Dictionary<Keys, PlayerAction>();
 
+    public Keys Left{ get; private set; }
+    public Keys Right{ get; private set; }
+    public Keys Jump{ get; private set; }
+    public Keys Special{ get; private set; }
+    public Keys PowerUp_1{ get; private set; }
+    public Keys PowerUp_2{ get; private set; }
+
     public PlayerControls(Keys[] keys)
     {
         this.controlKeys = keys;
@@ -28,6 +36,7 @@ public class PlayerControls
         {
             this.keyToAction[keys[i]] = (PlayerAction)i;
         }
+        syncPublicFields(controlKeys);
     }
 
     public void editKey(PlayerAction action, Keys key)
@@ -37,6 +46,7 @@ public class PlayerControls
         {
             keyToAction[key] = action;
         }
+        syncPublicFields(controlKeys);
     }
 
 
@@ -61,66 +71,83 @@ public class PlayerControls
     public Keys getKey(PlayerAction action)
     {
         return controlKeys[(int)action];
-    } 
+    }
 
-    
+    private void syncPublicFields(Keys[] keys)
+    {
+        Left = keys[(int)PlayerAction.Left];
+        Right = keys[(int)PlayerAction.Right];
+        Jump = keys[(int)PlayerAction.Jump];
+        Special = keys[(int)PlayerAction.Special];
+        PowerUp_1 = keys[(int)PlayerAction.PowerUp_1];
+        PowerUp_2 = keys[(int)PlayerAction.PowerUp_2];
+    }
 }
 
-public class ContraolsEditor : UIElement
+public class ControlsEditor : StackContainer
 {
-    public PlayerControls controls;
+    public PlayerControls controls { get; }
 
-    ElementContainer container = new ElementContainer();
 
-    public ContraolsEditor(PlayerControls controls) : base()
+    public ControlsEditor(PlayerControls controls) : base()
     {
         this.controls = controls;
 
-        
+        AddKeyEditor(PlayerAction.Left, "Move Left");
+
+
+        AddKeyEditor(PlayerAction.Right, "Move Right");
+
+        AddKeyEditor(PlayerAction.Jump, "Jump Up");
+
+        AddKeyEditor(PlayerAction.Special, "Special Move");
+
+        AddKeyEditor(PlayerAction.PowerUp_1, "PowerUp 1");
+
+        AddKeyEditor(PlayerAction.PowerUp_2, "PowerUp 2");
+
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    private void AddKeyEditor(PlayerAction action, String text)
     {
-        container.Draw(spriteBatch);
+        KeyEditor editor = new KeyEditor(controls.getKey(action), text);
+        editor.selector.OnKeySelected += () =>
+        {
+            controls.editKey(action, editor.selector.key);
+        };
+        base.Add(editor);
     }
+    
 
-    public override void Update()
-    {
-        container.Update();
-    }
 }
 
-public class KeyEditor : UIElement
+public class KeyEditor : HorizontalContainer
 {
-    Keys key;
     String description;
 
-    HorizontalContainer HContainer;
+    public Point textfieldSize;
+    public Point keyFieldSize;
 
+    public KeySelector selector { get; }
 
     public KeyEditor(Keys key, String description) : base()
     {
-        this.key = key;
         this.description = description;
 
-        HContainer = new HorizontalContainer();
+        textfieldSize = new Point(350, 100);
+        keyFieldSize = new Point(200, 100);
 
-        Point TextfielSize = new Point(250, 100);
-        Textfield text = new Textfield(description, TextfielSize);
-        HContainer.Add(text);
+        base.SetSpacing(7);
 
-        Textfield selKey = new Textfield(key.ToString(), TextfielSize);
-        HContainer.Add(text);
+        Textfield text = new Textfield(description, textfieldSize);
+        text.backgroundColor = Color.White;
+        text.IsSetToDrawOutline = true;
+        base.Add(text);
+
+        selector = new KeySelector(keyFieldSize, key);
+        selector.IsSetToDrawOutline = true;
+        base.Add(selector);
 
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        HContainer.Draw(spriteBatch);
-    }
-
-    public override void Update()
-    {
-        HContainer.Update();
-    }
 }

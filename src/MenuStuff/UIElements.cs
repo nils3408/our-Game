@@ -13,12 +13,12 @@ public abstract class UIElement
 {
     public UIElement parent = null;
 
-    protected Point relPos = Point.Zero;
+    public Point relPos = Point.Zero;
     public Point Size = Point.Zero;
 
-    protected bool IsSetToDrawOutline = false;
-    protected Color outlineColor = Color.White;
-    protected int thickness = 1;
+    public bool IsSetToDrawOutline = false;
+    public Color outlineColor = Color.Black;
+    public int outlineThickness = 1;
 
     public UIElement() { }
     public UIElement(Point Size)
@@ -84,13 +84,13 @@ public abstract class UIElement
     {
         IsSetToDrawOutline = true;
         outlineColor = color;
-        this.thickness = thickness;
+        this.outlineThickness = thickness;
     }
 
     protected void Outline(SpriteBatch spriteBatch)
     { 
         if (IsSetToDrawOutline)
-            PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), outlineColor, thickness);
+            PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), outlineColor, outlineThickness);
 
     }
 
@@ -178,7 +178,7 @@ public class ElementContainer : UIElement
 public class StackContainer : ElementContainer
 {
 
-    protected int spacing = 0;
+    public int spacing = 0;
 
     protected Point _Offset = Point.Zero;
 
@@ -264,7 +264,9 @@ public class HorizontalContainer : ElementContainer
 
 public class Textfield : UIElement
 {
-    private String text = "";
+    public String text = "";
+
+    public Color backgroundColor;
 
     public Textfield(string text, Point size) : base(size)
     {
@@ -272,7 +274,9 @@ public class Textfield : UIElement
     }
     public override void Draw(SpriteBatch spriteBatch)
     {
-        PrimitiveDrawer.DrawText(spriteBatch, new Rectangle(relPos, Size), text, Color.Black);
+        if(backgroundColor != null)PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), backgroundColor);
+        PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), text, Color.Black);
+
         Outline(spriteBatch);
     }
 

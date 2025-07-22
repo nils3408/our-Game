@@ -16,7 +16,7 @@ public class SimpleButton : UIElement
     Color colorOnHover = new Color(234, 234, 234);
     Color colorOutline = new Color(96, 96, 96);
 
-    String text = "";
+    public String text = "";
     SpriteFont font = null;
 
     bool isHovered = false;
@@ -86,6 +86,7 @@ public class SimpleButton : UIElement
 
 
             spriteBatch.DrawString(font, text, textPosition, Color.Black);
+            
         }
     }
 
@@ -184,5 +185,59 @@ public class TriangleButton : UIElement
     public void ToggleFlip()
     {
         flip = true;
+    }
+}
+
+public class KeySelector : UIElement
+{
+    public Keys key;
+    public KeySelector(Point Size, Keys key) : base(Size)
+    {
+        this.key = key;
+    }
+
+    public Color backgroundColor = Color.White;
+    public Color isSelectedColor = Color.LightGoldenrodYellow;
+
+    public bool isSelected = false;
+    private bool isHovered = false;
+    public event Action OnKeySelected;
+
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+
+        if (isSelected)
+        {
+            PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), isSelectedColor);
+            PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), "_", Color.Red);
+        }
+        else
+        {
+            PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), backgroundColor);
+            PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), key.ToString(), Color.Black);
+        }
+
+        Outline(spriteBatch);
+    }
+
+    public override void Update()
+    {
+        MouseState mouseState = Mouse.GetState();
+        Point mousePos = new Point(mouseState.X, mouseState.Y);
+        isHovered = GetBounds().Contains(mousePos);
+
+        // Check for click
+        if (isHovered && InputHandler.IsMouseLeftReleased())
+        {
+            isSelected = true;
+        }
+        if (isSelected && Keyboard.GetState().GetPressedKeyCount() > 0)
+        {
+            key = Keyboard.GetState().GetPressedKeys()[0];
+            OnKeySelected.Invoke();
+            isSelected = false;
+        }
+
     }
 }

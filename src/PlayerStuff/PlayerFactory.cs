@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 
 using System;
+using our_Game;
 
 
 public static class PlayerFactory
@@ -78,11 +79,11 @@ public static class PlayerFactory
     {
         if (left)
         {
-            return CreatePlayer(playerType, Vector2.Zero, 1, PlayerControls.getStandartLeft());
+            return CreatePlayer(playerType, Vector2.Zero, 1, Game1.leftPlayerControls);
         }
         else
         {
-            return CreatePlayer(playerType, Vector2.Zero, 2, PlayerControls.getStandartRight());
+            return CreatePlayer(playerType, Vector2.Zero, 2, Game1.rightPlayerControls);
         }
     }
 

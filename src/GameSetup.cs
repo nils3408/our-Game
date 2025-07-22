@@ -37,12 +37,25 @@ public class GameSetup : GameState
         container.Add(homeButton);
 
 
+
+
+
+
         HorizontalContainer H1 = new HorizontalContainer();
         H1.SetSpacing(30);
+
+        ControlsEditor leftPlayerControls = new ControlsEditor(Game1.leftPlayerControls);
+        H1.Add(leftPlayerControls);
+
         PlayerSelection leftSelection = new PlayerSelection(Content);
-        PlayerSelection rightSelection = new PlayerSelection(Content);
         H1.Add(leftSelection);
+
+        PlayerSelection rightSelection = new PlayerSelection(Content);
         H1.Add(rightSelection);
+
+        ControlsEditor rightPlayerControls = new ControlsEditor(Game1.rightPlayerControls);
+        H1.Add(rightPlayerControls);
+        
         H1.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
         container.Add(H1);
 
@@ -53,15 +66,15 @@ public class GameSetup : GameState
             if (leftSelection.isChoosen && rightSelection.isChoosen)
             {
                 Console.WriteLine($"start Game");
+                
                 Player leftPlayer = PlayerFactory.CreatePlayer(leftSelection.playerType, true);
                 Player rightPlayer = PlayerFactory.CreatePlayer(rightSelection.playerType, false);
 
                 GameLogic newGame = new GameLogic(game, leftPlayer, rightPlayer);
                 newGame.Initialize();
                 newGame.LoadContent();
-                Game1.openGames.Add(newGame);
-                
                 Game1.nextState = newGame;
+                Game1.openGames.Add(newGame);
             }
             else
             {
@@ -136,10 +149,7 @@ public class ShowPlayerType : UIElement
         return (PlayerFactory.Types) curIndex;
     }
 
-    public override void Update()
-    {
-
-    }
+    public override void Update(){}
 }
 
 //Die Box wo man den Player auswählen kann
@@ -196,11 +206,6 @@ public class PlayerSelection : StackContainer
 
         //buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
         base.SetDrawOutline(outlineColor, 3);
-    }
-
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        base.Draw(spriteBatch);
     }
 
     public override void Update()

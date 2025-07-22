@@ -20,6 +20,9 @@ public class Game1 : Game
     public static GameSetup setup;
     public static bool GameIsInitialized = false;
 
+    public static PlayerControls leftPlayerControls;
+    public static PlayerControls rightPlayerControls;
+
 
 
     public Game1()
@@ -35,6 +38,8 @@ public class Game1 : Game
         graphics.PreferredBackBufferHeight = 1080;
 
         openGames = new List<GameLogic>();
+        leftPlayerControls = PlayerControls.getStandartLeft();
+        rightPlayerControls = PlayerControls.getStandartRight();
     }
 
     protected override void Initialize()
@@ -42,11 +47,11 @@ public class Game1 : Game
         PrimitiveDrawer.Initialize(GraphicsDevice, Content);
         PlayerFactory.Initialize(GraphicsDevice, Content);
 
-
+        settings = new Settings(this);
         setup = new GameSetup(this);
 
         menu = new Menu(this);
-        settings = new Settings(this);
+        
 
         // Initializing each GameState
         menu.Initialize();
