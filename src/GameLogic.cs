@@ -41,6 +41,7 @@ using System.Collections.Generic;
 //using System.Drawing;
 //using System.Runtime.CompilerServices;
 using our_Game;
+using System.Security.Cryptography.X509Certificates;
 
 
 public class GameLogic : GameState
@@ -76,7 +77,8 @@ public class GameLogic : GameState
 
     private float groundY = 550;
 
-    float goalScale = 0.4f;
+    public float goalScale = 0.4f;
+    public float goalScale_copy = 0.4f;
     int goalWidth;
     int goalHeight;
     Microsoft.Xna.Framework.Rectangle leftGoal;
@@ -151,27 +153,10 @@ public class GameLogic : GameState
     {
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
         _backgroundTexture = Content.Load<Texture2D>("Spielfeld3");
+       
         _goalTexture = Content.Load<Texture2D>("Tore");
-
-        goalWidth = (int)(_goalTexture.Width * goalScale);
-        goalHeight = (int)(_goalTexture.Height * goalScale);
-
-
-
-        // Feste Punkte definieren
-        float fixedBottomY = groundY - 780 + _goalTexture.Height; // Unterer Punkt bleibt fest
-        float leftGoalInnerX = 200;  // Innerer Punkt des linken Tors (rechte Kante)
-        float rightGoalInnerX = _graphics.PreferredBackBufferWidth - 200; // Innerer Punkt des rechten Tors (linke Kante)
-
-        // Linkes Tor: Wächst nach links und oben
-        // X-Position: innerer Punkt minus Breite = linke Kante
-        // Y-Position: unterer Punkt minus Höhe = obere Kante  
-        _leftGoalPosition = new Vector2(leftGoalInnerX - goalWidth, fixedBottomY - goalHeight);
-
-        // Rechtes Tor: Wächst nach rechts und oben
-        // X-Position: innerer Punkt = linke Kante (Tor wächst nach rechts)
-        // Y-Position: unterer Punkt minus Höhe = obere Kante
-        _rightGoalPosition = new Vector2(rightGoalInnerX, fixedBottomY - goalHeight);
+        set_goal_size();
+        update_goal_positions();
 
         scoreFont = Content.Load<SpriteFont>("Arial");
 
@@ -207,6 +192,7 @@ public class GameLogic : GameState
         player2.reset_powerUp1_if_time_is_over();
         player2.reset_powerUp2_if_time_is_over();
         football.reset_powerUps_if_time_is_over();
+        
 
 
 
@@ -345,6 +331,7 @@ public class GameLogic : GameState
             player1.reset_rect_size();
             player2.reset_rect_size();
             update_all_item_positions();
+            reset_goal_size();
 
         }
 
@@ -359,6 +346,7 @@ public class GameLogic : GameState
             player1.reset_rect_size();
             player2.reset_rect_size();
             update_all_item_positions();
+            reset_goal_size();
         }
     }
 
@@ -416,11 +404,13 @@ public class GameLogic : GameState
         player1.position = new Vector2(60, exakter_ground_y);
         player1.starting_position = new Vector2(60, exakter_ground_y);
         player1.set_groundYs(exakter_ground_y);
+        player1.GameLogic_object = this;
 
         player2 = right;
         player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
         player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
         player2.set_groundYs(exakter_ground_y);
+        player2.GameLogic_object = this;
 
     }
 
@@ -449,6 +439,39 @@ public class GameLogic : GameState
     {
         if (scorePlayer1 > 12 || scorePlayer2 > 12) return true;
         return false;
+    }
+
+
+    public void set_goal_size()
+    {
+        goalWidth = (int)(_goalTexture.Width * goalScale);
+        goalHeight = (int)(_goalTexture.Height * goalScale);
+
+        update_goal_positions();
+    }
+
+    public void reset_goal_size()
+    {
+        goalScale = goalScale_copy;
+        set_goal_size();
+    }
+
+    public void update_goal_positions()
+    {
+        // Feste Punkte definieren
+        float fixedBottomY = groundY - 780 + _goalTexture.Height; // Unterer Punkt bleibt fest
+        float leftGoalInnerX = 200;  // Innerer Punkt des linken Tors (rechte Kante)
+        float rightGoalInnerX = _graphics.PreferredBackBufferWidth - 200; // Innerer Punkt des rechten Tors (linke Kante)
+
+        // Linkes Tor: Wächst nach links und oben
+        // X-Position: innerer Punkt minus Breite = linke Kante
+        // Y-Position: unterer Punkt minus Höhe = obere Kante  
+        _leftGoalPosition = new Vector2(leftGoalInnerX - goalWidth, fixedBottomY - goalHeight);
+
+        // Rechtes Tor: Wächst nach rechts und oben
+        // X-Position: innerer Punkt = linke Kante (Tor wächst nach rechts)
+        // Y-Position: unterer Punkt minus Höhe = obere Kante
+        _rightGoalPosition = new Vector2(rightGoalInnerX, fixedBottomY - goalHeight);
     }
 }
 

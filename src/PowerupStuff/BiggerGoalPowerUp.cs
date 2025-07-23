@@ -20,16 +20,12 @@ public class BiggerGoalPowerUp : PowerUp
 {
     public BiggerGoalPowerUp(Ball ball) : base(ball)
     {
-        cooldown = 2.5f;
+        cooldown = 3.5f;
     }
 
     public override void activate(Player player)
     {
-        ball.reset_values();
-        ball.activation_time_powerUp = DateTime.Now;
-        ball.powerUp_cooldown = cooldown;
-
-        ball.texture = ball.powerUp_textures["icefootball"];
-        ball.ice_powerUp_in_use = true;
+        player.GameLogic_object.goalScale = 0.55f;
+        player.GameLogic_object.set_goal_size();
     }
 }

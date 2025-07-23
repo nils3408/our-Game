@@ -58,7 +58,7 @@ public class Player
     public DateTime activation_time_powerUp2 = DateTime.MinValue;
 
     public PlayerControls controls;
-
+    public GameLogic GameLogic_object;
 
     /*
      * -------------------------------------------------
@@ -101,6 +101,7 @@ public class Player
         move_speed2 = move_speed;
 
         this.controls = controls;
+        
     }
 
 
