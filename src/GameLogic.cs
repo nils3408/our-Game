@@ -92,8 +92,14 @@ public class GameLogic : GameState
     private float gameTimer = 0f;
     private bool gameRunning = true;
 
+    // item
     public Item item1;
     public Item[] items;
+
+    // Shuriken
+    List<Schuriken> schurikenListe = new List<Schuriken>();
+    Texture2D schuriken_texture;
+
 
     private Texture2D _tribuneTexture;
     private Vector2 _leftTribunePosition;
@@ -119,13 +125,7 @@ public class GameLogic : GameState
 
     public override void Initialize()
     {
-        /*          FullScreen Mode: 
-                  ToDo Spielfeld anpassen!!
-                   _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-                   _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                   _graphics.IsFullScreen = true;
-                   _graphics.ApplyChanges();          
-       */
+       
 
         //Initiert nur Player wenn es durch den neuen Konstruktor nicht vorher gelöscht wird, Zeilen könnten auch gelöscht werden eigentlich, später!
         //if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
@@ -169,6 +169,7 @@ public class GameLogic : GameState
 
         _leftTribunePosition = new Vector2(450, -100);
 
+        schuriken_texture = Content.Load<Texture2D>("shuriken");
 
     }
 
@@ -240,6 +241,14 @@ public class GameLogic : GameState
             item.draw(spriteBatch, gameTime);
         }
 
+
+        //draw Shiruken 
+        foreach (Schuriken s in schurikenListe)
+        {
+            s.draw(spriteBatch, gameTime);
+        }
+
+
         // Score und Timer anzeigen
         spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
         string timerText = $" {Math.Floor(gameTimer)}s";
@@ -247,6 +256,33 @@ public class GameLogic : GameState
 
         spriteBatch.End();
     }
+
+
+
+    public void SetPlayer(Player left, Player right)
+    {
+        float exakter_ground_y = groundY - 40;
+
+        player1 = left;
+        player1.position = new Vector2(60, exakter_ground_y);
+        player1.starting_position = new Vector2(60, exakter_ground_y);
+        player1.set_groundYs(exakter_ground_y);
+        player1.GameLogic_object = this;
+
+        player2 = right;
+        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
+        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
+        player2.set_groundYs(exakter_ground_y);
+        player2.GameLogic_object = this;
+
+    }
+
+
+
+// ----------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------
+// player input and colissions
+
 
     private void handle_player_movement(GameTime gameTime)
     {
@@ -311,46 +347,6 @@ public class GameLogic : GameState
     }
 
 
-    //Check Ball im Tor
-    private void check_for_goal()
-    {
-        //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
-        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth, goalHeight);
-        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
-
-        Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
-
-
-        if (leftGoal.Contains(ballRect))
-        {
-            scorePlayer2++;
-            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
-            football.reset_values();
-            player1.set_back_to_starting_position();
-            player2.set_back_to_starting_position();
-            player1.reset_rect_size();
-            player2.reset_rect_size();
-            update_all_item_positions();
-            reset_goal_size();
-
-        }
-
-
-        if (rightGoal.Contains(ballRect))
-        {
-            scorePlayer1++;
-            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
-            football.reset_values();
-            player1.set_back_to_starting_position();
-            player2.set_back_to_starting_position();
-            player1.reset_rect_size();
-            player2.reset_rect_size();
-            update_all_item_positions();
-            reset_goal_size();
-        }
-    }
-
-
 
     private void handle_player_ball_collision(GameTime gameTime)
     {
@@ -396,23 +392,12 @@ public class GameLogic : GameState
     }
 
 
-    public void SetPlayer(Player left, Player right)
-    {
-        float exakter_ground_y = groundY - 40;
 
-        player1 = left;
-        player1.position = new Vector2(60, exakter_ground_y);
-        player1.starting_position = new Vector2(60, exakter_ground_y);
-        player1.set_groundYs(exakter_ground_y);
-        player1.GameLogic_object = this;
 
-        player2 = right;
-        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
-        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
-        player2.set_groundYs(exakter_ground_y);
-        player2.GameLogic_object = this;
 
-    }
+ // ------------------------------------------------------------------------------------------------------------------
+ // ------------------------------------------------------------------------------------------------------------------
+ // Object stuff item, Schuriken
 
 
     public void distribute_items()
@@ -432,6 +417,68 @@ public class GameLogic : GameState
             items[i].set_random_position();
         }
     }
+
+
+    public void add_Schuriken(Vector2 pos, Player owner, int direction)
+    {
+            
+
+        //adds a Schuriken object to the current List 
+        schurikenListe.Add(new Schuriken( schuriken_texture, pos , owner, direction));
+    }
+
+    public void delete_Schuriken (Schuriken schuriken_to_be_removed)
+    {
+        schurikenListe.Remove(schuriken_to_be_removed);
+    }
+
+
+
+    
+ //--------------------------------------------------------------------------------------------------------------
+ //--------------------------------------------------------------------------------------------------------------
+ // goal stuff
+
+
+    //Check Ball im Tor
+    private void check_for_goal()
+    {
+        //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
+        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth, goalHeight);
+        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
+
+        Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
+
+
+        if (leftGoal.Contains(ballRect))
+        {
+            scorePlayer2++;
+            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+            football.reset_values();
+            player1.set_back_to_starting_position();
+            player2.set_back_to_starting_position();
+            player1.reset_rect_size();
+            player2.reset_rect_size();
+            update_all_item_positions();
+            reset_goal_size();
+
+        }
+
+
+        if (rightGoal.Contains(ballRect))
+        {
+            scorePlayer1++;
+            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+            football.reset_values();
+            player1.set_back_to_starting_position();
+            player2.set_back_to_starting_position();
+            player1.reset_rect_size();
+            player2.reset_rect_size();
+            update_all_item_positions();
+            reset_goal_size();
+        }
+    }
+
 
     // checkt ob einer gewonnen hat, kann von Kindklassen geändert werden da es virtual ist.
     //standartmäßig einfachhalber bei 12 

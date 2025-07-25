@@ -27,6 +27,7 @@ public class Player
     public float jump_velocity2;  //copy if jump_velocity gets changed(for example in sonic character)
     public float gravity = 500f;
     public Vector2 velocity;
+    public int moving_direction = 1;
 
     public Rectangle currentRect;
     public Rectangle futureRect;
@@ -101,7 +102,10 @@ public class Player
         move_speed2 = move_speed;
 
         this.controls = controls;
-        
+
+        if (player == 1)      { moving_direction = 1;  }
+        else if (player == 2) { moving_direction = -1; }
+
     }
 
 
@@ -192,6 +196,8 @@ public class Player
         //dir must be -1 or 1
         if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
 
+        moving_direction = (int) dir;
+
         float newPositionX = position.X + (delta * move_speed) * dir;
         Vector2 newPosition = new Vector2(newPositionX, position.Y);
 
@@ -205,7 +211,6 @@ public class Player
                 update_rectangles();
             }
         }
-
 
 
         // future rect overlaps with oponent

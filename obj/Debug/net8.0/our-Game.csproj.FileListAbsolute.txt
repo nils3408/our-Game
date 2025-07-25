@@ -245,6 +245,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\KopfkickerChar2_ne
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\ronaldo.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sonic.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spiderman.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb

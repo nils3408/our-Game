@@ -64,7 +64,7 @@ public static class PlayerFactory
                 return new Knight(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             case Types.Ninja:
-                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Ninja(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
                 break;
             case Types.Mario:
                 return new Mario(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
