@@ -42,6 +42,7 @@ using System.Collections.Generic;
 //using System.Runtime.CompilerServices;
 using our_Game;
 using System.Security.Cryptography.X509Certificates;
+using System.Runtime.CompilerServices;
 
 
 public class GameLogic : GameState
@@ -176,6 +177,9 @@ public class GameLogic : GameState
 
     public override void Update(GameTime gameTime)
     {
+        player1.update_schuriken_knockout_phase();
+        player2.update_schuriken_knockout_phase();
+
         handle_player_movement(gameTime);
         handle_player_ball_collision(gameTime);
 
@@ -186,6 +190,7 @@ public class GameLogic : GameState
 
         handle_player_coin_colission();
         handle_ball_coin_collision();
+        handle_player_schuriken_collision();
         check_for_goal();
 
         player1.reset_powerUp1_if_time_is_over();
@@ -193,8 +198,9 @@ public class GameLogic : GameState
         player2.reset_powerUp1_if_time_is_over();
         player2.reset_powerUp2_if_time_is_over();
         football.reset_powerUps_if_time_is_over();
-        
 
+        move_schuriken(gameTime);
+        update_schuriken_list();
 
 
         //Zurück ins Menu wenn ESC losgelassen wird 
@@ -234,6 +240,7 @@ public class GameLogic : GameState
         player1.draw(spriteBatch);
         player2.draw(spriteBatch);
         football.draw(spriteBatch);
+
 
         //draw items
         foreach (Item item in items)
@@ -347,7 +354,6 @@ public class GameLogic : GameState
     }
 
 
-
     private void handle_player_ball_collision(GameTime gameTime)
     {
         if (football.ice_powerUp_in_use) return;
@@ -393,6 +399,32 @@ public class GameLogic : GameState
 
 
 
+    private void handle_player_schuriken_collision()
+    {
+        Player[] players = new Player[] { player1, player2 };
+        List<Schuriken> toRemove = new List<Schuriken>();
+
+        foreach (Schuriken s in schurikenListe)
+        {
+            foreach (Player p in players)
+            {
+                if (s.current_Rect.Intersects(p.currentRect))
+                {
+                    if (s.owner != p)
+                    {
+                        p.schuriken_knockout();
+                        toRemove.Add(s);
+                        break;
+                    }
+                }
+            }
+        }
+
+        foreach (var s in toRemove)
+        {
+            schurikenListe.Remove(s);
+        }
+    }
 
 
  // ------------------------------------------------------------------------------------------------------------------
@@ -422,19 +454,38 @@ public class GameLogic : GameState
     public void add_Schuriken(Vector2 pos, Player owner, int direction)
     {
             
-
         //adds a Schuriken object to the current List 
         schurikenListe.Add(new Schuriken( schuriken_texture, pos , owner, direction));
     }
+
+    public void move_schuriken(GameTime gameTime)
+    {
+        foreach (Schuriken s in schurikenListe)
+        {
+            s.move((float)gameTime.ElapsedGameTime.TotalSeconds);
+        }
+    }
+
 
     public void delete_Schuriken (Schuriken schuriken_to_be_removed)
     {
         schurikenListe.Remove(schuriken_to_be_removed);
     }
 
-
-
     
+    
+    public void update_schuriken_list()
+    {
+        // remove all schurken that are out of the game
+        schurikenListe.RemoveAll(s =>
+            s.position.X >= 1800 ||
+            s.position.X + s.texture_width < -10 ||
+            s.position.Y < -50);
+    }
+
+
+
+
  //--------------------------------------------------------------------------------------------------------------
  //--------------------------------------------------------------------------------------------------------------
  // goal stuff

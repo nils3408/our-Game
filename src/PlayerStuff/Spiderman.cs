@@ -19,6 +19,7 @@ public class Spiderman: Player
         // spidermas special effect is: multiple jump;
 
         if (can_do_specialeffect == false) { return; }
+        if (can_move == false)             { return; }
 
         float newPositionY = position.Y - jump_velocity * delta;
         Vector2 newPosition = new Vector2(position.X, newPositionY);

@@ -8,11 +8,11 @@ using System;
 public class Schuriken
 {
     private Texture2D texture;
-    public int texture_width = 80;
-    public int texture_height = 80;
+    public int texture_width = 75;
+    public int texture_height = 75;
 
 
-    public Vector2 velocity = new Vector2(100, 0);
+    public Vector2 velocity = new Vector2(550, 0);
     public Vector2 position;
     public Rectangle current_Rect;
     private int direction;
@@ -31,6 +31,21 @@ public class Schuriken
         else                       { direction = 1; }
         
 
+    }
+   
+
+    public void move(float delta)
+    {
+        if (velocity == Vector2.Zero) return;
+
+        position.X = position.X + (delta * velocity.X) * direction; 
+        update_rectangle();
+    }
+
+
+    public void update_rectangle()
+    {
+        current_Rect = new Rectangle((int)position.X, (int)position.Y, texture_width, texture_height);
     }
 
 

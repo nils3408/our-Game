@@ -20,6 +20,10 @@ public class Player
     public Texture2D texture;
     public Player otherPlayer;
     public int playerGroup;
+    
+    public bool can_move = true;
+    public float knockout_time = 3f;  // time a player is knocked out after getting hit from a Schuriken
+    public DateTime schuriken_hitting_time = DateTime.Now; // time the player got hit by a Schuriken
 
     public float move_speed = 380f;
     public float move_speed2;  //copy if move_speed gets changed (for example in sonic character)
@@ -193,6 +197,7 @@ public class Player
 
     public virtual void move(float delta, float dir)
     {
+        if (can_move == false) { return; }
         //dir must be -1 or 1
         if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
 
@@ -236,6 +241,8 @@ public class Player
 
     public void jump(float delta)
     {
+        if(can_move == false) { return; }
+
         float newPositionY = position.Y - jump_velocity * delta;
         Vector2 newPosition = new Vector2(position.X, newPositionY);
 
@@ -244,6 +251,21 @@ public class Player
 
     }
 
+
+    public void schuriken_knockout()
+    {
+        can_move = false;
+        schuriken_hitting_time = DateTime.Now;
+    }
+
+    public void update_schuriken_knockout_phase()
+    {
+        if (can_move == true) { return; }  // nothing to do
+
+        TimeSpan timeSinceHit = DateTime.Now - schuriken_hitting_time;
+        if (timeSinceHit.TotalSeconds >= knockout_time)
+          { can_move = true; }
+    }
 
 
     public void set_PowerUp(PowerUp a)
