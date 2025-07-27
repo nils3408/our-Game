@@ -113,7 +113,6 @@ public class Ball
             return;
         }
 
-
         Vector2 direction = transform_direction(velocity);
         velocity = direction * starting_velocity;
     }
@@ -123,7 +122,6 @@ public class Ball
         velocity *= 0.8f;
     }
 
-    
  // ---------------------------------------------------------------------------------------
     
     public void reset_values()

@@ -196,10 +196,8 @@ public class GameLogic : GameState
         handle_player_schuriken_collision();
         check_for_goal();
 
-        player1.reset_powerUp1_if_time_is_over();
-        player1.reset_powerUp2_if_time_is_over();
-        player2.reset_powerUp1_if_time_is_over();
-        player2.reset_powerUp2_if_time_is_over();
+        player1.reset_powerUps_if_time_is_over();
+        player2.reset_powerUps_if_time_is_over();
         football.reset_powerUps_if_time_is_over();
 
         move_schuriken(gameTime);
@@ -505,34 +503,31 @@ public class GameLogic : GameState
 
         Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
 
-
         if (leftGoal.Contains(ballRect))
         {
             scorePlayer2++;
-            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
-            football.reset_values();
-            player1.set_back_to_starting_position();
-            player2.set_back_to_starting_position();
-            player1.reset_rect_size();
-            player2.reset_rect_size();
-            update_all_item_positions();
-            reset_goal_size();
-
+            reset_values_after_goal();
         }
 
-
-        if (rightGoal.Contains(ballRect))
+        else if (rightGoal.Contains(ballRect))
         {
             scorePlayer1++;
-            football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
-            football.reset_values();
-            player1.set_back_to_starting_position();
-            player2.set_back_to_starting_position();
-            player1.reset_rect_size();
-            player2.reset_rect_size();
-            update_all_item_positions();
-            reset_goal_size();
+            reset_values_after_goal();
         }
+    }
+
+    public void reset_values_after_goal()
+    {
+        football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
+        football.reset_values();
+        player1.set_back_to_starting_position();
+        player2.set_back_to_starting_position();
+        player1.reset_size();
+        player1.reset_groundY();
+        player2.reset_size();
+        player2.reset_groundY();
+        update_all_item_positions();
+        reset_goal_size();
     }
 
 

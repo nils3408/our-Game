@@ -28,7 +28,11 @@ public class PowerUp
     {
         ball = ball1;
     }
-    
+
+    public string get_class_name()
+    {
+        return this.GetType().Name;
+    }
 
     public virtual void activate(Player player)
     {

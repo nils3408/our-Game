@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -27,11 +26,13 @@ public class Player
 
     public float move_speed = 380f;
     public float move_speed2;  //copy if move_speed gets changed (for example in sonic character)
+    
     public float jump_velocity = -500f;
     public float jump_velocity2;  //copy if jump_velocity gets changed(for example in sonic character)
-    public float gravity = 500f;
     public Vector2 velocity;
+    
     public int moving_direction = 1;
+    public float gravity = 500f;
 
     public Rectangle currentRect;
     public Rectangle futureRect;
@@ -52,19 +53,14 @@ public class Player
     public float groundY = float.NaN;     //nicht initialisert am anfang um möliche bugs abzufangen welche bei zb. 0.0f entstehen könnten
     public float groundY_copy = float.NaN;
 
-
     public PowerUp powerup1 = null;
     public PowerUp powerup2 = null;
     public bool powerUp1_in_use = false;
     public bool powerUp2_in_use = false;
-    public float powerUp_cooldown1 = 0;   //how long PowerUp on a player should be active
-    public float powerUp_cooldown2 = 0;
-    public DateTime activation_time_powerUp1 = DateTime.MinValue;
-    public DateTime activation_time_powerUp2 = DateTime.MinValue;
 
-    
-
-
+    public DateTime activation_time_BigPlayer_powerup = DateTime.MinValue;
+    public float cooldown_BigPlayer_BigPlayer_powerup = 0;
+    public bool BigPlayer_powerup_in_use = false;
 
     public PlayerControls controls;
     public GameLogic GameLogic_object;
@@ -150,29 +146,6 @@ public class Player
         return;
     }
 
-    public void activate_powerUP(int slot)
-    {
-        if (can_move == false) return;
-
-        if (slot == 1 && powerup1 != null)
-        {
-            powerup1.activate(this);
-            activation_time_powerUp1 = DateTime.Now;
-            powerUp1_in_use = true;
-            powerUp_cooldown1 = powerup1.get_cooldown();
-            powerup1 = null;
-        }
-
-        else if (slot == 2 && powerup2 != null)
-        {
-            powerup2.activate(this);
-            activation_time_powerUp2 = DateTime.Now;
-            powerUp2_in_use = true;
-            powerUp_cooldown2 = powerup2.get_cooldown();
-            powerup2 = null;
-        }
-    }
-
 
     public void draw(SpriteBatch spritebatch)
     {
@@ -237,7 +210,6 @@ public class Player
     }
 
 
-
     public void jump(float delta)
     {
         if(can_move == false) { return; }
@@ -266,6 +238,45 @@ public class Player
           { can_move = true; }
     }
 
+    // ------------------------------------------------------------------------
+    // PowerUp stuff 
+
+    public void activate_powerUP(int slot)
+    {
+        if (can_move == false) return;
+
+        if (slot == 1 && powerup1 != null)
+        {
+            powerup1.activate(this);
+
+            switch(powerup1.get_class_name())
+            {
+                case "BigPlayerPowerUp":
+                    activation_time_BigPlayer_powerup = DateTime.Now;
+                    cooldown_BigPlayer_BigPlayer_powerup = powerup1.get_cooldown();
+                    BigPlayer_powerup_in_use = true;
+                    break;
+            }
+
+            powerup1 = null;
+        }
+
+        else if (slot == 2 && powerup2 != null)
+        {
+            powerup2.activate(this);
+
+            switch (powerup2.get_class_name())
+            {
+                case "BigPlayerPowerUp":
+                    activation_time_BigPlayer_powerup = DateTime.Now;
+                    cooldown_BigPlayer_BigPlayer_powerup = powerup2.get_cooldown();
+                    BigPlayer_powerup_in_use = true;
+                    break;
+            }
+
+            powerup2 = null;
+        }
+    }
 
     public void set_PowerUp(PowerUp a)
     {
@@ -279,59 +290,52 @@ public class Player
             powerup2 = a;
             return;
         }
-
     }
 
 
     public void reset_powerUps_if_time_is_over()
     {
-        reset_powerUp1_if_time_is_over();
-        reset_powerUp2_if_time_is_over();
+       reset_BigPlayer_PowerUp_if_time_is_over();
     }
 
-
-    public void reset_powerUp1_if_time_is_over()
+    public void reset_BigPlayer_PowerUp_if_time_is_over()
     {
-        if (powerUp1_in_use == false) return;
+        if(BigPlayer_powerup_in_use == false) { return; }
 
         DateTime current_time = DateTime.Now;
-        double vergangene_zeit = (current_time - activation_time_powerUp1).TotalSeconds;
+        double vergangene_zeit = (current_time - activation_time_BigPlayer_powerup ).TotalSeconds;
 
-        if (vergangene_zeit > powerUp_cooldown1)
+        if (vergangene_zeit > cooldown_BigPlayer_BigPlayer_powerup)
         {
-            reset_values();
-        }
+            reset_Size_after_BigPlayerPowerUp_is_over();
+            BigPlayer_powerup_in_use = false;
+
+        }  
     }
 
-
-    public void reset_powerUp2_if_time_is_over()
-    {
-        if (powerUp2_in_use  == false) return;
-
-        DateTime current_time = DateTime.Now;
-        double vergangene_zeit = (current_time - activation_time_powerUp2).TotalSeconds;
-
-        if (vergangene_zeit > powerUp_cooldown2)
-        {
-            reset_values();
-        }
-    }
-
-
-    public void reset_values()
+    public void reset_groundY()
     {
         groundY = groundY_copy;
-        reset_rect_size();
     }
 
-    public void reset_rect_size()
+    public void reset_size()
     {
         RectangleHeight = RectangleHeight_copy;
         RectangleWidth = RectangleWidth_copy;
     }
 
+    public void reset_Size_after_BigPlayerPowerUp_is_over()
+    {
+        //BigPlayerPowerUp was used -> player is bigger than used to be
+        if(RectangleHeight > RectangleHeight_copy || RectangleWidth > RectangleWidth_copy)
+        {
+            reset_size();
+            reset_groundY();
+        }
+    }
 
 
+//-----------------------------------------------------------------------
     public virtual void update_vertical(float delta)
     {
         velocity.Y += gravity * delta;
