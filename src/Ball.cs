@@ -46,7 +46,7 @@ public class Ball
 
     public  Texture2D current_texture;
     private Texture2D texture_copy;
-    private Texture2D[] football_textures; 
+    private Texture2D[] football_textures;
     public Dictionary<string, Texture2D> powerUp_textures;
 
     public Vector2 position;
@@ -70,10 +70,14 @@ public class Ball
     public float powerUp_cooldown = 0;
 
     //values for the animation
-    private float framerate = 0.05f;
+    private float framerate = 0.08f;
     private int current_frame = 0;
     private float animation_time_counter = 0f;
+    private float rotation = 0f;
+    private float rotationrate = 2.35f;
+
     private ContentManager content;
+
 
 
     public Ball(GraphicsDevice graphicsDevice, Vector2 position2, ContentManager content1, Dictionary<string, Texture2D> powerUp_textures1)
@@ -131,7 +135,7 @@ public class Ball
 
     public void reset_values()
     {
-        //set_texture_back_to_original();
+        set_texture_back_to_original();
         fire_powerUp_in_use = false;
         ice_powerUp_in_use = false;
         powerUp_cooldown = 0;
@@ -288,8 +292,7 @@ public class Ball
 
         if (animation_time_counter >= framerate)
         {
-            current_frame = (current_frame + 1) % football_textures.Length;
-            current_texture = football_textures[current_frame];
+            rotation= (rotation + rotationrate) % 360f;
             animation_time_counter = 0;
         }
 
@@ -297,7 +300,19 @@ public class Ball
 
     public void draw_current_texture(SpriteBatch spritebatch)
     {
-        spritebatch.Draw(current_texture, Rect, Color.White);
+        //spritebatch.Draw(current_texture, Rect, Color.White);
+        spritebatch.Draw
+        (
+            current_texture,
+            position: new Vector2(Rect.X + Rect.Width / 2, Rect.Y + Rect.Height / 2),
+            sourceRectangle: null,
+            color: Color.White,
+            rotation: rotation,
+            origin: new Vector2(current_texture.Width / 2, current_texture.Height / 2),
+            scale: new Vector2((float)Rect.Width / current_texture.Width, (float)Rect.Height / current_texture.Height),
+            effects: SpriteEffects.None,
+            layerDepth: 0f
+        );
     }
 
 
