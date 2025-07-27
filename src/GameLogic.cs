@@ -374,9 +374,12 @@ public class GameLogic : GameState
             collisionCooldown1 = CollisionCooldownTime;
 
             // shooting    
-            KeyboardState state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal(); }
-            if (state.IsKeyDown(Keys.Y)) { football.get_shooted_horizontal(); }
+            if (player1.can_move)
+            {
+                KeyboardState state = Keyboard.GetState();
+                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal(); }
+                if (state.IsKeyDown(Keys.Y)) { football.get_shooted_horizontal(); }
+            }
         }
 
         // Spieler 2
@@ -390,9 +393,12 @@ public class GameLogic : GameState
             collisionCooldown2 = CollisionCooldownTime;
 
             // shooting    
-            KeyboardState state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.K)) { football.get_shooted_diagonal(); }
-            if (state.IsKeyDown(Keys.M)) { football.get_shooted_horizontal(); }
+            if (player2.can_move)
+            {
+                KeyboardState state = Keyboard.GetState();
+                if (state.IsKeyDown(Keys.K)) { football.get_shooted_diagonal(); }
+                if (state.IsKeyDown(Keys.M)) { football.get_shooted_horizontal(); }
+            }
 
         }
     }

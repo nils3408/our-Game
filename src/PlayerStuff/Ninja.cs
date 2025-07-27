@@ -18,6 +18,8 @@ public class Ninja : Player
 
     public override void do_special_effect(float delta)
     {
+        if (can_move == false) { return; }
+
         if (can_do_specialeffect() == false) { return; }
         
         //error prevention

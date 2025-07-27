@@ -29,6 +29,8 @@ public class Sonic: Player
    
     public override void move(float delta, float dir)
     {
+        if (can_move == false) { return; }
+
         if (special_effect_in_use)
         {
             if (execution_time_is_over())

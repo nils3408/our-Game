@@ -136,8 +136,8 @@ public class Player
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position)) jump(delta);
 
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Special))) do_special_effect(delta);
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP1();
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP2();
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP(2);
     }
 
     public virtual void do_special_effect(float delta)
@@ -146,31 +146,26 @@ public class Player
         return;
     }
 
-    public void activate_powerUP1()
+    public void activate_powerUP(int slot)
     {
-        if (powerup1 != null)
+        if (can_move == false) return;
+
+        if (slot == 1 && powerup1 != null)
         {
             powerup1.activate(this);
-           
             activation_time_powerUp1 = DateTime.Now;
             powerUp1_in_use = true;
             powerUp_cooldown1 = powerup1.get_cooldown();
-
-            powerup1 = null; //delete after activation so it can not be used again
+            powerup1 = null;
         }
-    }
 
-    public void activate_powerUP2()
-    {
-        if (powerup2 != null)
+        else if (slot == 2 && powerup2 != null)
         {
             powerup2.activate(this);
-
             activation_time_powerUp2 = DateTime.Now;
-            powerUp2_in_use = false;
+            powerUp2_in_use = true;
             powerUp_cooldown2 = powerup2.get_cooldown();
-
-            powerup2 = null; //delete after activation so it can not be used again
+            powerup2 = null;
         }
     }
 

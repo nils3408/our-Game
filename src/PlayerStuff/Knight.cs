@@ -22,6 +22,8 @@ public class Knight: Player
 
     public override void do_special_effect(float delta)
     {
+        if (can_move == false) { return; }
+
         if (can_do_special_effect())
         {
             // special effect: stronger than its oponent-> can push him away
