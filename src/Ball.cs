@@ -70,7 +70,7 @@ public class Ball
     public float powerUp_cooldown = 0;
 
     //values for the animation
-    private float framerate = 0.08f;
+    private float framerate = 0.05f;
     private int current_frame = 0;
     private float animation_time_counter = 0f;
     private ContentManager content;
@@ -82,6 +82,7 @@ public class Ball
         football_textures = LoadTextures();
         current_texture = football_textures[0];
         texture_copy = football_textures[0];
+        
         powerUp_textures = powerUp_textures1;
 
         position = position2;
@@ -130,7 +131,7 @@ public class Ball
 
     public void reset_values()
     {
-        set_texture_back_to_original();
+        //set_texture_back_to_original();
         fire_powerUp_in_use = false;
         ice_powerUp_in_use = false;
         powerUp_cooldown = 0;
