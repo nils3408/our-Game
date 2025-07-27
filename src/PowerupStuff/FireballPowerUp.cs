@@ -32,7 +32,7 @@ public class FireballPowerUp : PowerUp
         ball.activation_time_powerUp = DateTime.Now;
         ball.powerUp_cooldown = cooldown;
 
-        ball.texture = ball.powerUp_textures["firefootball"];
+        ball.current_texture = ball.powerUp_textures["firefootball"];
         ball.fire_powerUp_in_use = true;
         Vector2 newVelocity = new Vector2 (fireball_velocityX, ball.velocity.Y*2);
         ball.set_velocity(newVelocity * ball.transform_direction(ball.velocity));

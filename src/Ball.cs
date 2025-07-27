@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using System.Diagnostics;
 
 
 //using SharpDX.XAudio2;
@@ -43,8 +44,9 @@ public class Ball
 {
 
 
-    public  Texture2D texture;
+    public  Texture2D current_texture;
     private Texture2D texture_copy;
+    private Texture2D[] football_textures; 
     public Dictionary<string, Texture2D> powerUp_textures;
 
     public Vector2 position;
@@ -67,11 +69,19 @@ public class Ball
     public DateTime activation_time_powerUp = DateTime.MinValue;
     public float powerUp_cooldown = 0;
 
+    //values for the animation
+    private float framerate = 0.08f;
+    private int current_frame = 0;
+    private float animation_time_counter = 0f;
+    private ContentManager content;
 
-    public Ball(GraphicsDevice graphicsDevice, Vector2 position2, Texture2D texture1, Dictionary<string, Texture2D> powerUp_textures1)
+
+    public Ball(GraphicsDevice graphicsDevice, Vector2 position2, ContentManager content1, Dictionary<string, Texture2D> powerUp_textures1)
     {
-        texture = texture1;
-        texture_copy = texture1;
+        this.content = content1;
+        football_textures = LoadTextures();
+        current_texture = football_textures[0];
+        texture_copy = football_textures[0];
         powerUp_textures = powerUp_textures1;
 
         position = position2;
@@ -85,7 +95,19 @@ public class Ball
     }
 
     public void set_texture_back_to_original() {
-        texture = texture_copy; 
+        current_texture = texture_copy; 
+    }
+
+    private Texture2D[] LoadTextures()
+    {
+        Texture2D[] textures = new Texture2D[30];
+        for (int i = 0; i <= 29; i++)
+        {
+            string path = $"football_textures/football-{i}";
+            textures[i] = content.Load<Texture2D>(path);
+        }
+
+        return textures;
     }
 
     public void set_velocity(Vector2 velocity1)
@@ -170,8 +192,6 @@ public class Ball
     }
 
 
-
-
     public void change_direction(Vector2 dir)
     {
         // dir is defined as ball.position - player.position in GameLogic
@@ -239,12 +259,6 @@ public class Ball
         Rect.Y = (int)position.Y;
     }
 
-    public void draw(SpriteBatch spritebatch)
-    {
-        spritebatch.Draw(texture, Rect, Color.White);
-    }
-
-
 
     public Vector2 transform_direction(Vector2 velocity1)
     {
@@ -256,6 +270,37 @@ public class Ball
     }
 
 
+ // -------------------------------------------------------------------------------------------------
+ // -------------------------------------------------------------------------------------------------
+ // draw functions
+
+    public void draw(SpriteBatch spritebatch, GameTime gameTime)
+    {
+        update_texture(spritebatch, gameTime);
+        draw_current_texture(spritebatch);  
+    }
+
+    public void update_texture(SpriteBatch spritebatch , GameTime gameTime)
+    {
+        //update texture for animation if "the time is come"
+        animation_time_counter += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        if (animation_time_counter >= framerate)
+        {
+            current_frame = (current_frame + 1) % football_textures.Length;
+            current_texture = football_textures[current_frame];
+            animation_time_counter = 0;
+        }
+
+    }
+
+    public void draw_current_texture(SpriteBatch spritebatch)
+    {
+        spritebatch.Draw(current_texture, Rect, Color.White);
+    }
+
+
+// -----------------------------------------------------------------------------
  //----------------------------------------------------------------------------
  //main function 
 

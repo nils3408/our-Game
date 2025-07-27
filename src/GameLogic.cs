@@ -67,7 +67,8 @@ public class GameLogic : GameState
     private Player last_player_touching_the_ball = null;
 
 
-    private Ball football;
+    private Ball football; 
+    private Texture2D[] football_textures;
     private float jumpheight = 250f;
     //generell
     private float collisionCooldown1 = 0f;
@@ -137,7 +138,8 @@ public class GameLogic : GameState
             { "firefootball", Content.Load<Texture2D>("firefootball") },
             { "icefootball",  Content.Load<Texture2D>("icefootball")  }
         };
-        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content.Load<Texture2D>("football"), powerUpTextures);
+
+        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content, powerUpTextures);
 
         player1.Set_other_Player(player2);
         player2.Set_other_Player(player1);
@@ -235,19 +237,15 @@ public class GameLogic : GameState
         new Microsoft.Xna.Framework.Rectangle((int)_leftTribunePosition.X, (int)_leftTribunePosition.Y, tribuneWidth, tribuneHeight),
         Microsoft.Xna.Framework.Color.White);
 
-
-
         player1.draw(spriteBatch);
         player2.draw(spriteBatch);
-        football.draw(spriteBatch);
-
+        football.draw(spriteBatch, gameTime);
 
         //draw items
         foreach (Item item in items)
         {
             item.draw(spriteBatch, gameTime);
         }
-
 
         //draw Shiruken 
         foreach (Schuriken s in schurikenListe)

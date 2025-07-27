@@ -62,6 +62,10 @@ public class Player
     public DateTime activation_time_powerUp1 = DateTime.MinValue;
     public DateTime activation_time_powerUp2 = DateTime.MinValue;
 
+    
+
+
+
     public PlayerControls controls;
     public GameLogic GameLogic_object;
 

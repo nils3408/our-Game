@@ -29,7 +29,7 @@ public class IceballPowerUp : PowerUp
         ball.activation_time_powerUp = DateTime.Now;
         ball.powerUp_cooldown = cooldown;
 
-        ball.texture = ball.powerUp_textures["icefootball"];
+        ball.current_texture = ball.powerUp_textures["icefootball"];
         ball.ice_powerUp_in_use = true;
     }
 }
