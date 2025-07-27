@@ -67,7 +67,7 @@ public class GameLogic : GameState
     private Player last_player_touching_the_ball = null;
 
 
-    private Ball football; 
+    private Ball football;
     private Texture2D[] football_textures;
     private float jumpheight = 250f;
     //generell
@@ -89,7 +89,11 @@ public class GameLogic : GameState
     //Tore Counter
     private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
+    private int winningScore = 7;
     private SpriteFont scoreFont;
+    private bool gameWon = false;
+    private string winnerText = "TEST";
+    private Texture2D overlayTexture;
 
     private float gameTimer = 0f;
     private bool gameRunning = true;
@@ -127,7 +131,7 @@ public class GameLogic : GameState
 
     public override void Initialize()
     {
-       
+
 
         //Initiert nur Player wenn es durch den neuen Konstruktor nicht vorher gelöscht wird, Zeilen könnten auch gelöscht werden eigentlich, später!
         //if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
@@ -157,7 +161,7 @@ public class GameLogic : GameState
     {
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
         _backgroundTexture = Content.Load<Texture2D>("Spielfeld3");
-       
+
         _goalTexture = Content.Load<Texture2D>("Tore");
         set_goal_size();
         update_goal_positions();
@@ -174,6 +178,9 @@ public class GameLogic : GameState
         _leftTribunePosition = new Vector2(450, -100);
 
         schuriken_texture = Content.Load<Texture2D>("shuriken");
+
+        overlayTexture = new Texture2D(_graphicsDevice, 1, 1);
+        overlayTexture.SetData(new[] { Color.White });
 
     }
 
@@ -194,7 +201,11 @@ public class GameLogic : GameState
         handle_player_coin_colission();
         handle_ball_coin_collision();
         handle_player_schuriken_collision();
-        check_for_goal();
+        if (!gameWon)
+        {
+            check_for_goal();
+        }
+
 
         player1.reset_powerUps_if_time_is_over();
         player2.reset_powerUps_if_time_is_over();
@@ -216,6 +227,15 @@ public class GameLogic : GameState
         {
             gameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
+        if (gameWon)
+        {
+            if (InputHandler.IsReleased(Keys.Escape))
+            {
+                System.Diagnostics.Debug.WriteLine("escape!");
+                Game1.nextState = new Menu(baseGame);
+            }
+            return; // Keine weitere Spiellogik ausführen
+        }
     }
 
 
@@ -235,6 +255,8 @@ public class GameLogic : GameState
         spriteBatch.Draw(_tribuneTexture,
         new Microsoft.Xna.Framework.Rectangle((int)_leftTribunePosition.X, (int)_leftTribunePosition.Y, tribuneWidth, tribuneHeight),
         Microsoft.Xna.Framework.Color.White);
+
+        Color gameColor = gameWon ? Color.White * 0.3f : Color.White;
 
         player1.draw(spriteBatch);
         player2.draw(spriteBatch);
@@ -257,6 +279,33 @@ public class GameLogic : GameState
         spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
         string timerText = $" {Math.Floor(gameTimer)}s";
         spriteBatch.DrawString(scoreFont, timerText, new Vector2(20, 20), Color.White);
+
+        if (gameWon)
+        {
+            // Semi-transparenter Overlay
+            spriteBatch.Draw(overlayTexture,
+                new Microsoft.Xna.Framework.Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
+                Color.Black * 0.5f);
+
+            // Gewinner-Text
+            Vector2 textSize = scoreFont.MeasureString(winnerText);
+            Vector2 textPosition = new Vector2(
+                (_graphics.PreferredBackBufferWidth - textSize.X) / 2,
+                (_graphics.PreferredBackBufferHeight - textSize.Y) / 2
+            );
+
+            spriteBatch.DrawString(scoreFont, winnerText, textPosition, Color.Gold);
+
+            // "ESC für Menü" Text
+            string escText = "ESC um zum Startbildschirm zu kommen!";
+            Vector2 escTextSize = scoreFont.MeasureString(escText);
+            Vector2 escTextPosition = new Vector2(
+                (_graphics.PreferredBackBufferWidth - escTextSize.X) / 2,
+                textPosition.Y + textSize.Y + 50
+            );
+
+            spriteBatch.DrawString(scoreFont, escText, escTextPosition, Color.White);
+        }
 
         spriteBatch.End();
     }
@@ -283,9 +332,9 @@ public class GameLogic : GameState
 
 
 
-// ----------------------------------------------------------------------------------------------
-// ----------------------------------------------------------------------------------------------
-// player input and colissions
+    // ----------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------
+    // player input and colissions
 
 
     private void handle_player_movement(GameTime gameTime)
@@ -430,9 +479,9 @@ public class GameLogic : GameState
     }
 
 
- // ------------------------------------------------------------------------------------------------------------------
- // ------------------------------------------------------------------------------------------------------------------
- // Object stuff item, Schuriken
+    // ------------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------------------------
+    // Object stuff item, Schuriken
 
 
     public void distribute_items()
@@ -456,9 +505,9 @@ public class GameLogic : GameState
 
     public void add_Schuriken(Vector2 pos, Player owner, int direction)
     {
-            
+
         //adds a Schuriken object to the current List 
-        schurikenListe.Add(new Schuriken( schuriken_texture, pos , owner, direction));
+        schurikenListe.Add(new Schuriken(schuriken_texture, pos, owner, direction));
     }
 
     public void move_schuriken(GameTime gameTime)
@@ -470,13 +519,13 @@ public class GameLogic : GameState
     }
 
 
-    public void delete_Schuriken (Schuriken schuriken_to_be_removed)
+    public void delete_Schuriken(Schuriken schuriken_to_be_removed)
     {
         schurikenListe.Remove(schuriken_to_be_removed);
     }
 
-    
-    
+
+
     public void update_schuriken_list()
     {
         // remove all schurken that are out of the game
@@ -489,9 +538,9 @@ public class GameLogic : GameState
 
 
 
- //--------------------------------------------------------------------------------------------------------------
- //--------------------------------------------------------------------------------------------------------------
- // goal stuff
+    //--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
+    // goal stuff
 
 
     //Check Ball im Tor
@@ -506,13 +555,35 @@ public class GameLogic : GameState
         if (leftGoal.Contains(ballRect))
         {
             scorePlayer2++;
-            reset_values_after_goal();
+            if (scorePlayer2 >= winningScore)
+            {
+                gameWon = true;
+                winnerText = "Player 2 wins!";
+            }
+            else
+            {
+                gameWon = false;
+                reset_values_after_goal();
+
+            }
+
+
         }
 
-        else if (rightGoal.Contains(ballRect))
+
+        if (rightGoal.Contains(ballRect))
         {
             scorePlayer1++;
-            reset_values_after_goal();
+            if (scorePlayer1 >= winningScore)
+            {
+                gameWon = true;
+                winnerText = "Player 1 wins!";
+            }
+            else
+            {
+                gameWon = false;
+                reset_values_after_goal();
+            }
         }
     }
 
@@ -528,15 +599,6 @@ public class GameLogic : GameState
         player2.reset_groundY();
         update_all_item_positions();
         reset_goal_size();
-    }
-
-
-    // checkt ob einer gewonnen hat, kann von Kindklassen geändert werden da es virtual ist.
-    //standartmäßig einfachhalber bei 12 
-    public virtual Boolean isOver()
-    {
-        if (scorePlayer1 > 12 || scorePlayer2 > 12) return true;
-        return false;
     }
 
 

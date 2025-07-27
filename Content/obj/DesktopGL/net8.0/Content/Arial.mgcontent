@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/Arial.spritefont</SourceFile>
-  <SourceTime>2025-06-25T15:01:50.5461829+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/Arial.xnb</DestFile>
-  <DestTime>2025-07-23T16:27:05.6111432+02:00</DestTime>
+  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Arial.spritefont</SourceFile>
+  <SourceTime>2025-07-27T23:00:24.3801154+02:00</SourceTime>
+  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/Arial.xnb</DestFile>
+  <DestTime>2025-07-27T23:01:35.7850667+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
