@@ -232,6 +232,7 @@ public class GameLogic : GameState
             if (InputHandler.IsReleased(Keys.Escape))
             {
                 System.Diagnostics.Debug.WriteLine("escape!");
+                Game1.openGames.Remove(this);
                 Game1.nextState = new Menu(baseGame);
             }
             return; // Keine weitere Spiellogik ausführen
