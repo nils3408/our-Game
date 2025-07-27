@@ -46,18 +46,15 @@ public class Ball
 
     public  Texture2D current_texture;
     private Texture2D texture_copy;
-    private Texture2D[] football_textures;
-    public Dictionary<string, Texture2D> powerUp_textures;
+    public Dictionary<string, Texture2D> textures;
 
     public Vector2 position;
 
     public Vector2 velocity = new Vector2(0, 0);
     public Vector2 starting_velocity = new Vector2(500f, -230f);
-    public Vector2 v_sim;
     public Vector2 shooting_horizontal_velocity = new Vector2(900, -20);
     public Vector2 shooting_diagonally_velocity = new Vector2(900, -250);
     
-
     private const int BallSize = 100;
     private const float BallFriction = (float)10;
 
@@ -76,19 +73,15 @@ public class Ball
     private float rotation = 0f;
     private float rotationrate = 2.35f;
 
-    private ContentManager content;
 
 
 
-    public Ball(GraphicsDevice graphicsDevice, Vector2 position2, ContentManager content1, Dictionary<string, Texture2D> powerUp_textures1)
+    public Ball(GraphicsDevice graphicsDevice, Vector2 position2, Dictionary<string, Texture2D> textures1)
     {
-        this.content = content1;
-        football_textures = LoadTextures();
-        current_texture = football_textures[0];
-        texture_copy = football_textures[0];
+        this.textures = textures1;
+        current_texture = textures["football"];
+        texture_copy =    textures["football"];
         
-        powerUp_textures = powerUp_textures1;
-
         position = position2;
         Rect = new Rectangle((int)position.X, (int)position.Y, BallSize, BallSize);
         //new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY)
@@ -103,17 +96,9 @@ public class Ball
         current_texture = texture_copy; 
     }
 
-    private Texture2D[] LoadTextures()
-    {
-        Texture2D[] textures = new Texture2D[30];
-        for (int i = 0; i <= 29; i++)
-        {
-            string path = $"football_textures/football-{i}";
-            textures[i] = content.Load<Texture2D>(path);
-        }
 
-        return textures;
-    }
+// -----------------------------------------------------------------------------
+// velocity
 
     public void set_velocity(Vector2 velocity1)
     {
@@ -133,6 +118,14 @@ public class Ball
         velocity = direction * starting_velocity;
     }
 
+    public void reduce_velocity_due_to_friction()
+    {
+        velocity *= 0.8f;
+    }
+
+    
+ // ---------------------------------------------------------------------------------------
+    
     public void reset_values()
     {
         set_texture_back_to_original();
@@ -156,7 +149,8 @@ public class Ball
         }
     }
 
-
+// -----------------------------------------------------------------------------------
+// shooting functions
 
     public void get_shooted_horizontal()
     {
@@ -191,11 +185,7 @@ public class Ball
     }
 
 
-    public void reduce_velocity_due_to_friction()
-    {
-        velocity *= 0.8f;
-    }
-
+// -----------------------------------------------------------------------------------
 
     public void change_direction(Vector2 dir)
     {
@@ -206,7 +196,6 @@ public class Ball
 
     public void change_direction_x_scale(Vector2 dir)
     {
-
         System.Diagnostics.Debug.WriteLine(dir);
         velocity.X = Math.Abs(velocity.X);
         velocity.X = velocity.X * transform_direction(dir).X;
@@ -222,8 +211,27 @@ public class Ball
         velocity.X *= -1;
     }
 
+    public void Reset_Position(Vector2 newPosition)
+    {
+        position = newPosition;
+        velocity = Vector2.Zero;
+        Rect.X = (int)position.X;
+        Rect.Y = (int)position.Y;
+    }
 
 
+    public Vector2 transform_direction(Vector2 velocity1)
+    {
+        //only return -1 or 1
+        float xDir = velocity1.X >= 0 ? 1 : -1;
+        float yDir = velocity1.Y >= 0 ? -1 : 1;
+
+        return new Vector2(xDir, yDir);
+    }
+
+
+// -------------------------------------------------------------------------------------
+// out of bounds 
 
     public bool out_of_bounds_on_right_side(Vector2 newPosition)
     {
@@ -246,7 +254,6 @@ public class Ball
     }
 
 
-
     public bool out_of_bounds_in_generell(Vector2 newPosition, float groundY)
     {
         return (out_of_bounds_on_down_side(newPosition, groundY) || out_of_bounds_on_upper_side(newPosition) ||
@@ -255,28 +262,9 @@ public class Ball
     }
 
 
-
-    public void Reset_Position(Vector2 newPosition)
-    {
-        position = newPosition;
-        velocity = Vector2.Zero;
-        Rect.X = (int)position.X;
-        Rect.Y = (int)position.Y;
-    }
-
-
-    public Vector2 transform_direction(Vector2 velocity1)
-    {
-        //only return -1 or 1
-        float xDir = velocity1.X >= 0 ? 1 : -1;
-        float yDir = velocity1.Y >= 0 ? -1 : 1;
-
-        return new Vector2(xDir, yDir);
-    }
-
-
  // -------------------------------------------------------------------------------------------------
  // -------------------------------------------------------------------------------------------------
+ //--------------------------------------------------------------------------------------------------
  // draw functions
 
     public void draw(SpriteBatch spritebatch, GameTime gameTime)
@@ -288,6 +276,10 @@ public class Ball
     public void update_texture(SpriteBatch spritebatch , GameTime gameTime)
     {
         //update texture for animation if "the time is come"
+        
+        if (velocity.X == 0)         { return; }
+        if (ice_powerUp_in_use)      { return; }
+
         animation_time_counter += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         if (animation_time_counter >= framerate)
@@ -317,8 +309,8 @@ public class Ball
 
 
 // -----------------------------------------------------------------------------
- //----------------------------------------------------------------------------
- //main function 
+//----------------------------------------------------------------------------
+//main function 
 
     public void move(float deltaTime, float groundY)
     {

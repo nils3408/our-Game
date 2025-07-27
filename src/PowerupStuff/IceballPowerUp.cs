@@ -1,7 +1,6 @@
 //nils 
 
 
-
 using System;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -29,7 +28,7 @@ public class IceballPowerUp : PowerUp
         ball.activation_time_powerUp = DateTime.Now;
         ball.powerUp_cooldown = cooldown;
 
-        ball.current_texture = ball.powerUp_textures["icefootball"];
+        ball.current_texture = ball.textures["icefootball"];
         ball.ice_powerUp_in_use = true;
     }
 }

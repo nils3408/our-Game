@@ -75,7 +75,7 @@ public class GameLogic : GameState
     private float collisionCooldown2 = 0f;
     private const float CollisionCooldownTime = 0.4f;
 
-    public Dictionary<string, Texture2D> powerUpTextures;
+    public Dictionary<string, Texture2D> ball_textures;
 
     private float groundY = 550;
 
@@ -133,13 +133,14 @@ public class GameLogic : GameState
         //if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
         //if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
 
-        powerUpTextures = new()
+        ball_textures = new()
         {
+            {"football" ,     Content.Load<Texture2D>("football")     },
             { "firefootball", Content.Load<Texture2D>("firefootball") },
             { "icefootball",  Content.Load<Texture2D>("icefootball")  }
         };
 
-        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), Content, powerUpTextures);
+        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), ball_textures);
 
         player1.Set_other_Player(player2);
         player2.Set_other_Player(player1);
