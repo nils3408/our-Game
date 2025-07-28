@@ -142,6 +142,8 @@ public class Player
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Special))) do_special_effect(delta);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP(2);
+
+        if (InputHandler.IsGamePadButtonDown(Buttons.A))  jump(delta);
     }
 
     public virtual void do_special_effect(float delta)

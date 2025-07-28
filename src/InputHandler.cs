@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 using System.Linq;
 
 /**
@@ -22,6 +23,10 @@ public static class InputHandler
 	private static MouseState prevMouse = Mouse.GetState();
 	private static MouseState curMouse = Mouse.GetState();
 
+    private static GamePadState prevPS4 = GamePad.GetState(PlayerIndex.One);
+	private static GamePadState curPS4 = GamePad.GetState(PlayerIndex.One);
+ 
+
 	public static void Update()
 	{
 		prevKeys = curKeys;
@@ -29,7 +34,10 @@ public static class InputHandler
 
 		prevMouse = curMouse;
 		curMouse = Mouse.GetState();
-	}
+
+        prevPS4 = curPS4;
+        curPS4 = GamePad.GetState(PlayerIndex.One);
+    }
 
 	public static bool IsDown(Keys key)
 	{
@@ -54,4 +62,24 @@ public static class InputHandler
 	public static bool IsMouseLeftReleased() { 
 		return prevMouse.LeftButton == ButtonState.Pressed && curMouse.LeftButton != ButtonState.Pressed;
 	}
+
+
+
+//---------------------------------------------------------------------------------
+// ps4 controller 
+
+    public static bool IsGamePadButtonDown(Buttons button)
+    {
+        return curPS4.IsButtonDown(button);
+    }
+
+    public static bool IsGamePadButtonReleased(Buttons button)
+    {
+        return prevPS4.IsButtonDown(button) && curPS4.IsButtonUp(button);
+    }
+
+    public static bool IsGamePadButtonPressed(Buttons button)
+    {
+        return prevPS4.IsButtonUp(button) && curPS4.IsButtonDown(button);
+    }
 }
