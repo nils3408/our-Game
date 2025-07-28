@@ -53,8 +53,7 @@ public class Ball
     public Vector2 velocity = new Vector2(0, 0);
     public Vector2 starting_velocity = new Vector2(500f, -230f);
     public Vector2 shooting_horizontal_velocity = new Vector2(900, -20);
-    public Vector2 shooting_diagonally_velocity = new Vector2(200, -500); //900 -250
-    
+    public Vector2 shooting_diagonally_velocity = new Vector2(900, -250); 
     private const int BallSize = 100;
     private const float BallFriction = (float)10;
 
