@@ -82,7 +82,7 @@ public class GameLogic : GameState
     private int winningScore = 7;
     private SpriteFont scoreFont;
     private bool gameWon = false;
-    private string winnerText = "TEST";
+    private string winnerText = "";
     private Texture2D overlayTexture;
 
     private float gameTimer = 0f;
@@ -531,11 +531,21 @@ public class GameLogic : GameState
     //Check Ball im Tor
     private void check_for_goal()
     {
-        //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
-        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y, goalWidth, goalHeight);
-        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y, goalWidth, goalHeight);
-
+        int crossbarHeight = 20;
         Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
+        //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
+        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y + crossbarHeight, goalWidth, goalHeight- crossbarHeight);
+        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y + crossbarHeight, goalWidth, goalHeight- crossbarHeight);
+        
+        Microsoft.Xna.Framework.Rectangle leftCrossbar = new Microsoft.Xna.Framework.Rectangle(leftGoal.X,leftGoal.Y,leftGoal.Width,crossbarHeight);
+
+        Microsoft.Xna.Framework.Rectangle rightCrossbar = new Microsoft.Xna.Framework.Rectangle(rightGoal.X,rightGoal.Y,rightGoal.Width,crossbarHeight);
+
+        football.handle_crossbar_collision(leftCrossbar);
+        football.handle_crossbar_collision(rightCrossbar);
+
+
+        
 
         if (leftGoal.Contains(ballRect))
         {
@@ -549,10 +559,7 @@ public class GameLogic : GameState
             {
                 gameWon = false;
                 reset_values_after_goal();
-
             }
-
-
         }
 
 

@@ -53,7 +53,7 @@ public class Ball
     public Vector2 velocity = new Vector2(0, 0);
     public Vector2 starting_velocity = new Vector2(500f, -230f);
     public Vector2 shooting_horizontal_velocity = new Vector2(900, -20);
-    public Vector2 shooting_diagonally_velocity = new Vector2(900, -250);
+    public Vector2 shooting_diagonally_velocity = new Vector2(200, -500); //900 -250
     
     private const int BallSize = 100;
     private const float BallFriction = (float)10;
@@ -350,5 +350,44 @@ public class Ball
         Rect.X = (int)position.X;
         Rect.Y = (int)position.Y;
 
+    }
+
+    public bool handle_crossbar_collision(Rectangle crossbar)
+    {
+        Rectangle ballRect = getRect();
+
+        if (ballRect.Intersects(crossbar))
+        {
+            // Ball aus der Kollisionszone herausbewegen BEVOR wir die Geschwindigkeit ändern
+            Vector2 newPos = position;
+
+            // Prüfen, ob Ball von oben oder unten kommt (VORHER die Geschwindigkeit umkehren!)
+            if (velocity.Y > 0) // Ball bewegt sich nach unten (kommt von oben)
+            {
+                // Ball ÜBER die Torlatte positionieren
+                newPos.Y = crossbar.Top - BallSize - 5;
+            }
+            else // Ball bewegt sich nach oben (kommt von unten)
+            {
+                // Ball UNTER die Torlatte positionieren
+                newPos.Y = crossbar.Bottom + 5;
+            }
+
+            position = newPos;
+
+            // DANACH erst die Geschwindigkeit umkehren
+            change_direction_y_scale();
+
+            // Geschwindigkeit durch Reibung reduzieren
+            reduce_velocity_due_to_friction();
+
+            // Rect aktualisieren
+            Rect.X = (int)position.X;
+            Rect.Y = (int)position.Y;
+
+            return true; // Kollision erkannt
+        }
+
+        return false; // Keine Kollision
     }
 }
