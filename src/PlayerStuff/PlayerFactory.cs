@@ -53,22 +53,16 @@ public static class PlayerFactory
         {
             case Types.Standart:
                 return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
-                break;
             case Types.Sonic:
                 return new Sonic(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
-                break;
             case Types.Spiderman:
                 return new Spiderman(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
-                break;
             case Types.Knight:
                 return new Knight(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
-                break;
             case Types.Ninja:
                 return new Ninja(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
-                break;
             case Types.Mario:
                 return new Mario(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
-                break;
             default:
                 return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
         }

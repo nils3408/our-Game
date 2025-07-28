@@ -59,8 +59,12 @@ public class Player
     public bool powerUp2_in_use = false;
 
     public DateTime activation_time_BigPlayer_powerup = DateTime.MinValue;
-    public float cooldown_BigPlayer_BigPlayer_powerup = 0;
+    public float cooldown_BigPlayer_powerup = 0;
     public bool BigPlayer_powerup_in_use = false;
+
+    public DateTime activation_time_SmallPlayer_powerup = DateTime.MinValue;
+    public float cooldown_SmallPlayer_powerup = 0;
+    public bool SmallPlayer_powerup_in_use = false;
 
     public PlayerControls controls;
     public GameLogic GameLogic_object;
@@ -253,8 +257,15 @@ public class Player
             {
                 case "BigPlayerPowerUp":
                     activation_time_BigPlayer_powerup = DateTime.Now;
-                    cooldown_BigPlayer_BigPlayer_powerup = powerup1.get_cooldown();
+                    cooldown_BigPlayer_powerup = powerup1.get_cooldown();
                     BigPlayer_powerup_in_use = true;
+                    break;
+
+                case "SmallPlayerPowerUp":
+                    // note !: values of the other Player get set as this Player is effected by the PowerUp
+                    otherPlayer.activation_time_SmallPlayer_powerup = DateTime.Now;
+                    otherPlayer.cooldown_SmallPlayer_powerup = powerup1.get_cooldown();
+                    otherPlayer.SmallPlayer_powerup_in_use = true;
                     break;
             }
 
@@ -269,8 +280,15 @@ public class Player
             {
                 case "BigPlayerPowerUp":
                     activation_time_BigPlayer_powerup = DateTime.Now;
-                    cooldown_BigPlayer_BigPlayer_powerup = powerup2.get_cooldown();
+                    cooldown_BigPlayer_powerup = powerup2.get_cooldown();
                     BigPlayer_powerup_in_use = true;
+                    break;
+
+                case "SmallPlayerPowerUp":
+                    // note !: values of the other Player get set as this Player is effected by the PowerUp
+                    otherPlayer.activation_time_SmallPlayer_powerup = DateTime.Now;
+                    otherPlayer.cooldown_SmallPlayer_powerup = powerup2.get_cooldown();
+                    otherPlayer.SmallPlayer_powerup_in_use = true;
                     break;
             }
 
@@ -296,6 +314,8 @@ public class Player
     public void reset_powerUps_if_time_is_over()
     {
        reset_BigPlayer_PowerUp_if_time_is_over();
+       reset_Small_Player_PowerUp_if_time_is_over();
+       
     }
 
     public void reset_BigPlayer_PowerUp_if_time_is_over()
@@ -305,12 +325,28 @@ public class Player
         DateTime current_time = DateTime.Now;
         double vergangene_zeit = (current_time - activation_time_BigPlayer_powerup ).TotalSeconds;
 
-        if (vergangene_zeit > cooldown_BigPlayer_BigPlayer_powerup)
+        if (vergangene_zeit > cooldown_BigPlayer_powerup)
         {
             reset_Size_after_BigPlayerPowerUp_is_over();
             BigPlayer_powerup_in_use = false;
-
         }  
+    }
+
+    public void reset_Small_Player_PowerUp_if_time_is_over()
+        // in oposite to activate part
+        // checks for own values and makes the own player big again
+        // after oponent has set the values of this player
+    {
+        if (SmallPlayer_powerup_in_use == false) { return; }
+
+        DateTime current_time = DateTime.Now;
+        double vergangene_zeit = (current_time - activation_time_SmallPlayer_powerup).TotalSeconds;
+
+        if (vergangene_zeit > cooldown_SmallPlayer_powerup)
+        {
+            reset_size_after_SmallPlayerPowerUp_is_over();
+            SmallPlayer_powerup_in_use = false;
+        }
     }
 
     public void reset_groundY()
@@ -328,6 +364,16 @@ public class Player
     {
         //BigPlayerPowerUp was used -> player is bigger than used to be
         if(RectangleHeight > RectangleHeight_copy || RectangleWidth > RectangleWidth_copy)
+        {
+            reset_size();
+            reset_groundY();
+        }
+    }
+
+    public void reset_size_after_SmallPlayerPowerUp_is_over()
+    {
+        //SmallPowerUp was used -> player is smaller than used to be
+        if (RectangleHeight < RectangleHeight_copy || RectangleWidth < RectangleWidth_copy)
         {
             reset_size();
             reset_groundY();

@@ -28,6 +28,7 @@ public class PowerUpFactory
         FireballPowerUp,
         IceballPowerUp,
         BigPlayerPowerUp,
+        SmallPlayerPowerUp,
         BigGoalPowerUp
     }
 
@@ -48,14 +49,15 @@ public class PowerUpFactory
         switch (randomType)
         {
             case PowerUps.FireballPowerUp:
-                return new FireballPowerUp(ball);
-            
+                return new FireballPowerUp(ball);  
             case PowerUps.BigPlayerPowerUp:
                 return new BigPlayerPowerUp(ball);
             case PowerUps.IceballPowerUp:
                 return new IceballPowerUp(ball);
             case PowerUps.BigGoalPowerUp:
                 return new BiggerGoalPowerUp(ball);
+            case PowerUps.SmallPlayerPowerUp:
+                return new SmallPlayerPowerUp(ball);
             default:
                 throw new NotImplementedException($"PowerUp '{randomType}' ist nicht implementiert.");
         }
