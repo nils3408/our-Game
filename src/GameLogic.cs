@@ -54,22 +54,12 @@ public class GameLogic : GameState
     private Texture2D _goalTexture;
     private Vector2 _leftGoalPosition;
     private Vector2 _rightGoalPosition;
-    // Spieler, Ball
-    private Texture2D _player1Texture;
-    private Texture2D _player2Texture;
-    private Vector2 _player1Position;
-    private Vector2 _player1Velocity;
-    private Vector2 _player2Position;
-    private Vector2 _player2Velocity;
-    //player
+
+    //player, ball
     private Player player1;
     private Player player2;
     private Player last_player_touching_the_ball = null;
-
-
     private Ball football;
-    private Texture2D[] football_textures;
-    private float jumpheight = 250f;
     //generell
     private float collisionCooldown1 = 0f;
     private float collisionCooldown2 = 0f;
@@ -109,17 +99,11 @@ public class GameLogic : GameState
 
     private Texture2D _tribuneTexture;
     private Vector2 _leftTribunePosition;
-    private Vector2 _rightTribunePosition;
 
     float tribuneScale = 1f;
     int tribuneWidth;
     int tribuneHeight;
     float greenAreaY;
-    float centerX;
-    float tribuneSpacing;
-
-
-
 
 
     public GameLogic(Game baseGame) : base(baseGame) { }

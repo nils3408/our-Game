@@ -20,7 +20,7 @@ public class Ninja : Player
     {
         if (can_move == false) { return; }
 
-        if (can_do_specialeffect() == false) { return; }
+        if (can_do_special_effect() == false) { return; }
         
         //error prevention
         if (GameLogic_object == null) {return; }
@@ -29,8 +29,8 @@ public class Ninja : Player
         last_time_used = DateTime.Now;
     }
 
-    
-    public bool can_do_specialeffect()
+
+    public override bool can_do_special_effect()
     {
         TimeSpan timeSinceLastUse = DateTime.Now - last_time_used;
         return timeSinceLastUse.TotalSeconds >= cooldown;

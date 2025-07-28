@@ -6,7 +6,6 @@ using System;
 
 public class Spiderman: Player
 {
-    private int counter;
 
     //Konstruktor for Spiderman
     public Spiderman(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)

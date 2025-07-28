@@ -68,7 +68,6 @@ public class Ball
 
     //values for the animation
     private float framerate = 0.08f;
-    private int current_frame = 0;
     private float animation_time_counter = 0f;
     private float rotation = 0f;
     private float rotationrate = 2.35f;

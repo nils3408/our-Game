@@ -8,9 +8,6 @@ public class PlayerThies
     public string name;
     //int id;
 
-    Texture2D texture2D;
-
-    Vector2 position;
     Vector2 velocity = new Vector2(0, 0);
 
     const float gravity = 10;
