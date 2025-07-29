@@ -416,18 +416,6 @@
 /processorParam:TextureFormat=Color
 /build:icefootball.png
 
-#begin Knight.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Knight.png
-
 #begin Knightord.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -488,18 +476,6 @@
 /processorParam:TextureFormat=Color
 /build:Mario2.png
 
-#begin ronaldo.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:ronaldo.jpg
-
 #begin shuriken.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -523,18 +499,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sonic.png
-
-#begin special_move_texture_knight.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:special_move_texture_knight.png
 
 #begin special_move_textures/special_move_texture_knight.png
 /importer:TextureImporter

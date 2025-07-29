@@ -103,6 +103,7 @@ public class Player
     {
         position = position1;
         playerGroup = player;
+        moving_direction = get_moving_direction_from_player_group();
 
         texture = texture1;
         special_move_texture = special_move_texture1;
@@ -138,6 +139,15 @@ public class Player
         groundY = groundY_copy;
     }
 
+    public int get_moving_direction_from_player_group()
+    {
+       // at the start of the game
+       // based from the playergroup we assume the next moving direction of the player
+       // left player will move to the right, right player will move to the left
+       if (playerGroup == 1) { return 1; }
+       else                 { return -1;}
+    }
+
     public void handle_input(float delta)
     { 
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Left))) move(delta, -1);
@@ -159,8 +169,9 @@ public class Player
 
 
     public void draw(SpriteBatch spritebatch)
-    {
-        if (playerGroup == 2)
+    {   
+
+        if (moving_direction == -1)
         {
             spritebatch.Draw(texture,
                              currentRect, null, Color.White, 0f, Vector2.Zero,
