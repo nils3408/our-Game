@@ -137,9 +137,27 @@ public class GameLogic : GameState
         items = new Item[] { item1 };
         distribute_items();
         update_all_item_positions();
-
-
     }
+
+
+    public void SetPlayer(Player left, Player right)
+    {
+        float exakter_ground_y = groundY - 40;
+
+        player1 = left;
+        player1.position = new Vector2(60, exakter_ground_y);
+        player1.starting_position = new Vector2(60, exakter_ground_y);
+        player1.set_groundYs(exakter_ground_y);
+        player1.GameLogic_object = this;
+
+        player2 = right;
+        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
+        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
+        player2.set_groundYs(exakter_ground_y);
+        player2.GameLogic_object = this;
+    }
+
+
 
     public override void LoadContent()
     {
@@ -157,7 +175,7 @@ public class GameLogic : GameState
         tribuneHeight = (int)(_tribuneTexture.Height * tribuneScale);
 
         greenAreaY = groundY + 50;
-
+        
 
         _leftTribunePosition = new Vector2(450, -100);
 
@@ -224,6 +242,10 @@ public class GameLogic : GameState
     }
 
 
+
+// -----------------------------------------------------------------------------------------
+//Draws 
+
     public override void Draw(GameTime gameTime)
     {
         _graphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
@@ -263,7 +285,11 @@ public class GameLogic : GameState
         spriteBatch.Draw(player1.special_move_texture, new Microsoft.Xna.Framework.Rectangle(500, 800, 150, 150), Color.White);
         spriteBatch.Draw(player2.special_move_texture, new Microsoft.Xna.Framework.Rectangle(1300,800, 150, 150), Color.White);
 
-
+        //draw player powerUp_textures
+        DrawPowerUp(player1.powerup1?.get_powerUp_texture(), new Rectangle(300, 730, 150, 150));
+        DrawPowerUp(player1.powerup2?.get_powerUp_texture(), new Rectangle(300, 900, 150, 150));
+        DrawPowerUp(player2.powerup1?.get_powerUp_texture(), new Rectangle(1500, 730, 150, 150));
+        DrawPowerUp(player2.powerup2?.get_powerUp_texture(), new Rectangle(1500, 900, 150, 150));
 
         // Score und Timer anzeigen
         spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
@@ -300,27 +326,16 @@ public class GameLogic : GameState
         spriteBatch.End();
     }
 
-
-
-    public void SetPlayer(Player left, Player right)
+    void DrawPowerUp(Texture2D texture, Rectangle area)
     {
-        float exakter_ground_y = groundY - 40;
+        Texture2D blackTexture = new Texture2D(_graphicsDevice, 1, 1);
+        blackTexture.SetData(new[] { Color.Black });
 
-        player1 = left;
-        player1.position = new Vector2(60, exakter_ground_y);
-        player1.starting_position = new Vector2(60, exakter_ground_y);
-        player1.set_groundYs(exakter_ground_y);
-        player1.GameLogic_object = this;
-
-        player2 = right;
-        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
-        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
-        player2.set_groundYs(exakter_ground_y);
-        player2.GameLogic_object = this;
-
+        if (texture != null)
+            spriteBatch.Draw(texture, area, Color.White);
+        else
+            spriteBatch.Draw(blackTexture, area, Color.Black); 
     }
-
-
 
     // ----------------------------------------------------------------------------------------------
     // ----------------------------------------------------------------------------------------------
@@ -527,10 +542,9 @@ public class GameLogic : GameState
 
 
 
-
-    //--------------------------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------------------------
-    // goal stuff
+//--------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------
+// goal stuff
 
 
     //Check Ball im Tor

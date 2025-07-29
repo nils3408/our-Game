@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 //using SharpDX.XAudio2;
@@ -17,8 +18,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class SmallPlayerPowerUp : PowerUp
 {
-    public SmallPlayerPowerUp(Ball ball) : base(ball) {
+    public SmallPlayerPowerUp(Ball ball, ContentManager content) : base(ball, content) {
         cooldown = 4f;
+        powerUp_texture = content.Load<Texture2D> ("powerUp_textures/SmallPlayer_texture");
     }
 
     

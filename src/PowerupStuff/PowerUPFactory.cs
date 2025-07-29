@@ -11,6 +11,7 @@
 using System;
 using System.ComponentModel.Design;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 //using SharpDX.XAudio2;
 //using System;
@@ -39,7 +40,7 @@ public class PowerUpFactory
         this.ball = ball1;
     }
 
-    public PowerUp random_powerUP()
+    public PowerUp random_powerUP(ContentManager content)
     {
         //return a random PowerUp
 
@@ -49,15 +50,15 @@ public class PowerUpFactory
         switch (randomType)
         {
             case PowerUps.FireballPowerUp:
-                return new FireballPowerUp(ball);  
+                return new FireballPowerUp(ball, content);  
             case PowerUps.BigPlayerPowerUp:
-                return new BigPlayerPowerUp(ball);
+                return new BigPlayerPowerUp(ball, content);
             case PowerUps.IceballPowerUp:
-                return new IceballPowerUp(ball);
+                return new IceballPowerUp(ball, content);
             case PowerUps.BigGoalPowerUp:
-                return new BiggerGoalPowerUp(ball);
+                return new BiggerGoalPowerUp(ball, content);
             case PowerUps.SmallPlayerPowerUp:
-                return new SmallPlayerPowerUp(ball);
+                return new SmallPlayerPowerUp(ball, content);
             default:
                 throw new NotImplementedException($"PowerUp '{randomType}' ist nicht implementiert.");
         }

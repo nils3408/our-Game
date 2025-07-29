@@ -42,7 +42,7 @@ public static class PlayerFactory
         _graphicsDevice = graphicsDevice;
 
         playerTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("Spiderman");
-        playerTextures[(int)Types.Knight] = Content.Load<Texture2D>("Knight");
+        playerTextures[(int)Types.Knight] = Content.Load<Texture2D>("Knightord");
         playerTextures[(int)Types.Sonic] = Content.Load<Texture2D>("sonic");
         playerTextures[(int)Types.Standart] = Content.Load<Texture2D>("KopfkickerChar1_neu");
         playerTextures[(int)Types.Ninja] = Content.Load<Texture2D>("KopfkickerChar2_neu");

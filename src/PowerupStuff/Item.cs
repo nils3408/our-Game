@@ -154,7 +154,7 @@ public class Item
     public void set_new_powerUP()
     {
         // todo
-        linked_powerup = pf.random_powerUP();
+        linked_powerup = pf.random_powerUP(content);
     }
 
     
