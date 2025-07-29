@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sonic.png</SourceFile>
-  <SourceTime>2025-07-27T23:00:28.6879433+02:00</SourceTime>
-  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/sonic.xnb</DestFile>
-  <DestTime>2025-07-28T17:20:17.5064486+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/sonic.png</SourceFile>
+  <SourceTime>2025-07-02T20:25:34.5489664+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/sonic.xnb</DestFile>
+  <DestTime>2025-07-28T20:41:22.0045264+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

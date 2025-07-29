@@ -290,3 +290,10 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_texture_knight.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_knight.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_mario.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_ninja.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_player.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_sonic.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_spiderman.xnb

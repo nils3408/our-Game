@@ -17,6 +17,8 @@ public class Player
 {
 
     public Texture2D texture;
+    public Texture2D special_move_texture;
+
     public Player otherPlayer;
     public int playerGroup;
     
@@ -97,12 +99,15 @@ public class Player
      */
 
 
-    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)
+    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture1, int player, PlayerControls controls)
     {
         position = position1;
-
         playerGroup = player;
+
         texture = texture1;
+        special_move_texture = special_move_texture1;
+
+
         currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
         futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
         can_do_specialeffect = true;

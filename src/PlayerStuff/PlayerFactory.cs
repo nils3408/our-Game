@@ -33,18 +33,28 @@ public static class PlayerFactory
 
     private static GraphicsDevice _graphicsDevice;
 
-    private static Texture2D[] playerTextures = new Texture2D[TypesCount];
+    private static Texture2D[] playerTextures        = new Texture2D[TypesCount];
+    private static Texture2D[] smt = new Texture2D[TypesCount];  //special_move_textures
+
 
     public static void Initialize(GraphicsDevice graphicsDevice, ContentManager Content)
     {
         _graphicsDevice = graphicsDevice;
 
         playerTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("Spiderman");
-        playerTextures[(int)Types.Knight] = Content.Load<Texture2D>("Knightord");
+        playerTextures[(int)Types.Knight] = Content.Load<Texture2D>("Knight");
         playerTextures[(int)Types.Sonic] = Content.Load<Texture2D>("sonic");
         playerTextures[(int)Types.Standart] = Content.Load<Texture2D>("KopfkickerChar1_neu");
         playerTextures[(int)Types.Ninja] = Content.Load<Texture2D>("KopfkickerChar2_neu");
         playerTextures[(int)Types.Mario] = Content.Load<Texture2D>("Mario2");
+
+
+        smt[(int)Types.Spiderman]  = Content.Load<Texture2D>("special_move_textures/special_move_texture_spiderman");
+        smt[(int)Types.Knight]     = Content.Load<Texture2D>("special_move_textures/special_move_texture_knight");
+        smt[(int)Types.Sonic]      = Content.Load<Texture2D>("special_move_textures/special_move_texture_sonic");
+        smt[(int)Types.Standart]   = Content.Load<Texture2D>("special_move_textures/special_move_texture_player");
+        smt[(int)Types.Ninja]      = Content.Load<Texture2D>("special_move_textures/special_move_texture_ninja");
+        smt[(int)Types.Mario]      = Content.Load<Texture2D>("special_move_textures/special_move_texture_mario");
     }
 
     public static Player CreatePlayer(Types playerType, Vector2 position, int id, PlayerControls controls)
@@ -52,19 +62,19 @@ public static class PlayerFactory
         switch (playerType)
         {
             case Types.Standart:
-                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Player(_graphicsDevice,    position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Sonic:
-                return new Sonic(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Sonic(_graphicsDevice,     position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Spiderman:
-                return new Spiderman(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Spiderman(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Knight:
-                return new Knight(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Knight(_graphicsDevice,    position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Ninja:
-                return new Ninja(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Ninja(_graphicsDevice,     position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Mario:
-                return new Mario(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Mario(_graphicsDevice,     position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             default:
-                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), id, controls);
+                return new Player(_graphicsDevice,    position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
         }
     }
 
@@ -84,5 +94,10 @@ public static class PlayerFactory
     public static Texture2D GetPlayerTexture(Types playerType)
     {
         return playerTextures[(int)playerType];
+    }
+
+    public static Texture2D getSMT(Types playerType)
+    {
+        return smt[(int)playerType];
     }
 }

@@ -15,8 +15,8 @@ public class Knight: Player
 
 
     //Konstruktor for Knight
-    public Knight(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)
-              : base(graphicsDevice, position1, texture1, player, controls)
+    public Knight(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture, int player, PlayerControls controls)
+              : base(graphicsDevice, position1, texture1, special_move_texture, player, controls)
     {}
 
 

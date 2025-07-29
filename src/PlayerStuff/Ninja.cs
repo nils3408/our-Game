@@ -12,8 +12,8 @@ public class Ninja : Player
     public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
 
 
-    public Ninja(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, int player, PlayerControls controls)
-              : base(graphicsDevice, position1, texture1, player, controls)
+    public Ninja(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture1, int player, PlayerControls controls)
+              : base(graphicsDevice, position1, texture1, special_move_texture1, player, controls)
     { }
 
     public override void do_special_effect(float delta)

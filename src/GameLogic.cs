@@ -259,6 +259,11 @@ public class GameLogic : GameState
             s.draw(spriteBatch, gameTime);
         }
 
+        // draw player special_move_textures
+        spriteBatch.Draw(player1.special_move_texture, new Microsoft.Xna.Framework.Rectangle(500, 800, 150, 150), Color.White);
+        spriteBatch.Draw(player2.special_move_texture, new Microsoft.Xna.Framework.Rectangle(1300,800, 150, 150), Color.White);
+
+
 
         // Score und Timer anzeigen
         spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
