@@ -66,6 +66,7 @@ public class GameLogic : GameState
     private const float CollisionCooldownTime = 0.4f;
 
     Texture2D vs_zeichen;
+    Texture2D red_window;
 
     public Dictionary<string, Texture2D> ball_textures;
 
@@ -183,6 +184,7 @@ public class GameLogic : GameState
 
         schuriken_texture = Content.Load<Texture2D>("shuriken");
         vs_zeichen = Content.Load<Texture2D>("vs_zeichen");
+        red_window = Content.Load<Texture2D>("red_window");
 
         overlayTexture = new Texture2D(_graphicsDevice, 1, 1);
         overlayTexture.SetData(new[] { Color.White });
@@ -284,20 +286,8 @@ public class GameLogic : GameState
             s.draw(spriteBatch, gameTime);
         }
 
-
-        //draw vs zeichen
-        DrawVSZeichen();
-
-        // draw player special_move_textures
-        DrawPlayerSpecialMoveTexture(player1.special_move_texture, new Vector2(600, 800), 150f);
-        DrawPlayerSpecialMoveTexture(player2.special_move_texture, new Vector2(1200, 800), 150f);
-
-
-        //draw player powerUp_textures
-        DrawPowerUp(player1.powerup1?.get_powerUp_texture(), new Rectangle(300, 730, 150, 150));
-        DrawPowerUp(player1.powerup2?.get_powerUp_texture(), new Rectangle(300, 900, 150, 150));
-        DrawPowerUp(player2.powerup1?.get_powerUp_texture(), new Rectangle(1500, 730, 150, 150));
-        DrawPowerUp(player2.powerup2?.get_powerUp_texture(), new Rectangle(1500, 900, 150, 150));
+        //draw the Interface under ground Y
+        Draw_i_dont_know();
 
         // Score und Timer anzeigen
         spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);
@@ -334,49 +324,65 @@ public class GameLogic : GameState
         spriteBatch.End();
     }
 
-    void DrawPowerUp(Texture2D texture, Rectangle area)
+    void DrawPowerUp(Texture2D texture, Rectangle area, int size)
     {
-        Texture2D blackTexture = new Texture2D(_graphicsDevice, 1, 1);
-        blackTexture.SetData(new[] { Color.Black });
+        //size = size of the PowerUptexture
 
+        spriteBatch.Draw(red_window, area, Color.White);
         if (texture != null)
-            spriteBatch.Draw(texture, area, Color.White);
-        else
-            spriteBatch.Draw(blackTexture, area, Color.Black); 
+        {
+            spriteBatch.Draw(texture, new Rectangle(area.X + 15, area.Y+15, size, size), Color.White);
+        }
     }
 
-    void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, float desiredSize)
+    void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, int desiredSize)
     {
-        float scaleX = desiredSize / tex.Width;
-        float scaleY = desiredSize / tex.Height;
-        Vector2 origin = new Vector2(tex.Width / 2f, tex.Height / 2f);
-
-        spriteBatch.Draw
-        (
-            tex,
-            position,
-            null,
-            Color.White,
-            0f,
-            origin,
-            new Vector2(scaleX, scaleY),
-            SpriteEffects.None,
-            0f
-        );
+        spriteBatch.Draw(tex, new Rectangle( (int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White);
+    
     }
 
-    void DrawVSZeichen()
+
+    public void Draw_i_dont_know()
     {
+        /*  i dont know how to name this function
+         
+            draw vs zeichen, special effect textures, powerup textures
+            to make sure, channging one value( f.e. the vs sign shuld be smaller) does not force a
+            a change of the other values , the values depend from each other.
+            calculation values and drawing textures goes from middle to outside
+        */
+
+        int middle = 1920;
+
         // draw the texture in the middle of the screen
-        float scaling = 0.7f;
-        int x_size = (int)(vs_zeichen.Width * scaling);
-        int y_size = (int)(vs_zeichen.Height * scaling);
-        int x_pos = 1920 / 2 - x_size / 2;
+        float scaling = 0.5f;
+        int x_size = (int) (vs_zeichen.Width * scaling);
+        int y_size = (int) (vs_zeichen.Height * scaling);
+        int x_pos  = (int) (middle / 2 - x_size / 2);
         int y_pos = 800;
-
         spriteBatch.Draw(vs_zeichen, new Rectangle(x_pos, y_pos, x_size, y_size), Color.White);
-    }
 
+        // draw player special_move_textures
+        int distance2 = 140;                       // whished_distanze_between_vs_and_special_move_texture
+        int size2 = 140;                           // size of the round character_symbol_textures
+        int x_pos21 = x_pos - distance2 - size2;   // position of left character symbol
+        int x_pos22 = x_pos + distance2 + x_size;  // pposition of right character symbol
+        DrawPlayerSpecialMoveTexture(player1.special_move_texture, new Vector2(x_pos21, 800), size2);
+        DrawPlayerSpecialMoveTexture(player2.special_move_texture, new Vector2(x_pos22, 800), size2);
+
+
+        //draw player powerUp_textures
+        int size3 = 130;   //size of backgroudn texture
+        int size4 = 100;   //size of the real PowerUp_texture 
+        int distance3 = 20;  //distance to the specialeffect symbol
+        int xpos31 = x_pos21 - distance3 - size3 ;
+        int xpos32 = x_pos22 + distance3 + size3;
+
+        DrawPowerUp(player1.powerup1?.get_powerUp_texture(), new Rectangle(xpos31, 750, size3, size3), size4);
+        DrawPowerUp(player1.powerup2?.get_powerUp_texture(), new Rectangle(xpos31, 910, size3, size3), size4);
+        DrawPowerUp(player2.powerup1?.get_powerUp_texture(), new Rectangle(xpos32, 750, size3, size3), size4);
+        DrawPowerUp(player2.powerup2?.get_powerUp_texture(), new Rectangle(xpos32, 910, size3, size3), size4);
+    }
 
 
     // ----------------------------------------------------------------------------------------------

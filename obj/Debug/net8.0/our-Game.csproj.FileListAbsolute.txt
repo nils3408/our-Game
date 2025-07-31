@@ -250,6 +250,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\B
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\fireball_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\iceball_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\SmallPlayer_texture.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\red_window.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sonic.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_knight.xnb
@@ -267,6 +268,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tore.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tore2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\vs_zeichen.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.exe
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.deps.json
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.runtimeconfig.json
@@ -300,4 +302,3 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\vs_zeichen.xnb
