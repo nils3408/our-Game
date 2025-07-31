@@ -18,6 +18,13 @@ public class Schuriken
     private int direction;
     public Player owner;
 
+    //values for the animation
+    private float framerate = 0.08f;
+    private float animation_time_counter = 0f;
+    private float rotation = 0f;
+    private float rotationrate = 2.35f;
+
+
     public Schuriken( Texture2D texture1, Vector2 position1, Player owner1, int dir )
     {
         texture = texture1;
@@ -29,8 +36,6 @@ public class Schuriken
         //otherwise we use one as default value
         if (dir == 1 || dir == -1) { direction = dir; }
         else                       { direction = 1; }
-        
-
     }
    
 
@@ -61,11 +66,31 @@ public class Schuriken
 
     public void update_texture(GameTime gameTime)
     {
-        // todo
+        //update texture for animation if "the time is come"
+
+        animation_time_counter += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        if (animation_time_counter >= framerate)
+        {
+            rotation = (rotation + rotationrate*direction) % 360f;
+            animation_time_counter = 0;
+        }
+
     }
+
 
     public void draw_current_texture(SpriteBatch spritebatch)
     {
-        spritebatch.Draw(texture, current_Rect, Color.White);
+        spritebatch.Draw
+       (
+           texture,
+           position: new Vector2(current_Rect.X + current_Rect.Width / 2, current_Rect.Y + current_Rect.Height / 2),
+           sourceRectangle: null,
+           color: Color.White,
+           rotation: rotation,
+           origin: new Vector2(texture.Width / 2, texture.Height / 2),
+           scale: new Vector2((float)current_Rect.Width / texture.Width, (float)current_Rect.Height / texture.Height),
+           effects: SpriteEffects.None,
+           layerDepth: 0f
+       );
     }
 }
