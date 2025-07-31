@@ -65,6 +65,8 @@ public class GameLogic : GameState
     private float collisionCooldown2 = 0f;
     private const float CollisionCooldownTime = 0.4f;
 
+    Texture2D vs_zeichen;
+
     public Dictionary<string, Texture2D> ball_textures;
 
     private float groundY = 550;
@@ -180,6 +182,7 @@ public class GameLogic : GameState
         _leftTribunePosition = new Vector2(450, -100);
 
         schuriken_texture = Content.Load<Texture2D>("shuriken");
+        vs_zeichen = Content.Load<Texture2D>("vs_zeichen");
 
         overlayTexture = new Texture2D(_graphicsDevice, 1, 1);
         overlayTexture.SetData(new[] { Color.White });
@@ -281,9 +284,14 @@ public class GameLogic : GameState
             s.draw(spriteBatch, gameTime);
         }
 
+
+        //draw vs zeichen
+        DrawVSZeichen();
+
         // draw player special_move_textures
-        spriteBatch.Draw(player1.special_move_texture, new Microsoft.Xna.Framework.Rectangle(500, 800, 150, 150), Color.White);
-        spriteBatch.Draw(player2.special_move_texture, new Microsoft.Xna.Framework.Rectangle(1300,800, 150, 150), Color.White);
+        DrawPlayerSpecialMoveTexture(player1.special_move_texture, new Vector2(600, 800), 150f);
+        DrawPlayerSpecialMoveTexture(player2.special_move_texture, new Vector2(1200, 800), 150f);
+
 
         //draw player powerUp_textures
         DrawPowerUp(player1.powerup1?.get_powerUp_texture(), new Rectangle(300, 730, 150, 150));
@@ -336,6 +344,40 @@ public class GameLogic : GameState
         else
             spriteBatch.Draw(blackTexture, area, Color.Black); 
     }
+
+    void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, float desiredSize)
+    {
+        float scaleX = desiredSize / tex.Width;
+        float scaleY = desiredSize / tex.Height;
+        Vector2 origin = new Vector2(tex.Width / 2f, tex.Height / 2f);
+
+        spriteBatch.Draw
+        (
+            tex,
+            position,
+            null,
+            Color.White,
+            0f,
+            origin,
+            new Vector2(scaleX, scaleY),
+            SpriteEffects.None,
+            0f
+        );
+    }
+
+    void DrawVSZeichen()
+    {
+        // draw the texture in the middle of the screen
+        float scaling = 0.7f;
+        int x_size = (int)(vs_zeichen.Width * scaling);
+        int y_size = (int)(vs_zeichen.Height * scaling);
+        int x_pos = 1920 / 2 - x_size / 2;
+        int y_pos = 800;
+
+        spriteBatch.Draw(vs_zeichen, new Rectangle(x_pos, y_pos, x_size, y_size), Color.White);
+    }
+
+
 
     // ----------------------------------------------------------------------------------------------
     // ----------------------------------------------------------------------------------------------

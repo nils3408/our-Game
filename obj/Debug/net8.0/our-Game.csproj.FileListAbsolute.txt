@@ -258,6 +258,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textu
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_player.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_sonic.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_spiderman.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_spiderman1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spiderman.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielfeld2.xnb
@@ -299,3 +300,4 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\vs_zeichen.xnb

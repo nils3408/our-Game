@@ -55,6 +55,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/special_move_textures/special_move_texture_player.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/special_move_textures/special_move_texture_sonic.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/special_move_textures/special_move_texture_spiderman.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/special_move_textures/special_move_texture_spiderman1.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Spiderman.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Spielfeld2.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Spielfeld3.png</File>
@@ -62,8 +63,11 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Tore2.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/TribueneLang.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Tribüne.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/vs_zeichen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -620,6 +620,18 @@
 /processorParam:TextureFormat=Color
 /build:special_move_textures/special_move_texture_spiderman.png
 
+#begin special_move_textures/special_move_texture_spiderman1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:special_move_textures/special_move_texture_spiderman1.png
+
 #begin Spiderman.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -703,4 +715,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tribüne.png
+
+#begin vs_zeichen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:vs_zeichen.png
 
