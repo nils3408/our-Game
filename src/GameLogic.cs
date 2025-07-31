@@ -131,7 +131,7 @@ public class GameLogic : GameState
             { "icefootball",  Content.Load<Texture2D>("icefootball")  }
         };
 
-        football = new Ball(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY), ball_textures);
+        football = new Ball(_graphicsDevice, new Vector2(930, groundY), ball_textures);
 
         player1.Set_other_Player(player2);
         player2.Set_other_Player(player1);
@@ -148,14 +148,14 @@ public class GameLogic : GameState
         float exakter_ground_y = groundY - 40;
 
         player1 = left;
-        player1.position = new Vector2(60, exakter_ground_y);
-        player1.starting_position = new Vector2(60, exakter_ground_y);
+        player1.position = new Vector2(250, exakter_ground_y);
+        player1.starting_position = new Vector2(250, exakter_ground_y);
         player1.set_groundYs(exakter_ground_y);
         player1.GameLogic_object = this;
 
         player2 = right;
-        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
-        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 300, exakter_ground_y);
+        player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 400, exakter_ground_y);
+        player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 400, exakter_ground_y);
         player2.set_groundYs(exakter_ground_y);
         player2.GameLogic_object = this;
     }
@@ -395,16 +395,10 @@ public class GameLogic : GameState
         // movement and other input
         KeyboardState state = Keyboard.GetState();
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        
 
-
-        //Player 1
         player1.handle_input(delta);
-
-
-        // player 2
-        // {J K L I} statt {W S A D}
         player2.handle_input(delta);
-
 
     }
 
