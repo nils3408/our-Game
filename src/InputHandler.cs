@@ -124,10 +124,29 @@ public static class InputHandler
 
 
 
-    public static bool IsGamePadButtonReleased(Buttons button)
+    public static bool IsGamePadButtonReleased(Buttons button, int playergroup)
 	{
-		return prevPS4.IsButtonDown(button) && curPS4.IsButtonUp(button);
-	}
+
+        GamePadState prevState;
+        GamePadState curState;
+
+		switch (playergroup)
+		{
+			case 1:
+                prevState = prevPS4;
+                curState = curPS4;
+				break;
+			case 2:
+                prevState = prevPS4_P2;
+                curState = curPS4_P2;
+                break;
+			default:
+				return false;
+        }
+
+        return prevState.IsButtonDown(button) && curState.IsButtonUp(button);
+    }
+
 
     public static bool IsGamePadButtonPressed(Buttons button)
     {

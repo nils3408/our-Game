@@ -471,6 +471,13 @@ public class GameLogic : GameState
             {
                 if (player1.shoots_diagonal)   { football.get_shooted_diagonal();   }
                 if (player1.shoots_horizontal) { football.get_shooted_horizontal(); }
+
+                //todo: auslagern in PlayerControls/ Input handler /playeer.handleInput()
+                //drücken um player.shoot...  auf true zu setzen
+                //loslassen um player.shoot...auf false zu setzen
+                KeyboardState state = Keyboard.GetState();
+                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal(); }
+                if (state.IsKeyDown(Keys.Y)) { football.get_shooted_horizontal(); }
             }
         }
 
@@ -489,6 +496,13 @@ public class GameLogic : GameState
             {
                 if (player2.shoots_diagonal)   { football.get_shooted_diagonal(); }
                 if (player2.shoots_horizontal) { football.get_shooted_horizontal(); }
+
+                //todo auslaegrn in PlayerControls /InputHandler/ player.handleInput()
+                //drücken um player.shoot...  auf true zu setzen
+                //loslassen um player.shoot...auf false zu setzen
+                KeyboardState state = Keyboard.GetState();
+                if (state.IsKeyDown(Keys.K)) { football.get_shooted_diagonal(); }
+                if (state.IsKeyDown(Keys.M)) { football.get_shooted_horizontal(); }
             }
         }
     }

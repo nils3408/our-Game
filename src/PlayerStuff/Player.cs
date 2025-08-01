@@ -164,7 +164,7 @@ public class Player
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP(2);
 
-
+        //-----------------------------------------------------------------------------------------
         //Controller (steuerung sind X-Box tasten, do not ask me why
         if (InputHandler.IsGamePadButtonDown(Buttons.A, playerGroup))   jump(delta);
         if(InputHandler.isStickDown("l", playerGroup))                  move(delta, -1);
@@ -174,7 +174,15 @@ public class Player
         if (InputHandler.isLeftTriggerDown(playerGroup))                activate_powerUP(1);
         if (InputHandler.isRightTriggerDown(playerGroup))               activate_powerUP(2);
 
+        //pressing button
+        if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup))       shoots_diagonal   = true;
+        if (InputHandler.IsGamePadButtonDown(Buttons.Y, playerGroup))       shoots_horizontal = true;
+        //releasing button
+        if (InputHandler.IsGamePadButtonReleased(Buttons.B, playerGroup))   shoots_diagonal   = false;
+        if (InputHandler.IsGamePadButtonReleased(Buttons.Y, playerGroup))   shoots_horizontal = false;
+        
     }
+
 
     public virtual void do_special_effect(float delta)
     {
