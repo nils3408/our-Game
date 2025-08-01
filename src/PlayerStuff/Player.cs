@@ -175,14 +175,21 @@ public class Player
         if (InputHandler.isRightTriggerDown(playerGroup))               activate_powerUP(2);
 
         //pressing button
-        if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup))       shoots_diagonal   = true;
-        if (InputHandler.IsGamePadButtonDown(Buttons.Y, playerGroup))       shoots_horizontal = true;
-        //releasing button
-        if (InputHandler.IsGamePadButtonReleased(Buttons.B, playerGroup))   shoots_diagonal   = false;
-        if (InputHandler.IsGamePadButtonReleased(Buttons.Y, playerGroup))   shoots_horizontal = false;
-        
-    }
+        if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup) && 
+            !(InputHandler.IsGamePadButtonDown(Buttons.LeftShoulder, playerGroup)))     shoots_diagonal   = true;
 
+        if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup) &&
+            InputHandler.IsGamePadButtonDown(Buttons.LeftShoulder, playerGroup))        shoots_lupfer = true;
+
+        if (InputHandler.IsGamePadButtonDown(Buttons.Y, playerGroup))                   shoots_horizontal = true;
+
+        //releasing button
+        if (InputHandler.IsGamePadButtonReleased(Buttons.B, playerGroup)) 
+        { shoots_diagonal = false;  shoots_lupfer = false; }
+        if (InputHandler.IsGamePadButtonReleased(Buttons.Y, playerGroup))               shoots_horizontal = false; 
+        if (InputHandler.IsGamePadButtonReleased(Buttons.LeftShoulder, playerGroup))    shoots_lupfer = false;
+
+    }
 
     public virtual void do_special_effect(float delta)
     {

@@ -471,13 +471,15 @@ public class GameLogic : GameState
             {
                 if (player1.shoots_diagonal)   { football.get_shooted_diagonal();   }
                 if (player1.shoots_horizontal) { football.get_shooted_horizontal(); }
+                if (player1.shoots_lupfer)     { football.get_shooted_lupfer();     }
 
                 //todo: auslagern in PlayerControls/ Input handler /playeer.handleInput()
                 //drücken um player.shoot...  auf true zu setzen
                 //loslassen um player.shoot...auf false zu setzen
                 KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal(); }
-                if (state.IsKeyDown(Keys.Y)) { football.get_shooted_horizontal(); }
+                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal();   }
+                if (state.IsKeyDown(Keys.X)) { football.get_shooted_horizontal(); }
+                if (state.IsKeyDown(Keys.C)) { football.get_shooted_lupfer();     }
             }
         }
 
@@ -494,8 +496,9 @@ public class GameLogic : GameState
             // shooting    
             if (player2.can_move)
             {
-                if (player2.shoots_diagonal)   { football.get_shooted_diagonal(); }
-                if (player2.shoots_horizontal) { football.get_shooted_horizontal(); }
+                if (player2.shoots_diagonal)    { football.get_shooted_diagonal(); }
+                if (player2.shoots_horizontal)  { football.get_shooted_horizontal(); }
+                if (player2.shoots_lupfer)      { football.get_shooted_lupfer(); }
 
                 //todo auslaegrn in PlayerControls /InputHandler/ player.handleInput()
                 //drücken um player.shoot...  auf true zu setzen
@@ -503,6 +506,7 @@ public class GameLogic : GameState
                 KeyboardState state = Keyboard.GetState();
                 if (state.IsKeyDown(Keys.K)) { football.get_shooted_diagonal(); }
                 if (state.IsKeyDown(Keys.M)) { football.get_shooted_horizontal(); }
+                if (state.IsKeyDown(Keys.OemPeriod)) { football.get_shooted_lupfer(); }
             }
         }
     }

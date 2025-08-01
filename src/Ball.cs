@@ -53,7 +53,10 @@ public class Ball
     public Vector2 velocity = new Vector2(0, 0);
     public Vector2 starting_velocity = new Vector2(500f, -230f);
     public Vector2 shooting_horizontal_velocity = new Vector2(900, -20);
-    public Vector2 shooting_diagonally_velocity = new Vector2(900, -250); 
+    public Vector2 shooting_diagonally_velocity = new Vector2(900, -250);
+    public Vector2 shooting_lupfer_velocity = new Vector2(800, -750);
+
+
     private const int BallSize = 100;
     private const float BallFriction = (float)10;
 
@@ -178,6 +181,21 @@ public class Ball
 
         velocity.X = shooting_diagonally_velocity.X * transform_direction(velocity).X;
         velocity.Y = shooting_diagonally_velocity.Y;
+    }
+
+    public void get_shooted_lupfer()
+    {
+        if (fire_powerUp_in_use) { return; }
+        if (ice_powerUp_in_use)  { return; }
+
+        if (velocity == Vector2.Zero)
+        {
+            velocity = shooting_diagonally_velocity;
+            return;
+        }
+
+        velocity.X = shooting_lupfer_velocity.X * transform_direction(velocity).X;
+        velocity.Y = shooting_lupfer_velocity.Y;
     }
 
 
