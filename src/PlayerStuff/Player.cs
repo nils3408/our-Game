@@ -11,6 +11,7 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 
 public class Player
@@ -74,6 +75,11 @@ public class Player
     public bool shoots_diagonal = false;
     public bool shoots_horizontal = false;
     public bool shoots_lupfer = false;
+    
+    public DateTime time_kreis_got_released = DateTime.MaxValue;
+    public DateTime time_dreieck_got_released = DateTime.MaxValue;
+    public DateTime time_L1_got_released = DateTime.MaxValue;
+    public TimeSpan time_diff = TimeSpan.FromMilliseconds(350);
 
     /*
      * -------------------------------------------------
@@ -99,6 +105,13 @@ public class Player
      *      before the PowrUp gets deleted
      *      Moreover , with this aproach we can check on values of PowerUp from GameLogic (by calling connected player.value)
      *      
+     *     
+     *   Player Controller // shooting
+     *      There should be a small time difference between releasing a key and setting the correspondign varialbe to false
+            as it is usual in many video games
+            varialbe time_dif 
+            functions to check if at least time_dif is gone since button got released:  
+            public void update_released_Controller_Buttons()
      * --------------------------------------------------
      */
 
@@ -124,7 +137,6 @@ public class Player
         if (player == 1)      { moving_direction = 1;  }
         else if (player == 2) { moving_direction = -1; }
 
-
     }
 
 
@@ -148,7 +160,7 @@ public class Player
     {
        // at the start of the game
        // based from the playergroup we assume the next moving direction of the player
-       // left player will move to the right, right player will move to the left
+       // left player will move to the right, right player will move to the left 
        if (playerGroup == 1) { return 1; }
        else                 { return -1;}
     }
@@ -167,8 +179,9 @@ public class Player
         //-----------------------------------------------------------------------------------------
         //Controller (steuerung sind X-Box tasten, do not ask me why
         if (InputHandler.IsGamePadButtonDown(Buttons.A, playerGroup))   jump(delta);
-        if(InputHandler.isStickDown("l", playerGroup))                  move(delta, -1);
-        if(InputHandler.isStickDown("r", playerGroup))                  move(delta, 1);
+        if (InputHandler.IsL3MovedUp(playerGroup))                      jump(delta);
+        if (InputHandler.IsL3MovedToSide("l", playerGroup))             move(delta, -1);
+        if (InputHandler.IsL3MovedToSide("r", playerGroup))             move(delta, 1);
 
         if (InputHandler.IsGamePadButtonDown(Buttons.X, playerGroup))   do_special_effect(delta);
         if (InputHandler.isLeftTriggerDown(playerGroup))                activate_powerUP(1);
@@ -184,12 +197,75 @@ public class Player
         if (InputHandler.IsGamePadButtonDown(Buttons.Y, playerGroup))                   shoots_horizontal = true;
 
         //releasing button
-        if (InputHandler.IsGamePadButtonReleased(Buttons.B, playerGroup)) 
-        { shoots_diagonal = false;  shoots_lupfer = false; }
-        if (InputHandler.IsGamePadButtonReleased(Buttons.Y, playerGroup))               shoots_horizontal = false; 
-        if (InputHandler.IsGamePadButtonReleased(Buttons.LeftShoulder, playerGroup))    shoots_lupfer = false;
+        if (InputHandler.IsGamePadButtonReleased(Buttons.B, playerGroup))
+        {
+            time_kreis_got_released = DateTime.Now;
+        }
+        if (InputHandler.IsGamePadButtonReleased(Buttons.Y, playerGroup))
+        {
+            time_dreieck_got_released = DateTime.Now;
+        }
+        if (InputHandler.IsGamePadButtonReleased(Buttons.LeftShoulder, playerGroup))
+        {
+            time_L1_got_released = DateTime.Now;
+        }
 
+        update_released_Controller_Buttons();
     }
+
+    public void update_released_Controller_Buttons()
+    {
+        update_is_shooting_diagonal();
+        update_is_shooting_horizontal();
+        update_is_shooting_lupfer();
+    }
+
+    public void update_is_shooting_horizontal()
+    {
+        if (shoots_horizontal == false) { return; }
+
+        //horizontal shooting is by dreieck
+        TimeSpan vergangeneZeit = DateTime.Now - time_dreieck_got_released;
+        if (vergangeneZeit> time_diff)
+        {
+            time_dreieck_got_released = DateTime.MaxValue;
+            shoots_horizontal = false;
+        }
+    }
+
+    public void update_is_shooting_diagonal()
+    {
+        if (shoots_diagonal == false) { return; }
+
+        //diagonal shooting is by kreis
+        TimeSpan vergangeneZeit = DateTime.Now - time_kreis_got_released;
+        if (vergangeneZeit > time_diff)
+        {
+            time_kreis_got_released = DateTime.MaxValue;
+            shoots_diagonal = false;
+        }
+    }
+
+    public void update_is_shooting_lupfer()
+    {
+        if (shoots_lupfer == false) { return; }
+
+        // lupfer is by Kreis + L1
+        TimeSpan vergangeneZeit1 = DateTime.Now - time_kreis_got_released;
+        TimeSpan vergangeneZeit2 = DateTime.Now - time_L1_got_released;
+
+        if (vergangeneZeit1 > time_diff)
+        {
+            time_kreis_got_released = DateTime.MaxValue;
+            shoots_lupfer = false;
+        }
+        if (vergangeneZeit2 > time_diff)
+        {
+            time_L1_got_released = DateTime.MaxValue;
+            shoots_lupfer = false;
+        }
+    }
+
 
     public virtual void do_special_effect(float delta)
     {
@@ -211,9 +287,9 @@ public class Player
         else
         {
             spritebatch.Draw(texture,
-                         currentRect, null, Color.White, 0f, Vector2.Zero,
-                         SpriteEffects.None, 0f
-                         );
+                            currentRect, null, Color.White, 0f, Vector2.Zero,
+                            SpriteEffects.None, 0f
+                            );
 
         }
     }

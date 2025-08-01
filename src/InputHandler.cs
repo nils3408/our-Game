@@ -87,12 +87,12 @@ public static class InputHandler
 
 	}
 
-	public static bool isStickDown(string side, int playergroup)
+	public static bool IsL3MovedToSide(string side, int playergroup)
 	{
 		//side is "l" or "r"
 		PlayerIndex player = getPlayerIndex(playergroup);
-
 		GamePadState state = GamePad.GetState(player);
+
 		if (side == "l")
 		{
 			float z = -0.5f;
@@ -104,6 +104,16 @@ public static class InputHandler
 			return state.ThumbSticks.Left.X > z;
 		}
 	}
+
+	public static bool IsL3MovedUp(int playerGroup)
+	{
+        PlayerIndex player = getPlayerIndex(playerGroup);
+        GamePadState state = GamePad.GetState(player);
+
+		float z = 0.4f;
+		return state.ThumbSticks.Left.Y > z;
+    }
+
 
 	public static bool isLeftTriggerDown(int playergroup){
 		//L2 Tasten ist ein sogenannten Trigger
