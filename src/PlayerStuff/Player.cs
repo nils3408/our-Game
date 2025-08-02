@@ -634,5 +634,10 @@ public class Player
         position = starting_position;
         update_rectangles();
     }
+
+    public virtual void update_values()
+    {
+        // overwritten in other players
+    }
 }
 

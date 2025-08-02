@@ -10,7 +10,11 @@ using System;
 
 /*----------------------------------------------------
  * teleporting 
- *    teleporting update is handle in gameLogic Update()!!
+ * 
+ *     //  3 pahses of teleportation animation
+       //       1. animation at old position
+       //       2. animation at new position after pahse 1 is over
+       //       3. draw Player again at new position
  *    
  * --------------------------------------------------
 */
@@ -23,6 +27,20 @@ public class Wizzard: Player
     
     public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
     public bool special_effect_in_use = false;
+
+    float distance = 90f;  //distance the player is away from the ball after teleportation
+
+    public int teleportFrameCounter = 2;
+    public int teleportFrameCounter_copy = 2;
+    public int teleportFrameCounter2 = 2;
+    public int teleportFrameCounter2_copy = 2;
+    public bool showTeleportEffect = false;
+    public bool showTeleportEffect2 = false;
+    public Vector2 t1_pos = new Vector2(0, 0);
+    public Vector2 t2_pos = new Vector2(0, 0);
+
+    Texture2D t1;
+
 
 
     //Konstruktor for Wizzard
@@ -44,7 +62,6 @@ public class Wizzard: Player
         if (GameLogic_object.getBall() == null) { return; }
 
         Ball ball = GameLogic_object.getBall();
-        float distance = 70f;
         float pos_x;
         float pos_y;
 
@@ -64,7 +81,6 @@ public class Wizzard: Player
 
 
         do_teleportation_animation(pos_x, pos_y);
-        is_teleporting = true;
         position = newPosition;
         update_rectangles();
         last_time_used = DateTime.Now;
@@ -81,36 +97,91 @@ public class Wizzard: Player
 
     public void do_teleportation_animation(float x2, float y2)
         //x2,y2 are the cooridnates of the new position
+        //set the values for the teleportating animation
     {
-        GameLogic_object.t1_position =  new Vector2(position.X, position.Y);
-        GameLogic_object.t2_position =  new Vector2(x2, y2);
+        t1_pos =  new Vector2(position.X, position.Y);
+        t2_pos =  new Vector2(x2, y2);
         
-        GameLogic_object.showTeleportEffect = true;
+        showTeleportEffect = true;
+        is_teleporting = true;
 
-        GameLogic_object.teleportFrameCounter = GameLogic_object.teleportFrameCounter_copy;
-        GameLogic_object.teleportFrameCounter2 = GameLogic_object.teleportFrameCounter2_copy;
+        teleportFrameCounter  = teleportFrameCounter_copy;
+        teleportFrameCounter2 = teleportFrameCounter2_copy;
 
     }
 
     public override void draw(SpriteBatch spritebatch)
+    {
+        draw_teleporting_animation(spritebatch);
+        draw_player(spritebatch);
+    }
+
+    public void draw_teleporting_animation(SpriteBatch spriteBatch)
+    {
+        if (is_teleporting == false) { return; }
+
+        t1 = GameLogic_object.t1; 
+
+        if (showTeleportEffect)
+        {
+            spriteBatch.Draw(t1, new Rectangle((int)t1_pos.X, (int)t1_pos.Y, 150, 150), Color.White);
+        }
+        if (showTeleportEffect2)
+        {
+            spriteBatch.Draw(t1, new Rectangle((int)t2_pos.X, (int)t2_pos.Y, 150, 150), Color.White);
+        }
+    }
+
+    public void draw_player(SpriteBatch spriteBatch)
     {
         if (is_teleporting) { return; }
 
 
         if (moving_direction == -1)
         {
-            spritebatch.Draw(texture,
+            spriteBatch.Draw(texture,
                              currentRect, null, Color.White, 0f, Vector2.Zero,
                              SpriteEffects.FlipHorizontally, 0f
                              );
         }
         else
         {
-            spritebatch.Draw(texture,
+            spriteBatch.Draw(texture,
                             currentRect, null, Color.White, 0f, Vector2.Zero,
                             SpriteEffects.None, 0f
                             );
 
+        }
+    }
+
+    public override void update_values()
+    {
+       //  update teloprtating values
+
+        if (showTeleportEffect)
+        {
+            teleportFrameCounter--;
+
+            if (teleportFrameCounter <= 0)
+            {
+                showTeleportEffect = false;
+                showTeleportEffect2 = true;
+            }
+        }
+
+        if (showTeleportEffect2)
+        {
+            teleportFrameCounter2--;
+
+            if (teleportFrameCounter2 <= 0)
+            {
+                showTeleportEffect2 = false;
+            }
+        }
+        
+        if (showTeleportEffect2 == false && showTeleportEffect == false)
+        {
+            is_teleporting = false;
         }
     }
 
