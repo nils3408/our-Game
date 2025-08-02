@@ -101,11 +101,15 @@ public class GameLogic : GameState
     Texture2D schuriken_texture;
 
     //wizzard teleportation
-    public int teleportFrameCounter = 3;
-    public int teleportFrameCounterCopy = 3;
+    public int teleportFrameCounter = 2;
+    public int teleportFrameCounter_copy = 2;
+    public int teleportFrameCounter2 = 2;
+    public int teleportFrameCounter2_copy = 2;
     public bool showTeleportEffect = false;
+    public bool showTeleportEffect2 = false;
     public Texture2D t1;
-    public Vector2 t1_position = new Vector2(0,0);
+    public Vector2 t1_position  = new Vector2(0,0);
+    public Vector2 t2_position = new Vector2(0,0);
 
     private Texture2D _tribuneTexture;
     private Vector2 _leftTribunePosition;
@@ -187,8 +191,8 @@ public class GameLogic : GameState
         tribuneHeight = (int)(_tribuneTexture.Height * tribuneScale);
 
         greenAreaY = groundY + 50;
-        
 
+        
         _leftTribunePosition = new Vector2(450, -100);
 
         schuriken_texture = Content.Load<Texture2D>("shuriken");
@@ -244,7 +248,23 @@ public class GameLogic : GameState
             if (teleportFrameCounter <= 0)
             {
                 showTeleportEffect = false;
+                showTeleportEffect2 = true;
             }
+        }
+
+        if (showTeleportEffect2)
+        {
+            teleportFrameCounter2--;
+
+            if (teleportFrameCounter2 <= 0)
+            {
+                showTeleportEffect2 = false;
+            }
+        }
+        if (showTeleportEffect2 == false && showTeleportEffect == false)
+        {
+            player1.is_teleporting = false;
+            player2.is_teleporting = false;
         }
 
         //Zurück ins Menu wenn ESC losgelassen wird 
@@ -346,13 +366,19 @@ public class GameLogic : GameState
             spriteBatch.DrawString(scoreFont, escText, escTextPosition, Color.White);
         }
 
+
         //wizzard teleporation animation
         if (showTeleportEffect)
         {
             spriteBatch.Draw(t1, new Rectangle((int)t1_position.X, (int)t1_position.Y ,150, 150), Color.White);
         }
+        if (showTeleportEffect2)
+        {
+            spriteBatch.Draw(t1, new Rectangle((int)t2_position.X, (int)t2_position.Y, 150, 150), Color.White);
+        }
 
-        spriteBatch.End();
+           
+      spriteBatch.End();
     }
 
     void DrawPowerUp(Texture2D texture, Rectangle area, int size)

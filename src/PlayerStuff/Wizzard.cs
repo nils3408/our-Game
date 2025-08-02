@@ -7,6 +7,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
+
+/*----------------------------------------------------
+ * teleporting 
+ *    teleporting update is handle in gameLogic Update()!!
+ *    
+ * --------------------------------------------------
+*/
+
+
 public class Wizzard: Player
 {
 
@@ -14,7 +23,6 @@ public class Wizzard: Player
     
     public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
     public bool special_effect_in_use = false;
-
 
 
     //Konstruktor for Wizzard
@@ -55,7 +63,8 @@ public class Wizzard: Player
         if (out_of_bounds_both_scales(newPosition)) { return; }
 
 
-        do_teleportation_animation();
+        do_teleportation_animation(pos_x, pos_y);
+        is_teleporting = true;
         position = newPosition;
         update_rectangles();
         last_time_used = DateTime.Now;
@@ -70,12 +79,39 @@ public class Wizzard: Player
     }
 
 
-    public void do_teleportation_animation()
+    public void do_teleportation_animation(float x2, float y2)
+        //x2,y2 are the cooridnates of the new position
     {
-        GameLogic_object.t1_position = new Vector2(position.X, position.Y);
+        GameLogic_object.t1_position =  new Vector2(position.X, position.Y);
+        GameLogic_object.t2_position =  new Vector2(x2, y2);
+        
         GameLogic_object.showTeleportEffect = true;
-        GameLogic_object.teleportFrameCounter = GameLogic_object.teleportFrameCounterCopy; 
 
+        GameLogic_object.teleportFrameCounter = GameLogic_object.teleportFrameCounter_copy;
+        GameLogic_object.teleportFrameCounter2 = GameLogic_object.teleportFrameCounter2_copy;
+
+    }
+
+    public override void draw(SpriteBatch spritebatch)
+    {
+        if (is_teleporting) { return; }
+
+
+        if (moving_direction == -1)
+        {
+            spritebatch.Draw(texture,
+                             currentRect, null, Color.White, 0f, Vector2.Zero,
+                             SpriteEffects.FlipHorizontally, 0f
+                             );
+        }
+        else
+        {
+            spritebatch.Draw(texture,
+                            currentRect, null, Color.White, 0f, Vector2.Zero,
+                            SpriteEffects.None, 0f
+                            );
+
+        }
     }
 
 }
