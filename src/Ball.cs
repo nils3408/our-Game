@@ -57,7 +57,7 @@ public class Ball
     public Vector2 shooting_lupfer_velocity = new Vector2(800, -750);
 
 
-    private const int BallSize = 100;
+    public int BallSize = 100;
     private const float BallFriction = (float)10;
 
     private const float g = 250f;               

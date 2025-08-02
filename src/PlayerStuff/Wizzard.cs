@@ -31,29 +31,32 @@ public class Wizzard: Player
 
         // Wizzards: special effect:  teleporation
         //he can teleport himself next to the ball (left or right based on its playergroup)
-        last_time_used = DateTime.Now;
 
         if (GameLogic_object == null)           { return; }
         if (GameLogic_object.getBall() == null) { return; }
 
         Ball ball = GameLogic_object.getBall();
-        float distance = 50f;
+        float distance = 70f;
         float pos_x;
         float pos_y;
 
         if (playerGroup == 1)
         {
-            pos_x = ball.position.X - RectangleWidth- distance;
+            pos_x = ball.position.X - distance - currentRect.Width;
             pos_y = ball.position.Y;
         }
         else 
         {
-            pos_x = ball.position.X + ball.current_texture.Width +distance;
+            pos_x = ball.position.X + ball.BallSize +distance;
             pos_y = ball.position.Y;
         }
 
-        position = new Vector2(pos_x, pos_y);
+        Vector2 newPosition= new Vector2(pos_x, pos_y);
+        if (out_of_out_of_bounds_both_scales(newPosition) { return; }
+        
+        position = newPosition;
         update_rectangles();
+        last_time_used = DateTime.Now;
     }
     
     
