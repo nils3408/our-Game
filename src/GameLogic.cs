@@ -67,6 +67,7 @@ public class GameLogic : GameState
 
     Texture2D vs_zeichen;
     Texture2D red_window;
+    public SpriteBatch spriteBatch;
 
     public Dictionary<string, Texture2D> ball_textures;
 
@@ -99,6 +100,12 @@ public class GameLogic : GameState
     List<Schuriken> schurikenListe = new List<Schuriken>();
     Texture2D schuriken_texture;
 
+    //wizzard teleportation
+    public int teleportFrameCounter = 3;
+    public int teleportFrameCounterCopy = 3;
+    public bool showTeleportEffect = false;
+    public Texture2D t1;
+    public Vector2 t1_position = new Vector2(0,0);
 
     private Texture2D _tribuneTexture;
     private Vector2 _leftTribunePosition;
@@ -152,12 +159,14 @@ public class GameLogic : GameState
         player1.starting_position = new Vector2(250, exakter_ground_y);
         player1.set_groundYs(exakter_ground_y);
         player1.GameLogic_object = this;
+        player1.set_content(Content);
 
         player2 = right;
         player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 400, exakter_ground_y);
         player2.starting_position = new Vector2(_graphics.PreferredBackBufferWidth - 400, exakter_ground_y);
         player2.set_groundYs(exakter_ground_y);
         player2.GameLogic_object = this;
+        player2.set_content(Content);
     }
 
 
@@ -189,6 +198,7 @@ public class GameLogic : GameState
         overlayTexture = new Texture2D(_graphicsDevice, 1, 1);
         overlayTexture.SetData(new[] { Color.White });
 
+        t1 = Content.Load<Texture2D>("animation_p1");
     }
 
     public Ball getBall()
@@ -225,6 +235,17 @@ public class GameLogic : GameState
         move_schuriken(gameTime);
         update_schuriken_list();
 
+
+        //wizzard telepotation animation
+        if (showTeleportEffect)
+        {
+            teleportFrameCounter--;
+
+            if (teleportFrameCounter <= 0)
+            {
+                showTeleportEffect = false;
+            }
+        }
 
         //Zurück ins Menu wenn ESC losgelassen wird 
         if (InputHandler.IsReleased(Keys.Escape))
@@ -323,6 +344,12 @@ public class GameLogic : GameState
             );
 
             spriteBatch.DrawString(scoreFont, escText, escTextPosition, Color.White);
+        }
+
+        //wizzard teleporation animation
+        if (showTeleportEffect)
+        {
+            spriteBatch.Draw(t1, new Rectangle((int)t1_position.X, (int)t1_position.Y ,150, 150), Color.White);
         }
 
         spriteBatch.End();

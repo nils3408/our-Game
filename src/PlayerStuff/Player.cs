@@ -71,6 +71,7 @@ public class Player
 
     public PlayerControls controls;
     public GameLogic GameLogic_object;
+    public ContentManager content;
 
     public bool shoots_diagonal = false;
     public bool shoots_horizontal = false;
@@ -115,7 +116,7 @@ public class Player
      * --------------------------------------------------
      */
 
-
+    
     public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture1, int player, PlayerControls controls)
     {
         position = position1;
@@ -124,7 +125,6 @@ public class Player
 
         texture = texture1;
         special_move_texture = special_move_texture1;
-
 
         currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
         futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
@@ -143,6 +143,11 @@ public class Player
     public void Set_other_Player(Player otherPlayer1)
     {
         otherPlayer = otherPlayer1;
+    }
+
+    public void set_content(ContentManager content1)
+    {
+        content = content1;
     }
 
     public void set_groundYs(float abc)

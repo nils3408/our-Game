@@ -205,6 +205,13 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario2.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.AssemblyReference.cache
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfoInputs.cache
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfo.cs
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.CoreCompileInputs.cache
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.sourcelink.json
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\animation_p1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\background.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Ball.xnb
@@ -293,12 +300,6 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\win-x64\native\op
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\osx\native\libSDL2-2.0.0.dylib
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\win-x64\native\SDL2.dll
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.AssemblyReference.cache
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfoInputs.cache
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfo.cs
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.CoreCompileInputs.cache
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.sourcelink.json
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.Up2Date
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll

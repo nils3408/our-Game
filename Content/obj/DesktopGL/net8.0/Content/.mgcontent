@@ -4,6 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/animation_p1.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Arial.spritefont</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/background.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Ball.png</File>
@@ -70,6 +71,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Wizzard.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

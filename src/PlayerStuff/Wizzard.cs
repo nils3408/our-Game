@@ -53,7 +53,9 @@ public class Wizzard: Player
 
         Vector2 newPosition= new Vector2(pos_x, pos_y);
         if (out_of_bounds_both_scales(newPosition)) { return; }
-        
+
+
+        do_teleportation_animation();
         position = newPosition;
         update_rectangles();
         last_time_used = DateTime.Now;
@@ -65,6 +67,15 @@ public class Wizzard: Player
         DateTime current_time = DateTime.Now;
         double vergangene_zeit= (current_time- last_time_used).TotalSeconds;
         return (vergangene_zeit > cooldown);
+    }
+
+
+    public void do_teleportation_animation()
+    {
+        GameLogic_object.t1_position = new Vector2(position.X, position.Y);
+        GameLogic_object.showTeleportEffect = true;
+        GameLogic_object.teleportFrameCounter = GameLogic_object.teleportFrameCounterCopy; 
+
     }
 
 }
