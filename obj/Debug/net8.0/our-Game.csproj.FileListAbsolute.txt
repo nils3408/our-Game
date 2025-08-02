@@ -206,6 +206,7 @@ C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario2.xn
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\background.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Ball.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\BasicFont.ttf
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Coin\coin-0.xnb

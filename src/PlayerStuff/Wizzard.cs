@@ -52,7 +52,7 @@ public class Wizzard: Player
         }
 
         Vector2 newPosition= new Vector2(pos_x, pos_y);
-        if (out_of_out_of_bounds_both_scales(newPosition) { return; }
+        if (out_of_bounds_both_scales(newPosition)) { return; }
         
         position = newPosition;
         update_rectangles();

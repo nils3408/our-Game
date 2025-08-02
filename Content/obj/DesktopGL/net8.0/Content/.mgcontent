@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Arial.spritefont</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/background.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Ball.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Coin/coin-0.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Coin/coin-1.png</File>
@@ -69,6 +70,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Wizzard.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
