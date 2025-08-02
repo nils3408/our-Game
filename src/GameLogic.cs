@@ -191,6 +191,10 @@ public class GameLogic : GameState
 
     }
 
+    public Ball getBall()
+    {
+        return football;
+    }
 
     public override void Update(GameTime gameTime)
     {

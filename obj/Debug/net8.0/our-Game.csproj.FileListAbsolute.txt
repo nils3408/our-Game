@@ -260,6 +260,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textu
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_sonic.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_spiderman.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_spiderman1.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_wizzard.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spiderman.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spielfeld2.xnb
@@ -269,6 +270,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tore2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\vs_zeichen.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Wizzard.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.exe
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.deps.json
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\our-Game.runtimeconfig.json

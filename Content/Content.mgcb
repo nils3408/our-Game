@@ -536,18 +536,6 @@
 /processorParam:TextureFormat=Color
 /build:red_window.png
 
-#begin red_window.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:red_window.png
-
 #begin shuriken.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -656,6 +644,18 @@
 /processorParam:TextureFormat=Color
 /build:special_move_textures/special_move_texture_spiderman1.png
 
+#begin special_move_textures/special_move_texture_wizzard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:special_move_textures/special_move_texture_wizzard.png
+
 #begin Spiderman.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -751,4 +751,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:vs_zeichen.png
+
+#begin Wizzard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Wizzard.png
 
