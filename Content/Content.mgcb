@@ -512,6 +512,18 @@
 /processorParam:TextureFormat=Color
 /build:powerUp_textures/BigPlayer_texture.png
 
+#begin powerUp_textures/dieb.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:powerUp_textures/dieb.png
+
 #begin powerUp_textures/fireball_texture.png
 /importer:TextureImporter
 /processor:TextureProcessor

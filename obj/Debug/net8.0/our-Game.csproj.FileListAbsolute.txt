@@ -249,6 +249,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\BigGoal_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\BigPlayer_texture.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\dieb.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\fireball_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\iceball_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\SmallPlayer_texture.xnb

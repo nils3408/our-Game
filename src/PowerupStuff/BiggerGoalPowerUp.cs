@@ -25,7 +25,7 @@ public class BiggerGoalPowerUp : PowerUp
         powerUp_texture = content.Load<Texture2D>("powerUp_textures/BigGoal_texture");
     }
 
-    public override void activate(Player player)
+    public override void activate(Player player, int powerUp)
     {
         player.GameLogic_object.goalScale = 0.55f;
         player.GameLogic_object.set_goal_size();

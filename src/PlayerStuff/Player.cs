@@ -62,6 +62,10 @@ public class Player
     public bool powerUp1_in_use = false;
     public bool powerUp2_in_use = false;
 
+    public DateTime last_time_powerUp1_got_activated = DateTime.MinValue;
+    public DateTime last_time_powerUp2_got_activated = DateTime.MinValue;
+    public TimeSpan powerUp_time_diff = TimeSpan.FromMilliseconds(1000);
+
     public DateTime activation_time_BigPlayer_powerup = DateTime.MinValue;
     public float cooldown_BigPlayer_powerup = 0;
     public bool BigPlayer_powerup_in_use = false;
@@ -107,6 +111,12 @@ public class Player
      *      before the PowrUp gets deleted
      *      Moreover , with this aproach we can check on values of PowerUp from GameLogic (by calling connected player.value)
      *      
+     *      which teleportaion PowerUp
+     *          bug: you steal the PowerUp from your Oponent and activate it insteanc cause the taste is pressed
+     *          for more than one frame
+     *          solution: each powerup can only be activated each second / half second,..., something like this 
+     *                    stored in variable powerUp_time_diff
+     *      
      *     
      *   Player Controller // shooting
      *      There should be a small time difference between releasing a key and setting the correspondign varialbe to false
@@ -117,7 +127,7 @@ public class Player
      * --------------------------------------------------
      */
 
-    
+
     public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture1, int player, PlayerControls controls)
     {
         position = position1;
@@ -379,9 +389,11 @@ public class Player
     {
         if (can_move == false) return;
 
+        bool reset_powerup = true;    
+        
         if (slot == 1 && powerup1 != null)
         {
-            powerup1.activate(this);
+            if (can_activate_powerUp1() == false) { return;}
 
             switch(powerup1.get_class_name())
             {
@@ -397,14 +409,25 @@ public class Player
                     otherPlayer.cooldown_SmallPlayer_powerup = powerup1.get_cooldown();
                     otherPlayer.SmallPlayer_powerup_in_use = true;
                     break;
+
+                case "StealingPowerUp":
+                    reset_powerup = false;
+                    break;
             }
 
-            powerup1 = null;
+            powerup1.activate(this, 1);
+            last_time_powerUp1_got_activated = DateTime.Now;
+
+            if (reset_powerup == true)
+            {
+                powerup1 = null;
+            }
+
         }
 
         else if (slot == 2 && powerup2 != null)
         {
-            powerup2.activate(this);
+            if (can_activate_powerUp2() == false) { return; }
 
             switch (powerup2.get_class_name())
             {
@@ -420,11 +443,39 @@ public class Player
                     otherPlayer.cooldown_SmallPlayer_powerup = powerup2.get_cooldown();
                     otherPlayer.SmallPlayer_powerup_in_use = true;
                     break;
+
+                case "StealingPowerUp":
+                    reset_powerup = false;
+                    break;
             }
 
-            powerup2 = null;
+            powerup2.activate(this, 2);
+            last_time_powerUp2_got_activated = DateTime.Now;
+
+            if (reset_powerup == true)
+            {
+                powerup2 = null;
+            }
         }
     }
+
+    public bool can_activate_powerUp1()
+    {
+        // check if enough time (>= powerUp_time_diff) is passed since last activation of powerup1
+        
+        TimeSpan dt = DateTime.Now - last_time_powerUp1_got_activated;
+        return dt >= powerUp_time_diff;
+    }
+
+    public bool can_activate_powerUp2()
+    {
+        // check if enough time (>= powerUp_time_diff) is passed since last activation of powerup2
+
+        TimeSpan dt = DateTime.Now - last_time_powerUp2_got_activated;
+        return dt >= powerUp_time_diff;
+    }
+
+
 
     public void set_PowerUp(PowerUp a)
     {

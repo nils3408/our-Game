@@ -46,6 +46,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Mario2.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/BigGoal_texture.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/BigPlayer_texture.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/dieb.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/fireball_texture.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/iceball_texture.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/SmallPlayer_texture.png</File>
@@ -71,6 +72,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Wizzard.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

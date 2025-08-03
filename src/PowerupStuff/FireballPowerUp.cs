@@ -27,7 +27,7 @@ public class FireballPowerUp : PowerUp
         powerUp_texture = content.Load<Texture2D>("powerUp_textures/fireball_texture");
     }
 
-    public override void activate(Player player)
+    public override void activate(Player player, int powerUp)
     {
         ball.reset_values();
         ball.activation_time_powerUp = DateTime.Now;

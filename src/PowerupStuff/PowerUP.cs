@@ -38,7 +38,7 @@ public class PowerUp
         return this.GetType().Name;
     }
 
-    public virtual void activate(Player player)
+    public virtual void activate(Player player, int powerUp)
     {
        //player is the one the PowerUp will be used on
        //function is overwritten in the erbenden functions

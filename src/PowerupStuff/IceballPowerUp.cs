@@ -24,7 +24,7 @@ public class IceballPowerUp : PowerUp
         powerUp_texture = content.Load<Texture2D>("powerUp_textures/iceball_texture");
     }
 
-    public override void activate(Player player)
+    public override void activate(Player player, int powerUp)
     {
         ball.reset_values();
         ball.activation_time_powerUp = DateTime.Now;

@@ -24,7 +24,7 @@ public class BigPlayerPowerUp : PowerUp
     }
 
     
-    public override void activate(Player player)
+    public override void activate(Player player, int powerUp)
     {
         player.RectangleHeight = 250;
         player.RectangleWidth = 250;
