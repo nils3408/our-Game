@@ -4,8 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/../../../../../Downloads/TribueneLang.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/animation_p1.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Arial.spritefont</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/background.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Ball.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-0.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-1.png</File>
@@ -36,26 +37,67 @@
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-7.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-8.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-9.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Fanblau1.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Fanblau2.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/FanRot.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/FanRot2.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/firefootball.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/football.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/icefootball.png</File>
-    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Knight.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Knightord.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/KopfkickerChar1_neu.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/KopfkickerChar2_neu.png</File>
-    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Mario.png</File>
-    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/mariopixel.png</File>
-    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/ronaldo.jpg</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Mario2.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/powerUp_textures/BigGoal_texture.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/powerUp_textures/BigPlayer_texture.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/powerUp_textures/dieb.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/powerUp_textures/fireball_texture.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/powerUp_textures/iceball_texture.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/powerUp_textures/SmallPlayer_texture.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/red_window.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/shuriken.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sonic.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_knight.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_mario.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_ninja.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_player.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_sonic.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_spiderman.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_spiderman1.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/special_move_textures/special_move_texture_wizzard.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spiderman.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spielfeld2.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Spielfeld3.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tore.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tore2.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/TribueneLang.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Tribüne.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/vs_zeichen.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Wizzard.png</File>
   </SourceFiles>
   <DestFiles>
-    <File>TribueneLang.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

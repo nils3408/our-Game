@@ -111,6 +111,11 @@ public class GameLogic : GameState
     int tribuneHeight;
     float greenAreaY;
 
+    // Fan Characters
+    private Texture2D fanrotTexture;
+    private Texture2D fanrotBlau1Texture;
+    private List<BackgroundFan> backgroundFans = new List<BackgroundFan>();
+
 
     public GameLogic(Game baseGame) : base(baseGame) { }
     public GameLogic(Game baseGame, Player leftPlayer, Player rightPlayer) : base(baseGame)
@@ -143,6 +148,9 @@ public class GameLogic : GameState
         items = new Item[] { item1 };
         distribute_items();
         update_all_item_positions();
+
+        // DON'T Initialize background fans here - they need textures first!
+        // InitializeBackgroundFans(); - moved to LoadContent()
     }
 
 
@@ -184,7 +192,7 @@ public class GameLogic : GameState
 
         greenAreaY = groundY + 50;
 
-        
+
         _leftTribunePosition = new Vector2(450, -100);
 
         schuriken_texture = Content.Load<Texture2D>("shuriken");
@@ -195,6 +203,36 @@ public class GameLogic : GameState
         overlayTexture.SetData(new[] { Color.White });
 
         t1 = Content.Load<Texture2D>("animation_p1");
+
+        // Load fan textures
+        try
+        {
+            fanrotTexture = Content.Load<Texture2D>("FanRot");
+            fanrotBlau1Texture = Content.Load<Texture2D>("FanBlau1");
+        }
+        catch (Exception ex)
+        {
+            fanrotTexture = _goalTexture;
+            fanrotBlau1Texture = vs_zeichen;
+        }
+
+        InitializeBackgroundFans();
+    }
+
+    private void InitializeBackgroundFans()
+    {
+        // Create 3 Fanrot characters (left side)
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(500, 300), 0.5f, 2f, 0.3f));
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(700, 230), 0.5f, 2f, 0.2f));
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(600, 370), 0.5f, 2f, 0.4f));
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(800, 300), 0.5f, 2f, 0.1f));
+
+        // Create 3 FanrotBlau1 characters (right side)
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(980, 300), 0.5f, 2f, 0.3f));
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(1200, 230), 0.5f, 2f, 0.4f));
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(1300, 370), 0.5f, 2f, 0.1f));       
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(1150, 300), 0.5f, 2f, 0.2f));
+
     }
 
     public Ball getBall()
@@ -206,7 +244,7 @@ public class GameLogic : GameState
     {
         player1.update_values();
         player2.update_values();
-        
+
         player1.update_schuriken_knockout_phase();
         player2.update_schuriken_knockout_phase();
 
@@ -234,15 +272,17 @@ public class GameLogic : GameState
         move_schuriken(gameTime);
         update_schuriken_list();
 
-
+        // Update background fans
+        foreach (var fan in backgroundFans)
+        {
+            fan.Update(gameTime);
+        }
 
         //Zurück ins Menu wenn ESC losgelassen wird 
         if (InputHandler.IsReleased(Keys.Escape))
         {
             System.Diagnostics.Debug.WriteLine("escape!");
-            //Game1.GameIsInitialized = false;
             Game1.nextState = new Menu(baseGame);
-
         }
         if (gameRunning)
         {
@@ -256,14 +296,14 @@ public class GameLogic : GameState
                 Game1.openGames.Remove(this);
                 Game1.nextState = new Menu(baseGame);
             }
-            return; // Keine weitere Spiellogik ausführen
+            return;
         }
     }
 
 
 
-// -----------------------------------------------------------------------------------------
-//Draws 
+    // -----------------------------------------------------------------------------------------
+    //Draws 
 
     public override void Draw(GameTime gameTime)
     {
@@ -275,13 +315,20 @@ public class GameLogic : GameState
         new Microsoft.Xna.Framework.Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
         Microsoft.Xna.Framework.Color.White
         );
+
+        
+
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
         //Tribünen
         spriteBatch.Draw(_tribuneTexture,
         new Microsoft.Xna.Framework.Rectangle((int)_leftTribunePosition.X, (int)_leftTribunePosition.Y, tribuneWidth, tribuneHeight),
         Microsoft.Xna.Framework.Color.White);
-
+        // Draw background fans
+        foreach (var fan in backgroundFans)
+        {
+            fan.Draw(spriteBatch);
+        }
         Color gameColor = gameWon ? Color.White * 0.3f : Color.White;
 
         player1.draw(spriteBatch);
@@ -336,9 +383,7 @@ public class GameLogic : GameState
         }
 
 
-
-           
-      spriteBatch.End();
+        spriteBatch.End();
     }
 
     void DrawPowerUp(Texture2D texture, Rectangle area, int size)
@@ -348,14 +393,14 @@ public class GameLogic : GameState
         spriteBatch.Draw(red_window, area, Color.White);
         if (texture != null)
         {
-            spriteBatch.Draw(texture, new Rectangle(area.X + 15, area.Y+15, size, size), Color.White);
+            spriteBatch.Draw(texture, new Rectangle(area.X + 15, area.Y + 15, size, size), Color.White);
         }
     }
 
     void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, int desiredSize)
     {
-        spriteBatch.Draw(tex, new Rectangle( (int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White);
-    
+        spriteBatch.Draw(tex, new Rectangle((int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White);
+
     }
 
 
@@ -373,9 +418,9 @@ public class GameLogic : GameState
 
         // draw the texture in the middle of the screen
         float scaling = 0.5f;
-        int x_size = (int) (vs_zeichen.Width * scaling);
-        int y_size = (int) (vs_zeichen.Height * scaling);
-        int x_pos  = (int) (middle / 2 - x_size / 2);
+        int x_size = (int)(vs_zeichen.Width * scaling);
+        int y_size = (int)(vs_zeichen.Height * scaling);
+        int x_pos = (int)(middle / 2 - x_size / 2);
         int y_pos = 800;
         spriteBatch.Draw(vs_zeichen, new Rectangle(x_pos, y_pos, x_size, y_size), Color.White);
 
@@ -392,7 +437,7 @@ public class GameLogic : GameState
         int size3 = 130;   //size of backgroudn texture
         int size4 = 100;   //size of the real PowerUp_texture 
         int distance3 = 20;  //distance to the specialeffect symbol
-        int xpos31 = x_pos21 - distance3 - size3 ;
+        int xpos31 = x_pos21 - distance3 - size3;
         int xpos32 = x_pos22 + distance3 + size3;
 
         DrawPowerUp(player1.powerup1?.get_powerUp_texture(), new Rectangle(xpos31, 750, size3, size3), size4);
@@ -412,7 +457,7 @@ public class GameLogic : GameState
         // movement and other input
         KeyboardState state = Keyboard.GetState();
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        
+
 
         player1.handle_input(delta);
         player2.handle_input(delta);
@@ -486,17 +531,17 @@ public class GameLogic : GameState
             // shooting    
             if (player1.can_move)
             {
-                if (player1.shoots_diagonal)   { football.get_shooted_diagonal();   }
+                if (player1.shoots_diagonal) { football.get_shooted_diagonal(); }
                 if (player1.shoots_horizontal) { football.get_shooted_horizontal(); }
-                if (player1.shoots_lupfer)     { football.get_shooted_lupfer();     }
+                if (player1.shoots_lupfer) { football.get_shooted_lupfer(); }
 
                 //todo: auslagern in PlayerControls/ Input handler /playeer.handleInput()
                 //drücken um player.shoot...  auf true zu setzen
                 //loslassen um player.shoot...auf false zu setzen
                 KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal();   }
+                if (state.IsKeyDown(Keys.S)) { football.get_shooted_diagonal(); }
                 if (state.IsKeyDown(Keys.X)) { football.get_shooted_horizontal(); }
-                if (state.IsKeyDown(Keys.C)) { football.get_shooted_lupfer();     }
+                if (state.IsKeyDown(Keys.C)) { football.get_shooted_lupfer(); }
             }
         }
 
@@ -513,9 +558,9 @@ public class GameLogic : GameState
             // shooting    
             if (player2.can_move)
             {
-                if (player2.shoots_diagonal)    { football.get_shooted_diagonal(); }
-                if (player2.shoots_horizontal)  { football.get_shooted_horizontal(); }
-                if (player2.shoots_lupfer)      { football.get_shooted_lupfer(); }
+                if (player2.shoots_diagonal) { football.get_shooted_diagonal(); }
+                if (player2.shoots_horizontal) { football.get_shooted_horizontal(); }
+                if (player2.shoots_lupfer) { football.get_shooted_lupfer(); }
 
                 //todo auslaegrn in PlayerControls /InputHandler/ player.handleInput()
                 //drücken um player.shoot...  auf true zu setzen
@@ -616,9 +661,9 @@ public class GameLogic : GameState
 
 
 
-//--------------------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------------------
-// goal stuff
+    //--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
+    // goal stuff
 
 
     //Check Ball im Tor
@@ -627,18 +672,18 @@ public class GameLogic : GameState
         int crossbarHeight = 20;
         Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
         //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
-        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y + crossbarHeight, goalWidth, goalHeight- crossbarHeight);
-        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y + crossbarHeight, goalWidth, goalHeight- crossbarHeight);
-        
-        Microsoft.Xna.Framework.Rectangle leftCrossbar = new Microsoft.Xna.Framework.Rectangle(leftGoal.X,leftGoal.Y,leftGoal.Width,crossbarHeight);
+        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
+        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
 
-        Microsoft.Xna.Framework.Rectangle rightCrossbar = new Microsoft.Xna.Framework.Rectangle(rightGoal.X,rightGoal.Y,rightGoal.Width,crossbarHeight);
+        Microsoft.Xna.Framework.Rectangle leftCrossbar = new Microsoft.Xna.Framework.Rectangle(leftGoal.X, leftGoal.Y, leftGoal.Width, crossbarHeight);
+
+        Microsoft.Xna.Framework.Rectangle rightCrossbar = new Microsoft.Xna.Framework.Rectangle(rightGoal.X, rightGoal.Y, rightGoal.Width, crossbarHeight);
 
         football.handle_crossbar_collision(leftCrossbar);
         football.handle_crossbar_collision(rightCrossbar);
 
 
-        
+
 
         if (leftGoal.Contains(ballRect))
         {
