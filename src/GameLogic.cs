@@ -341,7 +341,7 @@ public class GameLogic : GameState
         }
 
         //draw the Interface under ground Y
-        //Draw_i_dont_know();
+        Draw_i_dont_know();
 
         // Score und Timer anzeigen
         spriteBatch.DrawString(scoreFont, $"{scorePlayer1} : {scorePlayer2}", new Vector2(_graphics.PreferredBackBufferWidth / 2f, 20), Color.White);

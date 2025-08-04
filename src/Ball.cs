@@ -154,7 +154,7 @@ public class Ball
     public void get_shooted_horizontal()
     {
         if (fire_powerUp_in_use) { return; }
-        if (ice_powerUp_in_use) { return; }
+        if (ice_powerUp_in_use) return;
         
         if (velocity == Vector2.Zero)
         {
@@ -289,9 +289,9 @@ public class Ball
     public void update_texture(SpriteBatch spritebatch , GameTime gameTime)
     {
         //update texture for animation if "the time is come"
-        
-        if (velocity.X == 0)         { return; }
-        if (ice_powerUp_in_use)      { return; }
+
+        if (Math.Abs(velocity.X) < 0.01  && fire_powerUp_in_use == false) { return; }   //(nearly) 0
+        if (ice_powerUp_in_use)          { return; }
 
         animation_time_counter += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -305,19 +305,22 @@ public class Ball
 
     public void draw_current_texture(SpriteBatch spritebatch)
     {
-        //spritebatch.Draw(current_texture, Rect, Color.White);
-        spritebatch.Draw
-        (
-            current_texture,
-            position: new Vector2(Rect.X + Rect.Width / 2, Rect.Y + Rect.Height / 2),
-            sourceRectangle: null,
-            color: Color.White,
-            rotation: rotation,
-            origin: new Vector2(current_texture.Width / 2, current_texture.Height / 2),
-            scale: new Vector2((float)Rect.Width / current_texture.Width, (float)Rect.Height / current_texture.Height),
-            effects: SpriteEffects.None,
-            layerDepth: 0f
-        );
+        float rotation1;
+        if (Math.Abs(velocity.X) < 0.01 && fire_powerUp_in_use == false) { rotation1 = 0;        }
+        else                                                             { rotation1 = rotation; }
+
+            spritebatch.Draw
+            (
+                current_texture,
+                position: new Vector2(Rect.X + Rect.Width / 2, Rect.Y + Rect.Height / 2),
+                sourceRectangle: null,
+                color: Color.White,
+                rotation: rotation1,
+                origin: new Vector2(current_texture.Width / 2, current_texture.Height / 2),
+                scale: new Vector2((float)Rect.Width / current_texture.Width, (float)Rect.Height / current_texture.Height),
+                effects: SpriteEffects.None,
+                layerDepth: 0f
+            );
     }
 
 
@@ -328,9 +331,8 @@ public class Ball
     public void move(float deltaTime, float groundY)
     {
         if (ice_powerUp_in_use) return;
-        if (velocity == Vector2.Zero) return;
-
-
+        if (velocity == Vector2.Zero) { return; }
+  
         velocity.Y += g * deltaTime;
         position = position + velocity * deltaTime;
 

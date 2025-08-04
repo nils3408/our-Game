@@ -162,6 +162,7 @@ public class Player
         content = content1;
     }
 
+
     public void set_groundYs(float abc)
     {
         groundY = abc;
@@ -192,6 +193,9 @@ public class Player
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Special))) do_special_effect(delta);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP(2);
+
+        if (InputHandler.IsDown(Keys.B))
+            Debug.WriteLine("test:  " +GameLogic_object.getBall().velocity);
 
         //-----------------------------------------------------------------------------------------
         //Controller (steuerung sind X-Box tasten, do not ask me why
@@ -378,6 +382,15 @@ public class Player
         Vector2 newPosition = new Vector2(newPositionX, position.Y);
 
         futureRect = new Rectangle((int)newPositionX, (int)position.Y, RectangleWidth, RectangleHeight);
+
+        //when ball is fireball / iceball: player should not be able to touch it
+        if (futureRect.Intersects(GameLogic_object.getBall().getRect())) { 
+             if ((GameLogic_object.getBall().fire_powerUp_in_use == true) ||
+                 ( GameLogic_object.getBall().ice_powerUp_in_use == true))  
+             {
+                return;
+             }
+        }
 
         if (!(futureRect.Intersects(otherPlayer.currentRect)))
         {
@@ -627,8 +640,15 @@ public class Player
         Vector2 newPos = new Vector2(position.X, newY);
         Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
 
-        
-
+        // make sure player does not intersect with ball from the down side when (ball = iceball)
+        if (testRect.Intersects(GameLogic_object.getBall().getRect()))
+        {
+            if (GameLogic_object.getBall().ice_powerUp_in_use == true)
+            {
+                velocity.Y = 0;
+                return;
+            }
+        }
 
 
         // Prüfe Kollision mit anderem Spieler
