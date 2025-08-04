@@ -76,9 +76,6 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Tore2.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\BasicFont.ttf
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Arial.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Ball.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\football.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spielfeld2.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Tore2.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\our-Game.exe
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\our-Game.deps.json
@@ -113,14 +110,11 @@ C:\Users\Lukas\source\repos\nils3408\our-Game\obj\Debug\net8.0\refint\our-Game.d
 C:\Users\Lukas\source\repos\nils3408\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\Lukas\source\repos\nils3408\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\Lukas\source\repos\nils3408\our-Game\obj\Debug\net8.0\ref\our-Game.dll
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\KopfkickerChar2_neu.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\KopfkickerChar1_neu.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Spielcharakter1_neu.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\KopfkickerChar1_neu.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\KopfkickerChar2_neu.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Spiderman.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spiderman.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Tore.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Tore.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Knight.xnb
@@ -154,8 +148,6 @@ C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Coin\coin
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Coin\coin-7.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Coin\coin-8.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Coin\coin-9.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Knightord.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sonic.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Coin\coin-0.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Coin\coin-1.xnb
@@ -188,10 +180,7 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Coin\coin-9.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Knightord.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Tribüne.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\firefootball.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\icefootball.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\firefootball.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\icefootball.xnb
@@ -200,15 +189,9 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\ronaldo.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\Spielfeld3.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\TribueneLang.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Mario2.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\animation_p1.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\background.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Fanblau1.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Fanblau2.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\FanRot.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\FanRot2.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\powerUp_textures\BigGoal_texture.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\powerUp_textures\BigPlayer_texture.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\powerUp_textures\dieb.xnb
@@ -225,7 +208,6 @@ C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\special_m
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_spiderman1.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_wizzard.xnb
 C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\vs_zeichen.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\Wizzard.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\animation_p1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\balls\firefootball.xnb
@@ -334,3 +316,23 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\balls\firefootball.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\balls\football.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\balls\icefootball.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\fans\Fanblau1.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\fans\Fanblau2.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\fans\FanRot1.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\fans\FanRot2.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\Knightord.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\KopfkickerChar1_neu.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\KopfkickerChar2_neu.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\Mario2.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\sonic.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\Spiderman.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\Wizzard.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\spielfeld_pictures\Spielfeld.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\spielfeld_pictures\Spielfeld2.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\spielfeld_pictures\Spielfeld3.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\spielfeld_pictures\starting_background.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\spielfeld_pictures\starting_background2.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\stun7.xnb

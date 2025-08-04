@@ -114,6 +114,8 @@ public class GameLogic : GameState
     // Fan Characters
     private Texture2D fanrotTexture;
     private Texture2D fanrotBlau1Texture;
+    private Texture2D fanrotBlau2Texture;
+    private Texture2D fanrot2Texture;
     private List<BackgroundFan> backgroundFans = new List<BackgroundFan>();
 
 
@@ -208,24 +210,25 @@ public class GameLogic : GameState
         // Load fan textures
         fanrotTexture = Content.Load<Texture2D>("fans/FanRot1");
         fanrotBlau1Texture = Content.Load<Texture2D>("fans/FanBlau1");
-      
+        fanrotBlau2Texture = Content.Load<Texture2D>("fans/FanBlau2");
+        fanrot2Texture = Content.Load<Texture2D>("fans/FanRot2");
+
         InitializeBackgroundFans();
     }
 
     private void InitializeBackgroundFans()
     {
-        // Create 3 Fanrot characters (left side)
-        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(500, 300), 0.5f, 2f, 0.3f));
-        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(700, 230), 0.5f, 2f, 0.2f));
-        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(600, 370), 0.5f, 2f, 0.4f));
-        backgroundFans.Add(new BackgroundFan(fanrotTexture, new Vector2(800, 300), 0.5f, 2f, 0.1f));
+        // Linke Seite Fans (Rot) - mit FanRot1 normal, FanRot2 excited
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, fanrot2Texture, new Vector2(500, 300), 0.5f, 2f, 0.3f));
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, fanrot2Texture, new Vector2(700, 230), 0.5f, 2f, 0.2f));
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, fanrot2Texture, new Vector2(600, 370), 0.5f, 2f, 0.4f));
+        backgroundFans.Add(new BackgroundFan(fanrotTexture, fanrot2Texture, new Vector2(800, 300), 0.5f, 2f, 0.1f));
 
-        // Create 3 FanrotBlau1 characters (right side)
-        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(980, 300), 0.5f, 2f, 0.3f));
-        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(1200, 230), 0.5f, 2f, 0.4f));
-        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(1300, 370), 0.5f, 2f, 0.1f));       
-        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, new Vector2(1150, 300), 0.5f, 2f, 0.2f));
-
+        // Rechte Seite Fans (Blau) - mit FanBlau1 normal, FanBlau2 excited
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, fanrotBlau2Texture, new Vector2(980, 300), 0.5f, 2f, 0.3f));
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, fanrotBlau2Texture, new Vector2(1200, 230), 0.5f, 2f, 0.4f));
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, fanrotBlau2Texture, new Vector2(1300, 370), 0.5f, 2f, 0.1f));
+        backgroundFans.Add(new BackgroundFan(fanrotBlau1Texture, fanrotBlau2Texture, new Vector2(1150, 300), 0.5f, 2f, 0.2f));
     }
 
     public Ball getBall()
@@ -309,7 +312,7 @@ public class GameLogic : GameState
         Microsoft.Xna.Framework.Color.White
         );
 
-        
+
 
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
@@ -664,23 +667,22 @@ public class GameLogic : GameState
     {
         int crossbarHeight = 20;
         Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
-        //_leftGoalPosition und _rightGoalPosition x - / + 1/2Ballsize
         leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
         rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
 
         Microsoft.Xna.Framework.Rectangle leftCrossbar = new Microsoft.Xna.Framework.Rectangle(leftGoal.X, leftGoal.Y, leftGoal.Width, crossbarHeight);
-
         Microsoft.Xna.Framework.Rectangle rightCrossbar = new Microsoft.Xna.Framework.Rectangle(rightGoal.X, rightGoal.Y, rightGoal.Width, crossbarHeight);
 
         football.handle_crossbar_collision(leftCrossbar);
         football.handle_crossbar_collision(rightCrossbar);
 
-
-
-
         if (leftGoal.Contains(ballRect))
         {
             scorePlayer2++;
+
+            // Toranimation für Team 2 (rechte Seite Fans jubeln)
+            TriggerGoalAnimation(2);
+
             if (scorePlayer2 >= winningScore)
             {
                 gameWon = true;
@@ -693,10 +695,13 @@ public class GameLogic : GameState
             }
         }
 
-
         if (rightGoal.Contains(ballRect))
         {
             scorePlayer1++;
+
+            // Toranimation für Team 1 (linke Seite Fans jubeln)
+            TriggerGoalAnimation(1);
+
             if (scorePlayer1 >= winningScore)
             {
                 gameWon = true;
@@ -707,6 +712,35 @@ public class GameLogic : GameState
                 gameWon = false;
                 reset_values_after_goal();
             }
+        }
+    }
+
+    private void TriggerGoalAnimation(int scoringTeam)
+    {
+        // Team 1 = linke Fans (Index 0-3), Team 2 = rechte Fans (Index 4-7)
+        if (scoringTeam == 1)
+        {
+            // Linke Fans jubeln (rote Fans)
+            for (int i = 0; i < 4 && i < backgroundFans.Count; i++)
+            {
+                backgroundFans[i].StartGoalAnimation();
+            }
+        }
+        else if (scoringTeam == 2)
+        {
+            // Rechte Fans jubeln (blaue Fans)
+            for (int i = 4; i < 8 && i < backgroundFans.Count; i++)
+            {
+                backgroundFans[i].StartGoalAnimation();
+            }
+        }
+    }
+
+    private void StopAllGoalAnimations()
+    {
+        foreach (var fan in backgroundFans)
+        {
+            fan.StopGoalAnimation();
         }
     }
 
@@ -722,8 +756,8 @@ public class GameLogic : GameState
         player2.reset_groundY();
         update_all_item_positions();
         reset_goal_size();
-    }
 
+    }
 
     public void set_goal_size()
     {
