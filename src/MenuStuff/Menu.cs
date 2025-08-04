@@ -16,7 +16,7 @@ public class Menu : GameState
     {
 
         SpriteFont font   = Content.Load<SpriteFont>("Arial");
-        backgroundPicture = Content.Load<Texture2D> ("background");
+        backgroundPicture = Content.Load<Texture2D> ("spielfeld_pictures/starting_background");
 
         buttonContainer = new StackContainer(new Point(500,500), 20);
         Point ButtonSize = new Point(300, 100);

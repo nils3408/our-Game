@@ -42,13 +42,13 @@ public static class PlayerFactory
     {
         _graphicsDevice = graphicsDevice;
 
-        playerTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("Spiderman");
-        playerTextures[(int)Types.Knight]    = Content.Load<Texture2D>("Knightord");
-        playerTextures[(int)Types.Sonic]     = Content.Load<Texture2D>("sonic");
-        playerTextures[(int)Types.Standart]  = Content.Load<Texture2D>("KopfkickerChar1_neu");
-        playerTextures[(int)Types.Ninja]     = Content.Load<Texture2D>("KopfkickerChar2_neu");
-        playerTextures[(int)Types.Mario]     = Content.Load<Texture2D>("Mario2");
-        playerTextures[(int)Types.Wizzard]   = Content.Load<Texture2D>("Wizzard");
+        playerTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("players/Spiderman");
+        playerTextures[(int)Types.Knight]    = Content.Load<Texture2D>("players/Knightord");
+        playerTextures[(int)Types.Sonic]     = Content.Load<Texture2D>("players/sonic");
+        playerTextures[(int)Types.Standart]  = Content.Load<Texture2D>("players/KopfkickerChar1_neu");
+        playerTextures[(int)Types.Ninja]     = Content.Load<Texture2D>("players/KopfkickerChar2_neu");
+        playerTextures[(int)Types.Mario]     = Content.Load<Texture2D>("players/Mario2");
+        playerTextures[(int)Types.Wizzard]   = Content.Load<Texture2D>("players/Wizzard");
 
 
         smt[(int)Types.Spiderman]  = Content.Load<Texture2D>("special_move_textures/special_move_texture_spiderman");

@@ -134,9 +134,9 @@ public class GameLogic : GameState
 
         ball_textures = new()
         {
-            {"football" ,     Content.Load<Texture2D>("football")     },
-            { "firefootball", Content.Load<Texture2D>("firefootball") },
-            { "icefootball",  Content.Load<Texture2D>("icefootball")  }
+            {"football" ,     Content.Load<Texture2D>("balls/football")     },
+            { "firefootball", Content.Load<Texture2D>("balls/firefootball") },
+            { "icefootball",  Content.Load<Texture2D>("balls/icefootball")  }
         };
 
         football = new Ball(_graphicsDevice, new Vector2(930, groundY), ball_textures);
@@ -178,7 +178,7 @@ public class GameLogic : GameState
     public override void LoadContent()
     {
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
-        _backgroundTexture = Content.Load<Texture2D>("Spielfeld3");
+        _backgroundTexture = Content.Load<Texture2D>("spielfeld_pictures/Spielfeld3");
 
         _goalTexture = Content.Load<Texture2D>("Tore");
         set_goal_size();
@@ -205,16 +205,9 @@ public class GameLogic : GameState
         t1 = Content.Load<Texture2D>("animation_p1");
 
         // Load fan textures
-        try
-        {
-            fanrotTexture = Content.Load<Texture2D>("FanRot");
-            fanrotBlau1Texture = Content.Load<Texture2D>("FanBlau1");
-        }
-        catch (Exception ex)
-        {
-            fanrotTexture = _goalTexture;
-            fanrotBlau1Texture = vs_zeichen;
-        }
+        fanrotTexture = Content.Load<Texture2D>("fans/FanRot1");
+        fanrotBlau1Texture = Content.Load<Texture2D>("fans/FanBlau1");
+       
 
         InitializeBackgroundFans();
     }

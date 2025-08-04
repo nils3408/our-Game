@@ -32,7 +32,7 @@
 /processorParam:TextureFormat=Compressed
 /build:Arial.spritefont
 
-#begin background.png
+#begin balls/firefootball.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -42,9 +42,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:background.png
+/build:balls/firefootball.png
 
-#begin Ball.png
+#begin balls/football.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -54,7 +54,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Ball.png
+/build:balls/football.png
+
+#begin balls/icefootball.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:balls/icefootball.png
 
 #begin Coin/coin-0.png
 /importer:TextureImporter
@@ -404,7 +416,7 @@
 /processorParam:TextureFormat=Color
 /build:Coin/coin-9.png
 
-#begin Fanblau1.png
+#begin fans/Fanblau1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -414,9 +426,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Fanblau1.png
+/build:fans/Fanblau1.png
 
-#begin Fanblau2.png
+#begin fans/Fanblau2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -426,9 +438,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Fanblau2.png
+/build:fans/Fanblau2.png
 
-#begin FanRot.png
+#begin fans/FanRot1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -438,9 +450,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:FanRot.png
+/build:fans/FanRot1.png
 
-#begin FanRot2.png
+#begin fans/FanRot2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -450,9 +462,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:FanRot2.png
+/build:fans/FanRot2.png
 
-#begin firefootball.png
+#begin players/Knightord.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -462,9 +474,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:firefootball.png
+/build:players/Knightord.png
 
-#begin football.png
+#begin players/KopfkickerChar1_neu.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -474,9 +486,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:football.png
+/build:players/KopfkickerChar1_neu.png
 
-#begin icefootball.png
+#begin players/KopfkickerChar2_neu.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -486,9 +498,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:icefootball.png
+/build:players/KopfkickerChar2_neu.png
 
-#begin Knightord.png
+#begin players/Mario2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -498,9 +510,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Knightord.png
+/build:players/Mario2.png
 
-#begin KopfkickerChar1_neu.png
+#begin players/sonic.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -510,9 +522,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:KopfkickerChar1_neu.png
+/build:players/sonic.png
 
-#begin KopfkickerChar2_neu.png
+#begin players/Spiderman.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -522,9 +534,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:KopfkickerChar2_neu.png
+/build:players/Spiderman.png
 
-#begin Mario2.png
+#begin players/Wizzard.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -534,7 +546,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Mario2.png
+/build:players/Wizzard.png
 
 #begin powerUp_textures/BigGoal_texture.png
 /importer:TextureImporter
@@ -632,18 +644,6 @@
 /processorParam:TextureFormat=Color
 /build:shuriken.png
 
-#begin sonic.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:sonic.png
-
 #begin special_move_textures/special_move_texture_knight.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -740,7 +740,7 @@
 /processorParam:TextureFormat=Color
 /build:special_move_textures/special_move_texture_wizzard.png
 
-#begin Spiderman.png
+#begin spielfeld_pictures/Spielfeld.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -750,9 +750,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Spiderman.png
+/build:spielfeld_pictures/Spielfeld.png
 
-#begin Spielfeld2.png
+#begin spielfeld_pictures/Spielfeld2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -762,9 +762,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Spielfeld2.png
+/build:spielfeld_pictures/Spielfeld2.png
 
-#begin Spielfeld3.png
+#begin spielfeld_pictures/Spielfeld3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -774,7 +774,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Spielfeld3.png
+/build:spielfeld_pictures/Spielfeld3.png
+
+#begin spielfeld_pictures/starting_background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spielfeld_pictures/starting_background.png
 
 #begin Tore.png
 /importer:TextureImporter
@@ -835,16 +847,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:vs_zeichen.png
-
-#begin Wizzard.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Wizzard.png
 
