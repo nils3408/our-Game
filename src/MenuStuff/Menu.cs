@@ -43,7 +43,7 @@ public class Menu : GameState
         exitButton.OnClick += () => { Game1.SaveData(); game.Exit(); };
         buttonContainer.Add(exitButton);
         
-        buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight/2+140));
+        buttonContainer.MoveCenter(new Point(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight/2+170));
         buttonContainer.SetDrawOutline(new Color(96, 96, 96), 3);
     }
 
@@ -63,7 +63,7 @@ public class Menu : GameState
         spriteBatch.Begin();
         
         spriteBatch.Draw(backgroundPicture, new Rectangle(0, 0, 1920, 1080), Color.White);
-        spriteBatch.Draw(pixel, new Rectangle(770, 470, 333, 380), background_color);
+        spriteBatch.Draw(pixel, new Rectangle(770, 500, 333, 380), background_color);
         buttonContainer.Draw(spriteBatch);
         
         spriteBatch.End();
