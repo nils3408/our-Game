@@ -788,6 +788,18 @@
 /processorParam:TextureFormat=Color
 /build:spielfeld_pictures/starting_background.png
 
+#begin stun7.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:stun7.png
+
 #begin Tore.png
 /importer:TextureImporter
 /processor:TextureProcessor

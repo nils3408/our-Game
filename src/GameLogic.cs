@@ -99,9 +99,9 @@ public class GameLogic : GameState
     List<Schuriken> schurikenListe = new List<Schuriken>();
     Texture2D schuriken_texture;
 
-    //wizzard teleportation
-
-    public Texture2D t1;
+    //animations
+    public Texture2D t1;   //wizzard teleportarion
+    public Texture2D s1;  // stun - knckout animation
 
     private Texture2D _tribuneTexture;
     private Vector2 _leftTribunePosition;
@@ -134,7 +134,7 @@ public class GameLogic : GameState
 
         ball_textures = new()
         {
-            {"football" ,     Content.Load<Texture2D>("balls/football")     },
+            { "football" ,    Content.Load<Texture2D>("balls/football")     },
             { "firefootball", Content.Load<Texture2D>("balls/firefootball") },
             { "icefootball",  Content.Load<Texture2D>("balls/icefootball")  }
         };
@@ -202,13 +202,13 @@ public class GameLogic : GameState
         overlayTexture = new Texture2D(_graphicsDevice, 1, 1);
         overlayTexture.SetData(new[] { Color.White });
 
-        t1 = Content.Load<Texture2D>("animation_p1");
+        t1 = Content.Load<Texture2D>("animation_p1");   // teleportation animation wizzard 
+        s1 = Content.Load<Texture2D>("stun7");         //  stun - knockoput animation
 
         // Load fan textures
         fanrotTexture = Content.Load<Texture2D>("fans/FanRot1");
         fanrotBlau1Texture = Content.Load<Texture2D>("fans/FanBlau1");
-       
-
+      
         InitializeBackgroundFans();
     }
 
@@ -324,8 +324,8 @@ public class GameLogic : GameState
         }
         Color gameColor = gameWon ? Color.White * 0.3f : Color.White;
 
-        player1.draw(spriteBatch);
-        player2.draw(spriteBatch);
+        player1.draw(spriteBatch, gameTime);
+        player2.draw(spriteBatch, gameTime);
         football.draw(spriteBatch, gameTime);
 
         //draw items

@@ -11,6 +11,7 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 
@@ -290,7 +291,11 @@ public class Player
     }
 
 
-    public virtual void draw(SpriteBatch spritebatch)
+//------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
+// draw 
+
+    public virtual void draw(SpriteBatch spritebatch, GameTime gameTime)
     {   
 
         if (moving_direction == -1)
@@ -306,10 +311,60 @@ public class Player
                             currentRect, null, Color.White, 0f, Vector2.Zero,
                             SpriteEffects.None, 0f
                             );
+        }
 
+        if (can_move == false)
+        {
+            draw_knockout_animation(spritebatch, gameTime);
         }
     }
 
+
+    public void draw_knockout_animation(SpriteBatch spriteBatch, GameTime gameTime)
+    {
+        // draw the 3 stars over the character
+
+        float size = 40;   // size der Sterne
+        float p = 0.12f;   // puliserungsfaktor der sterne
+        float rv = 4f;     // geschwindigkeit mit der die Sterne rotieren
+
+        Texture2D s1 = GameLogic_object.s1;  //der stern
+        Color color = new Color(255, 255, 100, 180); // halbtransparent gelb
+
+        float time = (float)gameTime.TotalGameTime.TotalSeconds;
+        float rotation = time * rv;
+        float baseScale = 1f + p * (float)Math.Sin(time * 3); // Pulsieren (Skalierung schwankt)
+        float scale = (size / s1.Width) * baseScale;
+
+        Vector2 center_pos =    new Vector2(position.X+ currentRect.Width/2, position.Y- 10);
+        Vector2 mittelpunkt = new Vector2(s1.Width / 2f, s1.Height / 2f);
+        Vector2[] offsets = new Vector2[]
+        {
+            new Vector2(-50, -10),
+            new Vector2(0, 0),
+            new Vector2(50, -10)
+        };
+
+
+        foreach (var offset in offsets)
+        {
+            Vector2 starPos = center_pos + offset;
+            spriteBatch.Draw(
+                s1,                 
+                starPos,           
+                null,         
+                color,
+                rotation,             
+                mittelpunkt,
+                scale,
+                SpriteEffects.None,
+                0f
+            );
+        }
+    }
+
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
     public virtual void move(float delta, float dir)
     {

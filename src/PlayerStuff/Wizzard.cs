@@ -110,7 +110,7 @@ public class Wizzard: Player
 
     }
 
-    public override void draw(SpriteBatch spritebatch)
+    public override void draw(SpriteBatch spritebatch, GameTime gameTime)
     {
         draw_teleporting_animation(spritebatch);
         draw_player(spritebatch);
