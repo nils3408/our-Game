@@ -507,6 +507,7 @@ public class Player
 
                 case "SmallPlayerPowerUp":
                     // note !: values of the other Player get set as this Player is effected by the PowerUp
+                    
                     otherPlayer.activation_time_SmallPlayer_powerup = DateTime.Now;
                     otherPlayer.cooldown_SmallPlayer_powerup = powerup2.get_cooldown();
                     otherPlayer.SmallPlayer_powerup_in_use = true;
@@ -593,8 +594,24 @@ public class Player
 
         if (vergangene_zeit > cooldown_SmallPlayer_powerup)
         {
+            //only (re-)set size of players when they not collide after (re-)setting
+            // temporary solution to bug fix where
+            //          player A is small, player stands on the other player B , playeer A gets big again, player collide, no player can move
+
+            Debug.WriteLine("station 1");
+            Rectangle testRect1 = new Rectangle((int)position.X, (int)position.Y-10, (int)RectangleWidth_copy , (int)RectangleHeight_copy);
+            if ( testRect1.Intersects(otherPlayer.currentRect)) {
+                Debug.WriteLine("station 2");
+                return;
+            }
+
+            Debug.WriteLine($"thisPlayer: X={position.X}, Y={position.Y}, Right={position.X + RectangleWidth_copy}, Bottom={position.Y + RectangleHeight_copy}");
+            Debug.WriteLine($"otherPlayer: X={otherPlayer.position.X}, Y={otherPlayer.position.Y}, Right={otherPlayer.position.X + otherPlayer.currentRect.Width}, Bottom={otherPlayer.position.Y + otherPlayer.currentRect.Height}");
+
+            Debug.WriteLine("station 3");
             reset_size_after_SmallPlayerPowerUp_is_over();
             SmallPlayer_powerup_in_use = false;
+           
         }
     }
 
@@ -622,6 +639,7 @@ public class Player
     public void reset_size_after_SmallPlayerPowerUp_is_over()
     {
         //SmallPowerUp was used -> player is smaller than used to be
+        // reset it 
         if (RectangleHeight < RectangleHeight_copy || RectangleWidth < RectangleWidth_copy)
         {
             reset_size();
@@ -651,19 +669,19 @@ public class Player
         }
 
 
-        // Prüfe Kollision mit anderem Spieler
+        // Prüfe Kollision mit anderem Spieler B
         if (testRect.Intersects(otherPlayer.currentRect))
         {
-            // Prüfe ob der Spieler von oben auf den anderen Spieler fällt
+            // Prüfe ob der Spieler von oben auf den anderen Spieler B fällt
             if (velocity.Y > 0 && position.Y + RectangleHeight <= otherPlayer.position.Y + 10) // 10 ist Toleranz
             {
-                // Spieler landet auf dem anderen Spieler
+                // Spieler landet auf dem anderen Spieler B
                 position.Y = otherPlayer.position.Y - RectangleHeight;
                 velocity.Y = 0;
             }
             else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + otherPlayer.RectangleHeight - 10)
             {
-                // Spieler stößt von unten gegen den anderen Spieler
+                // Spieler stößt von unten gegen den anderen Spieler 
                 position.Y = otherPlayer.position.Y + otherPlayer.RectangleHeight;
                 velocity.Y = 0;
             }
