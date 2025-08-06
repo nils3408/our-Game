@@ -473,7 +473,7 @@ public class Player
 
                 case "BigPlayerPowerUp":
                     // player gets bigger -> players intersect, players can not move anymore -> bug
-                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y, 250, 250); //size 250 is set currently set in BigPlayerPowerUp
+                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y-101, 250, 250); //size 250 is set currently set in BigPlayerPowerUp
                     if(testRect.Intersects(otherPlayer.currentRect))
                     {
                         return;
@@ -508,7 +508,12 @@ public class Player
 
                 case "BigPlayerPowerUp":
                     // player gets bigger -> players intersect, players can not move anymore -> bug
-                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y, 250, 250); //size 250 is set currently set in BigPlayerPowerUp
+                    //size 250 is set currently set in BigPlayerPowerUp
+
+                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y-101, 250, 250); 
+                    Debug.WriteLine("player 1: X={0}, Y={1}, Width={2}, Height={3}", testRect.X, testRect.Y, testRect.Width, testRect.Height);
+                    Debug.WriteLine("player 2: X={0}, Y={1}, Width={2}, Height={3}", otherPlayer.currentRect.X, otherPlayer.currentRect.Y, 
+                                                                                     otherPlayer.currentRect.Width, otherPlayer.currentRect.Height);
                     if (testRect.Intersects(otherPlayer.currentRect))
                     {
                         return;

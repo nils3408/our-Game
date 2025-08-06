@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/spielfeld_pictures/starting_background.png</SourceFile>
-  <SourceTime>2025-08-04T22:40:49.5279444+02:00</SourceTime>
-  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/spielfeld_pictures/starting_background.xnb</DestFile>
-  <DestTime>2025-08-06T17:24:44.4970138+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/spielfeld_pictures/starting_background.png</SourceFile>
+  <SourceTime>2025-08-04T15:55:21.4106205+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/spielfeld_pictures/starting_background.xnb</DestFile>
+  <DestTime>2025-08-06T18:28:17.0489328+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
