@@ -376,25 +376,53 @@ public class Ball
 
         if (ballRect.Intersects(crossbar))
         {
-            // Ball aus der Kollisionszone herausbewegen BEVOR wir die Geschwindigkeit ändern
             Vector2 newPos = position;
 
-            // Prüfen, ob Ball von oben oder unten kommt (VORHER die Geschwindigkeit umkehren!)
-            if (velocity.Y > 0) // Ball bewegt sich nach unten (kommt von oben)
+            // Bestimmen, von welcher Seite der Ball die Torlatte trifft
+            Vector2 ballCenter = new Vector2(ballRect.X + ballRect.Width / 2, ballRect.Y + ballRect.Height / 2);
+            Vector2 crossbarCenter = new Vector2(crossbar.X + crossbar.Width / 2, crossbar.Y + crossbar.Height / 2);
+
+            // Berechne die Überlappung in X und Y Richtung
+            float overlapX = Math.Min(ballRect.Right, crossbar.Right) - Math.Max(ballRect.Left, crossbar.Left);
+            float overlapY = Math.Min(ballRect.Bottom, crossbar.Bottom) - Math.Max(ballRect.Top, crossbar.Top);
+
+            // Die kleinere Überlappung zeigt die Kollisionsrichtung an
+            if (overlapX < overlapY)
             {
-                // Ball ÜBER die Torlatte positionieren
-                newPos.Y = crossbar.Top - BallSize - 5;
+                // Kollision von der Seite (links oder rechts)
+                if (ballCenter.X < crossbarCenter.X)
+                {
+                    // Ball kommt von links
+                    newPos.X = crossbar.Left - BallSize - 5;
+                }
+                else
+                {
+                    // Ball kommt von rechts  
+                    newPos.X = crossbar.Right + 5;
+                }
+
+                // X-Richtung umkehren (Ball prallt nach vorne/hinten ab)
+                change_direction_x_scale();
             }
-            else // Ball bewegt sich nach oben (kommt von unten)
+            else
             {
-                // Ball UNTER die Torlatte positionieren
-                newPos.Y = crossbar.Bottom + 5;
+                // Kollision von oben oder unten
+                if (ballCenter.Y < crossbarCenter.Y)
+                {
+                    // Ball kommt von oben
+                    newPos.Y = crossbar.Top - BallSize - 5;
+                }
+                else
+                {
+                    // Ball kommt von unten
+                    newPos.Y = crossbar.Bottom + 5;
+                }
+
+                // Y-Richtung umkehren (Ball prallt nach oben/unten ab)
+                change_direction_y_scale();
             }
 
             position = newPos;
-
-            // DANACH erst die Geschwindigkeit umkehren
-            change_direction_y_scale();
 
             // Geschwindigkeit durch Reibung reduzieren
             reduce_velocity_due_to_friction();

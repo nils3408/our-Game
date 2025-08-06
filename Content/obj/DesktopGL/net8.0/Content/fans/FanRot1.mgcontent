@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/fans/FanRot1.png</SourceFile>
-  <SourceTime>2025-08-04T14:28:48.1279966+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/fans/FanRot1.xnb</DestFile>
-  <DestTime>2025-08-05T11:52:17.3809342+02:00</DestTime>
+  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/fans/FanRot1.png</SourceFile>
+  <SourceTime>2025-08-04T22:40:49.358208+02:00</SourceTime>
+  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/fans/FanRot1.xnb</DestFile>
+  <DestTime>2025-08-06T17:24:42.661153+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
