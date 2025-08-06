@@ -39,7 +39,7 @@ namespace our_Game
             // Toranimation Parameter
             this.isPlayingGoalAnimation = false;
             this.goalAnimationDuration = 5.0f; // 5 Sekunden Animation
-            this.textureSwapInterval = 0.2f; // Alle 0.2 Sekunden zwischen Texturen wechseln
+            this.textureSwapInterval = 0.5f; // Alle 0.2 Sekunden zwischen Texturen wechseln
             this.useExcitedTexture = false;
             this.goalAnimationIntensity = 2.0f; // Verstärkte Animation bei Toren
         }
@@ -78,8 +78,7 @@ namespace our_Game
                 float textureTimer = goalAnimationTimer % textureSwapInterval;
                 useExcitedTexture = textureTimer < (textureSwapInterval / 2);
 
-                // ENTFERNT: Skalierung während der Animation
-                // Die Skalierung bleibt konstant, um das "nach-vorne-wackeln" zu verhindern
+                
 
                 // Animation beenden
                 if (goalAnimationTimer >= goalAnimationDuration)
@@ -112,8 +111,7 @@ namespace our_Game
                     height
                 );
 
-                // GEÄNDERT: Keine Transparenz-Effekte mehr
-                // Die Fans bleiben vollständig sichtbar
+                
                 Color drawColor = Color.White;
 
                 spriteBatch.Draw(currentTexture, destRect, drawColor);
