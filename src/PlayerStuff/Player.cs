@@ -463,26 +463,27 @@ public class Player
         {
             if (can_activate_powerUp1() == false) { return;}
 
+           //switch part handling a few edge case /bugs
             switch(powerup1.get_class_name())
             {
-                case "BigPlayerPowerUp":
-                    activation_time_BigPlayer_powerup = DateTime.Now;
-                    cooldown_BigPlayer_powerup = powerup1.get_cooldown();
-                    BigPlayer_powerup_in_use = true;
-                    break;
-
-                case "SmallPlayerPowerUp":
-                    // note !: values of the other Player get set as this Player is effected by the PowerUp
-                    otherPlayer.activation_time_SmallPlayer_powerup = DateTime.Now;
-                    otherPlayer.cooldown_SmallPlayer_powerup = powerup1.get_cooldown();
-                    otherPlayer.SmallPlayer_powerup_in_use = true;
-                    break;
-
                 case "StealingPowerUp":
+                    // for the reset powerup, preventing that (stolen=) powerup gets set to null
                     reset_powerup = false;
                     break;
+
+                case "BigPlayerPowerUp":
+                    // player gets bigger -> players intersect, players can not move anymore -> bug
+                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y, 250, 250); //size 250 is set currently set in BigPlayerPowerUp
+                    if(testRect.Intersects(otherPlayer.currentRect))
+                    {
+                        return;
+                    }
+                    break;
+
             }
 
+
+            // values on the player or ball get set in the corresponding PowerUp object/ class
             powerup1.activate(this, 1);
             last_time_powerUp1_got_activated = DateTime.Now;
 
@@ -497,27 +498,26 @@ public class Player
         {
             if (can_activate_powerUp2() == false) { return; }
 
+            //switch part handling a few edge case /bugs
             switch (powerup2.get_class_name())
             {
-                case "BigPlayerPowerUp":
-                    activation_time_BigPlayer_powerup = DateTime.Now;
-                    cooldown_BigPlayer_powerup = powerup2.get_cooldown();
-                    BigPlayer_powerup_in_use = true;
-                    break;
-
-                case "SmallPlayerPowerUp":
-                    // note !: values of the other Player get set as this Player is effected by the PowerUp
-                    
-                    otherPlayer.activation_time_SmallPlayer_powerup = DateTime.Now;
-                    otherPlayer.cooldown_SmallPlayer_powerup = powerup2.get_cooldown();
-                    otherPlayer.SmallPlayer_powerup_in_use = true;
-                    break;
-
                 case "StealingPowerUp":
+                    // for the reset powerup, preventing that (stolen=) powerup gets set to null
                     reset_powerup = false;
                     break;
+
+                case "BigPlayerPowerUp":
+                    // player gets bigger -> players intersect, players can not move anymore -> bug
+                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y, 250, 250); //size 250 is set currently set in BigPlayerPowerUp
+                    if (testRect.Intersects(otherPlayer.currentRect))
+                    {
+                        return;
+                    }
+                    break;
+
             }
 
+            // values on the player or ball get set in the corresponding PowerUp object/ class
             powerup2.activate(this, 2);
             last_time_powerUp2_got_activated = DateTime.Now;
 
@@ -594,21 +594,16 @@ public class Player
 
         if (vergangene_zeit > cooldown_SmallPlayer_powerup)
         {
-            //only (re-)set size of players when they not collide after (re-)setting
+            // only (re-)set size of players when they not collide after (re-)setting
             // temporary solution to bug fix where
             //          player A is small, player stands on the other player B , playeer A gets big again, player collide, no player can move
+            // bias -10 to make sure rectangle intersect instead of overlap (Rect.Intersect would not work than)
 
-            Debug.WriteLine("station 1");
             Rectangle testRect1 = new Rectangle((int)position.X, (int)position.Y-10, (int)RectangleWidth_copy , (int)RectangleHeight_copy);
             if ( testRect1.Intersects(otherPlayer.currentRect)) {
-                Debug.WriteLine("station 2");
                 return;
             }
 
-            Debug.WriteLine($"thisPlayer: X={position.X}, Y={position.Y}, Right={position.X + RectangleWidth_copy}, Bottom={position.Y + RectangleHeight_copy}");
-            Debug.WriteLine($"otherPlayer: X={otherPlayer.position.X}, Y={otherPlayer.position.Y}, Right={otherPlayer.position.X + otherPlayer.currentRect.Width}, Bottom={otherPlayer.position.Y + otherPlayer.currentRect.Height}");
-
-            Debug.WriteLine("station 3");
             reset_size_after_SmallPlayerPowerUp_is_over();
             SmallPlayer_powerup_in_use = false;
            

@@ -29,6 +29,10 @@ public class SmallPlayerPowerUp : PowerUp
         player.otherPlayer.RectangleHeight = 100;
         player.otherPlayer.RectangleWidth = 100;
 
+        player.otherPlayer.activation_time_SmallPlayer_powerup = DateTime.Now;
+        player.otherPlayer.cooldown_SmallPlayer_powerup = cooldown;
+        player.otherPlayer.SmallPlayer_powerup_in_use = true;
+
         // would be in the Ground -> update Position to avoid this
         player.otherPlayer.groundY = 550;  //hardcoded
     }

@@ -26,8 +26,13 @@ public class BigPlayerPowerUp : PowerUp
     
     public override void activate(Player player, int powerUp)
     {
+
         player.RectangleHeight = 250;
         player.RectangleWidth = 250;
+
+        player.activation_time_BigPlayer_powerup = DateTime.Now;
+        player.cooldown_BigPlayer_powerup = cooldown;
+        player.BigPlayer_powerup_in_use = true;
 
         // would be in the Ground -> update Position to avoid this
         player.groundY = 410;  //hardcoded
