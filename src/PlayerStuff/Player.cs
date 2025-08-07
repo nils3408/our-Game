@@ -427,9 +427,6 @@ public class Player
     {
         if(can_move == false) { return; }
 
-        float newPositionY = position.Y - jump_velocity * delta;
-        Vector2 newPosition = new Vector2(position.X, newPositionY);
-
         if (!(IsOnGround(position))) return;
         velocity.Y = jump_velocity;
 
@@ -656,18 +653,24 @@ public class Player
         Vector2 newPos = new Vector2(position.X, newY);
         Rectangle testRect = new Rectangle((int)newPos.X, (int)newPos.Y, RectangleWidth, RectangleHeight);
 
-        // make sure player does not intersect with ball from the down side when (ball = iceball)
+
         if (testRect.Intersects(GameLogic_object.getBall().getRect()))
         {
-            if (GameLogic_object.getBall().ice_powerUp_in_use == true)
+            // make sure player does not intersect with ball from the down side when (ball = iceball)
+            if (GameLogic_object.getBall().ice_powerUp_in_use  == true)
             {
                 velocity.Y = 0;
                 return;
             }
+
+            if (GameLogic_object.getBall().fire_powerUp_in_use == true &&
+                GameLogic_object.getBall().velocity.Length() < 5)
+            {
+                //make sure player can not jump into fireball that is on the ground and does not move
+                velocity.Y = 0;
+                return;
+            }
         }
-
-        // make sure player does not intersect with ball from top/down when (ball = iceball/ fireball)
-
 
 
         // Prüfe Kollision mit anderem Spieler B
@@ -679,6 +682,8 @@ public class Player
                 // Spieler landet auf dem anderen Spieler B
                 position.Y = otherPlayer.position.Y - RectangleHeight;
                 velocity.Y = 0;
+                //spider man check here 
+
             }
             else if (velocity.Y < 0 && position.Y >= otherPlayer.position.Y + otherPlayer.RectangleHeight - 10)
             {
