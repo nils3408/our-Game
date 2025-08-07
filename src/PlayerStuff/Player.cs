@@ -199,8 +199,9 @@ public class Player
 
         //-----------------------------------------------------------------------------------------
         //Controller (steuerung sind X-Box tasten, do not ask me why
+       
         if (InputHandler.IsGamePadButtonDown(Buttons.A, playerGroup))   jump(delta);
-        if (InputHandler.IsL3MovedUp(playerGroup))                      jump(delta);
+        //if (InputHandler.IsL3MovedUp(playerGroup))                      jump(delta);
         if (InputHandler.IsL3MovedToSide("l", playerGroup))             move(delta, -1);
         if (InputHandler.IsL3MovedToSide("r", playerGroup))             move(delta, 1);
 
@@ -511,9 +512,6 @@ public class Player
                     //size 250 is set currently set in BigPlayerPowerUp
 
                     Rectangle testRect = new Rectangle((int)position.X, (int)position.Y-101, 250, 250); 
-                    Debug.WriteLine("player 1: X={0}, Y={1}, Width={2}, Height={3}", testRect.X, testRect.Y, testRect.Width, testRect.Height);
-                    Debug.WriteLine("player 2: X={0}, Y={1}, Width={2}, Height={3}", otherPlayer.currentRect.X, otherPlayer.currentRect.Y, 
-                                                                                     otherPlayer.currentRect.Width, otherPlayer.currentRect.Height);
                     if (testRect.Intersects(otherPlayer.currentRect))
                     {
                         return;
@@ -667,6 +665,9 @@ public class Player
                 return;
             }
         }
+
+        // make sure player does not intersect with ball from top/down when (ball = iceball/ fireball)
+
 
 
         // Prüfe Kollision mit anderem Spieler B

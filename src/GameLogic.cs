@@ -21,9 +21,6 @@
  *          declare all items -> give each item array of references of all items -> give each item a new position and 
  *          check on collission
  *          
- *          
- *  
- *      
  * 
  * ---------------------------------------------------------------------------------------------------------------------
  */
@@ -32,14 +29,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
-//using SharpDX.Direct2D1;
-//using SharpDX.XAudio2;
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-//using System.Drawing;
-//using System.Runtime.CompilerServices;
 using our_Game;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
@@ -47,7 +40,6 @@ using System.Runtime.CompilerServices;
 
 public class GameLogic : GameState
 {
-
 
     //Spielfeld
     private Texture2D _backgroundTexture;
@@ -63,7 +55,7 @@ public class GameLogic : GameState
     //generell
     private float collisionCooldown1 = 0f;
     private float collisionCooldown2 = 0f;
-    private const float CollisionCooldownTime = 0.4f;
+    private const float CollisionCooldownTime = 0.1f;
 
     Texture2D vs_zeichen;
     Texture2D red_window;
@@ -121,15 +113,12 @@ public class GameLogic : GameState
 
     public GameLogic(Game baseGame) : base(baseGame) { }
     public GameLogic(Game baseGame, Player leftPlayer, Player rightPlayer) : base(baseGame)
-
     {
         SetPlayer(leftPlayer, rightPlayer);
     }
 
     public override void Initialize()
     {
-
-
         //Initiert nur Player wenn es durch den neuen Konstruktor nicht vorher gelöscht wird, Zeilen könnten auch gelöscht werden eigentlich, später!
         //if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
         //if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
@@ -277,7 +266,6 @@ public class GameLogic : GameState
         //Zurück ins Menu wenn ESC losgelassen wird 
         if (InputHandler.IsReleased(Keys.Escape))
         {
-            System.Diagnostics.Debug.WriteLine("escape!");
             Game1.nextState = new Menu(baseGame);
         }
         if (gameRunning)
@@ -288,7 +276,6 @@ public class GameLogic : GameState
         {
             if (InputHandler.IsReleased(Keys.Escape))
             {
-                System.Diagnostics.Debug.WriteLine("escape!");
                 Game1.openGames.Remove(this);
                 Game1.nextState = new Menu(baseGame);
             }
@@ -311,7 +298,6 @@ public class GameLogic : GameState
         new Microsoft.Xna.Framework.Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
         Microsoft.Xna.Framework.Color.White
         );
-
 
 
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
@@ -378,9 +364,9 @@ public class GameLogic : GameState
             spriteBatch.DrawString(scoreFont, escText, escTextPosition, Color.White);
         }
 
-
         spriteBatch.End();
     }
+
 
     void DrawPowerUp(Texture2D texture, Rectangle area, int size)
     {
@@ -454,10 +440,8 @@ public class GameLogic : GameState
         KeyboardState state = Keyboard.GetState();
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-
         player1.handle_input(delta);
         player2.handle_input(delta);
-
     }
 
 
@@ -625,7 +609,6 @@ public class GameLogic : GameState
 
     public void add_Schuriken(Vector2 pos, Player owner, int direction)
     {
-
         //adds a Schuriken object to the current List 
         schurikenListe.Add(new Schuriken(schuriken_texture, pos, owner, direction));
     }
@@ -645,7 +628,6 @@ public class GameLogic : GameState
     }
 
 
-
     public void update_schuriken_list()
     {
         // remove all schurken that are out of the game
@@ -656,10 +638,9 @@ public class GameLogic : GameState
     }
 
 
-
-    //--------------------------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------------------------
-    // goal stuff
+ //--------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------
+// goal stuff
 
 
     //Check Ball im Tor

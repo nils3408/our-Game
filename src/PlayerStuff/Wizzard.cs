@@ -23,7 +23,7 @@ using System;
 public class Wizzard: Player
 {
 
-    public int cooldown = 10; //can activate its special effect all x seconds
+    public int cooldown = 6; //can activate its special effect all x seconds
     
     public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
     public bool special_effect_in_use = false;
@@ -113,7 +113,7 @@ public class Wizzard: Player
     public override void draw(SpriteBatch spritebatch, GameTime gameTime)
     {
         draw_teleporting_animation(spritebatch);
-        draw_player(spritebatch);
+        draw_player(spritebatch, gameTime);
     }
 
     public void draw_teleporting_animation(SpriteBatch spriteBatch)
@@ -132,7 +132,7 @@ public class Wizzard: Player
         }
     }
 
-    public void draw_player(SpriteBatch spriteBatch)
+    public void draw_player(SpriteBatch spriteBatch, GameTime gameTime)
     {
         if (is_teleporting) { return; }
 
@@ -152,11 +152,16 @@ public class Wizzard: Player
                             );
 
         }
+
+        if (can_move == false)
+        {
+            draw_knockout_animation(spriteBatch, gameTime);
+        }
     }
 
     public override void update_values()
     {
-       //  update teloprtating values
+        //  update teloprtating values
 
         if (showTeleportEffect)
         {
@@ -178,7 +183,7 @@ public class Wizzard: Player
                 showTeleportEffect2 = false;
             }
         }
-        
+
         if (showTeleportEffect2 == false && showTeleportEffect == false)
         {
             is_teleporting = false;
