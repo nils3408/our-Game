@@ -39,7 +39,7 @@ public class Item
     private float animation_time_counter = 0f;
 
     // position boundaries for the item in the map -> values got hardcoded 
-    private float min_Y = 30;
+    private float min_Y = 60;
     private float max_Y = 550;
     private float min_X = 190;
     private float max_X = 1800;
@@ -117,7 +117,7 @@ public class Item
     }
 
 
-    public void set_random_position()
+    public void set_random_position(Player a, Player b)
     {
         position.X = rand.Next((int)min_X, (int)max_X);
         position.Y = rand.Next((int)min_Y, (int)max_Y);
@@ -126,7 +126,12 @@ public class Item
         if (Rect_intersect_with_one_of_the_other_items(current_Rect))
         {
             // set a new random position -> can end in endless loop in worst case but statistically very unlikely
-            set_random_position();
+            set_random_position(a,b);
+        }
+
+        if(current_Rect.Intersects(a.currentRect) || current_Rect.Intersects(b.currentRect))
+        {
+            set_random_position(a, b);
         }
     }
 

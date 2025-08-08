@@ -52,6 +52,8 @@ public class GameLogic : GameState
     private Player player2;
     private Player last_player_touching_the_ball = null;
     private Ball football;
+    private bool randomPlayer1 = false;  //is player1.type == RandomPlayer ?
+    private bool randomPlayer2 = false;  //is player2.type == randomPlayer?
     //generell
     private float collisionCooldown1 = 0f;
     private float collisionCooldown2 = 0f;
@@ -61,6 +63,8 @@ public class GameLogic : GameState
     Texture2D red_window;
 
     public Dictionary<string, Texture2D> ball_textures;
+
+    private static Random rng = new Random();
 
     private float groundY = 550;
 
@@ -122,6 +126,7 @@ public class GameLogic : GameState
         //Initiert nur Player wenn es durch den neuen Konstruktor nicht vorher gelöscht wird, Zeilen könnten auch gelöscht werden eigentlich, später!
         //if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
         //if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
+        PlayerFactory.Initialize(_graphicsDevice, Content);
 
         ball_textures = new()
         {
@@ -131,6 +136,11 @@ public class GameLogic : GameState
         };
 
         football = new Ball(_graphicsDevice, new Vector2(930, groundY), ball_textures);
+
+        randomPlayer1 = is_RandomPlayer(player1);
+        randomPlayer2 = is_RandomPlayer(player2);
+        if (randomPlayer1) { player_becomes_new_random_player(player1, 1); }
+        if (randomPlayer2) { player_becomes_new_random_player(player2, 2); }
 
         player1.Set_other_Player(player2);
         player2.Set_other_Player(player1);
@@ -145,7 +155,14 @@ public class GameLogic : GameState
     }
 
 
+//----------------------------------------------------------------------------------------
     public void SetPlayer(Player left, Player right)
+    {
+        SetPlayer1(left);
+        SetPlayer2(right);
+    }
+
+    public void SetPlayer1(Player left)
     {
         float exakter_ground_y = groundY - 40;
 
@@ -155,6 +172,11 @@ public class GameLogic : GameState
         player1.set_groundYs(exakter_ground_y);
         player1.GameLogic_object = this;
         player1.set_content(Content);
+    }
+
+    public void SetPlayer2(Player right)
+    {
+        float exakter_ground_y = groundY - 40;
 
         player2 = right;
         player2.position = new Vector2(_graphics.PreferredBackBufferWidth - 400, exakter_ground_y);
@@ -164,7 +186,30 @@ public class GameLogic : GameState
         player2.set_content(Content);
     }
 
+    public PlayerFactory.Types getRandomPlayerType()
+    {
+        //return randomPlayertype that is not from class RandomPlayer
+        int n = rng.Next(1, PlayerFactory.TypesCount);
+        if ((PlayerFactory.Types)n == PlayerFactory.Types.RandomPlayer)
+        {
+            return getRandomPlayerType();
+        }
+        return (PlayerFactory.Types)n;
+    }
 
+    public void player_becomes_new_random_player(Player abc, int id)
+    {
+        // hinweis: id is the playergroup and definer for theplayer
+
+        PlayerFactory.Types luna = getRandomPlayerType();
+        abc = PlayerFactory.CreatePlayer(luna, abc.position, id, abc.controls);
+
+        if (id == 1) { SetPlayer1(abc); }
+        else { SetPlayer2(abc); }
+    }
+
+
+    //-----------------------------------------------------------------------------------
 
     public override void LoadContent()
     {
@@ -223,6 +268,12 @@ public class GameLogic : GameState
     public Ball getBall()
     {
         return football;
+    }
+
+    public bool is_RandomPlayer(Player abc)
+    {
+        // checks whether a player object is from the class RandomPlayer
+        return (abc is RandomPlayer);
     }
 
     public override void Update(GameTime gameTime)
@@ -463,7 +514,7 @@ public class GameLogic : GameState
                 playerABC.set_PowerUp(itemA.linked_powerup);
 
                 itemA.set_new_powerUP();
-                itemA.set_random_position();
+                itemA.set_random_position(player1, player2);
 
             }
         }
@@ -482,7 +533,7 @@ public class GameLogic : GameState
                 last_player_touching_the_ball.set_PowerUp(itemA.linked_powerup);
 
                 itemA.set_new_powerUP();
-                itemA.set_random_position();
+                itemA.set_random_position(player1, player2);
 
             }
         }
@@ -602,7 +653,7 @@ public class GameLogic : GameState
         //update position of all items
         for (int i = 0; i < items.Length; i++)
         {
-            items[i].set_random_position();
+            items[i].set_random_position(player1, player2);
         }
     }
 
@@ -659,7 +710,7 @@ public class GameLogic : GameState
 
         if (leftGoal.Contains(ballRect))
         {
-            scorePlayer2++;
+            scorePlayer2++; 
 
             // Toranimation für Team 2 (rechte Seite Fans jubeln)
             TriggerGoalAnimation(2);
