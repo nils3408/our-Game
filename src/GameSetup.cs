@@ -155,8 +155,8 @@ public class ShowPlayerType : UIElement
 //Die Box wo man den Player auswählen kann
 public class PlayerSelection : StackContainer
 {
-    Color outlineColor = new Color(96, 96, 96);
-    int spacing = 7;
+    new Color outlineColor = new Color(96, 96, 96);
+    new int spacing = 7;
 
     public bool isChoosen = false;
 

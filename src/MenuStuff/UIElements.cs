@@ -274,7 +274,7 @@ public class Textfield : UIElement
     }
     public override void Draw(SpriteBatch spriteBatch)
     {
-        if(backgroundColor != null)PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), backgroundColor);
+        PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), backgroundColor);
         PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), text, Color.Black);
 
         Outline(spriteBatch);

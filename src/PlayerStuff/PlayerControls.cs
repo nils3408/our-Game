@@ -6,20 +6,22 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 public enum PlayerAction
-    {
-        Left = 0,
-        Right = 1,
-        Jump = 2,
-        Special = 3,
-        PowerUp_1 = 4,
-        PowerUp_2 = 5
+{
+    Left = 0,
+    Right = 1,
+    Jump = 2,
+    Special = 3,
+    PowerUp_1 = 4,
+    PowerUp_2 = 5,
+    Lupfer = 6,
+    Diagonal = 7
     }
 public class PlayerControls
 {
 
 
     //maps the Controlls to the Keys, standartwerte, müssen angepasst werden
-    private Keys[] controlKeys = { Keys.A, Keys.D, Keys.W, Keys.S, Keys.Space, Keys.E };
+    private Keys[] controlKeys = new Keys[8];
     private Dictionary<Keys, PlayerAction> keyToAction = new Dictionary<Keys, PlayerAction>();
 
     public Keys Left{ get; private set; }
@@ -28,6 +30,8 @@ public class PlayerControls
     public Keys Special{ get; private set; }
     public Keys PowerUp_1{ get; private set; }
     public Keys PowerUp_2{ get; private set; }
+    public Keys Lupfer{get; private set; }
+    public Keys Diagonal{get; private set; }
 
     public PlayerControls(Keys[] keys)
     {
@@ -52,14 +56,14 @@ public class PlayerControls
 
     public static PlayerControls getStandartLeft()
     {
-        Keys[] keys = { Keys.A, Keys.D, Keys.W, Keys.E, Keys.R, Keys.F };
+        Keys[] keys = { Keys.A, Keys.D, Keys.W, Keys.E, Keys.R, Keys.F, Keys.C, Keys.S};
         return new PlayerControls(keys);
     }
 
     //standart besetzung wie zuvor in GameLogic.handel_player_movement()
     public static PlayerControls getStandartRight()
     {
-        Keys[] keys = { Keys.J, Keys.L, Keys.I, Keys.O, Keys.P, Keys.OemPeriod };
+        Keys[] keys = { Keys.J, Keys.L, Keys.I, Keys.O, Keys.P, Keys.OemPeriod, Keys.M, Keys.K};
         return new PlayerControls(keys);
     }
 
@@ -81,6 +85,8 @@ public class PlayerControls
         Special = keys[(int)PlayerAction.Special];
         PowerUp_1 = keys[(int)PlayerAction.PowerUp_1];
         PowerUp_2 = keys[(int)PlayerAction.PowerUp_2];
+        Lupfer = keys[(int)PlayerAction.Lupfer];
+        Diagonal = keys[(int)PlayerAction.Diagonal];
     }
 }
 
@@ -95,7 +101,6 @@ public class ControlsEditor : StackContainer
 
         AddKeyEditor(PlayerAction.Left, "Move Left");
 
-
         AddKeyEditor(PlayerAction.Right, "Move Right");
 
         AddKeyEditor(PlayerAction.Jump, "Jump Up");
@@ -106,6 +111,9 @@ public class ControlsEditor : StackContainer
 
         AddKeyEditor(PlayerAction.PowerUp_2, "PowerUp 2");
 
+        AddKeyEditor(PlayerAction.Lupfer, "Lupfer");
+
+        AddKeyEditor(PlayerAction.Diagonal, "Shot diag.");
     }
 
     private void AddKeyEditor(PlayerAction action, String text)

@@ -190,6 +190,9 @@ public class Player
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Right))) move(delta, 1);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position)) jump(delta);
 
+        //if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer))) shoots_lupfer = true;
+        //if (InputHandler.IsDown(controls.getKey(PlayerAction.Diagonal))) shoots_diagonal = true;
+
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Special))) do_special_effect(delta);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP(2);
@@ -198,14 +201,14 @@ public class Player
             Debug.WriteLine("test:  " +GameLogic_object.getBall().velocity);
 
         //-----------------------------------------------------------------------------------------
-        //Controller (steuerung sind X-Box tasten, do not ask me why
+        //Controller (steuerung sind X-Box tasten, do not ask me why...Weil Microsoft
        
         if (InputHandler.IsGamePadButtonDown(Buttons.A, playerGroup))   jump(delta);
         //if (InputHandler.IsL3MovedUp(playerGroup))                      jump(delta);
         if (InputHandler.IsL3MovedToSide("l", playerGroup))             move(delta, -1);
         if (InputHandler.IsL3MovedToSide("r", playerGroup))             move(delta, 1);
 
-        if (InputHandler.IsGamePadButtonDown(Buttons.X, playerGroup))   do_special_effect(delta);
+        if (InputHandler.IsGamePadButtonDown(Buttons.X, playerGroup)) do_special_effect(delta);
         if (InputHandler.isLeftTriggerDown(playerGroup))                activate_powerUP(1);
         if (InputHandler.isRightTriggerDown(playerGroup))               activate_powerUP(2);
 

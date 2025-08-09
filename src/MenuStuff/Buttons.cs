@@ -116,9 +116,9 @@ public class SimpleButton : UIElement
 
     public void SetColor(Color color, Color colorOnHover, Color colorOutline)
     {
-        if (color != null) this.color = color;
-        if (colorOnHover != null) this.colorOnHover = colorOnHover;
-        if(colorOutline != null) this.outlineColor = colorOutline;
+        this.color = color;
+        this.colorOnHover = colorOnHover;
+        this.outlineColor = colorOutline;
     }
 }
 

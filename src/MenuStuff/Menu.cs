@@ -10,7 +10,7 @@ public class Menu : GameState
 {
     StackContainer buttonContainer;
     Texture2D backgroundPicture;
-    Texture2D pixel;
+    //Texture2D pixel;
 
     public Menu(Game game) : base(game)
     {
