@@ -172,6 +172,7 @@ public class GameLogic : GameState
         player1.set_groundYs(exakter_ground_y);
         player1.GameLogic_object = this;
         player1.set_content(Content);
+        player1.Set_other_Player(player2);
     }
 
     public void SetPlayer2(Player right)
@@ -184,6 +185,7 @@ public class GameLogic : GameState
         player2.set_groundYs(exakter_ground_y);
         player2.GameLogic_object = this;
         player2.set_content(Content);
+        player2.Set_other_Player(player1);
     }
 
     public PlayerFactory.Types getRandomPlayerType()
@@ -199,7 +201,7 @@ public class GameLogic : GameState
 
     public void player_becomes_new_random_player(Player abc, int id)
     {
-        // hinweis: id is the playergroup and definer for theplayer
+        // hinweis: id is the playergroup 
 
         PlayerFactory.Types luna = getRandomPlayerType();
         abc = PlayerFactory.CreatePlayer(luna, abc.position, id, abc.controls);
@@ -778,6 +780,19 @@ public class GameLogic : GameState
 
     public void reset_values_after_goal()
     {
+        //change player character if randomPlayer
+        if (randomPlayer1)
+        {
+            player_becomes_new_random_player(player1, 1);
+            SetPlayer1(player1);
+        }
+        if (randomPlayer2)
+        {
+            player_becomes_new_random_player(player2, 2);
+            SetPlayer2(player2);
+        }
+
+
         football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
         football.reset_values();
         player1.set_back_to_starting_position();
@@ -789,6 +804,8 @@ public class GameLogic : GameState
         update_all_item_positions();
         reset_goal_size();
 
+        player1.Set_other_Player(player2);
+        player2.Set_other_Player(player1);
     }
 
     public void set_goal_size()

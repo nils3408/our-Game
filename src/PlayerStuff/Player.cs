@@ -197,8 +197,7 @@ public class Player
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP(2);
 
-        if (InputHandler.IsDown(Keys.B))
-            Debug.WriteLine("test:  " +GameLogic_object.getBall().velocity);
+
 
         //-----------------------------------------------------------------------------------------
         //Controller (steuerung sind X-Box tasten, do not ask me why...Weil Microsoft
@@ -567,8 +566,6 @@ public class Player
     public void reset_powerUps_if_time_is_over()
     {
        reset_BigPlayer_PowerUp_if_time_is_over();
-       reset_Small_Player_PowerUp_if_time_is_over();
-       
     }
 
     public void reset_BigPlayer_PowerUp_if_time_is_over()
