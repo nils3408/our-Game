@@ -141,9 +141,7 @@ public class GameLogic : GameState
         randomPlayer2 = is_RandomPlayer(player2);
         if (randomPlayer1) { player_becomes_new_random_player(player1, 1); }
         if (randomPlayer2) { player_becomes_new_random_player(player2, 2); }
-
-        player1.Set_other_Player(player2);
-        player2.Set_other_Player(player1);
+        set_other_players();
 
         item1 = new Item(_graphicsDevice, Content, football);
         items = new Item[] { item1 };
@@ -208,6 +206,12 @@ public class GameLogic : GameState
 
         if (id == 1) { SetPlayer1(abc); }
         else { SetPlayer2(abc); }
+    }
+
+    public void set_other_players()
+    {
+        player1.Set_other_Player(player2);
+        player2.Set_other_Player(player1);
     }
 
 
@@ -791,6 +795,7 @@ public class GameLogic : GameState
             player_becomes_new_random_player(player2, 2);
             SetPlayer2(player2);
         }
+        set_other_players();
 
 
         football.Reset_Position(new Vector2(_graphics.PreferredBackBufferWidth / 2f, groundY));
@@ -804,8 +809,7 @@ public class GameLogic : GameState
         update_all_item_positions();
         reset_goal_size();
 
-        player1.Set_other_Player(player2);
-        player2.Set_other_Player(player1);
+        set_other_players();
     }
 
     public void set_goal_size()

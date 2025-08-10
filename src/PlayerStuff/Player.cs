@@ -566,6 +566,7 @@ public class Player
     public void reset_powerUps_if_time_is_over()
     {
        reset_BigPlayer_PowerUp_if_time_is_over();
+       reset_Small_Player_PowerUp_if_time_is_over();
     }
 
     public void reset_BigPlayer_PowerUp_if_time_is_over()
