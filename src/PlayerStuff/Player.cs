@@ -75,6 +75,10 @@ public class Player
     public float cooldown_SmallPlayer_powerup = 0;
     public bool SmallPlayer_powerup_in_use = false;
 
+    public DateTime activation_time_MoveChange_powerup = DateTime.MinValue;
+    public float cooldown_MoveChange_powerup = 0;
+    public bool MoveChange_powerup_in_use = false;
+
     public PlayerControls controls;
     public GameLogic GameLogic_object;
     public ContentManager content;
@@ -184,10 +188,19 @@ public class Player
     }
 
     public void handle_input(float delta)
-    { 
+    {
         //tastatur
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Left))) move(delta, -1);
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Right))) move(delta, 1);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Left)))
+        {
+            if (MoveChange_powerup_in_use == false)     { move(delta, -1); }
+            else                                        { move(delta, 1);  }
+        }
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Right)))
+        {
+            if (MoveChange_powerup_in_use == false)     { move(delta, 1); }
+            else                                        { move(delta, -1);}
+        }
+            
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position)) jump(delta);
 
         //if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer))) shoots_lupfer = true;
@@ -204,8 +217,16 @@ public class Player
        
         if (InputHandler.IsGamePadButtonDown(Buttons.A, playerGroup))   jump(delta);
         //if (InputHandler.IsL3MovedUp(playerGroup))                      jump(delta);
-        if (InputHandler.IsL3MovedToSide("l", playerGroup))             move(delta, -1);
-        if (InputHandler.IsL3MovedToSide("r", playerGroup))             move(delta, 1);
+        if (InputHandler.IsL3MovedToSide("l", playerGroup))
+        {
+            if (MoveChange_powerup_in_use == false)     { move(delta, -1);}
+            else                                        { move(delta, 1); }
+        }
+        if (InputHandler.IsL3MovedToSide("r", playerGroup))
+        {
+            if (MoveChange_powerup_in_use == false)     { move(delta, 1); }
+            else                                        { move(delta, -1);}
+        }
 
         if (InputHandler.IsGamePadButtonDown(Buttons.X, playerGroup)) do_special_effect(delta);
         if (InputHandler.isLeftTriggerDown(playerGroup))                activate_powerUP(1);
@@ -567,6 +588,20 @@ public class Player
     {
        reset_BigPlayer_PowerUp_if_time_is_over();
        reset_Small_Player_PowerUp_if_time_is_over();
+       reset_MoveChange_PowerUp_if_time_has_come();
+    }
+
+    public void reset_MoveChange_PowerUp_if_time_has_come()
+    {
+        if (MoveChange_powerup_in_use == false) { return; }
+
+        DateTime current_time = DateTime.Now;
+        double vergangene_zeit = (current_time - activation_time_MoveChange_powerup).TotalSeconds;
+
+        if (vergangene_zeit > cooldown_MoveChange_powerup)
+        {
+            reset_MoveChange_after_MoveChangePowerUp_is_over();
+        }
     }
 
     public void reset_BigPlayer_PowerUp_if_time_is_over()
@@ -641,6 +676,12 @@ public class Player
             reset_size();
             reset_groundY();
         }
+    }
+
+    public void reset_MoveChange_after_MoveChangePowerUp_is_over()
+    {
+        MoveChange_powerup_in_use = false;
+        activation_time_MoveChange_powerup = DateTime.MinValue;
     }
 
 

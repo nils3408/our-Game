@@ -803,9 +803,11 @@ public class GameLogic : GameState
         player1.set_back_to_starting_position();
         player2.set_back_to_starting_position();
         player1.reset_size();
-        player1.reset_groundY();
         player2.reset_size();
+        player1.reset_groundY();
         player2.reset_groundY();
+        player1.reset_MoveChange_after_MoveChangePowerUp_is_over();
+        player2.reset_MoveChange_after_MoveChangePowerUp_is_over();
         update_all_item_positions();
         reset_goal_size();
 

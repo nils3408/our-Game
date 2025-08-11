@@ -55,6 +55,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/dieb.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/fireball_texture.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/iceball_texture.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/movement_changing.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/SmallPlayer_texture.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/red_window.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/shuriken.png</File>
@@ -79,6 +80,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/vs_zeichen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
