@@ -436,9 +436,10 @@ public class GameLogic : GameState
         }
     }
 
-    void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, int desiredSize)
+    void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, int desiredSize, Player abc)
     {
-        spriteBatch.Draw(tex, new Rectangle((int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White);
+        float bias = abc.can_do_special_effect() ? 1f : 0.4f;
+        spriteBatch.Draw(tex, new Rectangle((int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White*bias);
 
     }
 
@@ -468,8 +469,8 @@ public class GameLogic : GameState
         int size2 = 140;                           // size of the round character_symbol_textures
         int x_pos21 = x_pos - distance2 - size2;   // position of left character symbol
         int x_pos22 = x_pos + distance2 + x_size;  // pposition of right character symbol
-        DrawPlayerSpecialMoveTexture(player1.special_move_texture, new Vector2(x_pos21, 800), size2);
-        DrawPlayerSpecialMoveTexture(player2.special_move_texture, new Vector2(x_pos22, 800), size2);
+        DrawPlayerSpecialMoveTexture(player1.special_move_texture, new Vector2(x_pos21, 800), size2, player1);
+        DrawPlayerSpecialMoveTexture(player2.special_move_texture, new Vector2(x_pos22, 800), size2, player2);
 
 
         //draw player powerUp_textures
