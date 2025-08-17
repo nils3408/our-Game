@@ -436,4 +436,44 @@ public class Ball
 
         return false; // Keine Kollision
     }
+    // -----------------------------------------------------------------------------
+    //----------------------------------------------------------------------------
+    // Anstoﬂ features 
+
+    public bool handle_goal_front_wall_collision(Rectangle wall)
+    {
+        Rectangle ballRect = getRect();
+        if (!ballRect.Intersects(wall)) return false;
+
+        float overlapX = Math.Min(ballRect.Right, wall.Right) - Math.Max(ballRect.Left, wall.Left);
+        float overlapY = Math.Min(ballRect.Bottom, wall.Bottom) - Math.Max(ballRect.Top, wall.Top);
+
+        Vector2 newPos = position;
+
+        if (overlapX <= overlapY)
+        {
+            if (ballRect.Center.X < wall.Center.X)
+                newPos.X = wall.Left - BallSize - 1;
+            else
+                newPos.X = wall.Right + 1;
+
+            change_direction_x_scale();
+        }
+        else
+        {
+            if (ballRect.Center.Y < wall.Center.Y)
+                newPos.Y = wall.Top - BallSize - 1;
+            else
+                newPos.Y = wall.Bottom + 1;
+
+            change_direction_y_scale();
+        }
+
+        position = newPos;
+        reduce_velocity_due_to_friction();
+        Rect.X = (int)position.X;
+        Rect.Y = (int)position.Y;
+        return true;
+    }
+
 }

@@ -114,6 +114,24 @@ public class GameLogic : GameState
     private Texture2D fanrot2Texture;
     private List<BackgroundFan> backgroundFans = new List<BackgroundFan>();
 
+    //Anstoßfeatures
+    private enum RoundMode { Normal, WallFrontGoals, WallButtonTrigger }
+    private RoundMode currentMode = RoundMode.Normal;
+
+    // Mode zerstörbare Wand
+    private int leftWallHP = 0;
+    private int rightWallHP = 0;
+    private const int MaxWallHits = 3;
+
+
+    //button 
+    private Texture2D buttonTexture;
+    private int buttonSize = 64;
+    private Rectangle leftButtonRect;
+    private Rectangle rightButtonRect;
+    private bool leftWallActive = false;
+    private bool rightWallActive = false;
+
 
     public GameLogic(Game baseGame) : base(baseGame) { }
     public GameLogic(Game baseGame, Player leftPlayer, Player rightPlayer) : base(baseGame)
@@ -153,7 +171,7 @@ public class GameLogic : GameState
     }
 
 
-//----------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------
     public void SetPlayer(Player left, Player right)
     {
         SetPlayer1(left);
@@ -421,6 +439,18 @@ public class GameLogic : GameState
             spriteBatch.DrawString(scoreFont, escText, escTextPosition, Color.White);
         }
 
+        if (currentMode == RoundMode.WallButtonTrigger)
+        {
+            if (leftWallActive)
+            {
+                spriteBatch.Draw(overlayTexture, leftButtonRect, Color.Red);
+            }
+            if (rightWallActive)
+            {
+                spriteBatch.Draw(overlayTexture, rightButtonRect, Color.Red);
+            }
+        }
+
         spriteBatch.End();
     }
 
@@ -439,7 +469,7 @@ public class GameLogic : GameState
     void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, int desiredSize, Player abc)
     {
         float bias = abc.can_do_special_effect() ? 1f : 0.4f;
-        spriteBatch.Draw(tex, new Rectangle((int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White*bias);
+        spriteBatch.Draw(tex, new Rectangle((int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White * bias);
 
     }
 
@@ -484,6 +514,22 @@ public class GameLogic : GameState
         DrawPowerUp(player1.powerup2?.get_powerUp_texture(), new Rectangle(xpos31, 910, size3, size3), size4);
         DrawPowerUp(player2.powerup1?.get_powerUp_texture(), new Rectangle(xpos32, 750, size3, size3), size4);
         DrawPowerUp(player2.powerup2?.get_powerUp_texture(), new Rectangle(xpos32, 910, size3, size3), size4);
+
+        if (currentMode == RoundMode.WallFrontGoals)
+        {
+            string modeText = "Mode: WAND VORM TOR";
+            Vector2 size = scoreFont.MeasureString(modeText);
+            spriteBatch.DrawString(scoreFont, modeText,
+                new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720), Color.Yellow);
+        }
+
+        if (currentMode == RoundMode.WallButtonTrigger)
+        {
+            string modeText = "Mode: Triff den Knopf";
+            Vector2 size = scoreFont.MeasureString(modeText);
+            spriteBatch.DrawString(scoreFont, modeText,
+                new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720), Color.Yellow);
+        }
     }
 
 
@@ -696,61 +742,87 @@ public class GameLogic : GameState
     }
 
 
- //--------------------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------------------
-// goal stuff
+    //--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
+    // goal stuff
 
 
     //Check Ball im Tor
     private void check_for_goal()
     {
         int crossbarHeight = 20;
-        Microsoft.Xna.Framework.Rectangle ballRect = football.getRect();
-        leftGoal = new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
-        rightGoal = new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
+        Rectangle ballRect = football.getRect();
 
-        Microsoft.Xna.Framework.Rectangle leftCrossbar = new Microsoft.Xna.Framework.Rectangle(leftGoal.X, leftGoal.Y, leftGoal.Width, crossbarHeight);
-        Microsoft.Xna.Framework.Rectangle rightCrossbar = new Microsoft.Xna.Framework.Rectangle(rightGoal.X, rightGoal.Y, rightGoal.Width, crossbarHeight);
+        leftGoal = new Rectangle((int)_leftGoalPosition.X - 25, (int)_leftGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
+        rightGoal = new Rectangle((int)_rightGoalPosition.X + 25, (int)_rightGoalPosition.Y + crossbarHeight, goalWidth, goalHeight - crossbarHeight);
+
+        Rectangle leftCrossbar = new Rectangle(leftGoal.X, leftGoal.Y - crossbarHeight, leftGoal.Width, crossbarHeight);
+        Rectangle rightCrossbar = new Rectangle(rightGoal.X, rightGoal.Y - crossbarHeight, rightGoal.Width, crossbarHeight);
 
         football.handle_crossbar_collision(leftCrossbar);
         football.handle_crossbar_collision(rightCrossbar);
 
+        // ----- Front-Wände je nach Modus -----
+        int wallThickness = 10;
+
+        if (currentMode == RoundMode.WallFrontGoals)
+        {
+            if (leftWallHP > 0)
+            {
+                Rectangle leftWall = new Rectangle(leftGoal.Right + 1, leftGoal.Y, wallThickness, leftGoal.Height);
+                if (football.handle_goal_front_wall_collision(leftWall)) { leftWallHP--; }
+            }
+            if (rightWallHP > 0)
+            {
+                Rectangle rightWall = new Rectangle(rightGoal.Left - wallThickness - 1, rightGoal.Y, wallThickness, rightGoal.Height);
+                if (football.handle_goal_front_wall_collision(rightWall)) { rightWallHP--; }
+            }
+        }
+        else if (currentMode == RoundMode.WallButtonTrigger)
+        {
+            int offsetY = 120, offsetX = 40;
+            leftButtonRect = new Rectangle(leftGoal.Right + offsetX, leftGoal.Y - offsetY, buttonSize, buttonSize);
+            rightButtonRect = new Rectangle(rightGoal.Left - offsetX - buttonSize, rightGoal.Y - offsetY, buttonSize, buttonSize);
+
+            // Wand abprallen lassen, solange aktiv
+            if (leftWallActive)
+            {
+                Rectangle leftWall = new Rectangle(leftGoal.Right + 1, leftGoal.Y, 10, leftGoal.Height);
+                football.handle_goal_front_wall_collision(leftWall);
+            }
+            if (rightWallActive)
+            {
+                Rectangle rightWall = new Rectangle(rightGoal.Left - 11, rightGoal.Y, 10, rightGoal.Height);
+                football.handle_goal_front_wall_collision(rightWall);
+            }
+
+            // Button-Kollision prüfen
+            if (leftWallActive && football.getRect().Intersects(leftButtonRect))
+            {
+                leftWallActive = false;
+                Debug.WriteLine("Linke Wand zerstört (Button getroffen).");
+            }
+            if (rightWallActive && football.getRect().Intersects(rightButtonRect))
+            {
+                rightWallActive = false;
+                Debug.WriteLine("Rechte Wand zerstört (Button getroffen).");
+            }
+        }
+
         if (leftGoal.Contains(ballRect))
         {
-            scorePlayer2++; 
-
-            // Toranimation für Team 2 (rechte Seite Fans jubeln)
+            scorePlayer2++;
             TriggerGoalAnimation(2);
-
-            if (scorePlayer2 >= winningScore)
-            {
-                gameWon = true;
-                winnerText = "Player 2 wins!";
-            }
-            else
-            {
-                gameWon = false;
-                reset_values_after_goal();
-            }
+            if (scorePlayer2 >= winningScore) { gameWon = true; winnerText = "Player 2 wins!"; }
+            else { gameWon = false; reset_values_after_goal(); }
         }
 
         if (rightGoal.Contains(ballRect))
         {
             scorePlayer1++;
-
-            // Toranimation für Team 1 (linke Seite Fans jubeln)
             TriggerGoalAnimation(1);
-
-            if (scorePlayer1 >= winningScore)
-            {
-                gameWon = true;
-                winnerText = "Player 1 wins!";
-            }
-            else
-            {
-                gameWon = false;
-                reset_values_after_goal();
-            }
+            if (scorePlayer1 >= winningScore) { gameWon = true; winnerText = "Player 1 wins!"; }
+            else { gameWon = false; reset_values_after_goal(); }
         }
     }
 
@@ -785,6 +857,34 @@ public class GameLogic : GameState
 
     public void reset_values_after_goal()
     {
+        double r = rng.NextDouble();
+        if (r < 1.0 / 3.0) currentMode = RoundMode.Normal;
+        else if (r < 2.0 / 3.0) currentMode = RoundMode.WallFrontGoals;
+        else currentMode = RoundMode.WallButtonTrigger;
+
+        // Zustand pro Modus vorbereiten
+        if (currentMode == RoundMode.WallFrontGoals) // dein HP-Modus
+        {
+            leftWallHP = MaxWallHits;
+            rightWallHP = MaxWallHits;
+            leftWallActive = false;
+            rightWallActive = false;
+        }
+        else if (currentMode == RoundMode.WallButtonTrigger)
+        {
+            // Wände sind aktiv bis ein Button getroffen wird
+            leftWallActive = true;
+            rightWallActive = true;
+            // (HP ignorieren)
+            leftWallHP = 0;
+            rightWallHP = 0;
+        }
+        else // Normal
+        {
+            leftWallHP = 0; rightWallHP = 0;
+            leftWallActive = false; rightWallActive = false;
+        }
+
         //change player character if randomPlayer
         if (randomPlayer1)
         {
@@ -814,6 +914,7 @@ public class GameLogic : GameState
 
         set_other_players();
     }
+
 
     public void set_goal_size()
     {
@@ -847,4 +948,5 @@ public class GameLogic : GameState
         _rightGoalPosition = new Vector2(rightGoalInnerX, fixedBottomY - goalHeight);
     }
 }
+
 

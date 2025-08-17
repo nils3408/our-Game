@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/movement_changing.png</SourceFile>
-  <SourceTime>2025-08-11T21:22:29.4168095+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/powerUp_textures/movement_changing.xnb</DestFile>
-  <DestTime>2025-08-11T21:24:02.3777166+02:00</DestTime>
+  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/powerUp_textures/movement_changing.png</SourceFile>
+  <SourceTime>2025-08-17T17:56:32.3173516+02:00</SourceTime>
+  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/powerUp_textures/movement_changing.xnb</DestFile>
+  <DestTime>2025-08-17T18:03:07.1975455+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
