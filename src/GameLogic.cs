@@ -116,7 +116,7 @@ public class GameLogic : GameState
 
     //Anstoßfeatures
     private bool specialModesEnabled = false;   // Masterschalter um Anstoßfeature an oder aus zu machen            TODO: Button im Menu hinzufügen
-    private enum RoundMode { Normal, WallFrontGoals, WallButtonTrigger }
+    private enum RoundMode { Normal, WallFrontGoals, WallButtonTrigger, MovingWall }
     private RoundMode currentMode = RoundMode.Normal;
 
     // Mode zerstörbare Wand
@@ -125,13 +125,23 @@ public class GameLogic : GameState
     private const int MaxWallHits = 3;
 
 
-    //button 
+    //button für Wand-Trigger-Modus
     private Texture2D buttonTexture;
     private int buttonSize = 64;
     private Rectangle leftButtonRect;
     private Rectangle rightButtonRect;
     private bool leftWallActive = false;
     private bool rightWallActive = false;
+
+    // Moving Wall (vertikale Schieberiegel vor den Toren)
+    private int movingWallThickness = 10;
+    private int movingWallHeight = 140;   
+    private float movingWallSpeed = 110f;           //speed
+
+    private float leftWallY;   
+    private float rightWallY;  
+    private int leftWallDir = 1;   
+    private int rightWallDir = -1; 
 
 
     public GameLogic(Game baseGame) : base(baseGame) { }
@@ -357,6 +367,8 @@ public class GameLogic : GameState
             }
             return;
         }
+
+        UpdateMovingWalls((float)gameTime.ElapsedGameTime.TotalSeconds);
     }
 
 
@@ -374,11 +386,6 @@ public class GameLogic : GameState
         new Microsoft.Xna.Framework.Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
         Microsoft.Xna.Framework.Color.White
         );
-
-
-        spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
-        spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
-        //Tribünen
         spriteBatch.Draw(_tribuneTexture,
         new Microsoft.Xna.Framework.Rectangle((int)_leftTribunePosition.X, (int)_leftTribunePosition.Y, tribuneWidth, tribuneHeight),
         Microsoft.Xna.Framework.Color.White);
@@ -389,9 +396,16 @@ public class GameLogic : GameState
         }
         Color gameColor = gameWon ? Color.White * 0.3f : Color.White;
 
+
+        football.draw(spriteBatch, gameTime);
+
+
+        spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
+        spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
+
         player1.draw(spriteBatch, gameTime);
         player2.draw(spriteBatch, gameTime);
-        football.draw(spriteBatch, gameTime);
+        
 
         //draw items
         foreach (Item item in items)
@@ -450,6 +464,15 @@ public class GameLogic : GameState
             {
                 spriteBatch.Draw(overlayTexture, rightButtonRect, Color.Red);
             }
+        }
+        if (currentMode == RoundMode.MovingWall)
+        {
+            
+            var leftRect = new Rectangle(leftGoal.Right + 1, (int)leftWallY, movingWallThickness, movingWallHeight);
+            var rightRect = new Rectangle(rightGoal.Left - movingWallThickness - 1, (int)rightWallY, movingWallThickness, movingWallHeight);
+
+            spriteBatch.Draw(overlayTexture, leftRect, Color.Red * 0.6f);
+            spriteBatch.Draw(overlayTexture, rightRect, Color.Red * 0.6f);
         }
 
         spriteBatch.End();
@@ -527,6 +550,13 @@ public class GameLogic : GameState
         if (currentMode == RoundMode.WallButtonTrigger)
         {
             string modeText = "Mode: Triff den Knopf";
+            Vector2 size = scoreFont.MeasureString(modeText);
+            spriteBatch.DrawString(scoreFont, modeText,
+                new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720), Color.Yellow);
+        }
+        if (currentMode == RoundMode.MovingWall)
+        {
+            string modeText = "Mode: MovingWall";
             Vector2 size = scoreFont.MeasureString(modeText);
             spriteBatch.DrawString(scoreFont, modeText,
                 new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720), Color.Yellow);
@@ -809,6 +839,27 @@ public class GameLogic : GameState
                 Debug.WriteLine("Rechte Wand zerstört (Button getroffen).");
             }
         }
+        else if (currentMode == RoundMode.MovingWall)
+        {
+            // Wand-Segmente vor die Tore (vertikale Balken, die hoch/runter fahren)
+            Rectangle leftWall = new Rectangle(
+                leftGoal.Right + 1,
+                (int)leftWallY,
+                movingWallThickness,
+                movingWallHeight
+            );
+
+            Rectangle rightWall = new Rectangle(
+                rightGoal.Left - movingWallThickness - 1,
+                (int)rightWallY,
+                movingWallThickness,
+                movingWallHeight
+            );
+
+            // Ball daran abprallen lassen
+            football.handle_goal_front_wall_collision(leftWall);
+            football.handle_goal_front_wall_collision(rightWall);
+        }
 
         if (leftGoal.Contains(ballRect))
         {
@@ -862,13 +913,13 @@ public class GameLogic : GameState
         {
             currentMode = RoundMode.Normal;
         }
-        else
         {
-            // Modus bestimmen (gleich verteilt)
+            
             double r = rng.NextDouble();
-            if (r < 1.0 / 3.0) currentMode = RoundMode.Normal;
-            else if (r < 2.0 / 3.0) currentMode = RoundMode.WallFrontGoals;
-            else currentMode = RoundMode.WallButtonTrigger;
+            if (r < 0.25) currentMode = RoundMode.Normal;
+            else if (r < 0.50) currentMode = RoundMode.WallFrontGoals;
+            else if (r < 0.75) currentMode = RoundMode.WallButtonTrigger;
+            else currentMode = RoundMode.MovingWall;          
         }
 
         // Zustand pro Modus vorbereiten
@@ -887,6 +938,22 @@ public class GameLogic : GameState
             // (HP ignorieren)
             leftWallHP = 0;
             rightWallHP = 0;
+        }
+        else if (currentMode == RoundMode.MovingWall)
+        {
+            // Wand-Segmente mittig im Tor starten
+            int crossbarHeight = 20;
+            int leftTop = (int)_leftGoalPosition.Y + crossbarHeight;
+            int rightTop = (int)_rightGoalPosition.Y + crossbarHeight;
+
+            int usableH = goalHeight - crossbarHeight; 
+            leftWallY = leftTop + (usableH - movingWallHeight) * 0.5f;
+            rightWallY = rightTop + (usableH - movingWallHeight) * 0.5f;
+
+            leftWallDir = 1;   
+            rightWallDir = -1; 
+            leftWallHP = 0; rightWallHP = 0;
+            leftWallActive = false; rightWallActive = false;
         }
         else // Normal
         {
@@ -955,6 +1022,29 @@ public class GameLogic : GameState
         // X-Position: innerer Punkt = linke Kante (Tor wächst nach rechts)
         // Y-Position: unterer Punkt minus Höhe = obere Kante
         _rightGoalPosition = new Vector2(rightGoalInnerX, fixedBottomY - goalHeight);
+    }
+
+    private void UpdateMovingWalls(float dt)
+    {
+        if (currentMode != RoundMode.MovingWall) return;
+
+        int crossbarHeight = 20;
+
+        // Linkes Tor: erlaubter Bewegungsbereich
+        int leftTop = (int)_leftGoalPosition.Y + crossbarHeight;
+        int leftBottomMax = leftTop + (goalHeight - crossbarHeight) - movingWallHeight;
+
+        leftWallY += movingWallSpeed * dt * leftWallDir;
+        if (leftWallY <= leftTop) { leftWallY = leftTop; leftWallDir = 1; }
+        if (leftWallY >= leftBottomMax) { leftWallY = leftBottomMax; leftWallDir = -1; }
+
+        // Rechtes Tor: Bereich
+        int rightTop = (int)_rightGoalPosition.Y + crossbarHeight;
+        int rightBottomMax = rightTop + (goalHeight - crossbarHeight) - movingWallHeight;
+
+        rightWallY += movingWallSpeed * dt * rightWallDir;
+        if (rightWallY <= rightTop) { rightWallY = rightTop; rightWallDir = 1; }
+        if (rightWallY >= rightBottomMax) { rightWallY = rightBottomMax; rightWallDir = -1; }
     }
 }
 
