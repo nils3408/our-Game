@@ -115,6 +115,7 @@ public class GameLogic : GameState
     private List<BackgroundFan> backgroundFans = new List<BackgroundFan>();
 
     //Anstoßfeatures
+    private bool specialModesEnabled = false;   // Masterschalter um Anstoßfeature an oder aus zu machen            TODO: Button im Menu hinzufügen
     private enum RoundMode { Normal, WallFrontGoals, WallButtonTrigger }
     private RoundMode currentMode = RoundMode.Normal;
 
@@ -857,10 +858,18 @@ public class GameLogic : GameState
 
     public void reset_values_after_goal()
     {
-        double r = rng.NextDouble();
-        if (r < 1.0 / 3.0) currentMode = RoundMode.Normal;
-        else if (r < 2.0 / 3.0) currentMode = RoundMode.WallFrontGoals;
-        else currentMode = RoundMode.WallButtonTrigger;
+        if (!specialModesEnabled)
+        {
+            currentMode = RoundMode.Normal;
+        }
+        else
+        {
+            // Modus bestimmen (gleich verteilt)
+            double r = rng.NextDouble();
+            if (r < 1.0 / 3.0) currentMode = RoundMode.Normal;
+            else if (r < 2.0 / 3.0) currentMode = RoundMode.WallFrontGoals;
+            else currentMode = RoundMode.WallButtonTrigger;
+        }
 
         // Zustand pro Modus vorbereiten
         if (currentMode == RoundMode.WallFrontGoals) // dein HP-Modus
