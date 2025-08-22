@@ -6,7 +6,7 @@ using System;
 
 public class Knight: Player
 {
-    public int cooldown = 9; //can activate its special effect all x seconds
+    public int cooldown = 8; //can activate its special effect all x seconds
     public int speciaL_effect_timer = 3;  //can do its special effect for x seconds
 
     public bool special_effect_in_use = false;

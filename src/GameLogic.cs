@@ -500,22 +500,23 @@ public class GameLogic : GameState
         {
             alpha = 1f;
         }
-        float baseScale = (float)desiredSize / Math.Max(tex.Width, tex.Height);
-        float scale = baseScale * (abc.is_using_specialeffect ? 1.3f : 1f);
 
-        Vector2 origin = new Vector2(tex.Width / 2f, tex.Height / 2f);
+            float baseScale = (float)desiredSize / Math.Max(tex.Width, tex.Height);
+            float scale = baseScale * (abc.is_using_specialeffect ? 1.3f : 1f);
 
-        spriteBatch.Draw(
-            tex,
-            centerPosition, 
-            null,
-            Color.White * alpha,
-            0f,
-            origin,
-            scale,
-            SpriteEffects.None,
-            0f
-        );
+            Vector2 origin = new Vector2(tex.Width / 2f, tex.Height / 2f);
+
+            spriteBatch.Draw(
+                tex,
+                centerPosition,
+                null,
+                Color.White * alpha,
+                0f,
+                origin,
+                scale,
+                SpriteEffects.None,
+                0f
+            );
     }
 
 
