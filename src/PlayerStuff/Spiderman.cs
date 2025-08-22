@@ -22,6 +22,8 @@ public class Spiderman: Player
 
         velocity.Y = jump_velocity;
         can_do_specialeffect = false;
+        is_using_specialeffect = true;
+        last_time_used = DateTime.Now;
     }
 
     public override void update_vertical(float delta)

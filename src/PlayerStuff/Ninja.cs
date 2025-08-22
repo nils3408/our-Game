@@ -9,7 +9,6 @@ public class Ninja : Player
 {
 
     public int cooldown = 10; //can activate its special effect all x seconds
-    public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
 
 
     public Ninja(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture1, int player, PlayerControls controls)
@@ -27,6 +26,7 @@ public class Ninja : Player
 
         GameLogic_object.add_Schuriken(new Vector2(position.X, position.Y+ 30), this, moving_direction);
         last_time_used = DateTime.Now;
+        is_using_specialeffect = true;
     }
 
 

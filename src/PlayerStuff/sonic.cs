@@ -13,7 +13,6 @@ public class Sonic: Player
     public int cooldown = 7; //can activate its special effect all x seconds
     public int speciaL_effect_timer = 2;  //can do its special effect for x seconds
     
-    public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
     public bool special_effect_in_use = false;
 
     public float fast_move_speed = 1000;
@@ -52,8 +51,8 @@ public class Sonic: Player
         move_speed = fast_move_speed;
         
         last_time_used = DateTime.Now;
-        special_effect_in_use=true; 
-
+        special_effect_in_use=true;
+        is_using_specialeffect = true;
     }
     
     

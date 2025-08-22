@@ -340,6 +340,9 @@ public class GameLogic : GameState
         player2.reset_powerUps_if_time_is_over();
         football.reset_powerUps_if_time_is_over();
 
+        player1.update_special_effect_in_use();
+        player2.update_special_effect_in_use();
+
         move_schuriken(gameTime);
         update_schuriken_list();
 
@@ -490,11 +493,29 @@ public class GameLogic : GameState
         }
     }
 
-    void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 position, int desiredSize, Player abc)
+    void DrawPlayerSpecialMoveTexture(Texture2D tex, Vector2 centerPosition, int desiredSize, Player abc)
     {
-        float bias = abc.can_do_special_effect() ? 1f : 0.4f;
-        spriteBatch.Draw(tex, new Rectangle((int)position.X, (int)position.Y, desiredSize, desiredSize), Color.White * bias);
+        float alpha = 0.4f;
+        if (abc.can_do_special_effect() || abc.is_using_specialeffect)
+        {
+            alpha = 1f;
+        }
+        float baseScale = (float)desiredSize / Math.Max(tex.Width, tex.Height);
+        float scale = baseScale * (abc.is_using_specialeffect ? 1.3f : 1f);
 
+        Vector2 origin = new Vector2(tex.Width / 2f, tex.Height / 2f);
+
+        spriteBatch.Draw(
+            tex,
+            centerPosition, 
+            null,
+            Color.White * alpha,
+            0f,
+            origin,
+            scale,
+            SpriteEffects.None,
+            0f
+        );
     }
 
 
@@ -518,14 +539,14 @@ public class GameLogic : GameState
         int y_pos = 800;
         spriteBatch.Draw(vs_zeichen, new Rectangle(x_pos, y_pos, x_size, y_size), Color.White);
 
+
         // draw player special_move_textures
         int distance2 = 140;                       // whished_distanze_between_vs_and_special_move_texture
         int size2 = 140;                           // size of the round character_symbol_textures
         int x_pos21 = x_pos - distance2 - size2;   // position of left character symbol
         int x_pos22 = x_pos + distance2 + x_size;  // pposition of right character symbol
-        DrawPlayerSpecialMoveTexture(player1.special_move_texture, new Vector2(x_pos21, 800), size2, player1);
-        DrawPlayerSpecialMoveTexture(player2.special_move_texture, new Vector2(x_pos22, 800), size2, player2);
-
+        DrawPlayerSpecialMoveTexture(player1.special_move_texture, new Vector2(x_pos21 + size2 / 2, 800 + size2 / 2), size2, player1);
+        DrawPlayerSpecialMoveTexture(player2.special_move_texture, new Vector2(x_pos22 + size2 / 2, 800 + size2 / 2), size2, player2);
 
         //draw player powerUp_textures
         int size3 = 130;   //size of backgroudn texture

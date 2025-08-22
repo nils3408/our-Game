@@ -17,6 +17,7 @@ public class Mario : Player
     {
 
         velocity.Y = 500f; // erh�hte Gravitation f�r schnelleren Fall
-     
+        is_using_specialeffect = true;
+        last_time_used = DateTime.Now;
     }
 }

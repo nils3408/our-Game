@@ -53,6 +53,9 @@ public class Player
     public float maxHeightY = 3;
 
     public bool can_do_specialeffect;
+    public bool is_using_specialeffect = false;
+    public DateTime last_time_used = DateTime.MinValue;
+
     public int strength;
 
     public float groundY = float.NaN;     //nicht initialisert am anfang um möliche bugs abzufangen welche bei zb. 0.0f entstehen könnten
@@ -763,6 +766,15 @@ public class Player
         futureRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
     }
 
+    public void update_special_effect_in_use()
+    {
+        TimeSpan elapsed = DateTime.Now - last_time_used;
+        
+        if (elapsed.TotalSeconds > 0.2)
+        {
+            is_using_specialeffect = false;
+        }
+    }
 
 
     public bool out_of_bounds_both_scales(Vector2 newPosition1)

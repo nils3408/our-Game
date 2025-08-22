@@ -25,7 +25,6 @@ public class Wizzard: Player
 
     public int cooldown = 6; //can activate its special effect all x seconds
     
-    public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
     public bool special_effect_in_use = false;
 
     float distance = 90f;  //distance the player is away from the ball after teleportation
@@ -84,6 +83,7 @@ public class Wizzard: Player
         position = newPosition;
         update_rectangles();
         last_time_used = DateTime.Now;
+        is_using_specialeffect = true;
     }
     
     

@@ -9,7 +9,6 @@ public class Knight: Player
     public int cooldown = 9; //can activate its special effect all x seconds
     public int speciaL_effect_timer = 3;  //can do its special effect for x seconds
 
-    public DateTime last_time_used = DateTime.MinValue; //last time the special effect got used
     public bool special_effect_in_use = false;
 
 
@@ -30,6 +29,7 @@ public class Knight: Player
             strength = 2;   //current normal value = 1
             
             special_effect_in_use = true;
+            is_using_specialeffect = true;
             last_time_used = DateTime.Now;
 
         }
