@@ -322,10 +322,8 @@ public class GameLogic : GameState
         player1.update_values();
         player2.update_values();
 
-        player1.update_schuriken_knockout_phase();
-        player2.update_schuriken_knockout_phase();
-        player1.update_goomba_knockout_phase();
-        player2.update_goomba_knockout_phase();
+        player1.update_knockout_phase();
+        player2.update_knockout_phase();
 
         handle_player_movement(gameTime);
         handle_player_ball_collision(gameTime);
@@ -357,7 +355,6 @@ public class GameLogic : GameState
         update_goombas(gameTime);
         
 
-
         // Update background fans
         foreach (var fan in backgroundFans)
         {
@@ -385,7 +382,6 @@ public class GameLogic : GameState
 
         UpdateMovingWalls((float)gameTime.ElapsedGameTime.TotalSeconds);
     }
-
 
 
     // -----------------------------------------------------------------------------------------
@@ -748,7 +744,7 @@ public class GameLogic : GameState
                 {
                     if (s.owner != p)
                     {
-                        p.schuriken_knockout();
+                        p.getKnockout_by_schuriken();
                         toRemove.Add(s);
                         break;
                     }
@@ -765,15 +761,16 @@ public class GameLogic : GameState
 
     private void handle_player_goomba_collision()
     {
+        if (currentMode != RoundMode.GoombaMode) { return; }
+        
         Player[] players = new Player[] { player1, player2 };
-
         foreach (Goomba goomba in goombaListe)
         {
             foreach (Player p in players)
             {
                 if (p.currentRect.Intersects(goomba.current_rect))
                 {
-                    p.goomba_knockout();
+                    p.getKnockout_by_goomba();
                 }
             }
         }
@@ -1123,7 +1120,7 @@ public class GameLogic : GameState
             for (int i = 0; i < number_of_goombas_in_the_game; i++)
             {
                 int direction = (i < number_of_goombas_in_the_game / 2) ? 1 : -1;
-                goombaListe.Add(new Goomba(goomba_texture, (300 + i * 500), groundY, direction));
+                goombaListe.Add(new Goomba(goomba_texture, (550 + i * 370), groundY, direction));
             }
         }
 

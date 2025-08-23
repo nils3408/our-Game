@@ -25,10 +25,12 @@ public class Player
     public int playerGroup;
     
     public bool can_move = true;
-    public float knockout_time = 3f;  // time a player is knocked out after getting hit from a Schuriken
-    public float goomba_knockout_time = 3f; //time a player is knocked out after getting hit from a goomba
-    public DateTime schuriken_hitting_time = DateTime.Now; // time the player got hit by a Schuriken
-    public DateTime goomba_hitting_time = DateTime.Now;
+    public float schuriken_knockout_time = 3f;  // time a player is knocked out after getting hit from a Schuriken
+    public float goomba_knockout_time = 1.1f;    //time a player is knocked out after getting hit from a goomba
+    public float knockout_time = 0;
+    public DateTime hitting_time = DateTime.MinValue;  //when player got hit by a schuriken or a goomba
+
+    
     public bool is_teleporting = false;
 
     public float move_speed = 380f;
@@ -461,37 +463,38 @@ public class Player
     }
 
 
-    public void schuriken_knockout()
+    public void getKnockout_by_schuriken()
     {
-
-        can_move = false;
-        schuriken_hitting_time = DateTime.Now;
+        getKnockout(1);
+    }
+    public void getKnockout_by_goomba()
+    {
+        getKnockout(2);
     }
 
-    public void update_schuriken_knockout_phase()
+    public void getKnockout(int i)
     {
-        if (can_move == true) { return; }  // nothing to do
+        //  integer to deklare the object that causes the knockout
+        //  Schuriken: i=1 
+        //  Goomba:    i=2
 
-        TimeSpan timeSinceHit = DateTime.Now - schuriken_hitting_time;
-        if (timeSinceHit.TotalSeconds >= knockout_time)
-          { can_move = true; }
-    }
-
-    public void goomba_knockout()
-    {
         if (can_move == false) { return; }  // do not go knockout if you are already knockout 
 
         can_move = false;
-        goomba_hitting_time = DateTime.Now;
+        hitting_time = DateTime.Now;
+        knockout_time = (i == 1) ? schuriken_knockout_time : goomba_knockout_time;
     }
-    
-    public void update_goomba_knockout_phase()
+
+    public void update_knockout_phase()
     {
         if (can_move == true) { return; }  // nothing to do
 
-        TimeSpan timeSinceHit = DateTime.Now - goomba_hitting_time;
-        if (timeSinceHit.TotalSeconds >= goomba_knockout_time)
-        { can_move = true; }
+        TimeSpan timeSinceHit = DateTime.Now - hitting_time;
+        if (timeSinceHit.TotalSeconds >= knockout_time)
+        { 
+            can_move = true;
+            knockout_time = 0;
+        }
     }
 
 
