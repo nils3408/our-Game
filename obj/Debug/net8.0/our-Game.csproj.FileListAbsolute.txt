@@ -337,6 +337,8 @@ C:\Users\thies\Documents\3DGame\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\thies\Documents\3DGame\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\thies\Documents\3DGame\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\thies\Documents\3DGame\our-Game\obj\Debug\net8.0\ref\our-Game.dll
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\questionmark.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\powerUp_textures\movement_changing.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\animation_p1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\balls\firefootball.xnb
@@ -376,6 +378,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\fans\Fanblau1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\fans\Fanblau2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\fans\FanRot1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\fans\FanRot2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\goomba.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\players\Knightord.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\players\KopfkickerChar1_neu.xnb
@@ -447,5 +450,3 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\players\questionmark.xnb
-C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\powerUp_textures\movement_changing.xnb

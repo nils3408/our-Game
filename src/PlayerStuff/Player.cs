@@ -26,7 +26,9 @@ public class Player
     
     public bool can_move = true;
     public float knockout_time = 3f;  // time a player is knocked out after getting hit from a Schuriken
+    public float goomba_knockout_time = 3f; //time a player is knocked out after getting hit from a goomba
     public DateTime schuriken_hitting_time = DateTime.Now; // time the player got hit by a Schuriken
+    public DateTime goomba_hitting_time = DateTime.Now;
     public bool is_teleporting = false;
 
     public float move_speed = 380f;
@@ -461,6 +463,7 @@ public class Player
 
     public void schuriken_knockout()
     {
+
         can_move = false;
         schuriken_hitting_time = DateTime.Now;
     }
@@ -473,6 +476,24 @@ public class Player
         if (timeSinceHit.TotalSeconds >= knockout_time)
           { can_move = true; }
     }
+
+    public void goomba_knockout()
+    {
+        if (can_move == false) { return; }  // do not go knockout if you are already knockout 
+
+        can_move = false;
+        goomba_hitting_time = DateTime.Now;
+    }
+    
+    public void update_goomba_knockout_phase()
+    {
+        if (can_move == true) { return; }  // nothing to do
+
+        TimeSpan timeSinceHit = DateTime.Now - goomba_hitting_time;
+        if (timeSinceHit.TotalSeconds >= goomba_knockout_time)
+        { can_move = true; }
+    }
+
 
     // ------------------------------------------------------------------------
     // PowerUp stuff 

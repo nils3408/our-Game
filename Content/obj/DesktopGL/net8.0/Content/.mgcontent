@@ -42,6 +42,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/fans/Fanblau2.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/fans/FanRot1.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/fans/FanRot2.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/goomba.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/players/Knightord.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/players/KopfkickerChar1_neu.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/players/KopfkickerChar2_neu.png</File>
@@ -80,6 +81,7 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/vs_zeichen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -95,6 +95,11 @@ public class GameLogic : GameState
     List<Schuriken> schurikenListe = new List<Schuriken>();
     Texture2D schuriken_texture;
 
+    //Goomba
+    List<Goomba> goombaListe = new List<Goomba>();
+    Texture2D goomba_texture;
+    int number_of_goombas_in_the_game = 2;
+
     //animations
     public Texture2D t1;   //wizzard teleportarion
     public Texture2D s1;  // stun - knckout animation
@@ -115,8 +120,8 @@ public class GameLogic : GameState
     private List<BackgroundFan> backgroundFans = new List<BackgroundFan>();
 
     //Anstoßfeatures
-    private bool specialModesEnabled = false;   // Masterschalter um Anstoßfeature an oder aus zu machen            TODO: Button im Menu hinzufügen
-    private enum RoundMode { Normal, WallFrontGoals, WallButtonTrigger, MovingWall }
+    private bool specialModesEnabled = true;   // Masterschalter um Anstoßfeature an oder aus zu machen            TODO: Button im Menu hinzufügen
+    private enum RoundMode { Normal, GoombaMode, WallFrontGoals, WallButtonTrigger, MovingWall,}
     private RoundMode currentMode = RoundMode.Normal;
 
     // Mode zerstörbare Wand
@@ -124,7 +129,7 @@ public class GameLogic : GameState
     private int rightWallHP = 0;
     private const int MaxWallHits = 3;
 
-
+    
     //button für Wand-Trigger-Modus
     private Texture2D buttonTexture;
     private int buttonSize = 64;
@@ -267,6 +272,7 @@ public class GameLogic : GameState
         _leftTribunePosition = new Vector2(450, -100);
 
         schuriken_texture = Content.Load<Texture2D>("shuriken");
+        goomba_texture    = Content.Load<Texture2D>("goomba");
         vs_zeichen = Content.Load<Texture2D>("vs_zeichen");
         red_window = Content.Load<Texture2D>("red_window");
 
@@ -318,6 +324,8 @@ public class GameLogic : GameState
 
         player1.update_schuriken_knockout_phase();
         player2.update_schuriken_knockout_phase();
+        player1.update_goomba_knockout_phase();
+        player2.update_goomba_knockout_phase();
 
         handle_player_movement(gameTime);
         handle_player_ball_collision(gameTime);
@@ -330,11 +338,12 @@ public class GameLogic : GameState
         handle_player_coin_colission();
         handle_ball_coin_collision();
         handle_player_schuriken_collision();
+        handle_player_goomba_collision();
+
         if (!gameWon)
         {
             check_for_goal();
         }
-
 
         player1.reset_powerUps_if_time_is_over();
         player2.reset_powerUps_if_time_is_over();
@@ -345,6 +354,9 @@ public class GameLogic : GameState
 
         move_schuriken(gameTime);
         update_schuriken_list();
+        update_goombas(gameTime);
+        
+
 
         // Update background fans
         foreach (var fan in backgroundFans)
@@ -457,26 +469,40 @@ public class GameLogic : GameState
             spriteBatch.DrawString(scoreFont, escText, escTextPosition, Color.White);
         }
 
-        if (currentMode == RoundMode.WallButtonTrigger)
-        {
-            if (leftWallActive)
-            {
-                spriteBatch.Draw(overlayTexture, leftButtonRect, Color.Red);
-            }
-            if (rightWallActive)
-            {
-                spriteBatch.Draw(overlayTexture, rightButtonRect, Color.Red);
-            }
-        }
-        if (currentMode == RoundMode.MovingWall)
-        {
-            
-            var leftRect = new Rectangle(leftGoal.Right + 1, (int)leftWallY, movingWallThickness, movingWallHeight);
-            var rightRect = new Rectangle(rightGoal.Left - movingWallThickness - 1, (int)rightWallY, movingWallThickness, movingWallHeight);
 
-            spriteBatch.Draw(overlayTexture, leftRect, Color.Red * 0.6f);
-            spriteBatch.Draw(overlayTexture, rightRect, Color.Red * 0.6f);
+        
+        switch (currentMode)
+        {
+            case RoundMode.WallButtonTrigger:
+                if (leftWallActive)
+                {
+                    spriteBatch.Draw(overlayTexture, leftButtonRect, Color.Red);
+                }
+                if (rightWallActive)
+                {
+                    spriteBatch.Draw(overlayTexture, rightButtonRect, Color.Red);
+                }
+                break;
+
+            
+            case RoundMode.MovingWall:
+                   var leftRect = new Rectangle(leftGoal.Right + 1, (int)leftWallY, movingWallThickness, movingWallHeight);
+                   var rightRect = new Rectangle(rightGoal.Left - movingWallThickness - 1, (int)rightWallY, movingWallThickness, movingWallHeight);
+
+                   spriteBatch.Draw(overlayTexture, leftRect, Color.Red * 0.6f);
+                   spriteBatch.Draw(overlayTexture, rightRect, Color.Red * 0.6f);
+                   break;
+                
+
+            case RoundMode.GoombaMode:
+                   foreach (Goomba abc in goombaListe)
+                   {
+                      abc.draw(spriteBatch);
+                   }
+                    break;
         }
+
+
 
         spriteBatch.End();
     }
@@ -561,27 +587,25 @@ public class GameLogic : GameState
         DrawPowerUp(player2.powerup1?.get_powerUp_texture(), new Rectangle(xpos32, 750, size3, size3), size4);
         DrawPowerUp(player2.powerup2?.get_powerUp_texture(), new Rectangle(xpos32, 910, size3, size3), size4);
 
-        if (currentMode == RoundMode.WallFrontGoals)
+        //draw the text of the Mode
+        string modeText = currentMode switch
         {
-            string modeText = "Mode: WAND VORM TOR";
-            Vector2 size = scoreFont.MeasureString(modeText);
-            spriteBatch.DrawString(scoreFont, modeText,
-                new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720), Color.Yellow);
-        }
+            RoundMode.WallFrontGoals =>    "Mode: Wand vor dem Tor",
+            RoundMode.WallButtonTrigger => "Mode: Triff den Knopf",
+            RoundMode.MovingWall =>        "Mode: MovingWall",
+            RoundMode.GoombaMode =>        "Mode: Goombas ausweichen",
+            _ => string.Empty
+        };
 
-        if (currentMode == RoundMode.WallButtonTrigger)
+        if (string.IsNullOrEmpty(modeText) == false)
         {
-            string modeText = "Mode: Triff den Knopf";
             Vector2 size = scoreFont.MeasureString(modeText);
-            spriteBatch.DrawString(scoreFont, modeText,
-                new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720), Color.Yellow);
-        }
-        if (currentMode == RoundMode.MovingWall)
-        {
-            string modeText = "Mode: MovingWall";
-            Vector2 size = scoreFont.MeasureString(modeText);
-            spriteBatch.DrawString(scoreFont, modeText,
-                new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720), Color.Yellow);
+            spriteBatch.DrawString(
+                scoreFont,
+                modeText,
+                new Vector2((_graphics.PreferredBackBufferWidth - size.X) / 2, 720),
+                Color.Yellow
+            );
         }
     }
 
@@ -600,7 +624,6 @@ public class GameLogic : GameState
         player1.handle_input(delta);
         player2.handle_input(delta);
     }
-
 
 
     private void handle_player_coin_colission()
@@ -740,6 +763,23 @@ public class GameLogic : GameState
     }
 
 
+    private void handle_player_goomba_collision()
+    {
+        Player[] players = new Player[] { player1, player2 };
+
+        foreach (Goomba goomba in goombaListe)
+        {
+            foreach (Player p in players)
+            {
+                if (p.currentRect.Intersects(goomba.current_rect))
+                {
+                    p.goomba_knockout();
+                }
+            }
+        }
+    }
+
+
     // ------------------------------------------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------------------------------------------
     // Object stuff item, Schuriken
@@ -792,6 +832,18 @@ public class GameLogic : GameState
             s.position.X >= 1800 ||
             s.position.X + s.texture_width < -10 ||
             s.position.Y < -50);
+    }
+
+    public void update_goombas(GameTime gameTime)
+    {
+        foreach (Goomba abc in goombaListe)
+        {
+            abc.move((float)gameTime.ElapsedGameTime.TotalSeconds);
+
+            if (abc.position.X < abc.left_bounder || abc.position.X > abc.right_bounder){
+                abc.change_direction();
+            }
+        }
     }
 
 
@@ -929,59 +981,10 @@ public class GameLogic : GameState
         }
     }
 
+
     public void reset_values_after_goal()
     {
-        if (!specialModesEnabled)
-        {
-            currentMode = RoundMode.Normal;
-        }
-        {
-            
-            double r = rng.NextDouble();
-            if (r < 0.25) currentMode = RoundMode.Normal;
-            else if (r < 0.50) currentMode = RoundMode.WallFrontGoals;
-            else if (r < 0.75) currentMode = RoundMode.WallButtonTrigger;
-            else currentMode = RoundMode.MovingWall;          
-        }
-
-        // Zustand pro Modus vorbereiten
-        if (currentMode == RoundMode.WallFrontGoals) // dein HP-Modus
-        {
-            leftWallHP = MaxWallHits;
-            rightWallHP = MaxWallHits;
-            leftWallActive = false;
-            rightWallActive = false;
-        }
-        else if (currentMode == RoundMode.WallButtonTrigger)
-        {
-            // Wände sind aktiv bis ein Button getroffen wird
-            leftWallActive = true;
-            rightWallActive = true;
-            // (HP ignorieren)
-            leftWallHP = 0;
-            rightWallHP = 0;
-        }
-        else if (currentMode == RoundMode.MovingWall)
-        {
-            // Wand-Segmente mittig im Tor starten
-            int crossbarHeight = 20;
-            int leftTop = (int)_leftGoalPosition.Y + crossbarHeight;
-            int rightTop = (int)_rightGoalPosition.Y + crossbarHeight;
-
-            int usableH = goalHeight - crossbarHeight; 
-            leftWallY = leftTop + (usableH - movingWallHeight) * 0.5f;
-            rightWallY = rightTop + (usableH - movingWallHeight) * 0.5f;
-
-            leftWallDir = 1;   
-            rightWallDir = -1; 
-            leftWallHP = 0; rightWallHP = 0;
-            leftWallActive = false; rightWallActive = false;
-        }
-        else // Normal
-        {
-            leftWallHP = 0; rightWallHP = 0;
-            leftWallActive = false; rightWallActive = false;
-        }
+        changeKickOffMode();
 
         //change player character if randomPlayer
         if (randomPlayer1)
@@ -1012,7 +1015,6 @@ public class GameLogic : GameState
 
         set_other_players();
     }
-
 
     public void set_goal_size()
     {
@@ -1067,6 +1069,69 @@ public class GameLogic : GameState
         rightWallY += movingWallSpeed * dt * rightWallDir;
         if (rightWallY <= rightTop) { rightWallY = rightTop; rightWallDir = 1; }
         if (rightWallY >= rightBottomMax) { rightWallY = rightBottomMax; rightWallDir = -1; }
+    }
+
+    public void changeKickOffMode()
+    {
+        if (!specialModesEnabled)
+        {
+            currentMode = RoundMode.Normal;
+            return;
+        }
+
+
+        RoundMode[] modes = (RoundMode[])Enum.GetValues(typeof(RoundMode));  //make array of enum 
+        int index = rng.Next(modes.Length);
+        currentMode = modes[index];
+
+        // Zustand pro Modus vorbereiten
+        if (currentMode == RoundMode.WallFrontGoals) // dein HP-Modus
+        {
+            leftWallHP = MaxWallHits;
+            rightWallHP = MaxWallHits;
+            leftWallActive = false;
+            rightWallActive = false;
+        }
+        else if (currentMode == RoundMode.WallButtonTrigger)
+        {
+            // Wände sind aktiv bis ein Button getroffen wird
+            leftWallActive = true;
+            rightWallActive = true;
+            // (HP ignorieren)
+            leftWallHP = 0;
+            rightWallHP = 0;
+        }
+        else if (currentMode == RoundMode.MovingWall)
+        {
+            // Wand-Segmente mittig im Tor starten
+            int crossbarHeight = 20;
+            int leftTop = (int)_leftGoalPosition.Y + crossbarHeight;
+            int rightTop = (int)_rightGoalPosition.Y + crossbarHeight;
+
+            int usableH = goalHeight - crossbarHeight;
+            leftWallY = leftTop + (usableH - movingWallHeight) * 0.5f;
+            rightWallY = rightTop + (usableH - movingWallHeight) * 0.5f;
+
+            leftWallDir = 1;
+            rightWallDir = -1;
+            leftWallHP = 0; rightWallHP = 0;
+            leftWallActive = false; rightWallActive = false;
+        }
+        else if (currentMode == RoundMode.GoombaMode)
+        {
+            goombaListe.Clear(); // alte Goombas entfernen
+            for (int i = 0; i < number_of_goombas_in_the_game; i++)
+            {
+                int direction = (i < number_of_goombas_in_the_game / 2) ? 1 : -1;
+                goombaListe.Add(new Goomba(goomba_texture, (300 + i * 500), groundY, direction));
+            }
+        }
+
+        else // Normal
+        {
+            leftWallHP = 0; rightWallHP = 0;
+            leftWallActive = false; rightWallActive = false;
+        }
     }
 }
 
