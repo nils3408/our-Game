@@ -290,6 +290,7 @@ public class GameLogic : GameState
         fanrot2Texture = Content.Load<Texture2D>("fans/FanRot2");
 
         holzwandTexture = Content.Load<Texture2D>("Holzwand");
+        buttonTexture = Content.Load<Texture2D>("Button");
 
         InitializeBackgroundFans();
     }
@@ -487,7 +488,9 @@ public class GameLogic : GameState
                 break;
 
             case RoundMode.WallButtonTrigger:
-                // aktive Wände zeichnen
+                
+              
+
                 if (leftWallActive)
                 {
                     var leftRectWall = new Rectangle(leftGoal.Right + 1, leftGoal.Y, 10, leftGoal.Height);
@@ -498,13 +501,14 @@ public class GameLogic : GameState
                     var rightRectWall = new Rectangle(rightGoal.Left - 11, rightGoal.Y, 10, rightGoal.Height);
                     spriteBatch.Draw(holzwandTexture, rightRectWall, Color.White);
                 }
-                // Buttons bleiben rote Rechtecke
-                spriteBatch.Draw(overlayTexture, leftButtonRect, Color.Red);
-                spriteBatch.Draw(overlayTexture, rightButtonRect, Color.Red);
+
+                
+                spriteBatch.Draw(buttonTexture, leftButtonRect, Color.White);
+                spriteBatch.Draw(buttonTexture, rightButtonRect, Color.White);
                 break;
 
             case RoundMode.MovingWall:
-                // bewegliche Wände mit Holztextur
+                
                 var leftRect = new Rectangle(leftGoal.Right + 1, (int)leftWallY, movingWallThickness, movingWallHeight);
                 var rightRect = new Rectangle(rightGoal.Left - movingWallThickness - 1, (int)rightWallY, movingWallThickness, movingWallHeight);
                 spriteBatch.Draw(holzwandTexture, leftRect, Color.White);

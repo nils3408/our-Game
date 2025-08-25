@@ -4,11 +4,13 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/../../../../../Downloads/Button.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/animation_p1.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Arial.spritefont</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/balls/firefootball.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/balls/football.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/balls/icefootball.png</File>
+    <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Button.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-0.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-1.png</File>
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-10.png</File>
@@ -82,6 +84,8 @@
     <File>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/vs_zeichen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File>Button.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
