@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/players/Mario2.png</SourceFile>
-  <SourceTime>2025-08-24T01:06:34.498431+02:00</SourceTime>
-  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/players/Mario2.xnb</DestFile>
-  <DestTime>2025-08-24T01:12:22.2730195+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/players/Mario2.png</SourceFile>
+  <SourceTime>2025-07-29T17:12:20.2000269+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/players/Mario2.xnb</DestFile>
+  <DestTime>2025-08-26T14:20:08.6492122+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
