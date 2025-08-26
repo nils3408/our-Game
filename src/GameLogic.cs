@@ -128,6 +128,7 @@ public class GameLogic : GameState
     private bool specialModesEnabled = true;   // Masterschalter um Anstoßfeature an oder aus zu machen            TODO: Button im Menu hinzufügen
     private enum RoundMode { Normal, GoombaMode, WallFrontGoals, WallButtonTrigger, MovingWall,}
     private RoundMode currentMode = RoundMode.Normal;
+    private Texture2D holzwandTexture;
 
     // Mode zerstörbare Wand
     private int leftWallHP = 0;
@@ -300,6 +301,9 @@ public class GameLogic : GameState
         fanrotBlau1Texture = Content.Load<Texture2D>("fans/FanBlau1");
         fanrotBlau2Texture = Content.Load<Texture2D>("fans/FanBlau2");
         fanrot2Texture = Content.Load<Texture2D>("fans/FanRot2");
+
+        holzwandTexture = Content.Load<Texture2D>("Holzwand");
+        buttonTexture = Content.Load<Texture2D>("Button");
 
         InitializeBackgroundFans();
     }
@@ -479,36 +483,55 @@ public class GameLogic : GameState
         }
 
 
-        
+
         switch (currentMode)
         {
-            case RoundMode.WallButtonTrigger:
-                if (leftWallActive)
+            case RoundMode.WallFrontGoals:
+                // HP-Modus: Wände sind sichtbar, solange HP > 0
+                if (leftWallHP > 0)
                 {
-                    spriteBatch.Draw(overlayTexture, leftButtonRect, Color.Red);
+                    var leftRectWall = new Rectangle(leftGoal.Right + 1, leftGoal.Y, 10, leftGoal.Height);
+                    spriteBatch.Draw(holzwandTexture, leftRectWall, Color.White);
                 }
-                if (rightWallActive)
+                if (rightWallHP > 0)
                 {
-                    spriteBatch.Draw(overlayTexture, rightButtonRect, Color.Red);
+                    var rightRectWall = new Rectangle(rightGoal.Left - 11, rightGoal.Y, 10, rightGoal.Height);
+                    spriteBatch.Draw(holzwandTexture, rightRectWall, Color.White);
                 }
                 break;
 
-            
-            case RoundMode.MovingWall:
-                   var leftRect = new Rectangle(leftGoal.Right + 1, (int)leftWallY, movingWallThickness, movingWallHeight);
-                   var rightRect = new Rectangle(rightGoal.Left - movingWallThickness - 1, (int)rightWallY, movingWallThickness, movingWallHeight);
-
-                   spriteBatch.Draw(overlayTexture, leftRect, Color.Red * 0.6f);
-                   spriteBatch.Draw(overlayTexture, rightRect, Color.Red * 0.6f);
-                   break;
+            case RoundMode.WallButtonTrigger:
                 
+              
+
+                if (leftWallActive)
+                {
+                    var leftRectWall = new Rectangle(leftGoal.Right + 1, leftGoal.Y, 10, leftGoal.Height);
+                    spriteBatch.Draw(holzwandTexture, leftRectWall, Color.White);
+                }
+                if (rightWallActive)
+                {
+                    var rightRectWall = new Rectangle(rightGoal.Left - 11, rightGoal.Y, 10, rightGoal.Height);
+                    spriteBatch.Draw(holzwandTexture, rightRectWall, Color.White);
+                }
+
+                
+                spriteBatch.Draw(buttonTexture, leftButtonRect, Color.White);
+                spriteBatch.Draw(buttonTexture, rightButtonRect, Color.White);
+                break;
+
+            case RoundMode.MovingWall:
+                
+                var leftRect = new Rectangle(leftGoal.Right + 1, (int)leftWallY, movingWallThickness, movingWallHeight);
+                var rightRect = new Rectangle(rightGoal.Left - movingWallThickness - 1, (int)rightWallY, movingWallThickness, movingWallHeight);
+                spriteBatch.Draw(holzwandTexture, leftRect, Color.White);
+                spriteBatch.Draw(holzwandTexture, rightRect, Color.White);
+                break;
 
             case RoundMode.GoombaMode:
-                   foreach (Goomba abc in goombaListe)
-                   {
-                      abc.draw(spriteBatch);
-                   }
-                    break;
+                foreach (Goomba abc in goombaListe)
+                    abc.draw(spriteBatch);
+                break;
         }
 
 
