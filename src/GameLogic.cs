@@ -36,10 +36,15 @@ using System.Collections.Generic;
 using our_Game;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
+//Sound
+using Microsoft.Xna.Framework.Media; 
+using Microsoft.Xna.Framework.Audio; 
 
 
 public class GameLogic : GameState
 {
+    //Sounds
+    Song background_sound;
 
     //Spielfeld
     private Texture2D _backgroundTexture;
@@ -155,12 +160,15 @@ public class GameLogic : GameState
         SetPlayer(leftPlayer, rightPlayer);
     }
 
+
+
     public override void Initialize()
     {
         //Initiert nur Player wenn es durch den neuen Konstruktor nicht vorher gelöscht wird, Zeilen könnten auch gelöscht werden eigentlich, später!
         //if (player1 == null) player1 = new Spiderman(_graphicsDevice, new Vector2(60, groundY), Content.Load<Texture2D>("Spiderman"), 1);
         //if (player2 == null) player2 = new Sonic(_graphicsDevice, new Vector2(_graphics.PreferredBackBufferWidth - 300, groundY), Content.Load<Texture2D>("sonic"), 2);
         PlayerFactory.Initialize(_graphicsDevice, Content);
+
 
         ball_textures = new()
         {
@@ -255,6 +263,11 @@ public class GameLogic : GameState
     {
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
         _backgroundTexture = Content.Load<Texture2D>("spielfeld_pictures/Spielfeld3");
+
+        background_sound = Content.Load<Song>("sounds/crowd_noise");
+        MediaPlayer.IsRepeating = true; 
+        MediaPlayer.Volume = 0.9f;       
+        MediaPlayer.Play(background_sound);
 
         _goalTexture = Content.Load<Texture2D>("Tore");
         set_goal_size();
