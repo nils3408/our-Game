@@ -45,6 +45,7 @@ public class GameLogic : GameState
 {
     //Sounds
     Song background_sound;
+    private SoundEffect goalSound;
 
     //Spielfeld
     private Texture2D _backgroundTexture;
@@ -265,9 +266,11 @@ public class GameLogic : GameState
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
         _backgroundTexture = Content.Load<Texture2D>("spielfeld_pictures/Spielfeld3");
 
+        goalSound = Content.Load<SoundEffect>("sounds/goal");
+        
         background_sound = Content.Load<Song>("sounds/crowd_noise");
-        MediaPlayer.IsRepeating = true; 
-        MediaPlayer.Volume = 0.9f;       
+        MediaPlayer.IsRepeating = true;
+        MediaPlayer.Volume = 0.15f;       
         MediaPlayer.Play(background_sound);
 
         _goalTexture = Content.Load<Texture2D>("Tore");
@@ -972,6 +975,7 @@ public class GameLogic : GameState
         {
             scorePlayer2++;
             TriggerGoalAnimation(2);
+            playGoalSound();
             if (scorePlayer2 >= winningScore) { gameWon = true; winnerText = "Player 2 wins!"; }
             else { gameWon = false; reset_values_after_goal(); }
         }
@@ -980,6 +984,7 @@ public class GameLogic : GameState
         {
             scorePlayer1++;
             TriggerGoalAnimation(1);
+            playGoalSound();
             if (scorePlayer1 >= winningScore) { gameWon = true; winnerText = "Player 1 wins!"; }
             else { gameWon = false; reset_values_after_goal(); }
         }
@@ -1165,6 +1170,14 @@ public class GameLogic : GameState
             leftWallHP = 0; rightWallHP = 0;
             leftWallActive = false; rightWallActive = false;
         }
+    }
+
+
+    public void playGoalSound()
+    {
+        SoundEffectInstance goalSoundInstance = goalSound.CreateInstance();
+        goalSoundInstance.Volume = 1.0f; 
+        goalSoundInstance.Play();
     }
 }
 
