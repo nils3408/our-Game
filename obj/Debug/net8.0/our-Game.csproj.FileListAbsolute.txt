@@ -404,6 +404,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\red_window.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\crowd_noise.ogg
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\crowd_noise.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\FansByGoal.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\goal.ogg
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\goal.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\ice.ogg

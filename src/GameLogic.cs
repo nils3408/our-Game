@@ -47,6 +47,7 @@ public class GameLogic : GameState
     Song background_sound;
     private SoundEffect goalSound;
     private SoundEffect iceSound;
+    private SoundEffect FansByGoalSound;
 
     //Spielfeld
     private Texture2D _backgroundTexture;
@@ -269,6 +270,7 @@ public class GameLogic : GameState
 
         goalSound = Content.Load<SoundEffect>("sounds/goal");
         iceSound  = Content.Load<SoundEffect>("sounds/ice2");
+        FansByGoalSound = Content.Load<SoundEffect>("sounds/FansByGoal");
         
         background_sound = Content.Load<Song>("sounds/crowd_noise");
         MediaPlayer.IsRepeating = true;
@@ -978,6 +980,7 @@ public class GameLogic : GameState
             scorePlayer2++;
             TriggerGoalAnimation(2);
             playGoalSound();
+            playFansByGoalSound();
             if (scorePlayer2 >= winningScore) { gameWon = true; winnerText = "Player 2 wins!"; }
             else { gameWon = false; reset_values_after_goal(); }
         }
@@ -987,6 +990,7 @@ public class GameLogic : GameState
             scorePlayer1++;
             TriggerGoalAnimation(1);
             playGoalSound();
+            playFansByGoalSound();
             if (scorePlayer1 >= winningScore) { gameWon = true; winnerText = "Player 1 wins!"; }
             else { gameWon = false; reset_values_after_goal(); }
         }
@@ -1190,6 +1194,23 @@ public class GameLogic : GameState
         SoundEffectInstance iceSounInstance = iceSound.CreateInstance();
         iceSounInstance.Volume = 0.8f;
         iceSounInstance.Play();
+    }
+
+    public void playFansByGoalSound()
+    {
+        //Fans cheering after a player has scored a goal
+        
+        SoundEffectInstance FansByGoal = FansByGoalSound.CreateInstance();
+        FansByGoal.Volume = 0.3f;
+
+        //soundlänge in abhängikeit von der fan animation skalieren
+        //double originalLength = FansByGoalSound.Duration.TotalSeconds;
+        //double targetLength = 5.0;  // = fan.animationDuration
+        //float pitch = (float)((originalLength / targetLength) -1.0);
+        //pitch = Math.Clamp(pitch, -1.0f, 1.0f);
+        //FansByGoal.Pitch = pitch;
+        
+        FansByGoal.Play();
     }
 }
 
