@@ -406,6 +406,9 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\crowd_noise
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\crowd_noise.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\goal.ogg
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\goal.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\ice.ogg
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\ice.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\ice2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_knight.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_mario.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_ninja.xnb

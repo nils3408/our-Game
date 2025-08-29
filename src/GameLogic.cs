@@ -46,6 +46,7 @@ public class GameLogic : GameState
     //Sounds
     Song background_sound;
     private SoundEffect goalSound;
+    private SoundEffect iceSound;
 
     //Spielfeld
     private Texture2D _backgroundTexture;
@@ -267,10 +268,11 @@ public class GameLogic : GameState
         _backgroundTexture = Content.Load<Texture2D>("spielfeld_pictures/Spielfeld3");
 
         goalSound = Content.Load<SoundEffect>("sounds/goal");
+        iceSound  = Content.Load<SoundEffect>("sounds/ice2");
         
         background_sound = Content.Load<Song>("sounds/crowd_noise");
         MediaPlayer.IsRepeating = true;
-        MediaPlayer.Volume = 0.15f;       
+        MediaPlayer.Volume = 0.1f;       
         MediaPlayer.Play(background_sound);
 
         _goalTexture = Content.Load<Texture2D>("Tore");
@@ -1173,11 +1175,21 @@ public class GameLogic : GameState
     }
 
 
+    //-----------------------------------------------------------------------------------------------
+    //sounds
+
     public void playGoalSound()
     {
         SoundEffectInstance goalSoundInstance = goalSound.CreateInstance();
         goalSoundInstance.Volume = 1.0f; 
         goalSoundInstance.Play();
+    }
+
+    public void playIceSound()
+    {
+        SoundEffectInstance iceSounInstance = iceSound.CreateInstance();
+        iceSounInstance.Volume = 0.8f;
+        iceSounInstance.Play();
     }
 }
 

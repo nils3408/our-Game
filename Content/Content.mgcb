@@ -716,6 +716,18 @@
 /processorParam:Quality=Best
 /build:sounds/goal.mp3
 
+#begin sounds/ice.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/ice.mp3
+
+#begin sounds/ice2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/ice2.mp3
+
 #begin special_move_textures/special_move_texture_knight.png
 /importer:TextureImporter
 /processor:TextureProcessor

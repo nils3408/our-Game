@@ -528,6 +528,10 @@ public class Player
                     }
                     break;
 
+                case "IceballPowerUp":
+                    GameLogic_object.playIceSound();
+                    break;
+
             }
 
 
