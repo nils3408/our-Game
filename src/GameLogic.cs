@@ -1217,7 +1217,7 @@ public class GameLogic : GameState
     public void playCollectingCoinSound()
     {
         SoundEffectInstance cc = CoinSound.CreateInstance();
-        cc.Volume = 0.60f;
+        cc.Volume = 0.5f;
         cc.Play();
     }
 }
