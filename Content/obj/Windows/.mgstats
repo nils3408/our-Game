@@ -1,3 +1,11 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/../../../../../Downloads/Button.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Button.xnb","TextureProcessor","Texture2DContent",804443,2153953,0,2179661
-"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Button.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Button.xnb","TextureProcessor","Texture2DContent",1397638,4194389,0,1668112
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Button.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Button.xnb","TextureProcessor","Texture2DContent",1397638,4194389,0,3341535
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Kristallbrocken.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Kristallbrocken.xnb","TextureProcessor","Texture2DContent",643547,1953045,0,0700988
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Panzer.png","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Panzer.xnb","TextureProcessor","Texture2DContent",549026,2072285,0,0875488
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/coin1.mp3","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/coin1.xnb","SoundEffectProcessor","SoundEffectContent",14400,69225,0,7563957
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/coin2.mp3","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/coin2.xnb","SoundEffectProcessor","SoundEffectContent",5851,16233,0,6436001
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/crowd_noise.mp3","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/crowd_noise.xnb","SongProcessor","SongContent",12161775,129,5,556268
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/FansByGoal.mp3","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/FansByGoal.xnb","SoundEffectProcessor","SoundEffectContent",81069,480529,0,5330329
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/goal.mp3","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/goal.xnb","SoundEffectProcessor","SoundEffectContent",18536,96621,0,5232144
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/ice.mp3","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/ice.xnb","SoundEffectProcessor","SoundEffectContent",33991,361693,0,5569491
+"C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/ice2.mp3","C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/ice2.xnb","SoundEffectProcessor","SoundEffectContent",25632,269677,0,548132
