@@ -48,6 +48,7 @@ public class GameLogic : GameState
     private SoundEffect goalSound;
     private SoundEffect iceSound;
     private SoundEffect FansByGoalSound;
+    private SoundEffect CoinSound;
 
     //Spielfeld
     private Texture2D _backgroundTexture;
@@ -270,6 +271,7 @@ public class GameLogic : GameState
 
         goalSound = Content.Load<SoundEffect>("sounds/goal");
         iceSound  = Content.Load<SoundEffect>("sounds/ice2");
+        CoinSound = Content.Load<SoundEffect>("sounds/coin1");
         FansByGoalSound = Content.Load<SoundEffect>("sounds/FansByGoal");
         
         background_sound = Content.Load<Song>("sounds/crowd_noise");
@@ -680,9 +682,9 @@ public class GameLogic : GameState
             if (playerABC.currentRect.Intersects(itemA.current_Rect))
             {
                 playerABC.set_PowerUp(itemA.linked_powerup);
-
                 itemA.set_new_powerUP();
                 itemA.set_random_position(player1, player2);
+                playCollectingCoinSound();
 
             }
         }
@@ -699,10 +701,9 @@ public class GameLogic : GameState
             if (football.getRect().Intersects(itemA.current_Rect))
             {
                 last_player_touching_the_ball.set_PowerUp(itemA.linked_powerup);
-
                 itemA.set_new_powerUP();
                 itemA.set_random_position(player1, player2);
-
+                playCollectingCoinSound();
             }
         }
     }
@@ -1211,6 +1212,13 @@ public class GameLogic : GameState
         //FansByGoal.Pitch = pitch;
         
         FansByGoal.Play();
+    }
+
+    public void playCollectingCoinSound()
+    {
+        SoundEffectInstance cc = CoinSound.CreateInstance();
+        cc.Volume = 0.60f;
+        cc.Play();
     }
 }
 

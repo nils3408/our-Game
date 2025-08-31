@@ -62,6 +62,8 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/powerUp_textures/SmallPlayer_texture.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/red_window.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/shuriken.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/coin1.mp3</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/coin2.mp3</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/crowd_noise.mp3</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/FansByGoal.mp3</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/goal.mp3</File>
@@ -88,6 +90,8 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/vs_zeichen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

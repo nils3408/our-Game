@@ -704,6 +704,18 @@
 /processorParam:TextureFormat=Color
 /build:shuriken.png
 
+#begin sounds/coin1.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/coin1.mp3
+
+#begin sounds/coin2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/coin2.mp3
+
 #begin sounds/crowd_noise.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
