@@ -465,3 +465,13 @@ C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\goal.ogg
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\ice.ogg
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\coin1.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\coin2.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\crowd_noise.ogg
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\crowd_noise.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\FansByGoal.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\goal.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\ice.xnb
+C:\Users\Lukas\source\repos\nils3408\our-Game\bin\Debug\net8.0\Content\sounds\ice2.xnb

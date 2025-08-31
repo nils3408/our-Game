@@ -359,6 +359,10 @@ public class GameLogic : GameState
 
         football.move((float)gameTime.ElapsedGameTime.TotalSeconds, groundY);
 
+        BlockPlayerAgainstWalls(player1);
+        BlockPlayerAgainstWalls(player2);
+
+
         handle_player_coin_colission();
         handle_ball_coin_collision();
         handle_player_schuriken_collision();
@@ -524,10 +528,13 @@ public class GameLogic : GameState
                     spriteBatch.Draw(holzwandTexture, rightRectWall, Color.White);
                 }
 
-                
-                spriteBatch.Draw(buttonTexture, leftButtonRect, Color.White);
-                spriteBatch.Draw(buttonTexture, rightButtonRect, Color.White);
+
+                if (leftWallActive)
+                    spriteBatch.Draw(buttonTexture, leftButtonRect, Color.White);
+                if (rightWallActive)
+                    spriteBatch.Draw(buttonTexture, rightButtonRect, Color.White);
                 break;
+                
 
             case RoundMode.MovingWall:
                 
@@ -1179,6 +1186,63 @@ public class GameLogic : GameState
         }
     }
 
+    private IEnumerable<Rectangle> GetBlockingWallsForPlayers()
+    {
+        int wallThickness = 10;
+        if (currentMode == RoundMode.WallFrontGoals)
+        {
+            if (leftWallHP > 0)
+                yield return new Rectangle(leftGoal.Right + 1, leftGoal.Y, wallThickness, leftGoal.Height);
+            if (rightWallHP > 0)
+                yield return new Rectangle(rightGoal.Left - wallThickness - 1, rightGoal.Y, wallThickness, rightGoal.Height);
+        }
+        else if (currentMode == RoundMode.WallButtonTrigger)
+        {
+            if (leftWallActive)
+                yield return new Rectangle(leftGoal.Right + 1, leftGoal.Y, wallThickness, leftGoal.Height);
+            if (rightWallActive)
+                yield return new Rectangle(rightGoal.Left - wallThickness - 1, rightGoal.Y, wallThickness, rightGoal.Height);
+        }
+    }
+
+    private void BlockPlayerAgainstWalls(Player p)
+    {
+        // Für MovingWall NICHT blocken
+        if (currentMode == RoundMode.MovingWall) return;
+
+        foreach (var wall in GetBlockingWallsForPlayers())
+        {
+            if (!p.currentRect.Intersects(wall)) continue;
+
+            // Auflösung entlang der kleineren Überlappung
+            var a = p.currentRect;
+            float overlapX = Math.Min(a.Right, wall.Right) - Math.Max(a.Left, wall.Left);
+            float overlapY = Math.Min(a.Bottom, wall.Bottom) - Math.Max(a.Top, wall.Top);
+
+            Vector2 pos = p.position;
+
+            if (overlapX <= overlapY)
+            {
+                // seitlich abblocken
+                if (a.Center.X < wall.Center.X)
+                    pos.X = wall.Left - p.RectangleWidth - 1;     // von links blocken
+                else
+                    pos.X = wall.Right + 1;                       // von rechts blocken
+            }
+            else
+            {
+                // vertikal abblocken (falls er irgendwie "in" die Wand fällt)
+                if (a.Center.Y < wall.Center.Y)
+                    pos.Y = wall.Top - p.RectangleHeight - 1;     // von oben
+                else
+                    pos.Y = wall.Bottom + 1;                      // von unten
+            }
+
+            p.position = pos;
+            p.update_rectangles();
+            // Falls er mehrere Wände schneidet, erneut prüfen
+        }
+    }
 
     //-----------------------------------------------------------------------------------------------
     //sounds
