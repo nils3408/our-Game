@@ -35,32 +35,46 @@ public static class PlayerFactory
 
     private static GraphicsDevice _graphicsDevice;
 
-    private static Texture2D[] playerTextures        = new Texture2D[TypesCount];
+    private static Texture2D[] playerTextures = new Texture2D[TypesCount];
     private static Texture2D[] smt = new Texture2D[TypesCount];  //special_move_textures
+
+    private static Texture2D[] playerInfo = new Texture2D[TypesCount];  //Texturen, die den PlayerTyp beschreiben
 
 
     public static void Initialize(GraphicsDevice graphicsDevice, ContentManager Content)
     {
         _graphicsDevice = graphicsDevice;
 
-        playerTextures[(int)Types.Spiderman]    = Content.Load<Texture2D>("players/Spiderman");
-        playerTextures[(int)Types.Knight]       = Content.Load<Texture2D>("players/Knightord");
-        playerTextures[(int)Types.Sonic]        = Content.Load<Texture2D>("players/sonic");
-        playerTextures[(int)Types.Standart]     = Content.Load<Texture2D>("players/KopfkickerChar1_neu");
-        playerTextures[(int)Types.Ninja]        = Content.Load<Texture2D>("players/KopfkickerChar2_neu");
-        playerTextures[(int)Types.Mario]        = Content.Load<Texture2D>("players/Mario2");
-        playerTextures[(int)Types.Wizzard]      = Content.Load<Texture2D>("players/Wizzard");
+        playerTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("players/Spiderman");
+        playerTextures[(int)Types.Knight] = Content.Load<Texture2D>("players/Knightord");
+        playerTextures[(int)Types.Sonic] = Content.Load<Texture2D>("players/sonic");
+        playerTextures[(int)Types.Standart] = Content.Load<Texture2D>("players/KopfkickerChar1_neu");
+        playerTextures[(int)Types.Ninja] = Content.Load<Texture2D>("players/KopfkickerChar2_neu");
+        playerTextures[(int)Types.Mario] = Content.Load<Texture2D>("players/Mario2");
+        playerTextures[(int)Types.Wizzard] = Content.Load<Texture2D>("players/Wizzard");
         playerTextures[(int)Types.RandomPlayer] = Content.Load<Texture2D>("players/questionmark");
 
 
-        smt[(int)Types.Spiderman]       = Content.Load<Texture2D>("special_move_textures/special_move_texture_spiderman");
-        smt[(int)Types.Knight]          = Content.Load<Texture2D>("special_move_textures/special_move_texture_knight");
-        smt[(int)Types.Sonic]           = Content.Load<Texture2D>("special_move_textures/special_move_texture_sonic");
-        smt[(int)Types.Standart]        = Content.Load<Texture2D>("special_move_textures/special_move_texture_player");
-        smt[(int)Types.Ninja]           = Content.Load<Texture2D>("special_move_textures/special_move_texture_ninja");
-        smt[(int)Types.Mario]           = Content.Load<Texture2D>("special_move_textures/special_move_texture_mario");
-        smt[(int)Types.Wizzard]         = Content.Load<Texture2D>("special_move_textures/special_move_texture_wizzard");
-        smt[(int)Types.RandomPlayer]    = Content.Load<Texture2D>("players/questionmark");
+        smt[(int)Types.Spiderman] = Content.Load<Texture2D>("special_move_textures/special_move_texture_spiderman");
+        smt[(int)Types.Knight] = Content.Load<Texture2D>("special_move_textures/special_move_texture_knight");
+        smt[(int)Types.Sonic] = Content.Load<Texture2D>("special_move_textures/special_move_texture_sonic");
+        smt[(int)Types.Standart] = Content.Load<Texture2D>("special_move_textures/special_move_texture_player");
+        smt[(int)Types.Ninja] = Content.Load<Texture2D>("special_move_textures/special_move_texture_ninja");
+        smt[(int)Types.Mario] = Content.Load<Texture2D>("special_move_textures/special_move_texture_mario");
+        smt[(int)Types.Wizzard] = Content.Load<Texture2D>("special_move_textures/special_move_texture_wizzard");
+        smt[(int)Types.RandomPlayer] = Content.Load<Texture2D>("players/questionmark");
+
+
+        /* Hier bitte die Dateipfade zu den Texturen einfügen, in denen die verschiedenen PlayerType beschrieben werden
+        playerInfo[(int)Types.Spiderman]    = Content.Load<Texture2D>("");
+        playerInfo[(int)Types.Knight]       = Content.Load<Texture2D>("");
+        playerInfo[(int)Types.Sonic]        = Content.Load<Texture2D>("");
+        playerInfo[(int)Types.Standart]     = Content.Load<Texture2D>("");
+        playerInfo[(int)Types.Ninja]        = Content.Load<Texture2D>("");
+        playerInfo[(int)Types.Mario]        = Content.Load<Texture2D>("");
+        playerInfo[(int)Types.Wizzard]      = Content.Load<Texture2D>("");
+        playerInfo[(int)Types.RandomPlayer] = Content.Load<Texture2D>("");
+        */
     }
 
     public static Player CreatePlayer(Types playerType, Vector2 position, int id, PlayerControls controls)
@@ -68,23 +82,23 @@ public static class PlayerFactory
         switch (playerType)
         {
             case Types.Standart:
-                return new Player(_graphicsDevice,    position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Sonic:
-                return new Sonic(_graphicsDevice,     position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
+                return new Sonic(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Spiderman:
                 return new Spiderman(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Knight:
-                return new Knight(_graphicsDevice,    position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
+                return new Knight(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Ninja:
-                return new Ninja(_graphicsDevice,     position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
+                return new Ninja(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Mario:
-                return new Mario(_graphicsDevice,     position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
+                return new Mario(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.Wizzard:
-                return new Wizzard(_graphicsDevice,   position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
+                return new Wizzard(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             case Types.RandomPlayer:
                 return new RandomPlayer(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
             default:
-                return new Player(_graphicsDevice,    position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
+                return new Player(_graphicsDevice, position, GetPlayerTexture(playerType), getSMT(playerType), id, controls);
         }
     }
 
@@ -109,5 +123,10 @@ public static class PlayerFactory
     public static Texture2D getSMT(Types playerType)
     {
         return smt[(int)playerType];
+    }
+
+    public static Texture2D GetPlayerInfoTexture(Types playerType)
+    {
+        return playerInfo[(int)playerType];
     }
 }

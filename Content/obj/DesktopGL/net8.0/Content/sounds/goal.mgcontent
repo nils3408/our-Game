@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/goal.mp3</SourceFile>
-  <SourceTime>2025-08-31T18:38:14.3567936+02:00</SourceTime>
-  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/DesktopGL/Content/sounds/goal.xnb</DestFile>
-  <DestTime>2025-08-31T18:46:09.8761216+02:00</DestTime>
+  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/sounds/goal.mp3</SourceFile>
+  <SourceTime>2025-09-02T10:13:13.7235075+02:00</SourceTime>
+  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/sounds/goal.xnb</DestFile>
+  <DestTime>2025-09-02T11:45:48.6934823+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

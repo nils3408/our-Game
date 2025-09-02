@@ -19,6 +19,9 @@ public class GameSetup : GameState
     Color outlineColor = new Color(96, 96, 96);
 
     int spacing = 20;
+
+    bool KickOffFeaturesBool = false;
+
     public GameSetup(Game game) : base(game)
     {
 
@@ -33,7 +36,7 @@ public class GameSetup : GameState
 
         SimpleButton homeButton = new SimpleButton(new Point(spacing, spacing), new Point(200, 100), "Home", font);
         homeButton.OnClick += () => Game1.nextState = new Menu(baseGame);
-        
+
         container.Add(homeButton);
 
 
@@ -55,10 +58,16 @@ public class GameSetup : GameState
 
         ControlsEditor rightPlayerControls = new ControlsEditor(Game1.rightPlayerControls);
         H1.Add(rightPlayerControls);
-        
+
         H1.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
         container.Add(H1);
 
+        SimpleButton KickOffFeatures = new SimpleButton(new Point(500, 100), "Kick-off features", font);
+        KickOffFeatures.SetToStayPressed();
+        KickOffFeatures.SetColor(Color.White, Color.Green, outlineColor);
+        KickOffFeatures.OnClick += () => { KickOffFeaturesBool = !KickOffFeaturesBool; };
+        KickOffFeatures.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 180));
+        container.Add(KickOffFeatures);
 
         SimpleButton startButton = new SimpleButton(new Point(500, 100), "Start New Game", font);
         startButton.OnClick += () =>
@@ -66,13 +75,14 @@ public class GameSetup : GameState
             if (leftSelection.isChoosen && rightSelection.isChoosen)
             {
                 Console.WriteLine($"start Game");
-                
+
                 Player leftPlayer = PlayerFactory.CreatePlayer(leftSelection.playerType, true);
                 Player rightPlayer = PlayerFactory.CreatePlayer(rightSelection.playerType, false);
 
                 GameLogic newGame = new GameLogic(game, leftPlayer, rightPlayer);
                 newGame.Initialize();
                 newGame.LoadContent();
+                newGame.specialModesEnabled = KickOffFeatures.GetState();
                 Game1.nextState = newGame;
                 Game1.openGames.Add(newGame);
             }
@@ -83,6 +93,8 @@ public class GameSetup : GameState
         };
         startButton.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - spacing - startButton.GetBounds().Height / 2));
         container.Add(startButton);
+
+
 
     }
 
@@ -214,6 +226,24 @@ public class PlayerSelection : StackContainer
         isChoosen = chooseButton.GetState();
     }
 
- 
 
+
+}
+
+public class ShowPlayerInfo : UIElement
+{
+    Texture2D InfoTexture;
+    public ShowPlayerInfo(Point size, PlayerFactory.Types type, ContentManager content) : base(size)
+    {
+        InfoTexture = PlayerFactory.GetPlayerInfoTexture(type);
+    }
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(InfoTexture,GetBounds(),Color.White);
+    }
+
+    public override void Update()
+    {
+    }
 }

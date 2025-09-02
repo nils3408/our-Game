@@ -129,7 +129,7 @@ public class GameLogic : GameState
     private List<BackgroundFan> backgroundFans = new List<BackgroundFan>();
 
     //Anstoßfeatures
-    private bool specialModesEnabled = true;   // Masterschalter um Anstoßfeature an oder aus zu machen            TODO: Button im Menu hinzufügen
+    public bool specialModesEnabled = true;   // Masterschalter um Anstoßfeature an oder aus zu machen            TODO: Button im Menu hinzufügen
     private enum RoundMode { Normal, GoombaMode, WallFrontGoals, WallButtonTrigger, MovingWall,}
     private RoundMode currentMode = RoundMode.Normal;
     private Texture2D holzwandTexture;

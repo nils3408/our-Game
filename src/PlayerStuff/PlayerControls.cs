@@ -113,7 +113,7 @@ public class ControlsEditor : StackContainer
 
         AddKeyEditor(PlayerAction.Lupfer, "Lupfer");
 
-        AddKeyEditor(PlayerAction.Diagonal, "Shot diag.");
+        AddKeyEditor(PlayerAction.Diagonal, "Shoot high");
     }
 
     private void AddKeyEditor(PlayerAction action, String text)
