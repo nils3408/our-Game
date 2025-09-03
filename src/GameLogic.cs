@@ -108,6 +108,10 @@ public class GameLogic : GameState
     List<Schuriken> schurikenListe = new List<Schuriken>();
     Texture2D schuriken_texture;
 
+    //panzer
+    List<Panzer> panzerListe = new List<Panzer>();
+    Texture2D panzer_texture;
+
     //Goomba
     List<Goomba> goombaListe = new List<Goomba>();
     Texture2D goomba_texture;
@@ -300,6 +304,7 @@ public class GameLogic : GameState
 
         _leftTribunePosition = new Vector2(450, -100);
 
+        panzer_texture = Content.Load<Texture2D>("Panzer");
         schuriken_texture = Content.Load<Texture2D>("shuriken");
         goomba_texture    = Content.Load<Texture2D>("goomba");
         vs_zeichen = Content.Load<Texture2D>("vs_zeichen");
@@ -388,6 +393,8 @@ public class GameLogic : GameState
 
         move_schuriken(gameTime);
         update_schuriken_list();
+        move_Panzer(gameTime);
+        update_panzer_list();
         update_goombas(gameTime);
         
 
@@ -445,26 +452,16 @@ public class GameLogic : GameState
 
 
         football.draw(spriteBatch, gameTime);
-
-
+        //goals
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
 
         player1.draw(spriteBatch, gameTime);
         player2.draw(spriteBatch, gameTime);
         
-
-        //draw items
-        foreach (Item item in items)
-        {
-            item.draw(spriteBatch, gameTime);
-        }
-
-        //draw Shiruken 
-        foreach (Schuriken s in schurikenListe)
-        {
-            s.draw(spriteBatch, gameTime);
-        }
+        foreach (Item i in items)                { i.draw(spriteBatch, gameTime); }  //draw items
+        foreach (Schuriken s in schurikenListe)  { s.draw(spriteBatch, gameTime); }  //draw Shiruken 
+        foreach (Panzer p in panzerListe)        { p.draw(spriteBatch);           }  //draw Panzer       
 
         //draw the Interface under ground Y
         Draw_i_dont_know();
@@ -834,10 +831,10 @@ public class GameLogic : GameState
     }
 
 
-    // ------------------------------------------------------------------------------------------------------------------
-    // ------------------------------------------------------------------------------------------------------------------
-    // Object stuff item, Schuriken
 
+    // ------------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------------------------
+    // Object stuff item, Schuriken, Panzer
 
     public void distribute_items()
     {
@@ -848,6 +845,7 @@ public class GameLogic : GameState
         }
     }
 
+
     public void update_all_item_positions()
     {
         //update position of all items
@@ -857,7 +855,8 @@ public class GameLogic : GameState
         }
     }
 
-
+    //----------------------------------
+    //Schuriken
     public void add_Schuriken(Vector2 pos, Player owner, int direction)
     {
         //adds a Schuriken object to the current List 
@@ -872,13 +871,6 @@ public class GameLogic : GameState
         }
     }
 
-
-    public void delete_Schuriken(Schuriken schuriken_to_be_removed)
-    {
-        schurikenListe.Remove(schuriken_to_be_removed);
-    }
-
-
     public void update_schuriken_list()
     {
         // remove all schurken that are out of the game
@@ -888,6 +880,34 @@ public class GameLogic : GameState
             s.position.Y < -50);
     }
 
+    //----------------------------------
+    //Panzer
+    public void add_Panzer(Vector2 pos, Player owner, int direction)
+    {
+        //adds a Schuriken object to the current List 
+        panzerListe.Add(new Panzer(panzer_texture, pos, owner, direction));
+    }
+
+    public void move_Panzer(GameTime gameTime)
+    {
+        foreach (Panzer p in panzerListe)
+        {
+            p.move((float)gameTime.ElapsedGameTime.TotalSeconds);
+        }
+    }
+
+    public void update_panzer_list()
+    {
+        // remove all schurken that are out of the game
+        panzerListe.RemoveAll(s =>
+            s.position.X >= 1800 ||
+            s.position.X + s.texture_width < -10 ||
+            s.position.Y < -50);
+    }
+    
+
+    //----------------------------------
+    //Goombas
     public void update_goombas(GameTime gameTime)
     {
         foreach (Goomba abc in goombaListe)

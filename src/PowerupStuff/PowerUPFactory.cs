@@ -32,7 +32,8 @@ public class PowerUpFactory
         SmallPlayerPowerUp,
         BigGoalPowerUp,
         StealingPowerUp,
-        MoveChangePowerUp
+        MoveChangePowerUp,
+        Panzer2PowerUp
     }
 
 
@@ -64,6 +65,8 @@ public class PowerUpFactory
                 return new StealingPowerUp(ball, content);
             case PowerUps.MoveChangePowerUp:
                 return new MoveChangePowerUp(ball, content);
+            case PowerUps.Panzer2PowerUp:
+                return new Panzer2PowerUp(ball, content);
             default:
                 throw new NotImplementedException($"PowerUp '{randomType}' ist nicht implementiert.");
         }

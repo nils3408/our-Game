@@ -392,12 +392,6 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\spielfeld_pictures\starting_background2.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\stun7.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\vs_zeichen.xnb
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.AssemblyReference.cache
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfoInputs.cache
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfo.cs
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.CoreCompileInputs.cache
-C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.sourcelink.json
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\animation_p1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Arial.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\balls\firefootball.xnb
@@ -457,6 +451,8 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\d
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\fireball_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\iceball_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\movement_changing.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\panzer1.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\panzer2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\powerUp_textures\SmallPlayer_texture.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\red_window.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\shuriken.xnb
@@ -473,6 +469,7 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\ice2.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\mario_sound.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\wizzard_sound1.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\wizzard_sound2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\wizzard_sound3.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_knight.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_mario.xnb
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\special_move_textures\special_move_texture_ninja.xnb
@@ -522,10 +519,15 @@ C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\win-x64\native\op
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\osx\native\libSDL2-2.0.0.dylib
 C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\runtimes\win-x64\native\SDL2.dll
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.AssemblyReference.cache
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfoInputs.cache
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.AssemblyInfo.cs
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.CoreCompileInputs.cache
+C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.sourcelink.json
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.csproj.Up2Date
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\refint\our-Game.dll
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.pdb
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\our-Game.genruntimeconfig.cache
 C:\Users\nilsw\source\repos\our-Game\obj\Debug\net8.0\ref\our-Game.dll
-C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\wizzard_sound3.xnb

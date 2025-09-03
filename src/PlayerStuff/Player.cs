@@ -532,6 +532,10 @@ public class Player
                     GameLogic_object.playIceSound();
                     break;
 
+                case "Panzer2PowerUp":
+                    powerup1 = new Panzer1PowerUp(GameLogic_object.getBall(), content);
+                    reset_powerup = false;
+                    break;
             }
 
 
@@ -545,6 +549,7 @@ public class Player
             }
 
         }
+
 
         else if (slot == 2 && powerup2 != null)
         {
@@ -569,6 +574,10 @@ public class Player
                     }
                     break;
 
+                case "Panzer2PowerUp":
+                    powerup2 = new Panzer1PowerUp(GameLogic_object.getBall(), content);
+                    reset_powerup = false;
+                    break;
             }
 
             // values on the player or ball get set in the corresponding PowerUp object/ class

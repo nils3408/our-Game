@@ -692,6 +692,30 @@
 /processorParam:TextureFormat=Color
 /build:powerUp_textures/movement_changing.png
 
+#begin powerUp_textures/panzer1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:powerUp_textures/panzer1.png
+
+#begin powerUp_textures/panzer2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:powerUp_textures/panzer2.png
+
 #begin powerUp_textures/SmallPlayer_texture.png
 /importer:TextureImporter
 /processor:TextureProcessor
