@@ -71,6 +71,10 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/goal.mp3</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/ice.mp3</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/ice2.mp3</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/mario_sound.mp3</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/wizzard_sound1.mp3</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/wizzard_sound2.mp3</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/sounds/wizzard_sound3.mp3</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/special_move_textures/special_move_texture_knight.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/special_move_textures/special_move_texture_mario.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/special_move_textures/special_move_texture_ninja.png</File>
@@ -85,6 +89,14 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/spielfeld_pictures/starting_background.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/spielfeld_pictures/starting_background2.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/stun7.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_footballer.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_knight.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_mario.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_ninja.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_random.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_sonic.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_spiderman.png</File>
+    <File>C:/Users/nilsw/source/repos/our-Game/Content/text/text_wizzard.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Tore.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/Tore2.png</File>
     <File>C:/Users/nilsw/source/repos/our-Game/Content/TribueneLang.png</File>
@@ -92,6 +104,18 @@
     <File>C:/Users/nilsw/source/repos/our-Game/Content/vs_zeichen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

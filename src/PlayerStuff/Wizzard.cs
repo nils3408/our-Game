@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
+using Microsoft.Xna.Framework.Media;      //sound
+using Microsoft.Xna.Framework.Audio;      //sound
+
 
 /*----------------------------------------------------
  * teleporting 
@@ -39,7 +42,6 @@ public class Wizzard: Player
     public Vector2 t2_pos = new Vector2(0, 0);
 
     Texture2D t1;
-
 
 
     //Konstruktor for Wizzard
@@ -83,6 +85,7 @@ public class Wizzard: Player
         if (futureRect.Intersects(otherPlayer.currentRect)) { return; }
 
 
+        GameLogic_object.playTeleportationSound();
         do_teleportation_animation(pos_x, pos_y);
         position = newPosition;
         update_rectangles();
@@ -193,5 +196,7 @@ public class Wizzard: Player
             is_teleporting = false;
         }
     }
+
+
 
 }

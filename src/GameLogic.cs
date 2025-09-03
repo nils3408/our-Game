@@ -50,6 +50,9 @@ public class GameLogic : GameState
     private SoundEffect FansByGoalSound;
     private SoundEffect CoinSound;
 
+    private SoundEffect teleportationSound;
+    private SoundEffect marioSound;
+
     //Spielfeld
     private Texture2D _backgroundTexture;
     private Texture2D _goalTexture;
@@ -63,10 +66,11 @@ public class GameLogic : GameState
     private Ball football;
     private bool randomPlayer1 = false;  //is player1.type == RandomPlayer ?
     private bool randomPlayer2 = false;  //is player2.type == randomPlayer?
-    //generell
+    
+    //collision
     private float collisionCooldown1 = 0f;
     private float collisionCooldown2 = 0f;
-    private const float CollisionCooldownTime = 0.1f;
+    private const float CollisionCooldownTime = 0.05f;
 
     Texture2D vs_zeichen;
     Texture2D red_window;
@@ -272,8 +276,10 @@ public class GameLogic : GameState
         goalSound = Content.Load<SoundEffect>("sounds/goal");
         iceSound  = Content.Load<SoundEffect>("sounds/ice2");
         CoinSound = Content.Load<SoundEffect>("sounds/coin1");
-        FansByGoalSound = Content.Load<SoundEffect>("sounds/FansByGoal");
-        
+        FansByGoalSound     = Content.Load<SoundEffect>("sounds/FansByGoal");
+        teleportationSound  = Content.Load<SoundEffect>("sounds/wizzard_sound2");
+        marioSound          = Content.Load<SoundEffect>("sounds/mario_sound");
+
         background_sound = Content.Load<Song>("sounds/crowd_noise");
         MediaPlayer.IsRepeating = true;
         MediaPlayer.Volume = 0.1f;       
@@ -1282,6 +1288,20 @@ public class GameLogic : GameState
     {
         SoundEffectInstance cc = CoinSound.CreateInstance();
         cc.Volume = 0.5f;
+        cc.Play();
+    }
+
+    public void playTeleportationSound()
+    {
+        SoundEffectInstance cc = teleportationSound.CreateInstance();
+        cc.Volume = 0.7f;
+        cc.Play();
+    }
+
+    public void playMarioSound()
+    {
+        SoundEffectInstance cc = marioSound.CreateInstance();
+        cc.Volume = 0.1f;
         cc.Play();
     }
 }
