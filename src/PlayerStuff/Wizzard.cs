@@ -76,7 +76,11 @@ public class Wizzard: Player
         }
 
         Vector2 newPosition= new Vector2(pos_x, pos_y);
-        if (out_of_bounds_both_scales(newPosition)) { return; }
+        Rectangle futureRect = new Rectangle((int)pos_x, (int)pos_y, RectangleWidth, RectangleHeight);
+
+        // out of bounds or intersecting with other player -> do nothing
+        if (out_of_bounds_both_scales(newPosition))         { return; }
+        if (futureRect.Intersects(otherPlayer.currentRect)) { return; }
 
 
         do_teleportation_animation(pos_x, pos_y);

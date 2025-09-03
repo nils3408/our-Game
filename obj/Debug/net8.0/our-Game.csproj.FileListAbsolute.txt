@@ -515,3 +515,5 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\spielfeld_pictures\starting_background2.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\stun7.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\vs_zeichen.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Kristallbrocken.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Panzer.xnb
