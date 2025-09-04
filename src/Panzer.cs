@@ -18,7 +18,7 @@ public class Panzer
     public int texture_height = 53;
 
     Vector2 velocity = new Vector2(800, 0);
-    int direction;
+    public int direction;
     public Vector2 position;
     public Player owner;
     public Rectangle current_Rect;

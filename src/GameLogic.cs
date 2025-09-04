@@ -378,6 +378,8 @@ public class GameLogic : GameState
         handle_ball_coin_collision();
         handle_player_schuriken_collision();
         handle_player_goomba_collision();
+        handle_player_panzer_colission(gameTime);
+        handle_panzer_panzer_collission();
 
         if (!gameWon)
         {
@@ -809,6 +811,62 @@ public class GameLogic : GameState
         foreach (var s in toRemove)
         {
             schurikenListe.Remove(s);
+        }
+    }
+
+
+    private void handle_player_panzer_colission(GameTime gameTime)
+    {
+        Player[] players = new Player[] { player1, player2 };
+        List<Panzer> toRemove = new List<Panzer>();
+
+        foreach (Panzer s in panzerListe)
+        {
+            foreach (Player p in players)
+            {
+                if (s.current_Rect.Intersects(p.currentRect))
+                {
+                    if (s.owner != p)
+                    {
+                        for (int i = 0; i < 30; i++)
+                        {
+                            p.move((float)gameTime.ElapsedGameTime.TotalSeconds, (float)s.direction);
+
+                        }
+
+                        toRemove.Add(s);
+                        break;
+                    }
+                }
+            }
+        }
+
+        foreach (var s in toRemove)
+        {
+            panzerListe.Remove(s);
+        }
+    }
+
+
+    private void handle_panzer_panzer_collission()
+    {
+        HashSet<Panzer> toRemove = new HashSet<Panzer>();
+
+        for (int i=0; i<panzerListe.Count; i++)
+        {
+            for (int j= i+1; j<panzerListe.Count; j++)
+            {
+                if (panzerListe[i].current_Rect.Intersects(panzerListe[j].current_Rect))
+                {
+                    toRemove.Add(panzerListe[i]);
+                    toRemove.Add(panzerListe[j]);
+                }
+            }
+        }
+
+        foreach (var p in toRemove)
+        {
+            panzerListe.Remove(p);
         }
     }
 
