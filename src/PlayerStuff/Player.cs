@@ -533,7 +533,7 @@ public class Player
                     break;
 
                 case "Panzer2PowerUp":
-                    powerup1 = new Panzer1PowerUp(GameLogic_object.getBall(), content);
+                    powerup1 = new Panzer2PowerUp(GameLogic_object.getBall(), content);
                     reset_powerup = false;
                     break;
             }
@@ -575,7 +575,7 @@ public class Player
                     break;
 
                 case "Panzer2PowerUp":
-                    powerup2 = new Panzer1PowerUp(GameLogic_object.getBall(), content);
+                    powerup2 = new Panzer2PowerUp(GameLogic_object.getBall(), content);
                     reset_powerup = false;
                     break;
             }

@@ -277,8 +277,8 @@ public class GameLogic : GameState
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
         _backgroundTexture = Content.Load<Texture2D>("spielfeld_pictures/Spielfeld3");
 
-        goalSound = Content.Load<SoundEffect>("sounds/goal");
         iceSound  = Content.Load<SoundEffect>("sounds/ice2");
+        goalSound = Content.Load<SoundEffect>("sounds/goal");
         CoinSound = Content.Load<SoundEffect>("sounds/coin1");
         FansByGoalSound     = Content.Load<SoundEffect>("sounds/FansByGoal");
         teleportationSound  = Content.Load<SoundEffect>("sounds/wizzard_sound2");
@@ -380,6 +380,7 @@ public class GameLogic : GameState
         handle_player_goomba_collision();
         handle_player_panzer_colission(gameTime);
         handle_panzer_panzer_collission();
+        handle_panzer_ball_collision();
 
         if (!gameWon)
         {
@@ -743,9 +744,9 @@ public class GameLogic : GameState
             // shooting    
             if (player1.can_move)
             {
-                if (player1.shoots_diagonal) { football.get_shooted_diagonal(); }
+                if (player1.shoots_diagonal)   { football.get_shooted_diagonal();   }
                 if (player1.shoots_horizontal) { football.get_shooted_horizontal(); }
-                if (player1.shoots_lupfer) { football.get_shooted_lupfer(); }
+                if (player1.shoots_lupfer)     { football.get_shooted_lupfer();     }
 
                 //todo: auslagern in PlayerControls/ Input handler /playeer.handleInput()
                 //drücken um player.shoot...  auf true zu setzen
@@ -831,7 +832,6 @@ public class GameLogic : GameState
                         for (int i = 0; i < 30; i++)
                         {
                             p.move((float)gameTime.ElapsedGameTime.TotalSeconds, (float)s.direction);
-
                         }
 
                         toRemove.Add(s);
@@ -865,6 +865,32 @@ public class GameLogic : GameState
         }
 
         foreach (var p in toRemove)
+        {
+            panzerListe.Remove(p);
+        }
+    }
+
+
+    private void handle_panzer_ball_collision()
+    {
+        List<Panzer> toRemove = new List<Panzer>();
+
+        foreach (Panzer p in panzerListe)
+        {
+            if (p.current_Rect.Intersects(football.getRect()))
+            {
+                if (football.ice_powerUp_in_use == false)
+                {
+
+                    Vector2 direction = football.position - p.position;
+                    football.reset_velocity();
+                    football.change_direction(direction);
+                }
+                toRemove.Add(p);
+            }
+        }
+
+        foreach(var p in toRemove)
         {
             panzerListe.Remove(p);
         }
