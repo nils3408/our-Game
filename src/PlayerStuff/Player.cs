@@ -43,6 +43,12 @@ public class Player
     public int moving_direction = 1;
     public float gravity = 500f;
 
+    public bool  forced_moving_value = false;
+    public float forced_moving_velocity = 550f;
+    public int   forced_moving_direction;
+    public float forced_moving_cooldown = 1f;
+    public DateTime forced_moving_activation_time = DateTime.MinValue;
+
     public Rectangle currentRect;
     public Rectangle futureRect;
     
@@ -173,6 +179,15 @@ public class Player
         content = content1;
     }
 
+    public void activate_forced_moving(float dir)
+    {
+        forced_moving_value = true;
+        forced_moving_activation_time = DateTime.Now;
+        //direction must be 1 or -1
+        if ( dir == 1) { forced_moving_direction = 1;  }
+        else           { forced_moving_direction = -1; }
+    }
+
 
     public void set_groundYs(float abc)
     {
@@ -199,13 +214,13 @@ public class Player
         //tastatur
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Left)))
         {
-            if (MoveChange_powerup_in_use == false)     { move(delta, -1); }
-            else                                        { move(delta, 1);  }
+            if (MoveChange_powerup_in_use == false)     { move_helper(delta, -1); }
+            else                                        { move_helper(delta, 1);  }
         }
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Right)))
         {
-            if (MoveChange_powerup_in_use == false)     { move(delta, 1); }
-            else                                        { move(delta, -1);}
+            if (MoveChange_powerup_in_use == false)     { move_helper(delta, 1); }
+            else                                        { move_helper(delta,-1); }
         }
             
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position)) jump(delta);
@@ -226,13 +241,13 @@ public class Player
         //if (InputHandler.IsL3MovedUp(playerGroup))                      jump(delta);
         if (InputHandler.IsL3MovedToSide("l", playerGroup))
         {
-            if (MoveChange_powerup_in_use == false)     { move(delta, -1);}
-            else                                        { move(delta, 1); }
+            if (MoveChange_powerup_in_use == false)     { move_helper(delta, -1);}
+            else                                        { move_helper(delta, 1); }
         }
         if (InputHandler.IsL3MovedToSide("r", playerGroup))
         {
-            if (MoveChange_powerup_in_use == false)     { move(delta, 1); }
-            else                                        { move(delta, -1);}
+            if (MoveChange_powerup_in_use == false)     { move_helper(delta, 1);  }
+            else                                        { move_helper(delta, -1); }
         }
 
         if (InputHandler.IsGamePadButtonDown(Buttons.X, playerGroup)) do_special_effect(delta);
@@ -400,14 +415,35 @@ public class Player
 
 //-------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------
+    public void move_helper(float delta, float dir)
+    {
+        // gets called in player.handleInput 
+        // do not let player move when he is currently moving by force 
+        // to prevent double moving
+        // to prevent oposite moving, which would lead to no movement at all
+
+        if(forced_moving_value == false)
+        { 
+            move(delta, dir); 
+        }
+    }
 
     public virtual void move(float delta, float dir)
     {
-        if (can_move == false) { return; }
-        //dir must be -1 or 1
-        if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
-
-        moving_direction = (int) dir;
+    
+        if (forced_moving_value == true)
+        {
+            move_speed = forced_moving_velocity;
+        }
+        else
+        {
+            if (can_move == false) { return; }
+            //dir must be -1 or 1
+            if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
+            moving_direction = (int)dir;
+            move_speed = move_speed2;
+        }
+        
 
         float newPositionX = position.X + (delta * move_speed) * dir;
         Vector2 newPosition = new Vector2(newPositionX, position.Y);
@@ -449,6 +485,14 @@ public class Player
                 position.X += move_speed * delta * dir;
                 update_rectangles();
             }
+        }
+    }
+
+    public void forced_moving(float delta)
+    {
+        if (forced_moving_value)
+        {
+            move(delta, forced_moving_direction);
         }
     }
 
@@ -497,6 +541,17 @@ public class Player
         }
     }
 
+    public void update_forced_moving_if_time_is_over()
+    {
+        if (forced_moving_value == false) { return; }
+
+        TimeSpan time = DateTime.Now - forced_moving_activation_time;
+        if(time.TotalSeconds >= forced_moving_cooldown)
+        {
+            forced_moving_value = false;
+        }
+    }
+
 
     // ------------------------------------------------------------------------
     // PowerUp stuff 
@@ -533,7 +588,7 @@ public class Player
                     break;
 
                 case "Panzer2PowerUp":
-                    powerup1 = new Panzer2PowerUp(GameLogic_object.getBall(), content);
+                    powerup1 = new Panzer1PowerUp(GameLogic_object.getBall(), content);
                     reset_powerup = false;
                     break;
             }
@@ -575,7 +630,7 @@ public class Player
                     break;
 
                 case "Panzer2PowerUp":
-                    powerup2 = new Panzer2PowerUp(GameLogic_object.getBall(), content);
+                    powerup2 = new Panzer1PowerUp(GameLogic_object.getBall(), content);
                     reset_powerup = false;
                     break;
             }

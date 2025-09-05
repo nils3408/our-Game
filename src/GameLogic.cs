@@ -359,6 +359,9 @@ public class GameLogic : GameState
         player1.update_values();
         player2.update_values();
 
+        player1.forced_moving((float) gameTime.ElapsedGameTime.TotalSeconds);
+        player2.forced_moving((float) gameTime.ElapsedGameTime.TotalSeconds);
+
         player1.update_knockout_phase();
         player2.update_knockout_phase();
 
@@ -386,6 +389,9 @@ public class GameLogic : GameState
         {
             check_for_goal();
         }
+
+        player1.update_forced_moving_if_time_is_over();
+        player2.update_forced_moving_if_time_is_over();
 
         player1.reset_powerUps_if_time_is_over();
         player2.reset_powerUps_if_time_is_over();
@@ -831,7 +837,7 @@ public class GameLogic : GameState
                     {
                         for (int i = 0; i < 30; i++)
                         {
-                            p.move((float)gameTime.ElapsedGameTime.TotalSeconds, (float)s.direction);
+                            p.activate_forced_moving((float)s.direction);
                         }
 
                         toRemove.Add(s);
