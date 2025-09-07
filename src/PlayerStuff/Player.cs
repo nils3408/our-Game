@@ -430,18 +430,21 @@ public class Player
 
     public virtual void move(float delta, float dir)
     {
-    
-        if (forced_moving_value == true)
+        if ((this is  Sonic) == false)
         {
-            move_speed = forced_moving_velocity;
-        }
-        else
-        {
-            if (can_move == false) { return; }
-            //dir must be -1 or 1
-            if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
-            moving_direction = (int)dir;
-            move_speed = move_speed2;
+
+            if (forced_moving_value == true)
+            {
+                move_speed = forced_moving_velocity;
+            }
+            else
+            {
+                if (can_move == false) { return; }
+                //dir must be -1 or 1
+                if (dir != -1 && dir != 1) { throw new Exception("error in move() function. Dir is not -1 or 1"); }
+                moving_direction = (int)dir;
+                move_speed = move_speed2;
+            }
         }
         
 
@@ -576,7 +579,8 @@ public class Player
 
                 case "BigPlayerPowerUp":
                     // player gets bigger -> players intersect, players can not move anymore -> bug
-                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y-101, 250, 250); //size 250 is set currently set in BigPlayerPowerUp
+                    int newSize = powerup1.getNewSize();
+                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y-101, newSize, newSize); //size 250 is set currently set in BigPlayerPowerUp
                     if(testRect.Intersects(otherPlayer.currentRect))
                     {
                         return;
@@ -621,8 +625,8 @@ public class Player
                 case "BigPlayerPowerUp":
                     // player gets bigger -> players intersect, players can not move anymore -> bug
                     //size 250 is set currently set in BigPlayerPowerUp
-
-                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y-101, 250, 250); 
+                    int newSize = powerup2.getNewSize();
+                    Rectangle testRect = new Rectangle((int)position.X, (int)position.Y - 101, newSize, newSize); //size 250 is set currently set in BigPlayerPowerUp
                     if (testRect.Intersects(otherPlayer.currentRect))
                     {
                         return;
@@ -730,7 +734,7 @@ public class Player
             //          player A is small, player stands on the other player B , playeer A gets big again, player collide, no player can move
             // bias -10 to make sure rectangle intersect instead of overlap (Rect.Intersect would not work than)
 
-            Rectangle testRect1 = new Rectangle((int)position.X, (int)position.Y-10, (int)RectangleWidth_copy , (int)RectangleHeight_copy);
+            Rectangle testRect1 = new Rectangle((int)position.X, (int)position.Y-40, (int)RectangleWidth_copy , (int)RectangleHeight_copy);
             if ( testRect1.Intersects(otherPlayer.currentRect)) {
                 return;
             }

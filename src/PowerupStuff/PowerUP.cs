@@ -54,4 +54,10 @@ public class PowerUp
         return powerUp_texture;
     }
 
+    public virtual int getNewSize()
+    {
+        // only relevant for BigPlayerPowerUp and SmallPlayerPowerUp
+        return 0;
+    }
+
 }

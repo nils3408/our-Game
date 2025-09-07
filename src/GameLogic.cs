@@ -286,7 +286,7 @@ public class GameLogic : GameState
 
         background_sound = Content.Load<Song>("sounds/crowd_noise");
         MediaPlayer.IsRepeating = true;
-        MediaPlayer.Volume = 0.1f;       
+        MediaPlayer.Volume = 0.2f;       
         MediaPlayer.Play(background_sound);
 
         _goalTexture = Content.Load<Texture2D>("Tore");
