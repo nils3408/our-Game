@@ -30,7 +30,6 @@ public class GameSetup : GameState
         SpriteFont font = Content.Load<SpriteFont>("Arial");
 
         Textfield textfield = new Textfield("Choose a Player", new Point(500, 100));
-        textfield.SetDrawOutline(outlineColor, 1);
         container.Add(textfield);
         textfield.MoveCenter(new Point(ScreenCenter.X, spacing + textfield.GetBounds().Height / 2));
 
@@ -40,26 +39,24 @@ public class GameSetup : GameState
         container.Add(homeButton);
 
 
-
-
-
-
         HorizontalContainer H1 = new HorizontalContainer();
         H1.SetSpacing(30);
 
-        ControlsEditor leftPlayerControls = new ControlsEditor(Game1.leftPlayerControls);
-        H1.Add(leftPlayerControls);
-
         PlayerSelection leftSelection = new PlayerSelection(Content);
-        H1.Add(leftSelection);
-
         PlayerSelection rightSelection = new PlayerSelection(Content);
+
+        ShowPlayerTexture showLeftPlayerTexture = new ShowPlayerTexture(new Point(500, 650),  PlayerFactory.GetPlayerInfoTexture(PlayerFactory.Types.Standart));
+        ShowPlayerTexture showRightPlayerTexture = new ShowPlayerTexture(new Point(500,650)  ,PlayerFactory.GetPlayerInfoTexture(PlayerFactory.Types.Standart));
+
+        leftSelection.onChange += () =>  { showLeftPlayerTexture. InfoTexture = PlayerFactory.GetPlayerInfoTexture(leftSelection.playerType);  };
+        rightSelection.onChange += () => { showRightPlayerTexture.InfoTexture = PlayerFactory.GetPlayerInfoTexture(rightSelection.playerType); };
+
+        H1.Add(showLeftPlayerTexture);
+        H1.Add(leftSelection);
         H1.Add(rightSelection);
+        H1.Add(showRightPlayerTexture);
 
-        ControlsEditor rightPlayerControls = new ControlsEditor(Game1.rightPlayerControls);
-        H1.Add(rightPlayerControls);
-
-        H1.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
+        H1.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2 - 50));
         container.Add(H1);
 
         SimpleButton KickOffFeatures = new SimpleButton(new Point(500, 100), "Kick-off features", font);
@@ -153,7 +150,7 @@ public class ShowPlayerType : UIElement
 
     public void SwipeLeft()
     {
-        curIndex = (curIndex + 1) % maxTypes;
+        curIndex = (curIndex - 1) % maxTypes;
     }
 
     public PlayerFactory.Types GetCurPlayer()
@@ -173,8 +170,9 @@ public class PlayerSelection : StackContainer
     public bool isChoosen = false;
 
     public PlayerFactory.Types playerType = PlayerFactory.Types.Standart;
-
+    public event Action onChange;
     SimpleButton chooseButton;
+
 
     public PlayerSelection(ContentManager Content)
     {
@@ -204,12 +202,28 @@ public class PlayerSelection : StackContainer
         Point TSize = new Point(100, 100);
 
         TriangleButton leftButton = new TriangleButton(TSize);
-        leftButton.OnClick += () => { if (!chooseButton.GetState()) playerDisplay.SwipeRight(); };
+        leftButton.OnClick += () =>
+        {
+            if (!chooseButton.GetState())
+            {
+                playerDisplay.SwipeLeft();
+            }
+            playerType = playerDisplay.GetCurPlayer();
+            onChange.Invoke();
+        };
+
         leftButton.ToggleFlip();
         HContainer.Add(leftButton);
 
         TriangleButton rightButton = new TriangleButton(TSize);
-        rightButton.OnClick += () => { if (!chooseButton.GetState()) playerDisplay.SwipeRight(); };
+        rightButton.OnClick += () => {
+            if (!chooseButton.GetState())
+            {
+                playerDisplay.SwipeRight();
+            }
+            playerType = playerDisplay.GetCurPlayer();
+            onChange.Invoke();
+        };
 
         HContainer.Add(rightButton);
         HContainer.SetDrawOutline(outlineColor, 1);
@@ -230,12 +244,13 @@ public class PlayerSelection : StackContainer
 
 }
 
-public class ShowPlayerInfo : UIElement
+public class ShowPlayerTexture : UIElement
 {
-    Texture2D InfoTexture;
-    public ShowPlayerInfo(Point size, PlayerFactory.Types type, ContentManager content) : base(size)
+     public Texture2D InfoTexture;
+
+    public ShowPlayerTexture(Point size, Texture2D text) : base(size)
     {
-        InfoTexture = PlayerFactory.GetPlayerInfoTexture(type);
+        InfoTexture = text;
     }
 
     public override void Draw(SpriteBatch spriteBatch)

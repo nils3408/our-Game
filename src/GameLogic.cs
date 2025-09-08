@@ -53,6 +53,8 @@ public class GameLogic : GameState
     private SoundEffect teleportationSound;
     private SoundEffect marioSound;
 
+    private bool playWristleValue = true;
+
     //Spielfeld
     private Texture2D _backgroundTexture;
     private Texture2D _goalTexture;
@@ -356,6 +358,13 @@ public class GameLogic : GameState
 
     public override void Update(GameTime gameTime)
     {
+        
+        if (gameTimer >= 0.0f && playWristleValue == true)
+        {
+            playWristle();
+            playWristleValue = false;
+        }
+
         player1.update_values();
         player2.update_values();
 
@@ -1412,6 +1421,13 @@ public class GameLogic : GameState
     {
         SoundEffectInstance cc = marioSound.CreateInstance();
         cc.Volume = 0.1f;
+        cc.Play();
+    }
+
+    public void playWristle()
+    {
+        SoundEffectInstance cc = CoinSound.CreateInstance();
+        cc.Volume = 0.5f;
         cc.Play();
     }
 }

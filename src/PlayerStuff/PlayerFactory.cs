@@ -65,16 +65,16 @@ public static class PlayerFactory
         smt[(int)Types.RandomPlayer] = Content.Load<Texture2D>("players/questionmark");
 
 
-        /* Hier bitte die Dateipfade zu den Texturen einfügen, in denen die verschiedenen PlayerType beschrieben werden
-        playerInfo[(int)Types.Spiderman]    = Content.Load<Texture2D>("");
-        playerInfo[(int)Types.Knight]       = Content.Load<Texture2D>("");
-        playerInfo[(int)Types.Sonic]        = Content.Load<Texture2D>("");
-        playerInfo[(int)Types.Standart]     = Content.Load<Texture2D>("");
-        playerInfo[(int)Types.Ninja]        = Content.Load<Texture2D>("");
-        playerInfo[(int)Types.Mario]        = Content.Load<Texture2D>("");
-        playerInfo[(int)Types.Wizzard]      = Content.Load<Texture2D>("");
-        playerInfo[(int)Types.RandomPlayer] = Content.Load<Texture2D>("");
-        */
+        // Hier bitte die Dateipfade zu den Texturen einfügen, in denen die verschiedenen PlayerType beschrieben werden
+        playerInfo[(int)Types.Spiderman]    = Content.Load<Texture2D>("text/text_spiderman");
+        playerInfo[(int)Types.Knight]       = Content.Load<Texture2D>("text/text_knight");
+        playerInfo[(int)Types.Sonic]        = Content.Load<Texture2D>("text/text_sonic");
+        playerInfo[(int)Types.Standart]     = Content.Load<Texture2D>("text/text_footballer");
+        playerInfo[(int)Types.Ninja]        = Content.Load<Texture2D>("text/text_ninja");
+        playerInfo[(int)Types.Mario]        = Content.Load<Texture2D>("text/text_mario");
+        playerInfo[(int)Types.Wizzard]      = Content.Load<Texture2D>("text/text_wizzard");
+        playerInfo[(int)Types.RandomPlayer] = Content.Load<Texture2D>("text/text_random");
+        
     }
 
     public static Player CreatePlayer(Types playerType, Vector2 position, int id, PlayerControls controls)

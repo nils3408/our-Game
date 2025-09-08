@@ -59,7 +59,8 @@ public class Settings : GameState
 
     public override void Draw(GameTime gameTime)
     {
-        Color background = Color.Crimson;
+        Color Green1 = new Color (141, 233, 88);
+        Color background = Green1;
         _graphicsDevice.Clear(background);
         spriteBatch.Begin();
         container.Draw(spriteBatch);

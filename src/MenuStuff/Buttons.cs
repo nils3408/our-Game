@@ -215,7 +215,7 @@ public class KeySelector : UIElement
         else
         {
             PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), backgroundColor);
-            PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), key.ToString(), Color.Black);
+            PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), getStringfromKey(key), Color.Black);
         }
 
         Outline(spriteBatch);
@@ -238,6 +238,48 @@ public class KeySelector : UIElement
             OnKeySelected.Invoke();
             isSelected = false;
         }
+    }
 
+    public String getStringfromKey(Keys key)
+    {
+        switch (key)
+        {
+            case Keys.OemPeriod:        return ".";
+            case Keys.OemComma:         return ",";
+            case Keys.OemMinus:         return "-";
+            case Keys.OemBackslash:     return ">";
+            case Keys.Add:              return "+";
+            case Keys.LeftControl:      return "STRG";
+            case Keys.RightControl:     return "STRG";
+            case Keys.CapsLock:         return "Caps";
+            case Keys.LeftShift:        return "LShift";
+            case Keys.RightShift:       return "RShift";
+            case Keys.NumLock:          return "NUM";
+            
+            case Keys.D0:               return "0";
+            case Keys.D1:               return "1";
+            case Keys.D2:               return "2";
+            case Keys.D3:               return "3";
+            case Keys.D4:               return "4";
+            case Keys.D5:               return "5";
+            case Keys.D6:               return "6";
+            case Keys.D7:               return "7";
+            case Keys.D8:               return "8";
+            case Keys.D9:               return "9";
+
+            case Keys.NumPad0: return "Num0";
+            case Keys.NumPad1: return "Num1";
+            case Keys.NumPad2: return "Num2";
+            case Keys.NumPad3: return "Num3";
+            case Keys.NumPad4: return "Num4";
+            case Keys.NumPad5: return "Num5";
+            case Keys.NumPad6: return "Num6";
+            case Keys.NumPad7: return "Num7";
+            case Keys.NumPad8: return "Num8";
+            case Keys.NumPad9: return "Num9";
+
+            default:
+                return key.ToString();
+        }
     }
 }
