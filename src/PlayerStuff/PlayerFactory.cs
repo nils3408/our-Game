@@ -57,13 +57,13 @@ public static class PlayerFactory
         playerTextures[(int)Types.RandomPlayer] = Content.Load<Texture2D>("players/questionmark");
         playerTextures[(int)Types.Robot] = Content.Load<Texture2D>("players/Robot");
 
-        playerShootTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("Spiderman2");
-        playerShootTextures[(int)Types.Knight] = Content.Load<Texture2D>("Knight2");
-        playerShootTextures[(int)Types.Sonic] = Content.Load<Texture2D>("Sonic2");
+        playerShootTextures[(int)Types.Spiderman] = Content.Load<Texture2D>("Spiderman2neu");
+        playerShootTextures[(int)Types.Knight] = Content.Load<Texture2D>("Knight2neu");
+        playerShootTextures[(int)Types.Sonic] = Content.Load<Texture2D>("Sonic2neu");
         playerShootTextures[(int)Types.Standart] = Content.Load<Texture2D>("Standart2");
-        playerShootTextures[(int)Types.Ninja] = Content.Load<Texture2D>("ninja2");
-        playerShootTextures[(int)Types.Mario] = Content.Load<Texture2D>("Mario 2");
-        playerShootTextures[(int)Types.Wizzard] = Content.Load<Texture2D>("Wizard2");
+        playerShootTextures[(int)Types.Ninja] = Content.Load<Texture2D>("ninja2neu");
+        playerShootTextures[(int)Types.Mario] = Content.Load<Texture2D>("Mario 2neu");
+        playerShootTextures[(int)Types.Wizzard] = Content.Load<Texture2D>("Wizard2neu");
         playerShootTextures[(int)Types.RandomPlayer] = Content.Load<Texture2D>("players/questionmark");
         playerShootTextures[(int)Types.Robot] = Content.Load<Texture2D>("players/questionmark");
 
