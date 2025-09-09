@@ -22,7 +22,7 @@ public class PlayerControls
 
 
     //maps the Controlls to the Keys, standartwerte, müssen angepasst werden
-    private Keys[] controlKeys = new Keys[8];
+    private Keys[] controlKeys = new Keys[9];
     private Dictionary<Keys, PlayerAction> keyToAction = new Dictionary<Keys, PlayerAction>();
 
     public Keys Left{ get; private set; }
@@ -33,6 +33,7 @@ public class PlayerControls
     public Keys PowerUp_2{ get; private set; }
     public Keys Lupfer{get; private set; }
     public Keys Diagonal{get; private set; }
+    public Keys Horizontal{get; private set; }
 
     public PlayerControls(Keys[] keys)
     {
@@ -57,14 +58,14 @@ public class PlayerControls
 
     public static PlayerControls getStandartLeft()
     {
-        Keys[] keys = { Keys.A, Keys.D, Keys.W, Keys.E, Keys.R, Keys.F, Keys.C, Keys.S};
+        Keys[] keys = { Keys.A, Keys.D, Keys.W, Keys.E, Keys.R, Keys.F, Keys.C, Keys.S, Keys.X};
         return new PlayerControls(keys);
     }
 
     //standart besetzung wie zuvor in GameLogic.handel_player_movement()
     public static PlayerControls getStandartRight()
     {
-        Keys[] keys = { Keys.J, Keys.L, Keys.I, Keys.O, Keys.P, Keys.OemPeriod, Keys.M, Keys.K};
+        Keys[] keys = { Keys.J, Keys.L, Keys.I, Keys.O, Keys.P, Keys.OemPeriod, Keys.M, Keys.K, Keys.OemComma};
         return new PlayerControls(keys);
     }
 
@@ -88,6 +89,7 @@ public class PlayerControls
         PowerUp_2 = keys[(int)PlayerAction.PowerUp_2];
         Lupfer = keys[(int)PlayerAction.Lupfer];
         Diagonal = keys[(int)PlayerAction.Diagonal];
+        Horizontal = keys[(int)PlayerAction.Horizontal];
     }
 }
 
@@ -115,8 +117,10 @@ public class ControlsEditor : StackContainer
         AddKeyEditor(PlayerAction.Lupfer, "Lupfer");
 
         AddKeyEditor(PlayerAction.Diagonal, "Shoot high");
-    }
 
+        AddKeyEditor(PlayerAction.Horizontal, "Shoot high");
+    }
+    
     private void AddKeyEditor(PlayerAction action, String text)
     {
         KeyEditor editor = new KeyEditor(controls.getKey(action), text);

@@ -30,8 +30,8 @@ public static class PlayerFactory
         Ninja = 4,
         Mario = 5,
         Wizzard = 6,
-        RandomPlayer = 7,
-        Robot = 42
+        RandomPlayer = 7
+  
     }
 
     private static GraphicsDevice _graphicsDevice;
