@@ -30,16 +30,16 @@ public static class PlayerFactory
         Ninja = 4,
         Mario = 5,
         Wizzard = 6,
-        RandomPlayer = 7
-  
+        RandomPlayer = 7,
+        Robot = 8
     }
 
     private static GraphicsDevice _graphicsDevice;
 
-    private static Texture2D[] playerTextures = new Texture2D[TypesCount];
-    private static Texture2D[] smt = new Texture2D[TypesCount];  //special_move_textures
+    private static Texture2D[] playerTextures = new Texture2D[TypesCount+1];
+    private static Texture2D[] smt = new Texture2D[TypesCount+1];  //special_move_textures
 
-    private static Texture2D[] playerInfo = new Texture2D[TypesCount];  //Texturen, die den PlayerTyp beschreiben
+    private static Texture2D[] playerInfo = new Texture2D[TypesCount+1];  //Texturen, die den PlayerTyp beschreiben
 
 
     public static void Initialize(GraphicsDevice graphicsDevice, ContentManager Content)
@@ -54,6 +54,7 @@ public static class PlayerFactory
         playerTextures[(int)Types.Mario] = Content.Load<Texture2D>("players/Mario2");
         playerTextures[(int)Types.Wizzard] = Content.Load<Texture2D>("players/Wizzard");
         playerTextures[(int)Types.RandomPlayer] = Content.Load<Texture2D>("players/questionmark");
+        playerTextures[(int)Types.Robot] = Content.Load<Texture2D>("players/Robot");
 
 
         smt[(int)Types.Spiderman] = Content.Load<Texture2D>("special_move_textures/special_move_texture_spiderman");
@@ -64,6 +65,8 @@ public static class PlayerFactory
         smt[(int)Types.Mario] = Content.Load<Texture2D>("special_move_textures/special_move_texture_mario");
         smt[(int)Types.Wizzard] = Content.Load<Texture2D>("special_move_textures/special_move_texture_wizzard");
         smt[(int)Types.RandomPlayer] = Content.Load<Texture2D>("players/questionmark");
+        //muss noch angepasst werden
+        smt[(int)Types.Robot] = Content.Load<Texture2D>("players/questionmark");
 
 
         // Hier bitte die Dateipfade zu den Texturen einfügen, in denen die verschiedenen PlayerType beschrieben werden
@@ -75,6 +78,8 @@ public static class PlayerFactory
         playerInfo[(int)Types.Mario] = Content.Load<Texture2D>("text/text_mario");
         playerInfo[(int)Types.Wizzard] = Content.Load<Texture2D>("text/text_wizzard");
         playerInfo[(int)Types.RandomPlayer] = Content.Load<Texture2D>("text/text_random");
+        //muss noch angepasst werden
+        playerInfo[(int)Types.Robot] = Content.Load<Texture2D>("text/text_random");
 
     }
 
@@ -130,9 +135,9 @@ public static class PlayerFactory
     {
         return playerInfo[(int)playerType];
     }
-    /*
-    public static Robot CreateRobot()
+    
+    public static Robot CreateRobot(GameLogic game)
     {
-        return new Player(_graphicsDevice, Vector2.Zero, GetPlayerTexture(playerType), getSMT(playerType), 2, Game1.rightPlayerControls);
-    }*/
+        return new Robot( _graphicsDevice, Vector2.Zero, GetPlayerTexture(Types.Robot), getSMT(Types.Robot), 2, Game1.rightPlayerControls, game);
+    }
 }

@@ -1,4 +1,5 @@
 
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,8 +9,6 @@ public class Robot : Player
 
     private GameLogic game;
 
-    private Vector2 prevBallPos;
-
     public Robot(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture1, int player, PlayerControls controls, GameLogic game)
               : base(graphicsDevice, position1, texture1, special_move_texture1, player, controls)
     {
@@ -18,13 +17,30 @@ public class Robot : Player
 
     public override void handle_input(float delta)
     {
-        if (game.getBall().velocity.X < 0)
-        {
-            
-        }
-        else
+        Vector2 BV = game.getBall().velocity;
+        Vector2 BP = game.getBall().position;
+        Vector2 RP = base.position;
+
+        //Debug.WriteLine($"Ball Position: {BP}");
+
+        if (BV.X < 0 && (BP.X+60) < RP.X)
         {
 
+            moveLeft(delta);
+        }
+        else 
+        {
+            if(RP.X < 1800) moveRight(delta);
+            
+
+            if (RP.X - BP.X < 100 && (BP.Y + 50 * BV.Y) < 200 ) {
+                jump(delta);
+            }
+            if ( RP.X - BP.X < 10) {
+                shoots_horizontal = true;
+
+                Debug.WriteLine($"Ball Position: {BP}, Robot Position: {RP} ");
+            }
         }
     }
 

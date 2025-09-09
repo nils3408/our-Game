@@ -304,6 +304,7 @@ public class SwitchButton : UIElement
     public SwitchButton(Point Size, String[] options) : base(Size)
     {
         this.options = options;
+        onClick += () => { };
     }
 
     public override void Draw(SpriteBatch spriteBatch)

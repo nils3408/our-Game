@@ -52,6 +52,7 @@
     <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/players/KopfkickerChar2_neu.png</File>
     <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/players/Mario2.png</File>
     <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/players/questionmark.png</File>
+    <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/players/Robot.png</File>
     <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/players/sonic.png</File>
     <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/players/Spiderman.png</File>
     <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/players/Wizzard.png</File>
@@ -106,6 +107,7 @@
     <File>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/vs_zeichen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

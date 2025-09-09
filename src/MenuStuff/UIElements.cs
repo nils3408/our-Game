@@ -210,7 +210,6 @@ public class StackContainer : ElementContainer
     {
         Rectangle nB = base.GetBounds();
         Rectangle boundsWSpacing = new Rectangle(nB.X - spacing, nB.Y - spacing, nB.Width + 2 * spacing, nB.Height + 2 * spacing);
-        Debug.WriteLine($"Elements Count: {boundsWSpacing}");
         return boundsWSpacing;
     }
 
@@ -250,7 +249,6 @@ public class HorizontalContainer : ElementContainer
         int outlineSpacing = 2;
         Rectangle nB = base.GetBounds();
         Rectangle boundsWSpacing = new Rectangle(nB.X - outlineSpacing, nB.Y - outlineSpacing, nB.Width + 2 * outlineSpacing, nB.Height + 2 * outlineSpacing);
-        Debug.WriteLine($"Elements Count: {boundsWSpacing}");
         return boundsWSpacing;
     }
 

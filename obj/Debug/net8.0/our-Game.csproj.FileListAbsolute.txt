@@ -545,3 +545,4 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\text\text_sonic.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\text\text_spiderman.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\text\text_wizzard.xnb
+C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\players\Robot.xnb
