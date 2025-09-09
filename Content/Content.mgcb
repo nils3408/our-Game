@@ -512,6 +512,18 @@
 /processorParam:TextureFormat=Color
 /build:Knight2.png
 
+#begin Knight2neu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Knight2neu.png
+
 #begin Kristallbrocken.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -536,6 +548,18 @@
 /processorParam:TextureFormat=Color
 /build:Mario 2.png
 
+#begin Mario 2neu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Mario 2neu.png
+
 #begin ninja2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -547,6 +571,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:ninja2.png
+
+#begin ninja2neu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ninja2neu.png
 
 #begin Panzer.png
 /importer:TextureImporter
@@ -812,6 +848,18 @@
 /processorParam:TextureFormat=Color
 /build:Sonic2.png
 
+#begin Sonic2neu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sonic2neu.png
+
 #begin sounds/coin1.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -991,6 +1039,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Spiderman2.png
+
+#begin Spiderman2neu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Spiderman2neu.png
 
 #begin spielfeld_pictures/Spielfeld.png
 /importer:TextureImporter
@@ -1243,4 +1303,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Wizard2.png
+
+#begin Wizard2neu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Wizard2neu.png
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/sounds/coin1.mp3</SourceFile>
-  <SourceTime>2025-09-09T19:11:52.9413476+02:00</SourceTime>
-  <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/sounds/coin1.xnb</DestFile>
-  <DestTime>2025-09-09T19:13:00.8840365+02:00</DestTime>
+  <SourceFile>C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/sounds/coin1.mp3</SourceFile>
+  <SourceTime>2025-09-09T23:51:22.0949757+02:00</SourceTime>
+  <DestFile>C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/Windows/sounds/coin1.xnb</DestFile>
+  <DestTime>2025-09-10T00:04:42.7827761+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
