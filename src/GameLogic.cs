@@ -472,12 +472,15 @@ public class GameLogic : GameState
 
 
         football.draw(spriteBatch, gameTime);
+        
+        player1.draw(spriteBatch, gameTime);
+        player2.draw(spriteBatch, gameTime);
+
         //goals
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_leftGoalPosition.X, (int)_leftGoalPosition.Y, goalWidth, goalHeight), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
         spriteBatch.Draw(_goalTexture, new Microsoft.Xna.Framework.Rectangle((int)_rightGoalPosition.X, (int)_rightGoalPosition.Y, goalWidth, goalHeight), Microsoft.Xna.Framework.Color.White);
 
-        player1.draw(spriteBatch, gameTime);
-        player2.draw(spriteBatch, gameTime);
+
         
         foreach (Item i in items)                { i.draw(spriteBatch, gameTime); }  //draw items
         foreach (Schuriken s in schurikenListe)  { s.draw(spriteBatch, gameTime); }  //draw Shiruken 

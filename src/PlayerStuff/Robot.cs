@@ -30,19 +30,21 @@ public class Robot : Player
         }
         else 
         {
-            if(RP.X < 1800) moveRight(delta);
+            if(RP.X < 1600) moveRight(delta);
             
-
-            if (RP.X - BP.X < 100 && (BP.Y + 50 * BV.Y) < 200 ) {
-                jump(delta);
-            }
             if ( RP.X - BP.X < 10) {
                 shoots_horizontal = true;
 
                 Debug.WriteLine($"Ball Position: {BP}, Robot Position: {RP} ");
             }
         }
+
+        if (BV.X > 0 &&  (BP.Y + 50 * BV.Y) < 300) {
+            jump(delta);
+        }
+
     }
+
 
     private void moveLeft(float delta)
     {
