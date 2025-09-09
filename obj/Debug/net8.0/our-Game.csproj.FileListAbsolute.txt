@@ -706,3 +706,16 @@ C:\Users\Lukas\source\repos\Sakulblue\our-Game\bin\Debug\net8.0\Content\Mario 2n
 C:\Users\Lukas\source\repos\Sakulblue\our-Game\bin\Debug\net8.0\Content\ninja2neu.xnb
 C:\Users\Lukas\source\repos\Sakulblue\our-Game\bin\Debug\net8.0\Content\Sonic2neu.xnb
 C:\Users\Lukas\source\repos\Sakulblue\our-Game\bin\Debug\net8.0\Content\Wizard2neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Knight2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Knight2neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario 2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Mario 2neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\ninja2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\ninja2neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Sonic2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Sonic2neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spiderman2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Spiderman2neu.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Standart2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Wizard2.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\Wizard2neu.xnb

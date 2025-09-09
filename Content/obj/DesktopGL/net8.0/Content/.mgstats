@@ -1,6 +1,1 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/Knight2neu.png","C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/DesktopGL/Content/Knight2neu.xnb","TextureProcessor","Texture2DContent",16911,57197,0,1349607
-"C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/Mario 2neu.png","C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/DesktopGL/Content/Mario 2neu.xnb","TextureProcessor","Texture2DContent",211297,5760085,0,1910873
-"C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/ninja2neu.png","C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/DesktopGL/Content/ninja2neu.xnb","TextureProcessor","Texture2DContent",684125,2598509,0,1213829
-"C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/Sonic2neu.png","C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/DesktopGL/Content/Sonic2neu.xnb","TextureProcessor","Texture2DContent",394498,1912645,0,0720764
-"C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/Wizard2neu.png","C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/DesktopGL/Content/Wizard2neu.xnb","TextureProcessor","Texture2DContent",648967,2900245,0,0815067

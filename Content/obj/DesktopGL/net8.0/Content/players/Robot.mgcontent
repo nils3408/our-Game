@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/players/Robot.png</SourceFile>
-  <SourceTime>2025-09-09T23:51:22.0608775+02:00</SourceTime>
-  <DestFile>C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/DesktopGL/Content/players/Robot.xnb</DestFile>
-  <DestTime>2025-09-09T23:52:20.0077614+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/players/Robot.png</SourceFile>
+  <SourceTime>2025-09-10T01:15:08.6926423+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/players/Robot.xnb</DestFile>
+  <DestTime>2025-09-10T01:15:40.1079419+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

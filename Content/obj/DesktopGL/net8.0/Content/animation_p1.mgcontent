@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/animation_p1.png</SourceFile>
-  <SourceTime>2025-09-09T23:51:13.2551356+02:00</SourceTime>
-  <DestFile>C:/Users/Lukas/source/repos/Sakulblue/our-Game/Content/bin/DesktopGL/Content/animation_p1.xnb</DestFile>
-  <DestTime>2025-09-09T23:52:09.4599359+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/animation_p1.png</SourceFile>
+  <SourceTime>2025-08-02T22:03:36.7330154+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/animation_p1.xnb</DestFile>
+  <DestTime>2025-09-10T01:15:35.1696615+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
