@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 public class SimpleButton : UIElement
 {
@@ -244,28 +245,28 @@ public class KeySelector : UIElement
     {
         switch (key)
         {
-            case Keys.OemPeriod:        return ".";
-            case Keys.OemComma:         return ",";
-            case Keys.OemMinus:         return "-";
-            case Keys.OemBackslash:     return ">";
-            case Keys.Add:              return "+";
-            case Keys.LeftControl:      return "STRG";
-            case Keys.RightControl:     return "STRG";
-            case Keys.CapsLock:         return "Caps";
-            case Keys.LeftShift:        return "LShift";
-            case Keys.RightShift:       return "RShift";
-            case Keys.NumLock:          return "NUM";
-            
-            case Keys.D0:               return "0";
-            case Keys.D1:               return "1";
-            case Keys.D2:               return "2";
-            case Keys.D3:               return "3";
-            case Keys.D4:               return "4";
-            case Keys.D5:               return "5";
-            case Keys.D6:               return "6";
-            case Keys.D7:               return "7";
-            case Keys.D8:               return "8";
-            case Keys.D9:               return "9";
+            case Keys.OemPeriod: return ".";
+            case Keys.OemComma: return ",";
+            case Keys.OemMinus: return "-";
+            case Keys.OemBackslash: return ">";
+            case Keys.Add: return "+";
+            case Keys.LeftControl: return "STRG";
+            case Keys.RightControl: return "STRG";
+            case Keys.CapsLock: return "Caps";
+            case Keys.LeftShift: return "LShift";
+            case Keys.RightShift: return "RShift";
+            case Keys.NumLock: return "NUM";
+
+            case Keys.D0: return "0";
+            case Keys.D1: return "1";
+            case Keys.D2: return "2";
+            case Keys.D3: return "3";
+            case Keys.D4: return "4";
+            case Keys.D5: return "5";
+            case Keys.D6: return "6";
+            case Keys.D7: return "7";
+            case Keys.D8: return "8";
+            case Keys.D9: return "9";
 
             case Keys.NumPad0: return "Num0";
             case Keys.NumPad1: return "Num1";
@@ -281,5 +282,66 @@ public class KeySelector : UIElement
             default:
                 return key.ToString();
         }
+    }
+}
+
+
+public class SwitchButton : UIElement
+{
+    String[] options;
+    int curIndex;
+
+    bool isHovered = false;
+
+    public bool drawOutline = false;
+    public Color OutlineColor = Color.Black;
+    public Color TextColor = Color.Black;
+    public Color BackgroundColor = Color.White;
+    public Color HoverColor = Color.Gray;
+
+    public event Action onClick;
+
+    public SwitchButton(Point Size, String[] options) : base(Size)
+    {
+        this.options = options;
+    }
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+
+        if (isHovered)
+        {
+            PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), HoverColor);
+        }
+        else
+        {
+            PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), BackgroundColor);
+
+        }
+        if (drawOutline) PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), OutlineColor);
+        PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), options[curIndex], TextColor);
+    }
+
+    public override void Update()
+    {
+        MouseState mouseState = Mouse.GetState();
+        Point mousePos = new Point(mouseState.X, mouseState.Y);
+        isHovered = GetBounds().Contains(mousePos);
+
+        // Check for click
+        if (isHovered && InputHandler.IsMouseLeftReleased())
+        {
+            curIndex = ++curIndex % options.Length;
+            onClick.Invoke();
+        }
+    }
+
+    public String getCurOption()
+    {
+        return options[curIndex];
+    }
+    public int getCurIndex()
+    {
+        return curIndex;
     }
 }

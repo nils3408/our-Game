@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/sounds/crowd_noise.mp3</SourceFile>
-  <SourceTime>2025-08-27T10:12:34.4927167+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/sounds/crowd_noise.xnb</DestFile>
-  <DestTime>2025-09-02T14:37:18.3742282+02:00</DestTime>
+  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/sounds/crowd_noise.mp3</SourceFile>
+  <SourceTime>2025-09-02T10:13:13.7215108+02:00</SourceTime>
+  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/sounds/crowd_noise.xnb</DestFile>
+  <DestTime>2025-09-09T12:42:08.6806645+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/sounds/crowd_noise.ogg</string>
+    <string>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/sounds/crowd_noise.ogg</string>
   </BuildOutput>
 </PipelineBuildEvent>

@@ -30,7 +30,8 @@ public static class PlayerFactory
         Ninja = 4,
         Mario = 5,
         Wizzard = 6,
-        RandomPlayer = 7
+        RandomPlayer = 7,
+        Robot = 42
     }
 
     private static GraphicsDevice _graphicsDevice;
@@ -66,15 +67,15 @@ public static class PlayerFactory
 
 
         // Hier bitte die Dateipfade zu den Texturen einfügen, in denen die verschiedenen PlayerType beschrieben werden
-        playerInfo[(int)Types.Spiderman]    = Content.Load<Texture2D>("text/text_spiderman");
-        playerInfo[(int)Types.Knight]       = Content.Load<Texture2D>("text/text_knight");
-        playerInfo[(int)Types.Sonic]        = Content.Load<Texture2D>("text/text_sonic");
-        playerInfo[(int)Types.Standart]     = Content.Load<Texture2D>("text/text_footballer");
-        playerInfo[(int)Types.Ninja]        = Content.Load<Texture2D>("text/text_ninja");
-        playerInfo[(int)Types.Mario]        = Content.Load<Texture2D>("text/text_mario");
-        playerInfo[(int)Types.Wizzard]      = Content.Load<Texture2D>("text/text_wizzard");
+        playerInfo[(int)Types.Spiderman] = Content.Load<Texture2D>("text/text_spiderman");
+        playerInfo[(int)Types.Knight] = Content.Load<Texture2D>("text/text_knight");
+        playerInfo[(int)Types.Sonic] = Content.Load<Texture2D>("text/text_sonic");
+        playerInfo[(int)Types.Standart] = Content.Load<Texture2D>("text/text_footballer");
+        playerInfo[(int)Types.Ninja] = Content.Load<Texture2D>("text/text_ninja");
+        playerInfo[(int)Types.Mario] = Content.Load<Texture2D>("text/text_mario");
+        playerInfo[(int)Types.Wizzard] = Content.Load<Texture2D>("text/text_wizzard");
         playerInfo[(int)Types.RandomPlayer] = Content.Load<Texture2D>("text/text_random");
-        
+
     }
 
     public static Player CreatePlayer(Types playerType, Vector2 position, int id, PlayerControls controls)
@@ -129,4 +130,9 @@ public static class PlayerFactory
     {
         return playerInfo[(int)playerType];
     }
+    /*
+    public static Robot CreateRobot()
+    {
+        return new Player(_graphicsDevice, Vector2.Zero, GetPlayerTexture(playerType), getSMT(playerType), 2, Game1.rightPlayerControls);
+    }*/
 }

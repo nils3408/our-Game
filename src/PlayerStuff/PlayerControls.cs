@@ -14,7 +14,8 @@ public enum PlayerAction
     PowerUp_1 = 4,
     PowerUp_2 = 5,
     Lupfer = 6,
-    Diagonal = 7
+    Diagonal = 7,
+    Horizontal = 8
     }
 public class PlayerControls
 {

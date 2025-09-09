@@ -209,7 +209,7 @@ public class Player
        else                 { return -1;}
     }
 
-    public void handle_input(float delta)
+    public virtual void handle_input(float delta)
     {
         //tastatur
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Left)))
@@ -225,8 +225,10 @@ public class Player
             
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position)) jump(delta);
 
-        //if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer))) shoots_lupfer = true;
-        //if (InputHandler.IsDown(controls.getKey(PlayerAction.Diagonal))) shoots_diagonal = true;
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer))) shoots_lupfer = true;
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Diagonal))) shoots_diagonal = true;
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Horizontal))) shoots_horizontal = true;
+
 
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Special))) do_special_effect(delta);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);

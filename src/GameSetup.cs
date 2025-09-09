@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -58,13 +59,17 @@ public class GameSetup : GameState
 
         H1.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2 - 50));
         container.Add(H1);
-
+        
         SimpleButton KickOffFeatures = new SimpleButton(new Point(500, 100), "Kick-off features", font);
         KickOffFeatures.SetToStayPressed();
         KickOffFeatures.SetColor(Color.White, Color.Green, outlineColor);
         KickOffFeatures.OnClick += () => { KickOffFeaturesBool = !KickOffFeaturesBool; };
         KickOffFeatures.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 180));
         container.Add(KickOffFeatures);
+        /*
+        String[] options = { "Normal", "Kick-off features", "Against a Robot" };
+        SwitchButton switchButton = new SwitchButton(new Point(500, 100), options);
+        */
 
         SimpleButton startButton = new SimpleButton(new Point(500, 100), "Start New Game", font);
         startButton.OnClick += () =>
@@ -79,7 +84,10 @@ public class GameSetup : GameState
                 GameLogic newGame = new GameLogic(game, leftPlayer, rightPlayer);
                 newGame.Initialize();
                 newGame.LoadContent();
-                newGame.specialModesEnabled = KickOffFeatures.GetState();
+                /*
+                newGame.specialModesEnabled = (switchButton.getCurIndex() == 1);
+                //if(switchButton.getCurIndex() == 2) newGame.SetPlayer(leftPlayer,new Robot())
+                */
                 Game1.nextState = newGame;
                 Game1.openGames.Add(newGame);
             }
