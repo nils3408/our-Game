@@ -100,9 +100,9 @@ public class Player
     public bool shoots_horizontal = false;
     public bool shoots_lupfer = false;
     
-    public DateTime time_kreis_got_released = DateTime.MaxValue;
-    public DateTime time_dreieck_got_released = DateTime.MaxValue;
-    public DateTime time_L1_got_released = DateTime.MaxValue;
+    public DateTime time_shoot_lupfer_button_got_released     = DateTime.MaxValue;
+    public DateTime time_shoot_diagonal_button_got_released   = DateTime.MaxValue;
+    public DateTime time_shoot_horizontal_button_got_released = DateTime.MaxValue;
     public TimeSpan time_diff = TimeSpan.FromMilliseconds(350);
 
     /*
@@ -209,80 +209,102 @@ public class Player
        else                 { return -1;}
     }
 
+
+    //----------------------------------------------------------------------
+    //----------------------------------------------------------------------
+    //Input Handling
     public virtual void handle_input(float delta)
     {
-        //tastatur
+        handle_tastatur_input(delta);
+        handle_controller_input(delta);
+    }
+
+
+    public void handle_tastatur_input(float delta)
+    {
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Left)))
         {
-            if (MoveChange_powerup_in_use == false)     { move_helper(delta, -1); }
-            else                                        { move_helper(delta, 1);  }
+            if (MoveChange_powerup_in_use == false) { move_helper(delta, -1); }
+            else                                    { move_helper(delta, 1);  }
         }
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Right)))
         {
-            if (MoveChange_powerup_in_use == false)     { move_helper(delta, 1); }
-            else                                        { move_helper(delta,-1); }
+            if (MoveChange_powerup_in_use == false) { move_helper(delta, 1); }
+            else                                    { move_helper(delta, -1);}
         }
-            
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position)) jump(delta);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Jump)) && IsOnGround(position))
+        {
+            jump(delta);
+        }
 
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer))) shoots_lupfer = true;
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Diagonal))) shoots_diagonal = true;
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Horizontal))) shoots_horizontal = true;
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer)))      { shoots_lupfer = true;    }
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Diagonal)))    { shoots_diagonal = true;  }
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Horizontal)))  { shoots_horizontal = true;}
+
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Special)))     do_special_effect(delta);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1)))   activate_powerUP(1);
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2)))   activate_powerUP(2);
 
 
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Special))) do_special_effect(delta);
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1))) activate_powerUP(1);
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_2))) activate_powerUP(2);
+        //releasing keys
+        if (InputHandler.IsReleased(controls.getKey(PlayerAction.Lupfer)))      { time_shoot_lupfer_button_got_released     = DateTime.Now; }
+        if (InputHandler.IsReleased(controls.getKey(PlayerAction.Diagonal)))    { time_shoot_diagonal_button_got_released   = DateTime.Now; }
+        if (InputHandler.IsReleased(controls.getKey(PlayerAction.Horizontal)))  { time_shoot_horizontal_button_got_released = DateTime.Now; }
+
+        update_released_Controller_Buttons_and_Keys();
+    }
 
 
-
-        //-----------------------------------------------------------------------------------------
+    public void handle_controller_input(float delta)
+    {
         //Controller (steuerung sind X-Box tasten, do not ask me why...Weil Microsoft
-       
-        if (InputHandler.IsGamePadButtonDown(Buttons.A, playerGroup))   jump(delta);
-        //if (InputHandler.IsL3MovedUp(playerGroup))                      jump(delta);
+
         if (InputHandler.IsL3MovedToSide("l", playerGroup))
         {
-            if (MoveChange_powerup_in_use == false)     { move_helper(delta, -1);}
-            else                                        { move_helper(delta, 1); }
+            if (MoveChange_powerup_in_use == false) { move_helper(delta, -1); }
+            else                                    { move_helper(delta, 1); }
         }
         if (InputHandler.IsL3MovedToSide("r", playerGroup))
         {
-            if (MoveChange_powerup_in_use == false)     { move_helper(delta, 1);  }
-            else                                        { move_helper(delta, -1); }
+            if (MoveChange_powerup_in_use == false) { move_helper(delta, 1); }
+            else                                    { move_helper(delta, -1); }
+        }
+        if (InputHandler.IsGamePadButtonDown(Buttons.A, playerGroup))
+        {
+            jump(delta);
         }
 
-        if (InputHandler.IsGamePadButtonDown(Buttons.X, playerGroup)) do_special_effect(delta);
+        if (InputHandler.IsGamePadButtonDown(Buttons.X, playerGroup))   do_special_effect(delta);
         if (InputHandler.isLeftTriggerDown(playerGroup))                activate_powerUP(1);
         if (InputHandler.isRightTriggerDown(playerGroup))               activate_powerUP(2);
 
-        //pressing button
-        if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup) && 
-            !(InputHandler.IsGamePadButtonDown(Buttons.LeftShoulder, playerGroup)))     shoots_diagonal   = true;
 
-        if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup) &&
-            InputHandler.IsGamePadButtonDown(Buttons.LeftShoulder, playerGroup))        shoots_lupfer = true;
+        if (InputHandler.IsGamePadButtonDown(Buttons.Y, playerGroup))
+            shoots_horizontal = true;
 
-        if (InputHandler.IsGamePadButtonDown(Buttons.Y, playerGroup))                   shoots_horizontal = true;
+        if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup))
+        {
+            if (InputHandler.IsGamePadButtonDown(Buttons.LeftShoulder, playerGroup))
+                shoots_lupfer = true;
+            else
+                shoots_diagonal = true;
+        }
+
 
         //releasing button
-        if (InputHandler.IsGamePadButtonReleased(Buttons.B, playerGroup))
-        {
-            time_kreis_got_released = DateTime.Now;
-        }
-        if (InputHandler.IsGamePadButtonReleased(Buttons.Y, playerGroup))
-        {
-            time_dreieck_got_released = DateTime.Now;
-        }
-        if (InputHandler.IsGamePadButtonReleased(Buttons.LeftShoulder, playerGroup))
-        {
-            time_L1_got_released = DateTime.Now;
-        }
+        if (InputHandler.IsGamePadButtonReleased(Buttons.B, playerGroup))               { time_shoot_diagonal_button_got_released   = DateTime.Now; 
+                                                                                          time_shoot_lupfer_button_got_released     = DateTime.Now; }
+        if (InputHandler.IsGamePadButtonReleased(Buttons.Y, playerGroup))               { time_shoot_horizontal_button_got_released = DateTime.Now; }
+        if (InputHandler.IsGamePadButtonReleased(Buttons.LeftShoulder, playerGroup))    { time_shoot_lupfer_button_got_released     = DateTime.Now; }
 
-        update_released_Controller_Buttons();
+
+        update_released_Controller_Buttons_and_Keys();
     }
 
-    public void update_released_Controller_Buttons()
+
+    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------
+    public void update_released_Controller_Buttons_and_Keys()
     {
         update_is_shooting_diagonal();
         update_is_shooting_horizontal();
@@ -293,11 +315,10 @@ public class Player
     {
         if (shoots_horizontal == false) { return; }
 
-        //horizontal shooting is by dreieck
-        TimeSpan vergangeneZeit = DateTime.Now - time_dreieck_got_released;
-        if (vergangeneZeit> time_diff)
+        TimeSpan vergangeneZeit = DateTime.Now - time_shoot_horizontal_button_got_released;
+        if (vergangeneZeit > time_diff)
         {
-            time_dreieck_got_released = DateTime.MaxValue;
+            time_shoot_horizontal_button_got_released = DateTime.MaxValue;
             shoots_horizontal = false;
         }
     }
@@ -306,11 +327,10 @@ public class Player
     {
         if (shoots_diagonal == false) { return; }
 
-        //diagonal shooting is by kreis
-        TimeSpan vergangeneZeit = DateTime.Now - time_kreis_got_released;
+        TimeSpan vergangeneZeit = DateTime.Now - time_shoot_diagonal_button_got_released;
         if (vergangeneZeit > time_diff)
         {
-            time_kreis_got_released = DateTime.MaxValue;
+            time_shoot_diagonal_button_got_released = DateTime.MaxValue;
             shoots_diagonal = false;
         }
     }
@@ -319,20 +339,12 @@ public class Player
     {
         if (shoots_lupfer == false) { return; }
 
-        // lupfer is by Kreis + L1
-        TimeSpan vergangeneZeit1 = DateTime.Now - time_kreis_got_released;
-        TimeSpan vergangeneZeit2 = DateTime.Now - time_L1_got_released;
-
+        TimeSpan vergangeneZeit1 = DateTime.Now - time_shoot_lupfer_button_got_released;
         if (vergangeneZeit1 > time_diff)
         {
-            time_kreis_got_released = DateTime.MaxValue;
+            time_shoot_lupfer_button_got_released = DateTime.MaxValue;
             shoots_lupfer = false;
-        }
-        if (vergangeneZeit2 > time_diff)
-        {
-            time_L1_got_released = DateTime.MaxValue;
-            shoots_lupfer = false;
-        }
+        }       
     }
 
 
