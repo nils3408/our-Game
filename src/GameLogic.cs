@@ -511,7 +511,7 @@ public class GameLogic : GameState
             spriteBatch.DrawString(scoreFont, winnerText, textPosition, Color.Gold);
 
             // "ESC für Menü" Text
-            string escText = "ESC um zum Startbildschirm zu kommen!";
+            string escText = "ESC to return to Main Menu";
             Vector2 escTextSize = scoreFont.MeasureString(escText);
             Vector2 escTextPosition = new Vector2(
                 (_graphics.PreferredBackBufferWidth - escTextSize.X) / 2,
@@ -664,10 +664,10 @@ public class GameLogic : GameState
         //draw the text of the Mode
         string modeText = currentMode switch
         {
-            RoundMode.WallFrontGoals =>    "Mode: Wand vor dem Tor",
-            RoundMode.WallButtonTrigger => "Mode: Triff den Knopf",
-            RoundMode.MovingWall =>        "Mode: MovingWall",
-            RoundMode.GoombaMode =>        "Mode: Goombas ausweichen",
+            RoundMode.WallFrontGoals =>    "Mode: Wall with 3 HP!",
+            RoundMode.WallButtonTrigger => "Mode: Hit the Button!",
+            RoundMode.MovingWall =>        "Mode: Moving Walls",
+            RoundMode.GoombaMode =>        "Mode: evade Goombas ",
             _ => string.Empty
         };
 

@@ -500,6 +500,18 @@
 /processorParam:TextureFormat=Color
 /build:Holzwand.png
 
+#begin Knight2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Knight2.png
+
 #begin Kristallbrocken.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -511,6 +523,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Kristallbrocken.png
+
+#begin Mario 2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Mario 2.png
+
+#begin ninja2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ninja2.png
 
 #begin Panzer.png
 /importer:TextureImporter
@@ -764,6 +800,18 @@
 /processorParam:TextureFormat=Color
 /build:shuriken.png
 
+#begin Sonic2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sonic2.png
+
 #begin sounds/coin1.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -932,6 +980,18 @@
 /processorParam:TextureFormat=Color
 /build:special_move_textures/special_move_texture_wizzard.png
 
+#begin Spiderman2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Spiderman2.png
+
 #begin spielfeld_pictures/Spielfeld.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -991,6 +1051,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:spielfeld_pictures/starting_background2.png
+
+#begin Standart2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Standart2.png
 
 #begin stun7.png
 /importer:TextureImporter
@@ -1159,4 +1231,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:vs_zeichen.png
+
+#begin Wizard2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Wizard2.png
 

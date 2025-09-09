@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/Coin/coin-64x64.png</SourceFile>
-  <SourceTime>2025-08-24T01:06:29.1616445+02:00</SourceTime>
+  <SourceTime>2025-09-09T19:11:45.7550573+02:00</SourceTime>
   <DestFile>C:/Users/Lukas/source/repos/nils3408/our-Game/Content/bin/Windows/Coin/coin-64x64.xnb</DestFile>
-  <DestTime>2025-08-24T01:08:43.9587353+02:00</DestTime>
+  <DestTime>2025-09-09T19:12:58.8281111+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
