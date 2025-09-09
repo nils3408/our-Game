@@ -45,8 +45,8 @@ public class Wizzard: Player
 
 
     //Konstruktor for Wizzard
-    public Wizzard(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture, int player, PlayerControls controls)
-              : base(graphicsDevice, position1, texture1, special_move_texture, player, controls)
+    public Wizzard(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D shoot_texture, Texture2D special_move_texture, int player, PlayerControls controls)
+              : base(graphicsDevice, position1, texture1, shoot_texture, special_move_texture, player, controls)
     {}
 
 
@@ -144,16 +144,18 @@ public class Wizzard: Player
         if (is_teleporting) { return; }
 
 
+        Texture2D tex = get_current_texture();
+
         if (moving_direction == -1)
         {
-            spriteBatch.Draw(texture,
+            spriteBatch.Draw(tex,
                              currentRect, null, Color.White, 0f, Vector2.Zero,
                              SpriteEffects.FlipHorizontally, 0f
                              );
         }
         else
         {
-            spriteBatch.Draw(texture,
+            spriteBatch.Draw(tex,
                             currentRect, null, Color.White, 0f, Vector2.Zero,
                             SpriteEffects.None, 0f
                             );
