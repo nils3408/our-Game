@@ -548,3 +548,6 @@ C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\players\Robot.xnb
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\sounds\wristle.ogg
 C:\Users\Feuer\OneDrive\Desktop\SS25\3D Game Projekt\GitHubDesktop\our-Game\bin\Debug\net8.0\Content\sounds\wristle.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\wristle.ogg
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\players\Robot.xnb
+C:\Users\nilsw\source\repos\our-Game\bin\Debug\net8.0\Content\sounds\wristle.xnb

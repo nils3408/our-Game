@@ -55,6 +55,7 @@ public class Ball
     public Vector2 shooting_horizontal_velocity = new Vector2(900, -20);
     public Vector2 shooting_diagonally_velocity = new Vector2(900, -250);
     public Vector2 shooting_lupfer_velocity = new Vector2(800, -750);
+    public Vector2 shooting_high_velocity = new Vector2(0, -800);
 
 
     public int BallSize = 100;

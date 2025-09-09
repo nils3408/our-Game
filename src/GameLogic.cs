@@ -749,7 +749,14 @@ public class GameLogic : GameState
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
         collisionCooldown1 -= delta;
         collisionCooldown2 -= delta;
-
+        
+        // both players intersect
+        if (football.getRect().Intersects(player1.currentRect) &&
+            football.getRect().Intersects(player2.currentRect))
+        {
+            football.velocity = football.shooting_high_velocity;
+            return;
+        }
 
         // Spieler 1
         if (football.getRect().Intersects(player1.currentRect) && collisionCooldown1 <= 0)
