@@ -146,19 +146,36 @@ public class Wizzard: Player
 
         Texture2D tex = get_current_texture();
 
+        // Similar to the base player draw logic we scale the texture
+        // explicitly so that shoot animations keep the same visual size
+        // as the normal sprite.
+        Vector2 scale = new Vector2(
+            (float)RectangleWidth / tex.Width,
+            (float)RectangleHeight / tex.Height);
+
         if (moving_direction == -1)
         {
             spriteBatch.Draw(tex,
-                             currentRect, null, Color.White, 0f, Vector2.Zero,
-                             SpriteEffects.FlipHorizontally, 0f
-                             );
+                             position,
+                             null,
+                             Color.White,
+                             0f,
+                             Vector2.Zero,
+                             scale,
+                             SpriteEffects.FlipHorizontally,
+                             0f);
         }
         else
         {
             spriteBatch.Draw(tex,
-                            currentRect, null, Color.White, 0f, Vector2.Zero,
-                            SpriteEffects.None, 0f
-                            );
+                             position,
+                             null,
+                             Color.White,
+                             0f,
+                             Vector2.Zero,
+                             scale,
+                             SpriteEffects.None,
+                             0f);
 
         }
 

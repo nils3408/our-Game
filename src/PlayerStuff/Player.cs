@@ -390,19 +390,41 @@ public class Player
     {
         Texture2D tex = get_current_texture();
 
+        // Draw the player scaled so that the sprite always matches the
+        // RectangleWidth/RectangleHeight of the player.  Some shooting
+        // textures have a different resolution than the normal textures
+        // which previously resulted in the player appearing larger or
+        // smaller while shooting.  By computing an explicit scale factor
+        // based on the desired rectangle and the actual texture size we
+        // ensure a consistent on screen size for all animations.
+
+        Vector2 scale = new Vector2(
+            (float)RectangleWidth / tex.Width,
+            (float)RectangleHeight / tex.Height);
+
         if (moving_direction == -1)
         {
             spritebatch.Draw(tex,
-                             currentRect, null, Color.White, 0f, Vector2.Zero,
-                             SpriteEffects.FlipHorizontally, 0f
-                             );
+                             position,
+                             null,
+                             Color.White,
+                             0f,
+                             Vector2.Zero,
+                             scale,
+                             SpriteEffects.FlipHorizontally,
+                             0f);
         }
         else
         {
             spritebatch.Draw(tex,
-                            currentRect, null, Color.White, 0f, Vector2.Zero,
-                            SpriteEffects.None, 0f
-                            );
+                             position,
+                             null,
+                             Color.White,
+                             0f,
+                             Vector2.Zero,
+                             scale,
+                             SpriteEffects.None,
+                             0f);
         }
 
         if (can_move == false)
