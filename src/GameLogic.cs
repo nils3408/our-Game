@@ -49,6 +49,7 @@ public class GameLogic : GameState
     private SoundEffect iceSound;
     private SoundEffect FansByGoalSound;
     private SoundEffect CoinSound;
+    private SoundEffect WristleSound;
 
     private SoundEffect teleportationSound;
     private SoundEffect marioSound;
@@ -279,9 +280,10 @@ public class GameLogic : GameState
         spriteBatch = new Microsoft.Xna.Framework.Graphics.SpriteBatch(_graphicsDevice);
         _backgroundTexture = Content.Load<Texture2D>("spielfeld_pictures/Spielfeld3");
 
-        iceSound  = Content.Load<SoundEffect>("sounds/ice2");
-        goalSound = Content.Load<SoundEffect>("sounds/goal");
-        CoinSound = Content.Load<SoundEffect>("sounds/coin1");
+        iceSound     = Content.Load<SoundEffect>("sounds/ice2");
+        goalSound    = Content.Load<SoundEffect>("sounds/goal");
+        CoinSound    = Content.Load<SoundEffect>("sounds/coin1");
+        WristleSound = Content.Load<SoundEffect>("sounds/wristle");
         FansByGoalSound     = Content.Load<SoundEffect>("sounds/FansByGoal");
         teleportationSound  = Content.Load<SoundEffect>("sounds/wizzard_sound2");
         marioSound          = Content.Load<SoundEffect>("sounds/mario_sound");
@@ -1410,8 +1412,8 @@ public class GameLogic : GameState
 
     public void playWristle()
     {
-        SoundEffectInstance cc = CoinSound.CreateInstance();
-        cc.Volume = 0.5f;
+        SoundEffectInstance cc = WristleSound.CreateInstance();
+        cc.Volume = 0.75f;
         cc.Play();
     }
 }
