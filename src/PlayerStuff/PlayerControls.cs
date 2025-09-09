@@ -118,7 +118,7 @@ public class ControlsEditor : StackContainer
 
         AddKeyEditor(PlayerAction.Diagonal, "Shoot high");
 
-        AddKeyEditor(PlayerAction.Horizontal, "Shoot high");
+        AddKeyEditor(PlayerAction.Horizontal, "Shoot horiz.");
     }
     
     private void AddKeyEditor(PlayerAction action, String text)
