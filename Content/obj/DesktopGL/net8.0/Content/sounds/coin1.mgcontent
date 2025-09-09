@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/sounds/coin1.mp3</SourceFile>
-  <SourceTime>2025-09-02T10:13:13.5995073+02:00</SourceTime>
-  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/sounds/coin1.xnb</DestFile>
-  <DestTime>2025-09-09T12:41:56.125136+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/sounds/coin1.mp3</SourceFile>
+  <SourceTime>2025-08-31T12:22:54.9799879+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/sounds/coin1.xnb</DestFile>
+  <DestTime>2025-09-09T15:46:45.1455521+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
