@@ -20,6 +20,10 @@ public class Player
 
     public Texture2D texture;
     public Texture2D special_move_texture;
+    public Texture2D shoot_texture;
+
+    public DateTime last_time_shot = DateTime.MinValue;
+    public TimeSpan shot_animation_duration = TimeSpan.FromMilliseconds(200);
 
     public Player otherPlayer;
     public int playerGroup;
@@ -146,13 +150,14 @@ public class Player
      */
 
 
-    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D special_move_texture1, int player, PlayerControls controls)
+    public Player(GraphicsDevice graphicsDevice, Vector2 position1, Texture2D texture1, Texture2D shoot_texture1, Texture2D special_move_texture1, int player, PlayerControls controls)
     {
         position = position1;
         playerGroup = player;
         moving_direction = get_moving_direction_from_player_group();
 
         texture = texture1;
+        shoot_texture = shoot_texture1;
         special_move_texture = special_move_texture1;
 
         currentRect = new Rectangle((int)position.X, (int)position.Y, RectangleWidth, RectangleHeight);
@@ -237,9 +242,9 @@ public class Player
             jump(delta);
         }
 
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer)))      { shoots_lupfer = true;    }
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Diagonal)))    { shoots_diagonal = true;  }
-        if (InputHandler.IsDown(controls.getKey(PlayerAction.Horizontal)))  { shoots_horizontal = true;}
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Lupfer)))      { shoots_lupfer = true;    last_time_shot = DateTime.Now; }
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Diagonal)))    { shoots_diagonal = true;  last_time_shot = DateTime.Now; }
+        if (InputHandler.IsDown(controls.getKey(PlayerAction.Horizontal)))  { shoots_horizontal = true;last_time_shot = DateTime.Now; }
 
         if (InputHandler.IsDown(controls.getKey(PlayerAction.Special)))     do_special_effect(delta);
         if (InputHandler.IsDown(controls.getKey(PlayerAction.PowerUp_1)))   activate_powerUP(1);
@@ -280,14 +285,23 @@ public class Player
 
 
         if (InputHandler.IsGamePadButtonDown(Buttons.Y, playerGroup))
+        {
             shoots_horizontal = true;
+            last_time_shot = DateTime.Now;
+        }
 
         if (InputHandler.IsGamePadButtonDown(Buttons.B, playerGroup))
         {
             if (InputHandler.IsGamePadButtonDown(Buttons.LeftShoulder, playerGroup))
+            {
                 shoots_lupfer = true;
+                last_time_shot = DateTime.Now;
+            }
             else
+            {
                 shoots_diagonal = true;
+                last_time_shot = DateTime.Now;
+            }
         }
 
 
@@ -357,21 +371,35 @@ public class Player
 
 //------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------
-// draw 
+// draw
+
+    protected Texture2D get_current_texture()
+    {
+        if (shoot_texture != null)
+        {
+            TimeSpan diff = DateTime.Now - last_time_shot;
+            if (diff < shot_animation_duration)
+            {
+                return shoot_texture;
+            }
+        }
+        return texture;
+    }
 
     public virtual void draw(SpriteBatch spritebatch, GameTime gameTime)
-    {   
+    {
+        Texture2D tex = get_current_texture();
 
         if (moving_direction == -1)
         {
-            spritebatch.Draw(texture,
+            spritebatch.Draw(tex,
                              currentRect, null, Color.White, 0f, Vector2.Zero,
                              SpriteEffects.FlipHorizontally, 0f
                              );
         }
         else
         {
-            spritebatch.Draw(texture,
+            spritebatch.Draw(tex,
                             currentRect, null, Color.White, 0f, Vector2.Zero,
                             SpriteEffects.None, 0f
                             );
