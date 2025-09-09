@@ -161,7 +161,7 @@ public class ShowPlayerType : UIElement
 
     public void SwipeLeft()
     {
-        curIndex = (curIndex - 1) % maxTypes;
+        curIndex = (curIndex - 1 + maxTypes) % maxTypes;
     }
 
     public PlayerFactory.Types GetCurPlayer()
