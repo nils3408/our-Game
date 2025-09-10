@@ -79,6 +79,8 @@ public class Player
     public PowerUp powerup2 = null;
     public bool powerUp1_in_use = false;
     public bool powerUp2_in_use = false;
+    public DateTime time_powerUp1_got_collected = DateTime.MaxValue;
+    public DateTime time_powerUp2_got_collected = DateTime.MaxValue;
 
     public DateTime last_time_powerUp1_got_activated = DateTime.MinValue;
     public DateTime last_time_powerUp2_got_activated = DateTime.MinValue;
@@ -737,11 +739,13 @@ public class Player
         if (powerup1 == null)
         {
             powerup1 = a;
+            time_powerUp1_got_collected = DateTime.Now;
             return;
         }
         if (powerup2 == null)
         {
             powerup2 = a;
+            time_powerUp2_got_collected = DateTime.Now;
             return;
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Math = System.Math;
 using Random = System.Random;
+using DateTime = System.DateTime;
 
 public class Robot : Player
 {
@@ -108,42 +109,43 @@ public class Robot : Player
     // powerups
     public void activate_PowerUp()
     {
-        if (powerup1 != null)
+        //only activate powerup if robot contains it for >= xyz seconds
+        float xyz = 3;
+
+        if ((DateTime.Now - time_powerUp1_got_collected).TotalSeconds >= xyz)
         {
-            switch (powerup1)
-            {
-                case BigPlayerPowerUp _:
-                    {
-                        if (BigPlayerPowerUpActivationMakesSense()) activate_powerUP(1);
-                        break;
-                    }
-
-                case SmallPlayerPowerUp _:
-                    if (SmallPlayerPowerUpActivationMakesSense()) activate_powerUP(1);
-                    break;
-
-                        default:
-                    break;
-            }
+           activate_powerUp_helper(powerup1, 1);
         }
 
-
-        if (powerup2 != null)
+        if ((DateTime.Now - time_powerUp2_got_collected).TotalSeconds >= xyz)
         {
-            switch (powerup2)
-            {
-                case BigPlayerPowerUp _:
-                    if (BigPlayerPowerUpActivationMakesSense()) activate_powerUP(2);
-                    break;
+            activate_powerUp_helper(powerup2, 2);
+        }
+    }
 
-                case SmallPlayerPowerUp _:
-                    if (SmallPlayerPowerUpActivationMakesSense()) activate_powerUP(2);
-                    break;
+   
+    public void activate_powerUp_helper(PowerUp? powerUP, int slot)
+    {
+        //handle the switch case
+        if (powerUP == null) { return; }
 
-                default:
-                    break;
+        switch (powerUP)
+        {
+            case BigPlayerPowerUp _:
+                if (BigPlayerPowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
 
-            }
+            case SmallPlayerPowerUp _:
+                if (SmallPlayerPowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
+
+            case FireballPowerUp _:
+
+
+            default:
+                break;
         }
     }
 
@@ -160,6 +162,17 @@ public class Robot : Player
         // makes sense if not currently activated
         // otherPlayer.size >= normal_size -> he ist not small currently
         return otherPlayer.RectangleHeight >= RectangleHeight_copy;
+    }
+
+    public bool FirePowerUpActvationMakesSense()
+    {
+        //makes sense if
+        //      the moves into the direction of the oponents goal 
+        //      icepowerUp is not activated
+
+        bool rightDirection = game.getBall().velocity.X < 0;
+        bool icePowerup     = game.getBall().ice_powerUp_in_use;
+        return (rightDirection && (!icePowerup)) ;
     }
 
 
