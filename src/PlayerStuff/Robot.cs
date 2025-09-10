@@ -123,7 +123,7 @@ public class Robot : Player
         }
     }
 
-   
+
     public void activate_powerUp_helper(PowerUp? powerUP, int slot)
     {
         //handle the switch case
@@ -142,7 +142,23 @@ public class Robot : Player
                 break;
 
             case FireballPowerUp _:
+                if (FirePowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
 
+            case BiggerGoalPowerUp _:
+                if (BiggerGoalPowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
+
+            case StealingPowerUp _:
+                if (StealingPowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
+
+            case MoveChangePowerUp _:
+                activate_powerUP(slot);
+                break;
 
             default:
                 break;
@@ -164,7 +180,7 @@ public class Robot : Player
         return otherPlayer.RectangleHeight >= RectangleHeight_copy;
     }
 
-    public bool FirePowerUpActvationMakesSense()
+    public bool FirePowerUpActivationMakesSense()
     {
         //makes sense if
         //      the moves into the direction of the oponents goal 
@@ -173,6 +189,19 @@ public class Robot : Player
         bool rightDirection = game.getBall().velocity.X < 0;
         bool icePowerup     = game.getBall().ice_powerUp_in_use;
         return (rightDirection && (!icePowerup)) ;
+    }
+
+    public bool BiggerGoalPowerUpActivationMakesSense()
+    {
+        //makes sense if the ball goes into the goal of the oponent
+        bool rightDirection = game.getBall().velocity.X < 0;
+        return rightDirection;
+    }
+
+    public bool StealingPowerUpActivationMakesSense()
+    {
+        //makes sense if the oponents contains at least one powerup the bot can steal
+        return (otherPlayer.powerup1 != null || otherPlayer.powerup2 != null);
     }
 
 
