@@ -197,8 +197,8 @@ public class GameLogic : GameState
 
         randomPlayer1 = is_RandomPlayer(player1);
         randomPlayer2 = is_RandomPlayer(player2);
-        if (randomPlayer1) { player_becomes_new_random_player(player1, 1); }
-        if (randomPlayer2) { player_becomes_new_random_player(player2, 2); }
+        if (randomPlayer1)  { player_becomes_new_random_player(player1, 1); }
+        if (randomPlayer2)  { player_becomes_new_random_player(player2, 2); }
         set_other_players();
 
         item1 = new Item(_graphicsDevice, Content, football);
@@ -229,6 +229,8 @@ public class GameLogic : GameState
         player1.GameLogic_object = this;
         player1.set_content(Content);
         player1.Set_other_Player(player2);
+
+        if (left.isBot()) {randomPlayer1 = false;} 
     }
 
     public void SetPlayer2(Player right)
@@ -242,6 +244,8 @@ public class GameLogic : GameState
         player2.GameLogic_object = this;
         player2.set_content(Content);
         player2.Set_other_Player(player1);
+
+        if (right.isBot()) { randomPlayer2 = false;}
     }
 
     public PlayerFactory.Types getRandomPlayerType()
@@ -367,7 +371,7 @@ public class GameLogic : GameState
     public bool is_RandomPlayer(Player abc)
     {
         // checks whether a player object is from the class RandomPlayer
-        return (abc is RandomPlayer);
+        return (abc is RandomPlayer && !(abc.isBot()));
     }
 
     public override void Update(GameTime gameTime)
@@ -1437,7 +1441,7 @@ public class GameLogic : GameState
     public void playWristle()
     {
         SoundEffectInstance cc = WristleSound.CreateInstance();
-        cc.Volume = 0.75f;
+        cc.Volume = 0.6f;
         cc.Play();
     }
 }

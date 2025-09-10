@@ -186,6 +186,11 @@ public class Player
         content = content1;
     }
 
+    public virtual bool isBot()
+    {
+        return false;
+    }
+
     public void activate_forced_moving(float dir)
     {
         forced_moving_value = true;

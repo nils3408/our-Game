@@ -21,6 +21,11 @@ public class Robot : Player
         moving_direction = -1;
     }
 
+    public override bool isBot()
+    {
+        return true;
+    }
+
     public override void handle_input(float delta)
     {
         Vector2 BV = game.getBall().velocity;

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 using our_Game;
 
 public class GameSetup : GameState
@@ -90,7 +91,7 @@ public class GameSetup : GameState
                 newGame.LoadContent();
 
                 newGame.specialModesEnabled = (switchButton.getCurIndex() == 1);
-                if (switchButton.getCurIndex() == 2) newGame.SetPlayer(leftPlayer, PlayerFactory.CreateRobot(newGame));
+                if (switchButton.getCurIndex() == 2) newGame.SetPlayer2(PlayerFactory.CreateRobot(newGame));
                 
                 Game1.nextState = newGame;
                 Game1.openGames.Clear();
@@ -190,8 +191,6 @@ public class PlayerSelection : StackContainer
     public PlayerSelection(ContentManager Content)
     {
         SpriteFont font = Content.Load<SpriteFont>("Arial");
-
-
 
         base.SetSpacing(spacing);
 
