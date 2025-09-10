@@ -160,6 +160,11 @@ public class Robot : Player
                 activate_powerUP(slot);
                 break;
 
+            case IceballPowerUp _:
+                if(IcePowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
+
             default:
                 break;
         }
@@ -202,6 +207,25 @@ public class Robot : Player
     {
         //makes sense if the oponents contains at least one powerup the bot can steal
         return (otherPlayer.powerup1 != null || otherPlayer.powerup2 != null);
+    }
+
+    public bool IcePowerUpActivationMakesSense()
+    {
+        // makes sense when
+        //      the ball goes into the direction of the own goal
+        //      ball is closer to the own goal than bot 
+        //      but ball is not in the goal
+        //      no player intersects with it -> bug prevention 
+
+        bool rightDirection = game.getBall().velocity.X > 0;
+        bool isCloser       = game.getBall().position.X > position.X;
+        bool notInGoal      = game.getBall().position.X < game.getRightGoalPosition().X - 20;
+
+
+        bool noIntersection1 = !(game.getBall().getRect().Intersects(currentRect));
+        bool noIntersection2 = !(game.getBall().getRect().Intersects(otherPlayer.currentRect));
+
+        return (rightDirection && isCloser && notInGoal && noIntersection1 && noIntersection2);
     }
 
 
