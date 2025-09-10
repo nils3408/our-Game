@@ -1020,6 +1020,8 @@ public class GameLogic : GameState
     //--------------------------------------------------------------------------------------------------------------
     // goal stuff
 
+    public Vector2 getRightGoalPosition()   { return _rightGoalPosition;}
+    public Vector2 getLeftGoalPosition()    { return _leftGoalPosition; }
 
     //Check Ball im Tor
     private void check_for_goal()

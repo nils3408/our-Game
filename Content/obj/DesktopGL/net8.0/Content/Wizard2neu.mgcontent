@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Wizard2neu.png</SourceFile>
-  <SourceTime>2025-09-10T10:26:40.8432693+02:00</SourceTime>
-  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/Wizard2neu.xnb</DestFile>
-  <DestTime>2025-09-10T11:35:05.2662114+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/Wizard2neu.png</SourceFile>
+  <SourceTime>2025-09-10T01:15:08.3732975+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/Wizard2neu.xnb</DestFile>
+  <DestTime>2025-09-10T12:14:39.9198937+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

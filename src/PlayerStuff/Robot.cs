@@ -140,7 +140,7 @@ public class Robot : Player
         }
     }
 
-   
+
     public void activate_powerUp_helper(PowerUp? powerUP, int slot)
     {
         //handle the switch case
@@ -159,7 +159,28 @@ public class Robot : Player
                 break;
 
             case FireballPowerUp _:
+                if (FirePowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
 
+            case BiggerGoalPowerUp _:
+                if (BiggerGoalPowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
+
+            case StealingPowerUp _:
+                if (StealingPowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
+
+            case MoveChangePowerUp _:
+                activate_powerUP(slot);
+                break;
+
+            case IceballPowerUp _:
+                if(IcePowerUpActivationMakesSense())
+                    activate_powerUP(slot);
+                break;
 
             default:
                 break;
@@ -181,7 +202,7 @@ public class Robot : Player
         return otherPlayer.RectangleHeight >= RectangleHeight_copy;
     }
 
-    public bool FirePowerUpActvationMakesSense()
+    public bool FirePowerUpActivationMakesSense()
     {
         //makes sense if
         //      the moves into the direction of the oponents goal 
@@ -190,6 +211,38 @@ public class Robot : Player
         bool rightDirection = game.getBall().velocity.X < 0;
         bool icePowerup     = game.getBall().ice_powerUp_in_use;
         return (rightDirection && (!icePowerup)) ;
+    }
+
+    public bool BiggerGoalPowerUpActivationMakesSense()
+    {
+        //makes sense if the ball goes into the goal of the oponent
+        bool rightDirection = game.getBall().velocity.X < 0;
+        return rightDirection;
+    }
+
+    public bool StealingPowerUpActivationMakesSense()
+    {
+        //makes sense if the oponents contains at least one powerup the bot can steal
+        return (otherPlayer.powerup1 != null || otherPlayer.powerup2 != null);
+    }
+
+    public bool IcePowerUpActivationMakesSense()
+    {
+        // makes sense when
+        //      the ball goes into the direction of the own goal
+        //      ball is closer to the own goal than bot 
+        //      but ball is not in the goal
+        //      no player intersects with it -> bug prevention 
+
+        bool rightDirection = game.getBall().velocity.X > 0;
+        bool isCloser       = game.getBall().position.X > position.X;
+        bool notInGoal      = game.getBall().position.X < game.getRightGoalPosition().X - 20;
+
+
+        bool noIntersection1 = !(game.getBall().getRect().Intersects(currentRect));
+        bool noIntersection2 = !(game.getBall().getRect().Intersects(otherPlayer.currentRect));
+
+        return (rightDirection && isCloser && notInGoal && noIntersection1 && noIntersection2);
     }
 
 

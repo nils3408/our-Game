@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/sounds/wristle.mp3</SourceFile>
-  <SourceTime>2025-09-09T17:31:51.6674189+02:00</SourceTime>
-  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/sounds/wristle.xnb</DestFile>
-  <DestTime>2025-09-10T11:35:02.832919+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/sounds/wristle.mp3</SourceFile>
+  <SourceTime>2025-09-09T17:26:14.5174186+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/sounds/wristle.xnb</DestFile>
+  <DestTime>2025-09-10T12:14:38.4788937+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
