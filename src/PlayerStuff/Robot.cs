@@ -95,19 +95,21 @@ public class Robot : Player
         Vector2 RP = base.position;
         Vector2 OP = otherPlayer.position;
 
-        if (((OP.Y + otherPlayer.RectangleHeight) <= game.getBall().position.Y && otherPlayer.velocity.Y < 0) //player is over the ball and is still going up
-           || BP.Y <= OP.Y-70 )  // or wenn the Ball is above the other player                                                           
-        {
-            //System.Diagnostics.Debug.WriteLine($"Robot shoots horizontal");
-            return 1;
-        }
         float PlayerBallDistance = Math.Abs(OP.X - BP.X);
-        if (PlayerBallDistance < 180 && BP.X > 550 && OP.X > 400) {
-            //System.Diagnostics.Debug.WriteLine($"Robot shoots diagonal");
+        if (PlayerBallDistance > 100 && PlayerBallDistance > 100 && BP.X > 550 && OP.X > 400) {
+            System.Diagnostics.Debug.WriteLine($"Robot shoots diagonal");
             return 3;
         }
 
-        //System.Diagnostics.Debug.WriteLine($"Robot shoots random");
+        if (((OP.Y + otherPlayer.RectangleHeight) <= game.getBall().position.Y && otherPlayer.velocity.Y < 0) //player is over the ball and is still going up
+           || BP.Y <= OP.Y-90 )  // or wenn the Ball is above the other player                                                           
+        {
+            System.Diagnostics.Debug.WriteLine($"Robot shoots horizontal");
+            return 1;
+        }
+
+
+        System.Diagnostics.Debug.WriteLine($"Robot shoots random");
         int value = rnd.Next(1, 4); // 2 inklusiv, 4 exklusiv --> liefert 2 oder 3
         return value;
     }
