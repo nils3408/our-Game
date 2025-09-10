@@ -178,6 +178,9 @@ public class ElementContainer : UIElement
 public class StackContainer : ElementContainer
 {
 
+    public bool DrawBackround = false;
+    public Color backgroundColor = Color.White;
+
     public int spacing = 0;
 
     protected Point _Offset = Point.Zero;
@@ -198,7 +201,7 @@ public class StackContainer : ElementContainer
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-
+        if (DrawBackround) PrimitiveDrawer.DrawRectangle(spriteBatch,GetBounds(),backgroundColor);
         foreach (UIElement e in elements)
         {
             e.Draw(spriteBatch);

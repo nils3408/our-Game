@@ -39,20 +39,25 @@ public class Robot : Player
         {
             if (RP.X < 1600) moveRight(delta);
 
-            if (RP.X - BP.X < 10 && Math.Abs(RP.X - BP.X) < 10)  // Bot is next to the ball and right of the ball
+
+        }  
+        
+        if (Math.Abs(RP.X - BP.X) < 120)  // Bot is next to the ball and right of the ball
             {
                 reset();   //reset before shoot, to make sure the right shoot will be executed
                 shoot();
 
-                //Debug.WriteLine($"Ball Position: {BP.X}, Robot Position: {RP.X} ");
+                System.Diagnostics.Debug.WriteLine($"Condition to shoot is true");
             }
-        }
+        //Debug.WriteLine($"Ball Position: {BP}, Robot Position: {RP} ");
 
-        if (BV.X > 0 && (BP.Y + 50 * BV.Y) < 300)
+        // Springt wenn der ball sich nach rechts bewegt, der ball nicht mehr als 230 pixel links vom roboter ist
+        // und wenn der Ball auf mit der aktuellen beschleunigugn unter 450 (umgekerhtes Koordinatensystem) sein wird an der Stelle wo der Roboter steht
+        if (BV.X > 0 && RP.X - BP.X < 230 && (BP.Y + BV.Y * ((RP.X - BP.X)/BV.X) ) < 450 )
         {
             jump(delta);
         }
-
+        //System.Diagnostics.Debug.WriteLine($"Ball Y prediction : {(BP.Y + BV.Y * ((RP.X - BP.X) / (BV.X)+ 0.003f))}");
 
         activate_PowerUp();
 
@@ -85,13 +90,25 @@ public class Robot : Player
 
     private int getShootType()
     {
-        if ((otherPlayer.position.Y + otherPlayer.RectangleHeight) <= game.getBall().position.Y || //player is over the ball
-            otherPlayer.velocity.Y < 0)                                                             //player is jumping
+        Vector2 BV = game.getBall().velocity;
+        Vector2 BP = game.getBall().position;
+        Vector2 RP = base.position;
+        Vector2 OP = otherPlayer.position;
+
+        if ((OP.Y + otherPlayer.RectangleHeight) <= game.getBall().position.Y && otherPlayer.velocity.Y < 0 //player is over the ball and is still going up
+           || BP.Y <= OP.Y+40 )  // or wenn the Ball is above the other player                                                           
         {
+            System.Diagnostics.Debug.WriteLine($"Robot shoots horizontal");
             return 1;
         }
+        float PlayerBallDistance = Math.Abs(OP.X - BP.X);
+        if (PlayerBallDistance < 180 && BP.X > 550 && OP.X > 400) {
+            System.Diagnostics.Debug.WriteLine($"Robot shoots diagonal");
+            return 3;
+        }
 
-        int value = rnd.Next(2, 4); // 2 inklusiv, 4 exklusiv --> liefert 2 oder 3
+        System.Diagnostics.Debug.WriteLine($"Robot shoots random");
+        int value = rnd.Next(1, 4); // 2 inklusiv, 4 exklusiv --> liefert 2 oder 3
         return value;
     }
 

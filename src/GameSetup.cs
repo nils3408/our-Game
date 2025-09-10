@@ -69,7 +69,7 @@ public class GameSetup : GameState
         
         String[] options = { "Normal", "Kick-off features", "Against a Robot" };
         SwitchButton switchButton = new SwitchButton(new Point(500, 100), options);
-        switchButton.drawOutline = true;
+        switchButton.SetDrawOutline(outlineColor, 5);
         switchButton.MoveCenter(new Point(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 180));
         container.Add(switchButton);
         
@@ -92,6 +92,7 @@ public class GameSetup : GameState
                 if (switchButton.getCurIndex() == 2) newGame.SetPlayer(leftPlayer, PlayerFactory.CreateRobot(newGame));
                 
                 Game1.nextState = newGame;
+                Game1.openGames.Clear();
                 Game1.openGames.Add(newGame);
             }
             else
@@ -111,7 +112,7 @@ public class GameSetup : GameState
         //Zurück ins Menu wenn ESC losgelassen wird 
         if (InputHandler.IsReleased(Keys.Escape))
         {
-            System.Diagnostics.Debug.WriteLine("escape!");
+
             Game1.nextState = new Menu(baseGame);
         }
 

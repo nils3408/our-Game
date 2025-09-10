@@ -294,10 +294,9 @@ public class SwitchButton : UIElement
     bool isHovered = false;
 
     public bool drawOutline = false;
-    public Color OutlineColor = Color.Black;
     public Color TextColor = Color.Black;
     public Color BackgroundColor = Color.White;
-    public Color HoverColor = Color.Gray;
+    public Color HoverColor = new Color(234, 234, 234);
 
     public event Action onClick;
 
@@ -319,8 +318,9 @@ public class SwitchButton : UIElement
             PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), BackgroundColor);
 
         }
-        if (drawOutline) PrimitiveDrawer.DrawRectangleOutline(spriteBatch, GetBounds(), OutlineColor);
+
         PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), options[curIndex], TextColor);
+        base.Outline(spriteBatch);
     }
 
     public override void Update()

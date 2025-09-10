@@ -19,6 +19,8 @@ public class Menu : GameState
         backgroundPicture = Content.Load<Texture2D> ("spielfeld_pictures/starting_background");
 
         buttonContainer = new StackContainer(new Point(500,500), 20);
+        buttonContainer.DrawBackround = true;
+        buttonContainer.backgroundColor = new Color(141, 233, 88);
         Point ButtonSize = new Point(300, 100);
 
         if (Game1.openGames.Count() == 0)
@@ -28,11 +30,21 @@ public class Menu : GameState
             gameButton.OnClick += () => Game1.nextState = new GameSetup(baseGame);
             buttonContainer.Add(gameButton);
 
-        } else {
+        }
+        else
+        {
 
             SimpleButton setupButton = new SimpleButton(ButtonSize, "Resume", font);
             setupButton.OnClick += () => Game1.nextState = Game1.openGames.First();
             buttonContainer.Add(setupButton);
+            
+            SimpleButton restartButton = new SimpleButton(ButtonSize, "Restart", font);
+            restartButton.OnClick += () =>
+            {
+                Game1.nextState = new GameSetup(baseGame);
+                
+            };
+            buttonContainer.Add(restartButton);
         }
 
         SimpleButton settingsButton = new SimpleButton(ButtonSize, "Settings", font);
