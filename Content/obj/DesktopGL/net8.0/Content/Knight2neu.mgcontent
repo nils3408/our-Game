@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/Knight2neu.png</SourceFile>
-  <SourceTime>2025-09-10T01:15:08.3619616+02:00</SourceTime>
-  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/Knight2neu.xnb</DestFile>
-  <DestTime>2025-09-10T12:14:26.2363285+02:00</DestTime>
+  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/Knight2neu.png</SourceFile>
+  <SourceTime>2025-09-10T10:26:40.7934229+02:00</SourceTime>
+  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/Knight2neu.xnb</DestFile>
+  <DestTime>2025-09-10T13:22:42.738164+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -47,7 +47,7 @@ public class Robot : Player
                 reset();   //reset before shoot, to make sure the right shoot will be executed
                 shoot();
 
-                System.Diagnostics.Debug.WriteLine($"Condition to shoot is true");
+                //System.Diagnostics.Debug.WriteLine($"Condition to shoot is true");
             }
         //Debug.WriteLine($"Ball Position: {BP}, Robot Position: {RP} ");
 
@@ -95,8 +95,8 @@ public class Robot : Player
         Vector2 RP = base.position;
         Vector2 OP = otherPlayer.position;
 
-        if ((OP.Y + otherPlayer.RectangleHeight) <= game.getBall().position.Y && otherPlayer.velocity.Y < 0 //player is over the ball and is still going up
-           || BP.Y <= OP.Y+40 )  // or wenn the Ball is above the other player                                                           
+        if (((OP.Y + otherPlayer.RectangleHeight) <= game.getBall().position.Y && otherPlayer.velocity.Y < 0) //player is over the ball and is still going up
+           || BP.Y <= OP.Y-70 )  // or wenn the Ball is above the other player                                                           
         {
             System.Diagnostics.Debug.WriteLine($"Robot shoots horizontal");
             return 1;
