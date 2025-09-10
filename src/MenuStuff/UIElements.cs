@@ -269,6 +269,8 @@ public class Textfield : UIElement
 
     public Color backgroundColor;
 
+    public Color textColor = Color.Black;
+
     public Textfield(string text, Point size) : base(size)
     {
         this.text = text;
@@ -276,7 +278,7 @@ public class Textfield : UIElement
     public override void Draw(SpriteBatch spriteBatch)
     {
         PrimitiveDrawer.DrawRectangle(spriteBatch, GetBounds(), backgroundColor);
-        PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), text, Color.Black);
+        PrimitiveDrawer.DrawText(spriteBatch, GetBounds(), text, textColor);
 
         Outline(spriteBatch);
     }

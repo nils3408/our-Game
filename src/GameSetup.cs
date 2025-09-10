@@ -31,6 +31,7 @@ public class GameSetup : GameState
         SpriteFont font = Content.Load<SpriteFont>("Arial");
 
         Textfield textfield = new Textfield("Choose a Player", new Point(500, 100));
+        textfield.textColor = Color.White;
         container.Add(textfield);
         textfield.MoveCenter(new Point(ScreenCenter.X, spacing + textfield.GetBounds().Height / 2));
 
