@@ -30,26 +30,34 @@ public class Robot : Player
 
         //Debug.WriteLine($"Ball Position: {BP}");
 
-        if (BV.X < 0 && (BP.X + 60) < RP.X)
+        // ball is moving
+        if (Math.Abs(game.getBall().velocity.X) > 1)  
         {
-
-            moveLeft(delta);
+            if (BV.X < 0 && (BP.X + 60) < RP.X)     moveLeft(delta);
+            else if (RP.X < 1600)                   moveRight(delta);
         }
-        else
+
+        else 
         {
-            if (RP.X < 1600) moveRight(delta);
+            // ball is not (really) moving
+            // go to the Ball when he is closer to the ball then the oponent
+            if (Math.Abs(game.getBall().velocity.X) < 1)
+            {
+                if (isCloserToBallThanOponent())
+                {
+                    if (BP.X < position.X) { moveLeft(delta); }
+                    if (BP.X > position.X) { moveRight(delta); }
+                }
+            }
+        }
 
 
-        }  
-        
-        if (Math.Abs(RP.X - BP.X) < 120)  // Bot is next to the ball and right of the ball
+       // bot: shoot
+        if (Math.Abs(RP.X - BP.X) < 120)  
             {
                 reset();   //reset before shoot, to make sure the right shoot will be executed
                 shoot();
-
-                //System.Diagnostics.Debug.WriteLine($"Condition to shoot is true");
             }
-        //Debug.WriteLine($"Ball Position: {BP}, Robot Position: {RP} ");
 
         // Springt wenn der ball sich nach rechts bewegt, der ball nicht mehr als 230 pixel links vom roboter ist
         // und wenn der Ball auf mit der aktuellen beschleunigugn unter 450 (umgekerhtes Koordinatensystem) sein wird an der Stelle wo der Roboter steht
@@ -60,19 +68,16 @@ public class Robot : Player
         //System.Diagnostics.Debug.WriteLine($"Ball Y prediction : {(BP.Y + BV.Y * ((RP.X - BP.X) / (BV.X)+ 0.003f))}");
 
         activate_PowerUp();
-
     }
 
 
     private void moveLeft(float delta)
     {
-        if (MoveChange_powerup_in_use == false) { move_helper(delta, -1); }
-        else { move_helper(delta, 1); }
+        move_helper(delta, -1); 
     }
     private void moveRight(float delta)
     {
-        if (MoveChange_powerup_in_use == false) { move_helper(delta, 1); }
-        else { move_helper(delta, -1); }
+        move_helper(delta, 1); 
     }
 
     private void shoot()
@@ -98,16 +103,13 @@ public class Robot : Player
         if (((OP.Y + otherPlayer.RectangleHeight) <= game.getBall().position.Y && otherPlayer.velocity.Y < 0) //player is over the ball and is still going up
            || BP.Y <= OP.Y-70 )  // or wenn the Ball is above the other player                                                           
         {
-            System.Diagnostics.Debug.WriteLine($"Robot shoots horizontal");
             return 1;
         }
         float PlayerBallDistance = Math.Abs(OP.X - BP.X);
         if (PlayerBallDistance < 180 && BP.X > 550 && OP.X > 400) {
-            System.Diagnostics.Debug.WriteLine($"Robot shoots diagonal");
             return 3;
         }
 
-        System.Diagnostics.Debug.WriteLine($"Robot shoots random");
         int value = rnd.Next(1, 4); // 2 inklusiv, 4 exklusiv --> liefert 2 oder 3
         return value;
     }
@@ -120,6 +122,13 @@ public class Robot : Player
         shoots_lupfer = false;
     }
 
+
+    public bool isCloserToBallThanOponent()
+    {
+        float d1 = game.getPlayerBallDistance(this       , game.getBall());
+        float d2 = game.getPlayerBallDistance(otherPlayer, game.getBall());
+        return (Math.Abs(d1) < Math.Abs(d2));
+    }
 
 
     //--------------------------------------------------------

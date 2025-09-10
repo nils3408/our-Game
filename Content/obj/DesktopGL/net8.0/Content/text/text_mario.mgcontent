@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/text/text_mario.png</SourceFile>
-  <SourceTime>2025-09-10T13:50:05.0419485+02:00</SourceTime>
-  <DestFile>C:/Users/Feuer/OneDrive/Desktop/SS25/3D Game Projekt/GitHubDesktop/our-Game/Content/bin/DesktopGL/Content/text/text_mario.xnb</DestFile>
-  <DestTime>2025-09-10T13:50:19.7494948+02:00</DestTime>
+  <SourceFile>C:/Users/nilsw/source/repos/our-Game/Content/text/text_mario.png</SourceFile>
+  <SourceTime>2025-09-10T14:28:08.3957249+02:00</SourceTime>
+  <DestFile>C:/Users/nilsw/source/repos/our-Game/Content/bin/DesktopGL/Content/text/text_mario.xnb</DestFile>
+  <DestTime>2025-09-10T14:28:50.1491871+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

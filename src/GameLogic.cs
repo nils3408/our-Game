@@ -352,6 +352,18 @@ public class GameLogic : GameState
         return football;
     }
 
+    public float getPlayerBallDistance(Player p , Ball b)
+    {
+        float ballMiddleX = b.position.X + b.BallSize / 2;
+        float ballMiddleY = b.position.Y + b.BallSize / 2;
+        
+        float dx = (p.position.X) - (ballMiddleX);
+        float dy = (p.position.Y) - (ballMiddleY);
+        
+        float distance = (float)Math.Sqrt(dx * dx + dy * dy);
+        return distance;
+    }
+
     public bool is_RandomPlayer(Player abc)
     {
         // checks whether a player object is from the class RandomPlayer
