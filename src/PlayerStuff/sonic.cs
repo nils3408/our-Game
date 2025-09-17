@@ -39,6 +39,9 @@ public class Sonic: Player
             }
         }
 
+
+        if (dir == -1)   { moving_direction = -1; }
+        else             { moving_direction = 1; }
         base.move(delta, dir);
     }
     

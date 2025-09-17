@@ -780,6 +780,10 @@ public class GameLogic : GameState
             last_player_touching_the_ball = player1;
             Vector2 direction = football.position - player1.position;
 
+            int JolesIstSchuld;
+            if (direction.X < 0) JolesIstSchuld = -1;
+            else                 JolesIstSchuld = 1;
+
             if (football.fire_powerUp_in_use == false) football.reset_velocity();
             football.change_direction(direction);
             collisionCooldown1 = CollisionCooldownTime;
@@ -787,9 +791,9 @@ public class GameLogic : GameState
             // shooting    
             if (player1.can_move)
             {
-                if (player1.shoots_diagonal)   { football.get_shooted_diagonal();   }
-                if (player1.shoots_horizontal) { football.get_shooted_horizontal(); }
-                if (player1.shoots_lupfer)     { football.get_shooted_lupfer();     }
+                if (player1.shoots_diagonal)   { football.get_shooted_diagonal();   player1.moving_direction = JolesIstSchuld; }
+                if (player1.shoots_horizontal) { football.get_shooted_horizontal(); player1.moving_direction = JolesIstSchuld; }
+                if (player1.shoots_lupfer)     { football.get_shooted_lupfer();     player1.moving_direction = JolesIstSchuld; }
             }
         }
 
@@ -799,6 +803,10 @@ public class GameLogic : GameState
             last_player_touching_the_ball = player2;
             Vector2 direction2 = football.position - player2.position;
 
+            int JolesIstSchuld2;
+            if (direction2.X < 0) JolesIstSchuld2 = -1;
+            else JolesIstSchuld2 = 1;
+
             if (football.fire_powerUp_in_use == false) football.reset_velocity();
             football.change_direction(direction2);
             collisionCooldown2 = CollisionCooldownTime;
@@ -806,9 +814,9 @@ public class GameLogic : GameState
             // shooting    
             if (player2.can_move)
             {
-                if (player2.shoots_diagonal) { football.get_shooted_diagonal(); }
-                if (player2.shoots_horizontal) { football.get_shooted_horizontal(); }
-                if (player2.shoots_lupfer) { football.get_shooted_lupfer(); }
+                if (player2.shoots_diagonal) { football.get_shooted_diagonal();     player2.moving_direction = JolesIstSchuld2; }
+                if (player2.shoots_horizontal) { football.get_shooted_horizontal(); player2.moving_direction = JolesIstSchuld2; }
+                if (player2.shoots_lupfer) { football.get_shooted_lupfer();         player2.moving_direction = JolesIstSchuld2; }
             }
         }
     }
